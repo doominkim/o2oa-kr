@@ -9,7 +9,9 @@ import com.x.base.core.project.tools.NumberTools;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -44,9 +46,18 @@ public class General extends ConfigObject {
 	private static final List<String> DEFAULT_TRUSTPROXYIPLIST = List.of("127.0.0.1");
 	private static final Integer DEFAULT_STORAGEENCRYPT = 0;
 	private static final Integer DEFAULT_WEBSERVERCACHECONTROLMAXAGE = 0;
-	private static final Map<String, String> DEFAULT_SUPPORTED_LANGUAGES = Map.of("zh-CN", "简体中文", "en", "English");
+	private static final Map<String, String> DEFAULT_SUPPORTED_LANGUAGES = defaultSupportedLanguages();
 	private static final Boolean DEFAULT_GRAALVMEVALASPROMISE = true;
 	private static final Boolean DEFAULT_TABLEROWSELECTENABLE = true;
+
+	// Insertion order is the order of the language selector (profile, system settings).
+	private static Map<String, String> defaultSupportedLanguages() {
+		Map<String, String> map = new LinkedHashMap<>();
+		map.put("ko", "한국어");
+		map.put("zh-CN", "중국어(간체)");
+		map.put("en", "English");
+		return Collections.unmodifiableMap(map);
+	}
 
 	public static General defaultInstance() {
 		General o = new General();

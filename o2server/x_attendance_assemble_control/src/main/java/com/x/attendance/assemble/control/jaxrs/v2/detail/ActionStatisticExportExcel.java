@@ -82,7 +82,7 @@ public class ActionStatisticExportExcel extends BaseAction {
             Workbook wb = new XSSFWorkbook();
             createExcelFile(wb, wos);
             // 生成excel
-            String fileName = "考勤统计_"+wi.getStartDate() + "-" + wi.getEndDate() + "_" +DateTools.format(new Date(), DateTools.formatCompact_yyyyMMddHHmmss)+".xlsx";
+            String fileName = "근태통계_"+wi.getStartDate() + "-" + wi.getEndDate() + "_" +DateTools.format(new Date(), DateTools.formatCompact_yyyyMMddHHmmss)+".xlsx";
             wb.write(os);
             StorageMapping gfMapping = ThisApplication.context().storageMappings().random(GeneralFile.class);
             GeneralFile generalFile = new GeneralFile(gfMapping.getName(), fileName,
@@ -114,20 +114,20 @@ public class ActionStatisticExportExcel extends BaseAction {
 
     private void createExcelFile(Workbook wb, List<StatisticWo> wos) throws Exception {
         // 创建新的表格
-        Sheet sheet = wb.createSheet("考勤统计");
+        Sheet sheet = wb.createSheet("근태 통계");
         sheet.setDefaultColumnWidth(25);
         // 先创建表头
         Row row  = sheet.createRow(0);
-        row.createCell(0).setCellValue("姓名");
-        row.createCell(1).setCellValue("平均工时(小时)");
-        row.createCell(2).setCellValue("工作时长");
-        row.createCell(3).setCellValue("出勤天数");
-        row.createCell(4).setCellValue("休息天数");
-        row.createCell(5).setCellValue("旷工天数");
-        row.createCell(6).setCellValue("迟到次数");
-        row.createCell(7).setCellValue("早退次数");
-        row.createCell(8).setCellValue("缺卡次数");
-        row.createCell(9).setCellValue("外勤次数");
+        row.createCell(0).setCellValue("이름");
+        row.createCell(1).setCellValue("평균 근무시간(시간)");
+        row.createCell(2).setCellValue("근무 시간");
+        row.createCell(3).setCellValue("출근 일수");
+        row.createCell(4).setCellValue("휴무 일수");
+        row.createCell(5).setCellValue("결근 일수");
+        row.createCell(6).setCellValue("지각 횟수");
+        row.createCell(7).setCellValue("조퇴 횟수");
+        row.createCell(8).setCellValue("누락 횟수");
+        row.createCell(9).setCellValue("외근 횟수");
         if (wos != null && !wos.isEmpty()) {
             for (int i = 0; i < wos.size(); i++) {
                 Row _row = sheet.createRow( i + 1 );
@@ -158,11 +158,11 @@ public class ActionStatisticExportExcel extends BaseAction {
         String result = "";
 
         if (hours > 0) {
-            result += hours + " 小时";
+            result += hours + " 시간";
         }
 
         if (remainingMinutes > 0 || StringUtils.isEmpty(result)) {
-            result += remainingMinutes + " 分钟" ;
+            result += remainingMinutes + " 분" ;
         }
 
         return result;

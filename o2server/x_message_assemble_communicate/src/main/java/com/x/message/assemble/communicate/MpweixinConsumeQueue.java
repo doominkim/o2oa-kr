@@ -122,7 +122,7 @@ public class MpweixinConsumeQueue extends AbstractQueue<Message> {
 			}
 			if ("title".equalsIgnoreCase(name)) { // 工作标题为空就用消息的标题
 				if (StringUtils.isEmpty(value)) {
-					value = "无标题";
+					value = "제목 없음";
 				}
 			} else {
 				if ("creatorPerson".equalsIgnoreCase(name) && StringUtils.isNotEmpty(value)) {
@@ -143,7 +143,7 @@ public class MpweixinConsumeQueue extends AbstractQueue<Message> {
 			String temp_remark = object.get("temp_remark").getAsString();
 			robj.setValue(temp_remark);
 		} else {
-			robj.setValue("请注意查收！");
+			robj.setValue("확인해 주세요!");
 		}
 		data.put("remark", robj);
 		return data;

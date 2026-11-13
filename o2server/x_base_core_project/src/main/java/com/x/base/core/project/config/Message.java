@@ -16,7 +16,7 @@ public class Message extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 2536141863287117519L;
 
-	private static final String DEFAULT_DESCRIPTION = "说明";
+	private static final String DEFAULT_DESCRIPTION = "설명";
 
 	public Message() {
 		this.description = DEFAULT_DESCRIPTION;
@@ -38,7 +38,7 @@ public class Message extends GsonPropertyObject {
 	@FieldDescribe("消费通道配置")
 	private List<JsonElement> consumers = new ArrayList<>();
 
-	@FieldDescribe("说明")
+	@FieldDescribe("설명")
 	private String description;
 
 	public String getDescription() {
@@ -89,7 +89,7 @@ public class Message extends GsonPropertyObject {
 
 		@FieldDescribe("消费者名称")
 		private String type;
-		@FieldDescribe("说明")
+		@FieldDescribe("설명")
 		private String description;
 		@FieldDescribe("是否启用")
 		private Boolean enable;

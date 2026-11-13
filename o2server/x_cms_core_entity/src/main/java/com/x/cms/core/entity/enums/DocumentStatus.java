@@ -6,10 +6,10 @@ package com.x.cms.core.entity.enums;
  */
 public enum DocumentStatus {
 
-	DRAFT("draft", "草稿"),
-	PUBLISHED("published", "已发布"),
-	WAIT_PUBLISH("waitPublish", "待发布"),
-	ARCHIVED("archived", "归档");
+	DRAFT("draft", "임시저장"),
+	PUBLISHED("published", "게시됨"),
+	WAIT_PUBLISH("waitPublish", "게시 대기"),
+	ARCHIVED("archived", "보관");
 	private String value;
 	private String name;
 

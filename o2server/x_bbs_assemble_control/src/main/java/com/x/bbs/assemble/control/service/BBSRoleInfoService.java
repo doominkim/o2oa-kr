@@ -203,7 +203,7 @@ public class BBSRoleInfoService {
 			permissionCodeList.clear();
 			permissionCodeList.add( "FORUM_VIEW_" + forumId );
 			checkAndSaveBBSRoleInfo( emc, personName,
-					_bBSForumInfo, "FORUM_GUEST_" + forumId, forumName + "-论坛访客", "系统角色，论坛["+ forumName +"]对指定范围用户可见。",
+					_bBSForumInfo, "FORUM_GUEST_" + forumId, forumName + "-포럼 방문자", "시스템 역할: 포럼["+ forumName +"]이(가) 지정된 범위의 사용자에게 공개됩니다.",
 					permissionCodeList );
 
 			//查询该论坛下有多少版块
@@ -242,7 +242,7 @@ public class BBSRoleInfoService {
 				}
 			}
 			checkAndSaveBBSRoleInfo( emc, personName, _bBSForumInfo, "FORUM_SUPER_MANAGER_" + forumId,
-					forumName + "-论坛超级管理员", "系统角色，在论坛["+ forumName +"]中拥有最大管理权限。",
+					forumName + "-포럼 최고 관리자", "시스템 역할: 포럼["+ forumName +"]에서 최고 관리 권한을 가집니다.",
 					permissionCodeList );
 		}catch( Exception e ){
 			logger.warn( "system check and create forum role got an exception!" );
@@ -291,7 +291,7 @@ public class BBSRoleInfoService {
 					permissionCodeList.add( "SECTION_VIEW_" + sectionId_tmp );
 				}
 			}
-			checkAndSaveBBSRoleInfo( emc, creatorName,  _sectionInfo, "SECTION_GUEST_" + sectionId, forumName + "-" + sectionName + "-版块访问", "系统角色，版块[" + forumName + "-"+ sectionName +"]对指定范围内的用户可见，并且用户可发布可回复。", permissionCodeList );
+			checkAndSaveBBSRoleInfo( emc, creatorName,  _sectionInfo, "SECTION_GUEST_" + sectionId, forumName + "-" + sectionName + "-섹션 방문", "시스템 역할: 섹션[" + forumName + "-"+ sectionName +"]이(가) 지정된 범위의 사용자에게 공개되며, 게시와 댓글 작성이 가능합니다.", permissionCodeList );
 
 			//版主(SECTION_MANAGER):拥有版块及版块内容管理的最大权限
 			permissionCodeList.clear();
@@ -327,7 +327,7 @@ public class BBSRoleInfoService {
 					permissionCodeList.add( "SECTION_CONFIG_MANAGEMENT_" + sectionId_tmp );
 				}
 			}
-			checkAndSaveBBSRoleInfo( emc, creatorName, _sectionInfo, "SECTION_MANAGER_" + sectionId, forumName + "-" + sectionName + "-版主", "系统角色，用户可以在版块[" + forumName + "-"+ sectionName +"]中拥有版块及版块内容管理的最大权限。", permissionCodeList );
+			checkAndSaveBBSRoleInfo( emc, creatorName, _sectionInfo, "SECTION_MANAGER_" + sectionId, forumName + "-" + sectionName + "-섹션 관리자", "시스템 역할: 섹션[" + forumName + "-"+ sectionName +"]과(와) 그 콘텐츠에 대한 최고 관리 권한을 가집니다.", permissionCodeList );
 
 			permissionCodeList.clear();
 			permissionCodeList.add( "SECTION_VIEW_" + sectionId );
@@ -339,7 +339,7 @@ public class BBSRoleInfoService {
 					permissionCodeList.add( "SECTION_SUBJECT_PUBLISH_" + sectionId_tmp );
 				}
 			}
-			checkAndSaveBBSRoleInfo( emc, creatorName, _sectionInfo, "SECTION_SUBJECT_PUBLISHER_" + sectionId, forumName + "-" + sectionName + "-主题发布者", "系统角色，用户可以在版块[" + forumName + "-"+ sectionName +"]发布主题。", permissionCodeList );
+			checkAndSaveBBSRoleInfo( emc, creatorName, _sectionInfo, "SECTION_SUBJECT_PUBLISHER_" + sectionId, forumName + "-" + sectionName + "-주제 게시자", "시스템 역할: 섹션[" + forumName + "-"+ sectionName +"]에 주제를 게시할 수 있습니다.", permissionCodeList );
 
 			permissionCodeList.clear();
 			permissionCodeList.add( "SECTION_VIEW_" + sectionId );
@@ -351,7 +351,7 @@ public class BBSRoleInfoService {
 					permissionCodeList.add( "SECTION_REPLY_PUBLISH_" + sectionId_tmp );
 				}
 			}
-			checkAndSaveBBSRoleInfo( emc, creatorName, _sectionInfo, "SECTION_REPLY_PUBLISHER_" + sectionId, forumName + "-" + sectionName + "-回复发布者", "系统角色，用户可以在版块[" + forumName + "-"+ sectionName +"]发表回复。", permissionCodeList );
+			checkAndSaveBBSRoleInfo( emc, creatorName, _sectionInfo, "SECTION_REPLY_PUBLISHER_" + sectionId, forumName + "-" + sectionName + "-댓글 작성자", "시스템 역할: 섹션[" + forumName + "-"+ sectionName +"]에 댓글을 작성할 수 있습니다.", permissionCodeList );
 
 			permissionCodeList.clear();
 			permissionCodeList.add( "SECTION_VIEW_" + sectionId );
@@ -363,7 +363,7 @@ public class BBSRoleInfoService {
 					permissionCodeList.add( "SECTION_SUBJECT_RECOMMEND_" + sectionId_tmp );
 				}
 			}
-			checkAndSaveBBSRoleInfo( emc, creatorName, _sectionInfo, "SECTION_RECOMMENDER_" + sectionId, forumName + "-" + sectionName + "-主题推荐者", "系统角色，用户可以在版块[" + forumName + "-"+ sectionName +"]对主题进行推荐到主页操作。", permissionCodeList );
+			checkAndSaveBBSRoleInfo( emc, creatorName, _sectionInfo, "SECTION_RECOMMENDER_" + sectionId, forumName + "-" + sectionName + "-주제 추천자", "시스템 역할: 섹션[" + forumName + "-"+ sectionName +"]의 주제를 홈에 추천할 수 있습니다.", permissionCodeList );
 
 			permissionCodeList.clear();
 			permissionCodeList.add( "SECTION_VIEW_" + sectionId );
@@ -375,7 +375,7 @@ public class BBSRoleInfoService {
 					permissionCodeList.add( "SECTION_SUBJECT_AUDIT_" + sectionId_tmp );
 				}
 			}
-			checkAndSaveBBSRoleInfo( emc, creatorName, _sectionInfo, "SECTION_SUBJECT_AUDITOR_" + sectionId, forumName + "-" + sectionName + "-主题审核者", "系统角色，用户可以在版块[" + forumName + "-"+ sectionName +"]对发布的主题进行审核。", permissionCodeList );
+			checkAndSaveBBSRoleInfo( emc, creatorName, _sectionInfo, "SECTION_SUBJECT_AUDITOR_" + sectionId, forumName + "-" + sectionName + "-주제 검토자", "시스템 역할: 섹션[" + forumName + "-"+ sectionName +"]에 게시된 주제를 검토할 수 있습니다.", permissionCodeList );
 
 			permissionCodeList.clear();
 			permissionCodeList.add( "SECTION_VIEW_" + sectionId );
@@ -387,7 +387,7 @@ public class BBSRoleInfoService {
 					permissionCodeList.add( "SECTION_REPLY_AUDIT_" + sectionId_tmp );
 				}
 			}
-			checkAndSaveBBSRoleInfo( emc, creatorName, _sectionInfo, "SECTION_REPLY_AUDITOR_" + sectionId, forumName + "-" + sectionName + "-回复审核者", "系统角色，用户可以在版块[" + forumName + "-"+ sectionName +"]中对发表的回复进行审核。", permissionCodeList );
+			checkAndSaveBBSRoleInfo( emc, creatorName, _sectionInfo, "SECTION_REPLY_AUDITOR_" + sectionId, forumName + "-" + sectionName + "-댓글 검토자", "시스템 역할: 섹션[" + forumName + "-"+ sectionName +"]의 댓글을 검토할 수 있습니다.", permissionCodeList );
 
 		}catch( Exception e ){
 			logger.warn( "system check and create section role got an exception!" );
@@ -781,13 +781,13 @@ public class BBSRoleInfoService {
 							unitName = userManagerService.getUnitNameWithPerson(bindObject.getObjectName());
 						} catch (Exception e) {
 							logger.warn("user has no identity!user:" + bindObject.getObjectName());
-							unitName = "未知组织";
+							unitName = "알 수 없는 조직";
 						}
 						try {
 							topUnitName = userManagerService.getTopUnitNameWithPerson(bindObject.getObjectName());
 						} catch (Exception e) {
 							logger.warn("user has no identity!user:" + bindObject.getObjectName());
-							topUnitName = "未知公司";
+							topUnitName = "알 수 없는 회사";
 						}
 					}else if(OrganizationDefinition.isUnitDistinguishedName(bindObject.getObjectName())){
 						unitName = bindObject.getObjectName();

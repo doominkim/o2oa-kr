@@ -6,11 +6,11 @@ package com.x.program.center.core.entity;
  */
 public enum InstallTypeEnum {
 
-	DATA("data", "初始化数据"),
-	CUSTOM("custom", "自定义服务"),
-	XAPP("xapp", "平台安装包"),
-	CONFIG("config", "配置文件"),
-	WEB("web", "前端资源");
+	DATA("data", "초기화 데이터"),
+	CUSTOM("custom", "사용자 정의 서비스"),
+	XAPP("xapp", "플랫폼 설치 패키지"),
+	CONFIG("config", "설정 파일"),
+	WEB("web", "프런트엔드 리소스");
 
 	private String value;
 	private String name;

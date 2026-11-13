@@ -22,7 +22,7 @@ import com.x.base.core.project.tools.DefaultCharset;
 
 public class Collect extends ConfigObject {
 
-	private static String Default_title = "企业办公平台";
+	private static String Default_title = "인디고 그룹웨어";
 	private static String Default_footer = "www.o2oa.net";
 	private static String Default_name = "www.o2oa.net";
 	private static String Default_appUrl = "https://app.o2oa.net/download/download.html";

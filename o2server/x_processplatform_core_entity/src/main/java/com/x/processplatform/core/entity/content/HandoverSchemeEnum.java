@@ -6,10 +6,10 @@ package com.x.processplatform.core.entity.content;
  */
 public enum HandoverSchemeEnum {
 
-	ALL("all", "所有有权限的文档"),
-	APPLICATION("application", "指定应用下有权限的文档"),
-	PROCESS("process", "指定流程下有权限的文档"),
-	JOB("job", "指定有权限的文档");
+	ALL("all", "권한이 있는 모든 문서"),
+	APPLICATION("application", "지정한 앱에서 권한이 있는 문서"),
+	PROCESS("process", "지정한 결재에서 권한이 있는 문서"),
+	JOB("job", "지정한 권한 있는 문서");
 
 	private String value;
 	private String name;

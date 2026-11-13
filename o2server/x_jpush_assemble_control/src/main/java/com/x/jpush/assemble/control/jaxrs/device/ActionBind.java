@@ -39,7 +39,7 @@ public class ActionBind extends BaseAction {
 			String unique = deviceUnique(wi.getDeviceType(), wi.getDeviceName(), PushDevice.PUSH_TYPE_JPUSH, person);
 			if (business.pushDeviceFactory().existDeviceUnique(unique)) {
 				wraps.setValue(true);
-				result.setMessage("当前设备已存在！");
+				result.setMessage("이미 등록된 기기입니다!");
 			} else {
 				PushDevice pushDevice = new PushDevice();
 				pushDevice.setDeviceId(wi.getDeviceName());

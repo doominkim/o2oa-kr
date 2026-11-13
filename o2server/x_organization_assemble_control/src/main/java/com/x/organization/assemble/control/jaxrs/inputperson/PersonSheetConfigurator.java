@@ -72,13 +72,13 @@ public class PersonSheetConfigurator extends GsonPropertyObject {
 		}
 	}
 
-	private static List<String> nameItems = Arrays.asList(new String[] { "人员姓名 *", "人员姓名", "name" });
-	private static List<String> employeeItems = Arrays.asList(new String[] { "人员编号 *", "人员编号", "unique" });
-	private static List<String> uniqueItems = Arrays.asList(new String[] { "唯一编码 *", "员工账号 *", "employee" });
-	private static List<String> mobileItems = Arrays.asList(new String[] { "手机号码 *", "手机", "联系电话", "phone", "mobile" });
-	private static List<String> officePhoneItems = Arrays.asList(new String[] { "办公电话", "办公室电话", "工作电话", "officePhone" });
-	private static List<String> mailItems = Arrays.asList(new String[] { "电子邮件", "邮件", "邮箱", "邮件地址", "mail", "email" });
-	private static List<String> genderTypeItems = Arrays.asList(new String[] { "性别", "gender", "genderType" });
+	private static List<String> nameItems = Arrays.asList(new String[] { "人员姓名 *", "사용자 이름 *", "人员姓名", "name" });
+	private static List<String> employeeItems = Arrays.asList(new String[] { "人员编号 *", "사번", "人员编号", "unique" });
+	private static List<String> uniqueItems = Arrays.asList(new String[] { "唯一编码 *", "고유 코드 *", "员工账号 *", "employee" });
+	private static List<String> mobileItems = Arrays.asList(new String[] { "手机号码 *", "휴대전화 번호 *", "手机", "联系电话", "phone", "mobile" });
+	private static List<String> officePhoneItems = Arrays.asList(new String[] { "办公电话", "사무실 전화", "办公室电话", "工作电话", "officePhone" });
+	private static List<String> mailItems = Arrays.asList(new String[] { "电子邮件", "이메일", "邮件", "邮箱", "邮件地址", "mail", "email" });
+	private static List<String> genderTypeItems = Arrays.asList(new String[] { "性别", "성별", "gender", "genderType" });
 
 	public String getCellStringValue(Cell cell) {
 		if (null != cell) {

@@ -187,7 +187,7 @@ public class AttendanceStatisticService {
 			emc.persist( statisticPersonForMonth );
 			emc.commit();
 			
-			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "COMPLETED", "处理成功" );
+			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "COMPLETED", "처리 성공" );
 		}catch(Exception e){
 			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "ERROR", e.getMessage().length()>1000?e.getMessage().substring(0,700):e.getMessage() );
 			logger.warn("系统在根据统计周期获取周期内统计数据时发生异常！" );
@@ -322,7 +322,7 @@ public class AttendanceStatisticService {
 			emc.commit();
 			
 			if( attendanceStatisticRequireLog != null ){
-				updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "COMPLETED", "处理成功" );
+				updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "COMPLETED", "처리 성공" );
 			}
 		}catch(Exception e){
 			logger.warn("系统在根据统计周期获取周期内组织统计数据时发生异常！" );
@@ -442,7 +442,7 @@ public class AttendanceStatisticService {
 			}
 			emc.persist( statisticTopUnitForMonth );
 			emc.commit();
-			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "COMPLETED", "处理成功" );
+			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "COMPLETED", "처리 성공" );
 		}catch(Exception e){
 			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "ERROR", e.getMessage().length()>1000?e.getMessage().substring(0,700):e.getMessage() );
 			logger.warn("系统在根据统计周期获取周期内顶层组织统计数据时发生异常！" );
@@ -564,7 +564,7 @@ public class AttendanceStatisticService {
 			}
 			emc.persist( statisticUnitForDay );
 			emc.commit();
-			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "COMPLETED", "处理成功" );
+			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "COMPLETED", "처리 성공" );
 		}catch(Exception e){
 			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "ERROR", e.getMessage().length()>1000?e.getMessage().substring(0,700):e.getMessage() );
 			logger.warn("系统在根据统计周期获取周期内统计数据时发生异常！" );
@@ -672,7 +672,7 @@ public class AttendanceStatisticService {
 			}
 			emc.persist( statisticTopUnitForDay );
 			emc.commit();
-			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "COMPLETED", "处理成功" );
+			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "COMPLETED", "처리 성공" );
 		}catch(Exception e){
 			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "ERROR", e.getMessage().length()>1000?e.getMessage().substring(0,700):e.getMessage() );
 			logger.warn("系统在根据统计周期获取周期内统计数据时发生异常！" );

@@ -41,26 +41,26 @@ public class ActionTemplate extends BaseAction {
 	}
 
 	private void templateRemark(XSSFWorkbook workbook) {
-		XSSFSheet sheet = workbook.createSheet("注意事项");
+		XSSFSheet sheet = workbook.createSheet("주의 사항");
 		Row row = sheet.createRow(0);
 		// 先创建表头
 		row = sheet.createRow(2);
-		row.createCell(0).setCellValue("注意事项:");
+		row.createCell(0).setCellValue("주의 사항:");
 
 		row = sheet.createRow(4);
-		row.createCell(0).setCellValue("1. 表格内不要做合并(拆分)单元格操作，各列顺序不能变动，更不能删除，否则会造成数据混乱；");
+		row.createCell(0).setCellValue("1. 표 안의 셀을 병합(분할)하지 마세요. 각 열의 순서를 바꾸거나 삭제하면 데이터가 꼬일 수 있습니다.");
 
 		row = sheet.createRow(6);
-		row.createCell(0).setCellValue("2. * 为必填项");
+		row.createCell(0).setCellValue("2. * 표시는 필수 항목입니다.");
 
 		row = sheet.createRow(8);
-		row.createCell(0).setCellValue("3. 如有特殊要求的格式，详见列名批注；");
+		row.createCell(0).setCellValue("3. 형식에 특별한 요구 사항이 있으면 열 이름의 메모를 참고하세요.");
 
 		row = sheet.createRow(10);
-		row.createCell(0).setCellValue("4. 表中示例数据用于示范，实际导入时需删除；");
+		row.createCell(0).setCellValue("4. 표의 예시 데이터는 참고용이므로 실제로 가져올 때는 삭제하세요.");
 
 		row = sheet.createRow(12);
-		row.createCell(0).setCellValue("5. 每个Sheet页顺序不能变动，本Sheet页不能删除。");
+		row.createCell(0).setCellValue("5. 각 시트의 순서를 바꾸지 말고 이 시트를 삭제하지 마세요.");
 
 		CellStyle cellStyle = workbook.createCellStyle();
 		cellStyle.setWrapText(true);
@@ -68,21 +68,21 @@ public class ActionTemplate extends BaseAction {
 	}
 
 	private void templateUnit(XSSFWorkbook workbook) {
-		XSSFSheet sheet = workbook.createSheet("组织信息");
+		XSSFSheet sheet = workbook.createSheet("조직 정보");
 		sheet.setDefaultColumnWidth(25);
 		Row row = sheet.createRow(0);
 		Cell cell = row.createCell(0);
-		cell.setCellValue("组织名称 *");
+		cell.setCellValue("조직 이름 *");
 		cell = row.createCell(1);
-		cell.setCellValue("唯一编码 *");
+		cell.setCellValue("고유 코드 *");
 		cell = row.createCell(2);
-		cell.setCellValue("组织级别名称 *");
+		cell.setCellValue("조직 레벨 이름 *");
 		cell = row.createCell(3);
-		cell.setCellValue("上级组织编号");
+		cell.setCellValue("상위 조직 코드");
 		cell = row.createCell(4);
-		cell.setCellValue("描述");
+		cell.setCellValue("설명");
 		cell = row.createCell(5);
-		cell.setCellValue("排序号");
+		cell.setCellValue("정렬 순서");
 		CellStyle cellStyle = workbook.createCellStyle();
 		cellStyle.setWrapText(true);
 		IntStream.rangeClosed(0, 6).forEach(i -> {
@@ -91,103 +91,103 @@ public class ActionTemplate extends BaseAction {
 	}
 
 	private void templatePerson(XSSFWorkbook workbook) {
-		XSSFSheet sheet = workbook.createSheet("人员基本信息");
+		XSSFSheet sheet = workbook.createSheet("사용자 기본 정보");
 		sheet.setDefaultColumnWidth(25);
 		Row row = sheet.createRow(0);
 		Cell cell = row.createCell(0);
-		cell.setCellValue("人员姓名 *");
+		cell.setCellValue("사용자 이름 *");
 		cell = row.createCell(1);
-		cell.setCellValue("唯一编码 *");
+		cell.setCellValue("고유 코드 *");
 		cell = row.createCell(2);
-		cell.setCellValue("手机号码 *");
+		cell.setCellValue("휴대전화 번호 *");
 		cell = row.createCell(3);
-		cell.setCellValue("人员编号");
+		cell.setCellValue("사번");
 		cell = row.createCell(4);
-		cell.setCellValue("办公电话");
+		cell.setCellValue("사무실 전화");
 		cell = row.createCell(5);
-		cell.setCellValue("性别");
+		cell.setCellValue("성별");
 		cell = row.createCell(6);
-		cell.setCellValue("邮件");
+		cell.setCellValue("이메일");
 		CellStyle cellStyle = workbook.createCellStyle();
 		cellStyle.setWrapText(true);
 		IntStream.rangeClosed(0, 6).forEach(i -> sheet.setDefaultColumnStyle(i, cellStyle));
 	}
 
 	private void templateIdentity(XSSFWorkbook workbook) {
-		XSSFSheet sheet = workbook.createSheet("人员身份信息");
+		XSSFSheet sheet = workbook.createSheet("사용자 소속 정보");
 		sheet.setDefaultColumnWidth(25);
 		Row row = sheet.createRow(0);
 		Cell cell = row.createCell(0);
-		cell.setCellValue("人员唯一编码 *");
+		cell.setCellValue("사용자 고유 코드 *");
 		cell = row.createCell(1);
-		cell.setCellValue("组织唯一编码 *");
+		cell.setCellValue("조직 고유 코드 *");
 		cell = row.createCell(2);
-		cell.setCellValue("身份编码");
+		cell.setCellValue("소속 코드");
 		cell = row.createCell(3);
-		cell.setCellValue("主兼职");
+		cell.setCellValue("주/겸직");
 		CellStyle cellStyle = workbook.createCellStyle();
 		cellStyle.setWrapText(true);
 		IntStream.rangeClosed(0, 6).forEach(i -> sheet.setDefaultColumnStyle(i, cellStyle));
 	}
 
 	private void templateDuty(XSSFWorkbook workbook) {
-		XSSFSheet sheet = workbook.createSheet("职务信息");
+		XSSFSheet sheet = workbook.createSheet("직무 정보");
 		sheet.setDefaultColumnWidth(45);
 		Row row = sheet.createRow(0);
 		Cell cell = row.createCell(0);
-		cell.setCellValue("职务名称 *");
+		cell.setCellValue("직무 이름 *");
 		cell = row.createCell(1);
-		cell.setCellValue("职务所在组织唯一编码 *");
+		cell.setCellValue("직무 소속 조직 고유 코드 *");
 		cell = row.createCell(2);
-		cell.setCellValue("职务编码");
+		cell.setCellValue("직무 코드");
 		cell = row.createCell(3);
-		cell.setCellValue("职务描述");
+		cell.setCellValue("직무 설명");
 		cell = row.createCell(4);
-		cell.setCellValue("职务所含人员唯一编码");
+		cell.setCellValue("직무 구성원 고유 코드");
 		cell = row.createCell(5);
-		cell.setCellValue("职务所含人员所在组织唯一编码");
+		cell.setCellValue("직무 구성원 소속 조직 고유 코드");
 		CellStyle cellStyle = workbook.createCellStyle();
 		cellStyle.setWrapText(true);
 		IntStream.rangeClosed(0, 6).forEach(i -> sheet.setDefaultColumnStyle(i, cellStyle));
 	}
 
 	private void templateGroup(XSSFWorkbook workbook) {
-		XSSFSheet sheet = workbook.createSheet("群组信息");
+		XSSFSheet sheet = workbook.createSheet("그룹 정보");
 		sheet.setDefaultColumnWidth(25);
 		Row row = sheet.createRow(0);
 		Cell cell = row.createCell(0);
-		cell.setCellValue("群组名称 *");
+		cell.setCellValue("그룹 이름 *");
 		cell = row.createCell(1);
-		cell.setCellValue("群组编码 *");
+		cell.setCellValue("그룹 코드 *");
 		cell = row.createCell(2);
-		cell.setCellValue("人员唯一编码");
+		cell.setCellValue("사용자 고유 코드");
 		cell = row.createCell(3);
-		cell.setCellValue("身份唯一编码");
+		cell.setCellValue("소속 고유 코드");
 		cell = row.createCell(4);
-		cell.setCellValue("组织唯一编码");
+		cell.setCellValue("조직 고유 코드");
 		cell = row.createCell(5);
-		cell.setCellValue("子群组编码");
+		cell.setCellValue("하위 그룹 코드");
 		cell = row.createCell(6);
-		cell.setCellValue("描述");
+		cell.setCellValue("설명");
 		CellStyle cellStyle = workbook.createCellStyle();
 		cellStyle.setWrapText(true);
 		IntStream.rangeClosed(0, 7).forEach(i -> sheet.setDefaultColumnStyle(i, cellStyle));
 	}
 
 	private void templateRole(XSSFWorkbook workbook) {
-		XSSFSheet sheet = workbook.createSheet("角色信息");
+		XSSFSheet sheet = workbook.createSheet("역할 정보");
 		sheet.setDefaultColumnWidth(25);
 		Row row = sheet.createRow(0);
 		Cell cell = row.createCell(0);
-		cell.setCellValue("角色名称 *");
+		cell.setCellValue("역할 이름 *");
 		cell = row.createCell(1);
-		cell.setCellValue("角色编码 *");
+		cell.setCellValue("역할 코드 *");
 		cell = row.createCell(2);
-		cell.setCellValue("人员唯一编码");
+		cell.setCellValue("사용자 고유 코드");
 		cell = row.createCell(3);
-		cell.setCellValue("群组唯一编码");
+		cell.setCellValue("그룹 고유 코드");
 		cell = row.createCell(4);
-		cell.setCellValue("描述");
+		cell.setCellValue("설명");
 		CellStyle cellStyle = workbook.createCellStyle();
 		cellStyle.setWrapText(true);
 		IntStream.rangeClosed(0, 5).forEach(i -> sheet.setDefaultColumnStyle(i, cellStyle));

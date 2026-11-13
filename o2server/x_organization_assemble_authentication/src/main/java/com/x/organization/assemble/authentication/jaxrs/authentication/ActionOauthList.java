@@ -51,7 +51,7 @@ class ActionOauthList extends BaseAction {
 		if (BooleanUtils.isTrue(Config.qiyeweixin().getScanLoginEnable())) {
 			Wo wo = new Wo();
 			wo.setName("企业微信");
-			wo.setDisplayName("@O2企业微信");
+			wo.setDisplayName("@O2 WeCom");
 			wo.setIcon(Qiyeweixin.qywxLogo);
 			wos.add(wo);
 		}
@@ -60,7 +60,7 @@ class ActionOauthList extends BaseAction {
 			Wo wo = new Wo();
 			wo.setName("钉钉");
 			wo.setIcon(Dingding.dingdingLogo);
-			wo.setDisplayName("@O2钉钉");
+			wo.setDisplayName("@O2 DingTalk");
 			wos.add(wo);
 		}
 		result.setData(wos);

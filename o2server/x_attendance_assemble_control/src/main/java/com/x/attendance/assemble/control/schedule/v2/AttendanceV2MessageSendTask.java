@@ -119,9 +119,9 @@ public class AttendanceV2MessageSendTask extends AbstractJob {
 
                 String title;
                 if (AttendanceV2CheckInRecord.OnDuty.equals(message.getCheckInType())) {
-                    title = "即将开始上班，请别忘记打卡哦！";
+                    title = "곧 출근 시간입니다. 출근 체크를 잊지 마세요!";
                 } else {
-                    title = "已经下班啦，请别忘记打卡哦！";
+                    title = "퇴근 시간입니다. 퇴근 체크를 잊지 마세요!";
                 }
                 MessageConnector.send(MessageConnector.TYPE_ATTENDANCE_CHECK_IN_ALERT, title, message.getUserId(), message);
             }
@@ -192,7 +192,7 @@ public class AttendanceV2MessageSendTask extends AbstractJob {
             for (Map.Entry<String, List<AttendanceV2AppealInfo>> entry : map.entrySet()) {
                 List<AttendanceV2AppealInfo> appealInfoList = entry.getValue();
                 if (appealInfoList != null && !appealInfoList.isEmpty()) {
-                    String title = "您有" + appealInfoList.size() + "条异常打卡数据产生，请及时处理！";
+                    String title = "처리할 이상 출퇴근 데이터가 " + appealInfoList.size() + "건 있습니다. 신속히 처리해 주세요!";
                     MessageConnector.send(MessageConnector.TYPE_ATTENDANCE_CHECK_IN_EXCEPTION, title, entry.getKey(), appealInfoList.get(0));
                     if (logger.isDebugEnabled()) {
                         logger.debug("发送异常数据提醒消息，person: {}", entry.getKey());

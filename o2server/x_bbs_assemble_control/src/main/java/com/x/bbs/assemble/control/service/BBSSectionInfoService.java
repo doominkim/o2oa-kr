@@ -367,13 +367,13 @@ public class BBSSectionInfoService {
 						unitName = userManagerService.getUnitNameWithPerson( name );
 					}catch( Exception e ) {
 						logger.warn("user has no identity!user:" + name );
-						unitName = "未知组织";
+						unitName = "알 수 없는 조직";
 					}
 					try {
 						topUnitName = userManagerService.getTopUnitNameWithPerson( name );
 					}catch( Exception e ) {
 						logger.warn("user has no identity!user:" + name );
-						topUnitName = "未知公司";
+						topUnitName = "알 수 없는 회사";
 					}
 
 					userRole_new.setTopUnitName( topUnitName );

@@ -1,0 +1,882 @@
+{
+  "o2server/x_organization_assemble_control/src/main/java/com/x/organization/assemble/control/MappingItem.java": [
+    {
+      "text": "姓名",
+      "reason": "엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "显示名",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "唯一编码",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "工号",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "性别",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "密码",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "密码到期时间",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "排序号",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "邮件",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "手机",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "固定电话",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "创建时间",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "入职时间",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "出生日期",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "头像",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "签名",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "微信",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "管理者",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "名称",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "标识",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "人员成员",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "群组成员",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "简称",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "上级公司",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "级别",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "上级部门",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "所属公司",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "所属人员",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "所属部门",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "下属身份",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "人员",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "属性值",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "公司",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "成员",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "部门",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    },
+    {
+      "text": "结果",
+      "reason": "같은 파일 검토 결과와 같은 유형: 엑셀 가져오기 열 이름 비교값(기존 파일 호환)"
+    }
+  ],
+  "o2server/x_organization_assemble_control/src/main/java/com/x/organization/assemble/control/jaxrs/inputperson/PersonSheetConfigurator.java": [
+    {
+      "text": "人员姓名 *",
+      "reason": "기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "人员姓名",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "人员编号 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "人员编号",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "唯一编码 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "员工账号 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "手机号码 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "手机",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "联系电话",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "办公电话",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "办公室电话",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "工作电话",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "电子邮件",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "邮件",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "邮箱",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "邮件地址",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "性别",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    }
+  ],
+  "o2server/x_organization_assemble_control/src/main/java/com/x/organization/assemble/control/jaxrs/inputperson/IdentitySheetConfigurator.java": [
+    {
+      "text": "人员唯一编码 *",
+      "reason": "기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "员工账号 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "组织编号 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "组织唯一编码 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "主兼职",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "身份编码",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    }
+  ],
+  "o2server/x_organization_assemble_control/src/main/java/com/x/organization/assemble/control/jaxrs/inputperson/DutySheetConfigurator.java": [
+    {
+      "text": "职务名称 *",
+      "reason": "기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "职务所在组织唯一编码 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "描述",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "职务描述",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "职务所含人员唯一编码",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "职务所含人员所在组织唯一编码",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "职务编码",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    }
+  ],
+  "o2server/x_organization_assemble_control/src/main/java/com/x/organization/assemble/control/jaxrs/inputperson/GroupSheetConfigurator.java": [
+    {
+      "text": "群组编码 *",
+      "reason": "기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "群组名称 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "人员编号",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "人员唯一编码",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "身份编号",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "身份唯一编码",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "组织编号",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "组织唯一编码",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "子群组编码",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "描述",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "群组描述",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    }
+  ],
+  "o2server/x_organization_assemble_control/src/main/java/com/x/organization/assemble/control/jaxrs/inputperson/RoleSheetConfigurator.java": [
+    {
+      "text": "角色编码 *",
+      "reason": "기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "角色名称 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "人员编号",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "人员唯一编码",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "群组编码",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "群组唯一编码",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "描述",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "群组描述",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    }
+  ],
+  "o2server/x_organization_assemble_control/src/main/java/com/x/organization/assemble/control/jaxrs/inputperson/UnitSheetConfigurator.java": [
+    {
+      "text": "组织名称 *",
+      "reason": "기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "唯一编码 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "组织编号 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "组织级别编号 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "组织级别名称 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "上级组织",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "上级组织编号",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "排序",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "排序号",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "描述",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "备注",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    }
+  ],
+  "o2server/x_organization_assemble_control/src/main/java/com/x/organization/assemble/control/jaxrs/inputperson/UnitTypeSheetConfigurator.java": [
+    {
+      "text": "级别编号",
+      "reason": "기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "组织级别编号",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "级别编号 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "级别名称 *",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "组织级别名称",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    },
+    {
+      "text": "名称",
+      "reason": "같은 파일 검토 결과와 같은 유형: 기존 중국어 템플릿 호환용 열 이름 비교값(한국어 별칭 추가함)"
+    }
+  ],
+  "o2server/x_organization_assemble_control/src/main/java/com/x/organization/assemble/control/jaxrs/inputperson/BaseAction.java": [
+    {
+      "text": "女",
+      "reason": "성별 입력 비교값(한국어 여/남 추가함)"
+    },
+    {
+      "text": "男",
+      "reason": "같은 파일 검토 결과와 같은 유형: 성별 입력 비교값(한국어 여/남 추가함)"
+    }
+  ],
+  "o2server/x_organization_assemble_control/src/main/java/com/x/organization/assemble/control/jaxrs/personcard/ActionCreate.java": [
+    {
+      "text": "默认分组",
+      "reason": "DB 저장값, PersonCard 엔티티 기본값과 동일해야 함"
+    }
+  ],
+  "o2server/x_organization_assemble_control/src/main/java/com/x/organization/assemble/control/jaxrs/personcard/ActionUpdate.java": [
+    {
+      "text": "默认分组",
+      "reason": "DB 저장값, PersonCard 엔티티 기본값과 동일해야 함"
+    }
+  ],
+  "o2server/x_organization_assemble_control/src/main/java/com/x/organization/assemble/control/jaxrs/personcard/CodeUtil.java": [
+    {
+      "text": "宋体",
+      "reason": "글꼴 이름(시스템 폰트 식별자)"
+    },
+    {
+      "text": "楷体",
+      "reason": "같은 파일 검토 결과와 같은 유형: 글꼴 이름(시스템 폰트 식별자)"
+    }
+  ],
+  "o2server/x_bbs_core_entity/src/main/java/com/x/bbs/entity/BBSConfigSetting.java": [
+    {
+      "text": "--无--",
+      "reason": "DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    }
+  ],
+  "o2server/x_bbs_core_entity/src/main/java/com/x/bbs/entity/BBSForumInfo.java": [
+    {
+      "text": "启用",
+      "reason": "DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    },
+    {
+      "text": "所有人",
+      "reason": "같은 파일 검토 결과와 같은 유형: DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    },
+    {
+      "text": "经典",
+      "reason": "같은 파일 검토 결과와 같은 유형: DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    },
+    {
+      "text": "讨论|新闻",
+      "reason": "같은 파일 검토 결과와 같은 유형: DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    },
+    {
+      "text": "信息|问题|投票",
+      "reason": "같은 파일 검토 결과와 같은 유형: DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    }
+  ],
+  "o2server/x_bbs_core_entity/src/main/java/com/x/bbs/entity/BBSOperationRecord.java": [
+    {
+      "text": "未知",
+      "reason": "DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    }
+  ],
+  "o2server/x_bbs_core_entity/src/main/java/com/x/bbs/entity/BBSPermissionInfo.java": [
+    {
+      "text": "其他权限",
+      "reason": "DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    }
+  ],
+  "o2server/x_bbs_core_entity/src/main/java/com/x/bbs/entity/BBSPermissionRole.java": [
+    {
+      "text": "其他权限",
+      "reason": "DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    }
+  ],
+  "o2server/x_bbs_core_entity/src/main/java/com/x/bbs/entity/BBSReplyInfo.java": [
+    {
+      "text": "无审核",
+      "reason": "DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    }
+  ],
+  "o2server/x_bbs_core_entity/src/main/java/com/x/bbs/entity/BBSSectionInfo.java": [
+    {
+      "text": "启用",
+      "reason": "DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    },
+    {
+      "text": "主版块",
+      "reason": "같은 파일 검토 결과와 같은 유형: DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    },
+    {
+      "text": "所有人",
+      "reason": "같은 파일 검토 결과와 같은 유형: DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    },
+    {
+      "text": "经典",
+      "reason": "같은 파일 검토 결과와 같은 유형: DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    },
+    {
+      "text": "讨论|新闻",
+      "reason": "같은 파일 검토 결과와 같은 유형: DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    },
+    {
+      "text": "信息|问题|投票",
+      "reason": "같은 파일 검토 결과와 같은 유형: DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    }
+  ],
+  "o2server/x_bbs_core_entity/src/main/java/com/x/bbs/entity/BBSSubjectInfo.java": [
+    {
+      "text": "启用",
+      "reason": "DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    },
+    {
+      "text": "新闻",
+      "reason": "같은 파일 검토 결과와 같은 유형: DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    },
+    {
+      "text": "信息",
+      "reason": "같은 파일 검토 결과와 같은 유형: DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    },
+    {
+      "text": "无审核",
+      "reason": "같은 파일 검토 결과와 같은 유형: DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    }
+  ],
+  "o2server/x_bbs_core_entity/src/main/java/com/x/bbs/entity/BBSUserInfo.java": [
+    {
+      "text": "启用",
+      "reason": "DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    }
+  ],
+  "o2server/x_bbs_core_entity/src/main/java/com/x/bbs/entity/BBSVoteOption.java": [
+    {
+      "text": "文字",
+      "reason": "DB 저장 기본값, 서버·웹이 같은 중국어 값으로 비교"
+    }
+  ],
+  "o2server/x_attendance_core_entity/src/main/java/com/x/attendance/entity/AppealConfig.java": [
+    {
+      "text": "指定人",
+      "reason": "근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "个人属性",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "汇报对象",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "所属部门职务",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "指定人|个人属性|汇报对象|所属部门职务",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "无|指定人|个人属性|汇报对象|所属部门职务",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    }
+  ],
+  "o2server/x_attendance_core_entity/src/main/java/com/x/attendance/entity/AttendanceDetail.java": [
+    {
+      "text": "无",
+      "reason": "근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    }
+  ],
+  "o2server/x_attendance_core_entity/src/main/java/com/x/attendance/entity/AttendanceDetailMobile.java": [
+    {
+      "text": "上午上班打卡",
+      "reason": "근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "上午下班打卡",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "下午上班打卡",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "下午下班打卡",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "午间打卡",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    }
+  ],
+  "o2server/x_attendance_core_entity/src/main/java/com/x/attendance/entity/AttendanceQywxDetail.java": [
+    {
+      "text": "上班打卡",
+      "reason": "근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "下班打卡",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "外出打卡",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "时间异常",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "地点异常",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "wifi异常",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "非常用设备",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "未打卡",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    },
+    {
+      "text": "正常",
+      "reason": "같은 파일 검토 결과와 같은 유형: 근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    }
+  ],
+  "o2server/x_attendance_core_entity/src/main/java/com/x/attendance/entity/AttendanceSetting.java": [
+    {
+      "text": "--无--",
+      "reason": "근태 상태·유형 비교값(DB 저장, 웹 비교)"
+    }
+  ],
+  "o2server/x_attendance_core_entity/src/main/java/com/x/attendance/entity/v2/AttendanceV2ConfigProperties.java": [
+    {
+      "text": "考勤管理员",
+      "reason": "조직 역할 이름 비교값"
+    }
+  ],
+  "o2server/x_cms_core_entity/src/main/java/com/x/cms/core/entity/AppInfo.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType·상태 비교값(DB 저장)"
+    },
+    {
+      "text": "未分类",
+      "reason": "같은 파일 검토 결과와 같은 유형: cms documentType·상태 비교값(DB 저장)"
+    }
+  ],
+  "o2server/x_cms_core_entity/src/main/java/com/x/cms/core/entity/CategoryInfo.java": [
+    {
+      "text": "数据",
+      "reason": "cms documentType·상태 비교값(DB 저장)"
+    },
+    {
+      "text": "禁用审批流",
+      "reason": "workflowType 비교값"
+    },
+    {
+      "text": "信息",
+      "reason": "같은 파일 검토 결과와 같은 유형: cms documentType·상태 비교값(DB 저장)"
+    }
+  ],
+  "o2server/x_cms_core_entity/src/main/java/com/x/cms/core/entity/Document.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType·상태 비교값(DB 저장)"
+    },
+    {
+      "text": "数据",
+      "reason": "같은 파일 검토 결과와 같은 유형: cms documentType·상태 비교값(DB 저장)"
+    }
+  ],
+  "o2server/x_cms_core_entity/src/main/java/com/x/cms/core/entity/DocumentCommentInfo.java": [
+    {
+      "text": "无审核",
+      "reason": "cms documentType·상태 비교값(DB 저장)"
+    }
+  ],
+  "o2server/x_cms_core_entity/src/main/java/com/x/cms/core/entity/element/TemplateForm.java": [
+    {
+      "text": "未分类",
+      "reason": "cms documentType·상태 비교값(DB 저장)"
+    }
+  ],
+  "o2server/x_calendar_core_entity/src/main/java/com/x/calendar/core/entity/Calendar_EventRepeatMaster.java": [
+    {
+      "text": "等待生成",
+      "reason": "반복 상태 비교값(DB 저장)"
+    }
+  ],
+  "o2server/x_calendar_core_entity/src/main/java/com/x/calendar/core/entity/Calendar_Setting.java": [
+    {
+      "text": "--无--",
+      "reason": "설정 선택값 비교값"
+    }
+  ],
+  "o2server/x_processplatform_core_entity/src/main/java/com/x/processplatform/core/entity/content/Handover.java": [
+    {
+      "text": "替换",
+      "reason": "인계 유형 비교값(DB 저장)"
+    },
+    {
+      "text": "授权",
+      "reason": "같은 파일 검토 결과와 같은 유형: 인계 유형 비교값(DB 저장)"
+    }
+  ],
+  "o2server/x_processplatform_core_entity/src/main/java/com/x/processplatform/core/entity/content/TaskCompleted.java": [
+    {
+      "text": "8.2 移动到properties中",
+      "reason": "@Deprecated 어노테이션 설명"
+    }
+  ],
+  "o2server/x_processplatform_core_entity/src/main/java/com/x/processplatform/core/entity/element/Manual.java": [
+    {
+      "text": "如果使用tickets的distingushedName,那么这个设置将要废弃.",
+      "reason": "@Deprecated 어노테이션 설명"
+    }
+  ],
+  "o2server/x_processplatform_service_processing/src/main/java/com/x/processplatform/service/processing/jaxrs/task/V2Remove.java": [
+    {
+      "text": "8.2,要删除掉和ActionDelete重复.",
+      "reason": "@Deprecated 어노테이션 설명"
+    }
+  ],
+  "o2server/x_query_assemble_surface/src/main/java/com/x/query/assemble/surface/jaxrs/morelikethis/MoreLikeThisAction.java": [
+    {
+      "text": "相似检索.",
+      "reason": "@Tag 어노테이션 API 설명"
+    }
+  ],
+  "o2server/x_query_assemble_surface/src/main/java/com/x/query/assemble/surface/jaxrs/search/SearchAction.java": [
+    {
+      "text": "搜索接口.",
+      "reason": "@Tag 어노테이션 API 설명"
+    }
+  ],
+  "o2server/x_query_assemble_surface/src/main/java/com/x/query/assemble/surface/jaxrs/view/ActionBundle.java": [
+    {
+      "text": "{'logic':'逻辑运算:and|or',...}",
+      "reason": "@FieldTypeDescribe 어노테이션 API 설명"
+    },
+    {
+      "text": "{'logic':'逻辑运算:and|or','path':'data数据的路径:$work.title','comparison':'比较运算符:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo|range','value':'7月','formatType':'textValue|numberValue|dateTimeValue|booleanValue'}",
+      "reason": "같은 파일 검토 결과와 같은 유형: @FieldTypeDescribe 어노테이션 API 설명"
+    }
+  ],
+  "o2server/x_query_assemble_surface/src/main/java/com/x/query/assemble/surface/jaxrs/view/ActionBundleV2.java": [
+    {
+      "text": "{'logic':'逻辑运算:and|or',...}",
+      "reason": "@FieldTypeDescribe 어노테이션 API 설명"
+    },
+    {
+      "text": "{'logic':'逻辑运算:and|or','path':'data数据的路径:$work.title','comparison':'比较运算符:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo|range','value':'7月','formatType':'textValue|numberValue|dateTimeValue|booleanValue'}",
+      "reason": "같은 파일 검토 결과와 같은 유형: @FieldTypeDescribe 어노테이션 API 설명"
+    }
+  ],
+  "o2server/x_query_assemble_surface/src/main/java/com/x/query/assemble/surface/jaxrs/view/ActionBundleWithQuery.java": [
+    {
+      "text": "{'logic':'逻辑运算:and|or',...}",
+      "reason": "@FieldTypeDescribe 어노테이션 API 설명"
+    },
+    {
+      "text": "{'logic':'逻辑运算:and|or','path':'data数据的路径:$work.title','comparison':'比较运算符:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo|range','value':'7月','formatType':'textValue|numberValue|dateTimeValue|booleanValue'}",
+      "reason": "같은 파일 검토 결과와 같은 유형: @FieldTypeDescribe 어노테이션 API 설명"
+    }
+  ],
+  "o2server/x_query_assemble_surface/src/main/java/com/x/query/assemble/surface/jaxrs/view/ActionExcelWithQuery.java": [
+    {
+      "text": "{'logic':'逻辑运算:and|or',...}",
+      "reason": "@FieldTypeDescribe 어노테이션 API 설명"
+    },
+    {
+      "text": "{'logic':'逻辑运算:and|or','path':'data数据的路径:$work.title','comparison':'比较运算符:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo|range','value':'7月','formatType':'textValue|numberValue|dateTimeValue|booleanValue'}",
+      "reason": "같은 파일 검토 결과와 같은 유형: @FieldTypeDescribe 어노테이션 API 설명"
+    }
+  ],
+  "o2server/x_query_assemble_surface/src/main/java/com/x/query/assemble/surface/jaxrs/view/ActionExecute.java": [
+    {
+      "text": "{'logic':'逻辑运算:and|or',...}",
+      "reason": "@FieldTypeDescribe 어노테이션 API 설명"
+    },
+    {
+      "text": "{'logic':'逻辑运算:and|or','path':'data数据的路径:$work.title','comparison':'比较运算符:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo|range','value':'7月','formatType':'textValue|numberValue|dateTimeValue|booleanValue'}",
+      "reason": "같은 파일 검토 결과와 같은 유형: @FieldTypeDescribe 어노테이션 API 설명"
+    }
+  ],
+  "o2server/x_query_assemble_surface/src/main/java/com/x/query/assemble/surface/jaxrs/view/ActionExecuteV2.java": [
+    {
+      "text": "{'logic':'逻辑运算:and|or',...}",
+      "reason": "@FieldTypeDescribe 어노테이션 API 설명"
+    },
+    {
+      "text": "{'logic':'逻辑运算:and|or','path':'data数据的路径:$work.title','comparison':'比较运算符:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo|range','value':'7月','formatType':'textValue|numberValue|dateTimeValue|booleanValue'}",
+      "reason": "같은 파일 검토 결과와 같은 유형: @FieldTypeDescribe 어노테이션 API 설명"
+    }
+  ],
+  "o2server/x_query_assemble_surface/src/main/java/com/x/query/assemble/surface/jaxrs/view/ActionExecuteWithQuery.java": [
+    {
+      "text": "{'logic':'逻辑运算:and|or',...}",
+      "reason": "@FieldTypeDescribe 어노테이션 API 설명"
+    },
+    {
+      "text": "{'logic':'逻辑运算:and|or','path':'data数据的路径:$work.title','comparison':'比较运算符:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo|range','value':'7月','formatType':'textValue|numberValue|dateTimeValue|booleanValue'}",
+      "reason": "같은 파일 검토 결과와 같은 유형: @FieldTypeDescribe 어노테이션 API 설명"
+    }
+  ],
+  "o2server/x_query_assemble_surface/src/main/java/com/x/query/assemble/surface/jaxrs/view/ActionExecuteWithQueryV2.java": [
+    {
+      "text": "{'logic':'逻辑运算:and|or',...}",
+      "reason": "@FieldTypeDescribe 어노테이션 API 설명"
+    },
+    {
+      "text": "{'logic':'逻辑运算:and|or','path':'data数据的路径:$work.title','comparison':'比较运算符:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo|range','value':'7月','formatType':'textValue|numberValue|dateTimeValue|booleanValue'}",
+      "reason": "같은 파일 검토 결과와 같은 유형: @FieldTypeDescribe 어노테이션 API 설명"
+    }
+  ],
+  "o2server/x_processplatform_assemble_designer/src/main/java/com/x/processplatform/assemble/designer/jaxrs/process/ActionGetProcessElementList.java": [
+    {
+      "text": "元素类型",
+      "reason": "@FieldTypeDescribe 어노테이션 API 설명"
+    },
+    {
+      "text": "{\"elementType\": \"元素类型\", \"elementId\": \"元素ID\"}",
+      "reason": "같은 파일 검토 결과와 같은 유형: @FieldTypeDescribe 어노테이션 API 설명"
+    }
+  ],
+  "o2server/x_processplatform_core_express/src/main/java/com/x/processplatform/core/express/assemble/surface/jaxrs/work/ActionCreateWi.java": [
+    {
+      "text": "附件id",
+      "reason": "@FieldTypeDescribe 어노테이션 API 설명"
+    },
+    {
+      "text": "{'id':'附件id','name':'附件名称','site':'附件框分类','isSoftCopy':'是否软拷贝，默认false，true表示不拷贝真实存储附件，共用附件，仅支持流程附件','copyFrom':'附件来源(cms或processPlatform，默认为processPlatform)'}",
+      "reason": "같은 파일 검토 결과와 같은 유형: @FieldTypeDescribe 어노테이션 API 설명"
+    },
+    {
+      "text": "{'type':'关联目标类型(cms或processPlatform)','bundle':'关联目标标识','site':'关联内容框标识','view':'来源视图'}",
+      "reason": "같은 파일 검토 결과와 같은 유형: @FieldTypeDescribe 어노테이션 API 설명"
+    }
+  ],
+  "o2server/x_organization_assemble_authentication/src/main/java/com/x/organization/assemble/authentication/jaxrs/authentication/ActionOauthList.java": [
+    {
+      "text": "企业微信",
+      "reason": "OAuth 클라이언트 name 식별값(로그인 경로에서 비교)"
+    },
+    {
+      "text": "钉钉",
+      "reason": "같은 파일 검토 결과와 같은 유형: OAuth 클라이언트 name 식별값(로그인 경로에서 비교)"
+    }
+  ]
+}

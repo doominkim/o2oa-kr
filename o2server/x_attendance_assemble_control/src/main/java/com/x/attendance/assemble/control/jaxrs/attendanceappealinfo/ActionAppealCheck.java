@@ -67,18 +67,18 @@ public class ActionAppealCheck extends BaseAction {
 					if (attendanceAppealInfo == null) {
 						subProcessCheck = false;
 						processWo.setSuccess( false );
-						processWo.setTitle( "无标题" );
-						processWo.setDiscription("考勤申诉信息不存在！");
+						processWo.setTitle( "제목 없음" );
+						processWo.setDiscription("근태 소명 정보가 없습니다!");
 						Exception exception = new ExceptionAttendanceAppealNotExists(id);
 						result.error(exception);
 					}else {
-						processWo.setTitle( "考勤申诉-" + attendanceAppealInfo.getEmpName() + "-" + attendanceAppealInfo.getRecordDateString() );
+						processWo.setTitle( "근태 소명-" + attendanceAppealInfo.getEmpName() + "-" + attendanceAppealInfo.getRecordDateString() );
 					}
 				} catch (Exception e) {
 					subProcessCheck = false;
 					processWo.setSuccess( false );
-					processWo.setTitle( "无标题" );
-					processWo.setDiscription("考勤申诉信息查询发生异常！");
+					processWo.setTitle( "제목 없음" );
+					processWo.setDiscription("근태 소명 정보 조회 중 오류가 발생했습니다!");
 					Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在根据ID查询考勤申诉信息数据时发生异常。ID:"+ id);
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
@@ -92,14 +92,14 @@ public class ActionAppealCheck extends BaseAction {
 						} else {
 							check = false;
 							processWo.setSuccess( false );
-							processWo.setDiscription("申诉人员组织不存在。" + effectivePerson.getDistinguishedName() );
+							processWo.setDiscription("소명자의 조직이 없습니다. " + effectivePerson.getDistinguishedName() );
 							Exception exception = new ExceptionPersonHasNoUnit(effectivePerson.getDistinguishedName());
 							result.error(exception);
 						}
 					} catch (Exception e) {
 						check = false;
 						processWo.setSuccess( false );
-						processWo.setDiscription("申诉人员组织查询发生异常！" + effectivePerson.getDistinguishedName() );
+						processWo.setDiscription("소명자 조직 조회 중 오류가 발생했습니다! " + effectivePerson.getDistinguishedName() );
 						Exception exception = new ExceptionAttendanceAppealProcess(e, "系统根据员工姓名查询组织信息时发生异常！name:"+effectivePerson.getDistinguishedName());
 						result.error(exception);
 						logger.error(e, effectivePerson, request, null);
@@ -112,11 +112,11 @@ public class ActionAppealCheck extends BaseAction {
 								wrapIn.getOpinion2(), // opinion
 								wrapIn.getStatus() // status
 						);
-						processWo.setDiscription("申诉处理成功！");
+						processWo.setDiscription("소명 처리 성공!");
 					} catch (Exception e) {
 						check = false;
 						processWo.setSuccess( false );
-						processWo.setDiscription( "申诉处理失败！" );
+						processWo.setDiscription( "소명 처리 실패!" );
 						Exception exception = new ExceptionAttendanceAppealProcess(e, id);
 						result.error(exception);
 						logger.error(e, effectivePerson, request, null);

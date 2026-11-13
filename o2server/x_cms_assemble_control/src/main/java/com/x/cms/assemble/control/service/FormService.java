@@ -56,13 +56,13 @@ public class FormService {
 
 	public String getNameWithId(EntityManagerContainer emc, String formId) throws Exception {
 		if( StringUtils.isEmpty( formId )) {
-			return  "未命名表单";
+			return  "이름 없는 양식";
 		}
 		Form form = emc.find( formId, Form.class );
 		if( form != null ){
 			return form.getName();
 		}else{
-			return "未命名表单";
+			return "이름 없는 양식";
 		}
 	}
 }

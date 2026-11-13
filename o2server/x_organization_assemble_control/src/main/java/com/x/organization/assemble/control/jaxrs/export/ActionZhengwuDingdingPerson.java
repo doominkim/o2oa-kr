@@ -67,11 +67,11 @@ class ActionZhengwuDingdingPerson extends BaseAction {
 				user.setUnitList(ListTools.extractProperty(units, Unit.name_FIELDNAME, String.class, true, false));
 				users.add(user);
 			}
-			Sheet sheet = workBook.createSheet("政务钉钉人员");
+			Sheet sheet = workBook.createSheet("정무 DingTalk 사용자");
 			Row row = sheet.createRow(0);
-			row.createCell(0).setCellValue("姓名");
-			row.createCell(1).setCellValue("手机");
-			row.createCell(2).setCellValue("政务钉钉ID");
+			row.createCell(0).setCellValue("이름");
+			row.createCell(1).setCellValue("휴대전화");
+			row.createCell(2).setCellValue("정무 DingTalk ID");
 			for (int i = 0; i < users.size(); i++) {
 				User user = users.get(i);
 				row = sheet.createRow(i + 1);
@@ -85,7 +85,7 @@ class ActionZhengwuDingdingPerson extends BaseAction {
 			workBook.write(baos);
 			CacheFileResult cacheFileResult = new CacheFileResult();
 			cacheFileResult.setBytes(baos.toByteArray());
-			cacheFileResult.setName("政务钉钉人员.xlsx");
+			cacheFileResult.setName("정무 DingTalk 사용자.xlsx");
 			Wo wo = new Wo();
 			wo.setFlag(StringTools.uniqueToken());
 			CacheKey cacheKey = new CacheKey(wo.getFlag());

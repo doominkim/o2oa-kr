@@ -39,11 +39,11 @@ public class ActionRemoveBind extends BaseAction {
 							effectivePerson.getDistinguishedName(), ActionListAll.DEVICE_PERSON_ATTR_KEY, deviceList));
 				} else {
 					wraps.setValue(true);
-					result.setMessage("当前设备不存在，无需解绑！");
+					result.setMessage("등록되지 않은 기기이므로 해제할 필요가 없습니다!");
 				}
 			} else {
 				wraps.setValue(true);
-				result.setMessage("当前设备不存在，无需解绑！");
+				result.setMessage("등록되지 않은 기기이므로 해제할 필요가 없습니다!");
 			}
 			result.setData(wraps);
 			logger.info("action 'ActionRemoveBind' execute completed!");

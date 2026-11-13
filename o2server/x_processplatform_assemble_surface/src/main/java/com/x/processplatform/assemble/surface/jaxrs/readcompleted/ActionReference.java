@@ -246,8 +246,8 @@ class ActionReference extends BaseAction {
 			if (o.getProcessingType().equals(ProcessingType.retract)) {
 				WoTaskCompleted retract = new WoTaskCompleted();
 				o.copyTo(retract);
-				retract.setRouteName("撤回");
-				retract.setOpinion("撤回");
+				retract.setRouteName("회수");
+				retract.setOpinion("회수");
 				retract.setStartTime(retract.getRetractTime());
 				retract.setCompletedTime(retract.getRetractTime());
 				list.add(retract);

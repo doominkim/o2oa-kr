@@ -52,7 +52,7 @@ public class ActionUpdateStatusByAdmin extends BaseAction {
         emc.beginTransaction(AttendanceV2CheckInRecord.class);
         record.setCheckInResult(AttendanceV2CheckInRecord.CHECKIN_RESULT_NORMAL); // 修改为正常
         record.setAppealId(info.getId()); // 回填 id
-        record.setDescription("管理员处理！"); // 描述
+        record.setDescription("관리자 처리!"); // 描述
         emc.check(record, CheckPersistType.all);
         emc.commit();
         // 申诉成功后，重新生成对应的数据

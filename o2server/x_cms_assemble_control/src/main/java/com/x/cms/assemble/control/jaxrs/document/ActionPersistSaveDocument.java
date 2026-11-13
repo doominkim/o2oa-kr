@@ -188,7 +188,7 @@ public class ActionPersistSaveDocument extends BaseAction {
 
 		if (check) {
 			if (StringUtils.isEmpty(document.getTitle())) {
-				document.setTitle(appInfo.getAppName() + " - " + categoryInfo.getCategoryName() + " - 无标题文档");
+				document.setTitle(appInfo.getAppName() + " - " + categoryInfo.getCategoryName() + " - 제목 없는 게시글");
 			}
 		}
 

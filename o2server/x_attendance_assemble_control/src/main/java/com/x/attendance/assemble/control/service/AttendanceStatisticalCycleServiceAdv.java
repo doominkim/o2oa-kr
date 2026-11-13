@@ -126,7 +126,7 @@ public class AttendanceStatisticalCycleServiceAdv {
 		attendanceStatisticalCycle.setCycleStartDateString( dateOperation.getFirstDateStringInMonth(detail.getRecordDate()));
 		attendanceStatisticalCycle.setCycleEndDate(dateOperation.getLastDateInMonth(detail.getRecordDate()));
 		attendanceStatisticalCycle.setCycleEndDateString(dateOperation.getLastDateStringInMonth(detail.getRecordDate()));
-		attendanceStatisticalCycle.setDescription("系统自动创建");
+		attendanceStatisticalCycle.setDescription("시스템 자동 생성");
 		//先把对象放到Map里
 		if( topUnitAttendanceStatisticalCycleMap == null ){
 			topUnitAttendanceStatisticalCycleMap = new HashMap<String, Map<String, List<AttendanceStatisticalCycle>>>();
@@ -249,7 +249,7 @@ public class AttendanceStatisticalCycleServiceAdv {
 			attendanceStatisticalCycle.setCycleStartDateString( dateOperation.getFirstDateStringInMonth(day));
 			attendanceStatisticalCycle.setCycleEndDate(dateOperation.getLastDateInMonth(day));
 			attendanceStatisticalCycle.setCycleEndDateString(dateOperation.getLastDateStringInMonth(day));
-			attendanceStatisticalCycle.setDescription("系统自动创建");
+			attendanceStatisticalCycle.setDescription("시스템 자동 생성");
 
 			//先把对象放到Map里
 			if( topUnitAttendanceStatisticalCycleMap == null ){
@@ -375,7 +375,7 @@ public class AttendanceStatisticalCycleServiceAdv {
 			attendanceStatisticalCycle.setCycleStartDateString( dateOperation.getFirstDateStringInMonth(day));
 			attendanceStatisticalCycle.setCycleEndDate(dateOperation.getLastDateInMonth(day));
 			attendanceStatisticalCycle.setCycleEndDateString(dateOperation.getLastDateStringInMonth(day));
-			attendanceStatisticalCycle.setDescription("系统自动创建");
+			attendanceStatisticalCycle.setDescription("시스템 자동 생성");
 
 			//先把对象放到Map里
 			if( topUnitAttendanceStatisticalCycleMap == null ){
@@ -513,7 +513,7 @@ public class AttendanceStatisticalCycleServiceAdv {
 			attendanceStatisticalCycle.setCycleStartDateString( dateOperation.getFirstDateStringInMonth(day));
 			attendanceStatisticalCycle.setCycleEndDate(dateOperation.getLastDateInMonth(day));
 			attendanceStatisticalCycle.setCycleEndDateString(dateOperation.getLastDateStringInMonth(day));
-			attendanceStatisticalCycle.setDescription("系统自动创建");
+			attendanceStatisticalCycle.setDescription("시스템 자동 생성");
 			
 			//先把对象放到Map里
 			if( topUnitAttendanceStatisticalCycleMap == null ){

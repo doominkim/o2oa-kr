@@ -155,7 +155,7 @@ class ActionCreate extends BaseAction {
 			WeLinkMessage m = new WeLinkMessage();
 			m.setToUserList(ids);
 			m.setMsgRange("0");
-			m.setMsgTitle("消息");
+			m.setMsgTitle("메시지");
 			m.setMsgContent(body);
 			Date now = new Date();
 			m.setCreateTime(now.getTime() + "");

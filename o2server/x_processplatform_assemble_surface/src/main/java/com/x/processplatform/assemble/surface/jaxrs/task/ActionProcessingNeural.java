@@ -115,8 +115,8 @@ class ActionProcessingNeural extends BaseAction {
 					if (_taskCompleted.getProcessingType().equals(ProcessingType.retract)) {
 						TaskCompleted _retract = new TaskCompleted();
 						o.copyTo(_retract);
-						_retract.setRouteName("撤回");
-						_retract.setOpinion("撤回");
+						_retract.setRouteName("회수");
+						_retract.setOpinion("회수");
 						_retract.setStartTime(_retract.getRetractTime());
 						_retract.setCompletedTime(_retract.getRetractTime());
 						o.getTaskCompletedList().add(WoTaskCompleted.copier.copy(_retract));

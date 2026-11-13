@@ -64,7 +64,7 @@ class AttendanceDetailAnalyseCoreService {
 				logger.debug( debugger, "格式化[下午上班签到时间]afternoonOndutyTime=" +  detail.getRecordDateString() + " " + detail.getAfternoonOnDutyTime() );
 				return dateOperation.getDateFromString( detail.getRecordDateString() + " " + detail.getAfternoonOnDutyTime() );
 			} catch (Exception e) {
-				detail.setDescription( detail.getDescription() + "; 系统进行时间转换时发生异常,afternoonOndutyTime=" + detail.getRecordDateString() + " " + detail.getAfternoonOnDutyTime() );
+				detail.setDescription( detail.getDescription() + "; 시스템 시간 변환 중 오류 발생,afternoonOndutyTime=" + detail.getRecordDateString() + " " + detail.getAfternoonOnDutyTime() );
 				logger.warn( "系统进行时间转换时发生异常,afternoonOndutyTime=" + detail.getRecordDateString() + " " + detail.getAfternoonOnDutyTime() );
 				logger.error(e);
 			}
@@ -80,7 +80,7 @@ class AttendanceDetailAnalyseCoreService {
 				logger.debug( debugger, "格式化[上午下班签退时间]morningOffdutyTime=" +  detail.getRecordDateString() + " " + detail.getMorningOffDutyTime() );
 				return dateOperation.getDateFromString( detail.getRecordDateString() + " " + detail.getMorningOffDutyTime() );
 			} catch (Exception e) {
-				detail.setDescription( detail.getDescription() + "; 系统进行时间转换时发生异常,morningOffdutyTime=" + detail.getRecordDateString() + " " + detail.getMorningOffDutyTime() );
+				detail.setDescription( detail.getDescription() + "; 시스템 시간 변환 중 오류 발생,morningOffdutyTime=" + detail.getRecordDateString() + " " + detail.getMorningOffDutyTime() );
 				logger.warn( "系统进行时间转换时发生异常,morningOffdutyTime=" + detail.getRecordDateString() + " " + detail.getMorningOffDutyTime() );
 				logger.error(e);
 			}
@@ -96,7 +96,7 @@ class AttendanceDetailAnalyseCoreService {
 				logger.debug( debugger, ">>>>>>>>>>格式化[缺勤起算时间]absenceStartTime=" +  detail.getRecordDateString() + " " + scheduleSetting.getAbsenceStartTime() );
 				return dateOperation.getDateFromString( detail.getRecordDateString() + " " + scheduleSetting.getAbsenceStartTime() );
 			} catch (Exception e) {
-				detail.setDescription( detail.getDescription() + "; 系统进行时间转换时发生异常,absenceStartTime=" + detail.getRecordDateString() + " " + scheduleSetting.getAbsenceStartTime() );
+				detail.setDescription( detail.getDescription() + "; 시스템 시간 변환 중 오류 발생,absenceStartTime=" + detail.getRecordDateString() + " " + scheduleSetting.getAbsenceStartTime() );
 				logger.warn( "系统进行时间转换时发生异常,absenceStartTime=" + detail.getRecordDateString() + " " + scheduleSetting.getAbsenceStartTime() );
 				logger.error(e);
 			}
@@ -112,7 +112,7 @@ class AttendanceDetailAnalyseCoreService {
 				logger.debug( debugger, ">>>>>>>>>>格式化[早退起算时间]leaveEarlyStartTime=" +  detail.getRecordDateString() + " " + scheduleSetting.getLeaveEarlyStartTime() );
 				return dateOperation.getDateFromString( detail.getRecordDateString() + " " + scheduleSetting.getLeaveEarlyStartTime() );
 			} catch (Exception e) {
-				detail.setDescription( detail.getDescription() + "; 系统进行时间转换时发生异常,leaveEarlyStartTime=" + detail.getRecordDateString() + " " + scheduleSetting.getLeaveEarlyStartTime() );
+				detail.setDescription( detail.getDescription() + "; 시스템 시간 변환 중 오류 발생,leaveEarlyStartTime=" + detail.getRecordDateString() + " " + scheduleSetting.getLeaveEarlyStartTime() );
 				logger.warn( "系统进行时间转换时发生异常,leaveEarlyStartTime=" + detail.getRecordDateString() + " " + scheduleSetting.getLeaveEarlyStartTime() );
 				logger.error(e);
 			}
@@ -127,7 +127,7 @@ class AttendanceDetailAnalyseCoreService {
 			try {
 				return dateOperation.getDateFromString( detail.getRecordDateString() + " " + scheduleSetting.getLateStartTime() );
 			} catch (Exception e) {
-				detail.setDescription( detail.getDescription() + "; 系统进行时间转换时发生异常,lateStartTime=" + detail.getRecordDateString() + " " + scheduleSetting.getLateStartTime() );
+				detail.setDescription( detail.getDescription() + "; 시스템 시간 변환 중 오류 발생,lateStartTime=" + detail.getRecordDateString() + " " + scheduleSetting.getLateStartTime() );
 				logger.warn( "系统进行时间转换时发生异常,lateStartTime=" + detail.getRecordDateString() + " " + scheduleSetting.getLateStartTime());
 				logger.error(e);
 			}
@@ -152,7 +152,7 @@ class AttendanceDetailAnalyseCoreService {
 				return dateOperation.getDateFromString(detail.getRecordDateString() + " " + detail.getMiddayRestStartTime());
 			}
 		} catch (Exception e) {
-			detail.setDescription(detail.getDescription() + "; 系统进行时间转换时发生异常,middleRestStartTime=" + detail.getRecordDateString() + " " + scheduleSetting.getMiddayRestStartTime() + " - " + scheduleSetting.getMiddayRestEndTime());
+			detail.setDescription(detail.getDescription() + "; 시스템 시간 변환 중 오류 발생,middleRestStartTime=" + detail.getRecordDateString() + " " + scheduleSetting.getMiddayRestStartTime() + " - " + scheduleSetting.getMiddayRestEndTime());
 			logger.debug(debugger, "系统进行时间转换时发生异常,middleRestStartTime=" + detail.getRecordDateString() + " " + scheduleSetting.getMiddayRestStartTime() + " - " + scheduleSetting.getMiddayRestEndTime());
 			logger.error(e);
 		}
@@ -173,7 +173,7 @@ class AttendanceDetailAnalyseCoreService {
 				return dateOperation.getDateFromString(detail.getRecordDateString() + " " + detail.getMiddayRestEndTime());
 			}
 		} catch (Exception e) {
-			detail.setDescription(detail.getDescription() + "; 系统进行时间转换时发生异常,middleRestEndTime=" + detail.getRecordDateString() + " " + scheduleSetting.getMiddayRestStartTime() + " - " + scheduleSetting.getMiddayRestEndTime());
+			detail.setDescription(detail.getDescription() + "; 시스템 시간 변환 중 오류 발생,middleRestEndTime=" + detail.getRecordDateString() + " " + scheduleSetting.getMiddayRestStartTime() + " - " + scheduleSetting.getMiddayRestEndTime());
 			logger.debug(debugger, "系统进行时间转换时发生异常,middleRestEndTime=" + detail.getRecordDateString() + " " + scheduleSetting.getMiddayRestStartTime() + " - " + scheduleSetting.getMiddayRestEndTime());
 			logger.error(e);
 		}
@@ -195,7 +195,7 @@ class AttendanceDetailAnalyseCoreService {
 				return dateOperation.getDateFromString( detail.getRecordDateString() + " " + detail.getOnWorkTime() );
 			}
 		} catch (Exception e) {
-			detail.setDescription( detail.getDescription() + "; 系统进行时间转换时发生异常,onWorkTime=" + detail.getRecordDateString() + " " + detail.getOnWorkTime() );
+			detail.setDescription( detail.getDescription() + "; 시스템 시간 변환 중 오류 발생,onWorkTime=" + detail.getRecordDateString() + " " + detail.getOnWorkTime() );
 			logger.debug( debugger, "系统进行时间转换时发生异常,onWorkTime=" + detail.getRecordDateString() + " " + detail.getOnWorkTime());
 			logger.error(e);
 		}
@@ -217,7 +217,7 @@ class AttendanceDetailAnalyseCoreService {
 				return dateOperation.getDateFromString( detail.getRecordDateString() + " " + detail.getOffWorkTime() );
 			}
 		} catch (Exception e) {
-			detail.setDescription( detail.getDescription() + "; 系统进行时间转换时发生异常,offWorkTime=" + detail.getRecordDateString() + " " + detail.getOffWorkTime() );
+			detail.setDescription( detail.getDescription() + "; 시스템 시간 변환 중 오류 발생,offWorkTime=" + detail.getRecordDateString() + " " + detail.getOffWorkTime() );
 			logger.debug( debugger, "系统进行时间转换时发生异常,offWorkTime=" + detail.getRecordDateString() + " " + detail.getOffWorkTime() );
 			logger.error(e);
 		}
@@ -239,7 +239,7 @@ class AttendanceDetailAnalyseCoreService {
 				return dateOperation.getDateFromString( detail.getRecordDateString() + " " + detail.getOnDutyTime() );
 			}
 		} catch (Exception e) {
-			detail.setDescription( detail.getDescription() + "; 系统进行时间转换时发生异常,onDutyTime=" + detail.getRecordDateString() + " " + detail.getOnDutyTime() );
+			detail.setDescription( detail.getDescription() + "; 시스템 시간 변환 중 오류 발생,onDutyTime=" + detail.getRecordDateString() + " " + detail.getOnDutyTime() );
 			logger.debug( debugger, "系统进行时间转换时发生异常,onDutyTime=" + detail.getRecordDateString() + " " + detail.getOnDutyTime());
 			logger.error(e);
 		}
@@ -260,7 +260,7 @@ class AttendanceDetailAnalyseCoreService {
 				return dateOperation.getDateFromString( detail.getRecordDateString() + " " + detail.getOffDutyTime() );
 			}
 		} catch (Exception e) {
-			detail.setDescription( detail.getDescription() + "; 系统进行时间转换时发生异常,offDutyTime=" + detail.getRecordDateString() + " " + detail.getOffDutyTime() );
+			detail.setDescription( detail.getDescription() + "; 시스템 시간 변환 중 오류 발생,offDutyTime=" + detail.getRecordDateString() + " " + detail.getOffDutyTime() );
 			logger.debug( debugger, "系统进行时间转换时发生异常,offDutyTime=" + detail.getRecordDateString() + " " + detail.getOffDutyTime());
 			logger.error(e);
 		}

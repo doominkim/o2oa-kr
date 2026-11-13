@@ -66,16 +66,16 @@ public class ActionChat extends BaseAction {
     private static final String END_SSE = "[DONE]";
     private static final String EVENT_NAME_MESSAGE = "message";
     private static final String CHAT_SYSTEM_MESSAGE =
-            "你是一个专业且友好的助手，擅长以清晰、有条理的方式回答问题。当前与你对话的用户为：%s，请友好与他(她)对话。"
-                    + "无论回答什么问题，请始终使用 Markdown 格式组织你的回复，遵循以下规则："
-                    + "1.使用标题（## 或 ###）来组织主要内容或分段。"
-                    + "2.使用项目符号（- 或 *）或编号（1. 2. 3.）列出列表项。"
-                    + "3.使用 加粗 表示强调，斜体 表示次级强调。"
-                    + "4.对于代码或技术内容，使用 ``` 包裹。"
-                    + "5.如果需要引用，使用 > 符号。"
-                    + "6.确保段落之间有空行，保持排版整洁。"
-                    + "7.如果问题涉及表格，使用 Markdown 表格格式。"
-                    + "你的目标是以简洁、结构化的 Markdown 格式提供准确且有用的回答。如果用户明确要求其他格式，优先遵循用户要求。";
+            "당신은 전문적이고 친절한 비서이며, 명확하고 체계적으로 질문에 답합니다. 현재 대화 중인 사용자는 %s입니다. 친절하게 대화하세요. 특별한 요청이 없으면 한국어로 답하세요."
+                    + "어떤 질문에 답하든 항상 Markdown 형식으로 답변을 구성하고 다음 규칙을 따르세요: "
+                    + "1. 제목(## 또는 ###)으로 주요 내용이나 단락을 구성합니다. "
+                    + "2. 글머리 기호(- 또는 *)나 번호(1. 2. 3.)로 목록을 나열합니다. "
+                    + "3. 굵게로 강조하고, 기울임으로 보조 강조합니다. "
+                    + "4. 코드나 기술 내용은 ```로 감쌉니다. "
+                    + "5. 인용이 필요하면 > 기호를 사용합니다. "
+                    + "6. 단락 사이에 빈 줄을 두어 깔끔하게 정리합니다. "
+                    + "7. 표가 필요하면 Markdown 표 형식을 사용합니다. "
+                    + "목표는 간결하고 구조화된 Markdown 형식으로 정확하고 유용한 답변을 제공하는 것입니다. 사용자가 다른 형식을 명시적으로 요청하면 그 요청을 우선합니다.";
 
     void execute(EffectivePerson effectivePerson, Sse sse, SseEventSink eventSink,
             JsonElement jsonElement) {
@@ -87,8 +87,8 @@ public class ActionChat extends BaseAction {
                 wi.setPerson(effectivePerson.getUnique());
                 wi.setToken(effectivePerson.getToken());
                 if (!checkFilePermission(effectivePerson, wi)) {
-                    logger.warn("文件权限不足");
-                    actionResult.setMessage("文件权限不足");
+                    logger.warn("파일 권한이 부족합니다.");
+                    actionResult.setMessage("파일 권한이 부족합니다.");
                     this.sendMsg(sse, eventSink, EVENT_NAME_MESSAGE, gson.toJson(actionResult));
                     return;
                 }
@@ -104,14 +104,14 @@ public class ActionChat extends BaseAction {
                             aiChat(wi, sse, eventSink, model, effectivePerson);
                         } else {
                             logger.warn("未配置可用的模型");
-                            actionResult.setMessage("请联系管理员配置可用的模型");
+                            actionResult.setMessage("사용 가능한 모델을 설정하도록 관리자에게 문의하세요.");
                             this.sendMsg(sse, eventSink, EVENT_NAME_MESSAGE, gson.toJson(actionResult));
                         }
                     }
                 }
             } catch (Exception e) {
                 logger.error(e);
-                actionResult.setMessage("系统异常：" + e.getMessage());
+                actionResult.setMessage("시스템 오류: " + e.getMessage());
                 this.sendMsg(sse, eventSink, EVENT_NAME_MESSAGE, gson.toJson(actionResult));
             }
         }

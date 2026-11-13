@@ -14,91 +14,91 @@ import com.x.base.core.project.tools.ListTools;
 public class OrganizationDefinition {
 
 	public static final String Manager = "Manager";
-	public static final String Manager_description = "系统管理员(系统角色)，拥有所有角色的权限，可以管理所有内容。";
+	public static final String Manager_description = "시스템 관리자(시스템 역할). 모든 역할의 권한을 가지며 모든 내용을 관리할 수 있습니다.";
 
 	public static final String AttendanceManager = "AttendanceManager";
-	public static final String AttendanceManager_description = "考勤管理员(系统角色)，可以管理考勤管理相关的配置，使用数据管理功能。";
+	public static final String AttendanceManager_description = "근태 관리자(시스템 역할). 근태 관리 관련 설정을 관리하고 데이터 관리 기능을 사용할 수 있습니다.";
 
 	public static final String OrganizationManager = "OrganizationManager";
-	public static final String OrganizationManager_description = "组织信息管理员(系统角色)，可以使用组织架构、人员、群组以及角色相关的配置和管理功能。";
+	public static final String OrganizationManager_description = "조직 정보 관리자(시스템 역할). 조직도, 사용자, 그룹, 역할 관련 설정과 관리 기능을 사용할 수 있습니다.";
 
 	public static final String PersonManager = "PersonManager";
-	public static final String PersonManager_description = "人员信息管理员(系统角色)，可以使用组织管理中的人员管理相关功能。";
+	public static final String PersonManager_description = "사용자 정보 관리자(시스템 역할). 조직 관리의 사용자 관리 기능을 사용할 수 있습니다.";
 
 	public static final String GroupManager = "GroupManager";
-	public static final String GroupManager_description = "群组信息管理员(系统角色)，可以使用组织管理中的群组管理相关功能。";
+	public static final String GroupManager_description = "그룹 정보 관리자(시스템 역할). 조직 관리의 그룹 관리 기능을 사용할 수 있습니다.";
 
 	public static final String UnitManager = "UnitManager";
-	public static final String UnitManager_description = "组织信息管理员(系统角色)，可以使用组织管理中的组织架构管理相关功能。";
+	public static final String UnitManager_description = "조직 정보 관리자(시스템 역할). 조직 관리의 조직도 관리 기능을 사용할 수 있습니다.";
 
 	public static final String RoleManager = "RoleManager";
-	public static final String RoleManager_description = "角色信息管理员(系统角色)，可以使用组织管理中的角色管理相关功能。";
+	public static final String RoleManager_description = "역할 정보 관리자(시스템 역할). 조직 관리의 역할 관리 기능을 사용할 수 있습니다.";
 
 	public static final String ProcessPlatformManager = "ProcessPlatformManager";
-	public static final String ProcessPlatformManager_description = "流程平台管理员(系统角色)，可以对流程平台进行管理，可以进行流程设计管理，可以查询、调度和删除流程实例等。";
+	public static final String ProcessPlatformManager_description = "프로세스 플랫폼 관리자(시스템 역할). 프로세스 플랫폼과 프로세스 설계를 관리하고 프로세스 인스턴스를 조회, 단계 이동, 삭제할 수 있습니다.";
 
 	public static final String ProcessPlatformCreator = "ProcessPlatformCreator";
-	public static final String ProcessPlatformCreator_description = "流程设计创建者(系统角色)，可以进行流程设计，新增和设计流程应用。";
+	public static final String ProcessPlatformCreator_description = "프로세스 설계 작성자(시스템 역할). 프로세스를 설계하고 프로세스 앱을 추가, 설계할 수 있습니다.";
 
 	public static final String MeetingManager = "MeetingManager";
-	public static final String MeetingManager_description = "会议管理员(系统角色)，可以对会议地址，会议室，会议等信息进行管理，对会议管理系统所有配置进行管理。";
+	public static final String MeetingManager_description = "회의 관리자(시스템 역할). 회의 장소, 회의실, 회의 등의 정보와 회의 관리 시스템의 모든 설정을 관리할 수 있습니다.";
 
 	public static final String MeetingViewer = "MeetingViewer";
-	public static final String MeetingViewer_description = "会议观察员(系统角色)，可以对所有的会议信息进行查看。";
+	public static final String MeetingViewer_description = "회의 관찰자(시스템 역할). 모든 회의 정보를 볼 수 있습니다.";
 
 	public static final String PortalManager = "PortalManager";
-	public static final String PortalManager_description = "门户管理员(系统角色)，可以进行门户应用设计，对门户应用进行管理操作。";
+	public static final String PortalManager_description = "포털 관리자(시스템 역할). 포털 앱을 설계하고 관리할 수 있습니다.";
 
 	public static final String PortalCreator = "PortalCreator";
-	public static final String PortalCreator_description = "门户创建者(系统角色)，可以进行门户设计，新增和设计门户。";
+	public static final String PortalCreator_description = "포털 작성자(시스템 역할). 포털을 설계하고 추가, 설계할 수 있습니다.";
 
 	public static final String BBSManager = "BBSManager";
-	public static final String BBSManager_description = "社区管理员(系统角色)，可以对社区进行论坛分区，版块的创建，权限的设定，贴子的管理等操作。";
+	public static final String BBSManager_description = "커뮤니티 관리자(시스템 역할). 포럼 분류와 섹션 생성, 권한 설정, 게시물 관리 등을 할 수 있습니다.";
 
 	public static final String CMSManager = "CMSManager";
-	public static final String CMSManager_description = "内容管理系统管理员(系统角色)，可以设计内容管理栏目，分类，对表单，列表进行设计，对文档进行管理等操作。";
+	public static final String CMSManager_description = "게시판 시스템 관리자(시스템 역할). 게시판과 분류를 설계하고, 양식과 목록을 설계하며 게시글을 관리할 수 있습니다.";
 
 	public static final String CMSCreator = "CMSCreator";
-	public static final String CMSCreator_description = "内容管理创建者(系统角色)，可以进行内容管理设计，新增和设计内容管理。";
+	public static final String CMSCreator_description = "게시판 작성자(시스템 역할). 게시판을 설계하고 추가, 설계할 수 있습니다.";
 
 	public static final String OKRManager = "OKRManager";
-	public static final String OKRManager_description = "执行力管理员(系统角色)，可以进行执行力管理系统配置，对工作内容进行管理操作。";
+	public static final String OKRManager_description = "실행력 관리자(시스템 역할). 실행력 관리 시스템을 설정하고 업무 내용을 관리할 수 있습니다.";
 
 	public static final String CRMManager = "CRMManager";
-	public static final String CRMManager_description = "CRM管理员(系统角色)，可以进行CRM系统相关配置，对客户信息，商机等信息进行管理操作。";
+	public static final String CRMManager_description = "CRM 관리자(시스템 역할). CRM 시스템 관련 설정과 고객 정보, 영업 기회 등의 정보를 관리할 수 있습니다.";
 
 	public static final String TeamWorkManager = "TeamWorkManager";
-	public static final String TeamWorkManager_description = "TeamWork管理员(系统角色)，可以进行TeamWork系统相关配置，对项目，任务等信息进行管理操作。";
+	public static final String TeamWorkManager_description = "TeamWork 관리자(시스템 역할). TeamWork 시스템 관련 설정과 프로젝트, 작업 등의 정보를 관리할 수 있습니다.";
 
 	public static final String QueryManager = "QueryManager";
-	public static final String QueryManager_description = "数据中心管理员(系统角色)，可以在数据中心进行视图管理，统计管理等操作。";
+	public static final String QueryManager_description = "데이터 센터 관리자(시스템 역할). 데이터 센터에서 뷰 관리, 통계 관리 등을 할 수 있습니다.";
 
 	public static final String QueryCreator = "QueryCreator";
-	public static final String QueryCreator_description = "数据中心创建者(系统角色)，可以在数据中心进行新增视图管理，统计管理等操作。";
+	public static final String QueryCreator_description = "데이터 센터 작성자(시스템 역할). 데이터 센터에서 뷰 추가, 통계 관리 등을 할 수 있습니다.";
 
 	public static final String MessageManager = "MessageManager";
-	public static final String MessageManager_description = "消息管理员(系统角色)，可以对系统中产生的消息进行管理。";
+	public static final String MessageManager_description = "메시지 관리자(시스템 역할). 시스템에서 생성된 메시지를 관리할 수 있습니다.";
 
 	public static final String HotPictureManager = "HotPictureManager";
-	public static final String HotPictureManager_description = "热点图片控制权限(系统角色)，可以对系统中产生的系统图片进行管理。";
+	public static final String HotPictureManager_description = "핫이슈 이미지 관리 권한(시스템 역할). 시스템에서 생성된 이미지를 관리할 수 있습니다.";
 
 	public static final String SearchPrivilege = "SearchPrivilege";
-	public static final String SearchPrivilege_description = "搜索管理员(系统角色)，可以跨权限对系统内容进行搜索。";
+	public static final String SearchPrivilege_description = "검색 관리자(시스템 역할). 권한과 관계없이 시스템 내용을 검색할 수 있습니다.";
 
 	public static final String FileManager = "FileManager";
-	public static final String FileManager_description = "云文件管理员(系统角色)，可以进行云文件系统相关配置。";
+	public static final String FileManager_description = "웹하드 관리자(시스템 역할). 웹하드 시스템 관련 설정을 할 수 있습니다.";
 
 	public static final String ServiceManager = "ServiceManager";
-	public static final String ServiceManager_description = "服务管理员(系统角色)，可以进行服务管理的接口和代理配置。";
+	public static final String ServiceManager_description = "서비스 관리자(시스템 역할). 서비스 관리의 인터페이스와 에이전트를 설정할 수 있습니다.";
 
 	public static final String SystemManager = "SystemManager";
-	public static final String SystemManager_description = "三元管理中的系统管理员(系统角色)，负责为系统添加用户和系统运行维护工作。";
+	public static final String SystemManager_description = "3권 분리 관리의 시스템 관리자(시스템 역할). 사용자 추가와 시스템 운영 유지보수를 담당합니다.";
 
 	public static final String SecurityManager = "SecurityManager";
-	public static final String SecurityManager_description = "三元管理中的安全管理员(系统角色)，负责权限设定，负责系统审计日志、用户和系统管理员操作行为的审查分析。";
+	public static final String SecurityManager_description = "3권 분리 관리의 보안 관리자(시스템 역할). 권한 설정과 감사 로그, 사용자 및 시스템 관리자 작업 검토 분석을 담당합니다.";
 
 	public static final String AuditManager = "AuditManager";
-	public static final String AuditManager_description = "三元管理中的安全审计员(系统角色)，负责对系统管理员、安全管理员的操作行为进行审计、跟踪。";
+	public static final String AuditManager_description = "3권 분리 관리의 보안 감사자(시스템 역할). 시스템 관리자와 보안 관리자의 작업을 감사, 추적합니다.";
 
 	public static final String RoleDefinitionSuffix = "SystemRole";
 

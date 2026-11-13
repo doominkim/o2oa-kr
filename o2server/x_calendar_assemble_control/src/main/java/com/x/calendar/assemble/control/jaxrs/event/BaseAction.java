@@ -171,7 +171,7 @@ public class BaseAction extends StandardJaxrsAction{
 		}else {			
 			event.setAlarm( true );
 			if( StringUtils.isEmpty( event.getValarm_Summary() )) {
-				event.setValarm_Summary( "日程提醒" );
+				event.setValarm_Summary( "일정 알림" );
 			}
 			//计算提醒时间，以开始时间为基准
 			String[] alarm_config = event.getValarmTime_config().trim().split(","); 

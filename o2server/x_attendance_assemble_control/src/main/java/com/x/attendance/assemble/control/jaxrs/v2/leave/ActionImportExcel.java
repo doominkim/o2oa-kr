@@ -65,41 +65,41 @@ public class ActionImportExcel extends BaseAction {
                 Row row = sheet.getRow(i);
                 String person = AttendanceV2Helper.getExcelCellStringValue(row.getCell(0)); // 第一条是person
                 if (StringUtils.isEmpty(person)) {
-                    setExcelCellError(row, "用户标识不能为空");
+                    setExcelCellError(row, "사용자 식별자는 비워 둘 수 없습니다");
                     continue;
                 }
                 Person mPerson = business.organization().person().getObject(person, true);
                 if (mPerson == null) {
-                    setExcelCellError(row, "用户标识找不到对应的人员");
+                    setExcelCellError(row, "사용자 식별자에 해당하는 사람을 찾을 수 없습니다");
                     continue;
                 }
                 String type = AttendanceV2Helper.getExcelCellStringValue(row.getCell(1)); // 第二条是外出类型:出差|培训|其他
                 if (StringUtils.isEmpty(type)) {
-                    setExcelCellError(row, "外出类型不能为空");
+                    setExcelCellError(row, "외출 유형은 비워 둘 수 없습니다");
                     continue;
                 }
                 String start = AttendanceV2Helper.getExcelCellStringValue(row.getCell(2)); // 开始时间：yyyy-MM-dd HH:mm:ss
                 if (StringUtils.isEmpty(start)) {
-                    setExcelCellError(row, "开始时间不能为空");
+                    setExcelCellError(row, "시작 시간은 비워 둘 수 없습니다");
                     continue;
                 }
                 Date startDate;
                 try {
                     startDate = DateTools.parse(start, DateTools.format_yyyyMMddHHmmss);
                 } catch (Exception e) {
-                    setExcelCellError(row, "开始时间格式不正确");
+                    setExcelCellError(row, "시작 시간 형식이 올바르지 않습니다");
                     continue;
                 }
                 String end = AttendanceV2Helper.getExcelCellStringValue(row.getCell(3)); // 结束时间：yyyy-MM-dd HH:mm:ss
                 if (StringUtils.isEmpty(end)) {
-                    setExcelCellError(row, "结束时间不能为空");
+                    setExcelCellError(row, "종료 시간은 비워 둘 수 없습니다");
                     continue;
                 }
                 Date endDate;
                 try {
                     endDate = DateTools.parse(end, DateTools.format_yyyyMMddHHmmss);
                 } catch (Exception e) {
-                    setExcelCellError(row, "结束时间格式不正确");
+                    setExcelCellError(row, "종료 시간 형식이 올바르지 않습니다");
                     continue;
                 }
                 String desc = AttendanceV2Helper.getExcelCellStringValue(row.getCell(4)); // 外出说明

@@ -6,7 +6,7 @@ package com.x.meeting.core.entity;
  */
 public enum MeetingModeEnum {
 
-	ONLINE("online", "线上会议"), OFFLINE("offline", "线下会议");
+	ONLINE("online", "온라인 회의"), OFFLINE("offline", "오프라인 회의");
 	private String value;
 	private String name;
 

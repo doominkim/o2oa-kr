@@ -69,7 +69,7 @@ public class ActionDeleteForce extends BaseAction {
 		if ( check ) {
 			if ( !ThisApplication.isForumManager( effectivePerson, forumInfo ) ) {//无权限进行版块删除操作
 				check = false;
-				String forumName = "论坛不存在或者已删除";
+				String forumName = "없거나 삭제된 포럼";
 				if( forumInfo != null ) {
 					forumName = forumInfo.getForumName();
 				}

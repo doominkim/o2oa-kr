@@ -182,7 +182,7 @@ public class BBSPermissionInfoService {
 		String forumName = _bBSForumInfo.getForumName();
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			//论坛可见（FORUM_VIEW）:用户可以BBS系统中访问该论坛
-			checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_VIEW", "FORUM_VIEW_" + forumId, "论坛["+forumName+"]可见", "论坛[" + forumName + "]可以被用户进行访问，可见" );			
+			checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_VIEW", "FORUM_VIEW_" + forumId, "포럼["+forumName+"] 공개", "포럼[" + forumName + "]에 사용자가 접근할 수 있습니다" );			
 			//论坛发布主题（FORUM_SUBJECT_PUBLISH）:用户可以在论坛中所有版块发布主题
 			//checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_SUBJECT_PUBLISH", "FORUM_SUBJECT_PUBLISH_" + forumId, "论坛["+forumName+"]发布主题", "在论坛[" + forumName + "]中用户可以在所有版块中发布主题" );			
 			//论坛发表回复（FORUM_REPLY_PUBLISH）：用户可以回复论坛中所有主题
@@ -198,11 +198,11 @@ public class BBSPermissionInfoService {
             //论坛回贴管理（FORUM_REPLY_MANAGEMENT）：用户拥有对论坛中所有的回复的删除权限
             //checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_REPLY_MANAGEMENT", "FORUM_REPLY_MANAGEMENT_" + forumId, "论坛["+forumName+"]回贴管理", "在论坛[" + forumName + "]中用户拥有所有的回复的删除权限" );            
             //论坛版块管理（FORUM_INFO_MANAGEMENT）：用户拥有对论坛的版块增加，删除，修改权限
-            checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_INFO_MANAGEMENT", "FORUM_INFO_MANAGEMENT_" + forumId, "论坛["+forumName+"]版块管理", "在论坛[" + forumName + "]中用户拥有对版块增加，删除，修改权限" );            
+            checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_INFO_MANAGEMENT", "FORUM_INFO_MANAGEMENT_" + forumId, "포럼["+forumName+"] 섹션 관리", "포럼[" + forumName + "]에서 섹션을 추가, 삭제, 수정할 수 있습니다" );            
             //论坛权限管理（FORUM_PERMISSION_MANAGEMENT）：用户拥有对论坛的用户进行该论坛权限设置的权限
-            checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_PERMISSION_MANAGEMENT", "FORUM_PERMISSION_MANAGEMENT_" + forumId, "论坛["+forumName+"]权限管理", "在论坛[" + forumName + "]中用户拥有对论坛用户进行该论坛权限设置的权限" );            
+            checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_PERMISSION_MANAGEMENT", "FORUM_PERMISSION_MANAGEMENT_" + forumId, "포럼["+forumName+"] 권한 관리", "포럼[" + forumName + "]에서 사용자 권한을 설정할 수 있습니다" );            
             //论坛配置管理（FORUM_CONFIG_MANAGEMENT）：用户拥有对论坛的参数配置进行设置的权限
-            checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_CONFIG_MANAGEMENT", "FORUM_CONFIG_MANAGEMENT_" + forumId, "论坛["+forumName+"]配置管理", "在论坛[" + forumName + "]中用户拥有对论坛的参数配置进行设置的权限" );            
+            checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_CONFIG_MANAGEMENT", "FORUM_CONFIG_MANAGEMENT_" + forumId, "포럼["+forumName+"] 설정 관리", "포럼[" + forumName + "]의 매개변수를 설정할 수 있습니다" );            
 		}catch( Exception e ){
 			logger.warn( "system check and create forum permission got an exception!" );
 			throw e;
@@ -223,31 +223,31 @@ public class BBSPermissionInfoService {
 		String sectionName = _sectionInfo.getSectionName();
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			//论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
-			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_VIEW", "SECTION_VIEW_" + sectionId, "版块["+forumName+"-"+sectionName+"]可见", "版块["+forumName+"-"+sectionName+"]可以被用户进行访问，可见。" );
+			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_VIEW", "SECTION_VIEW_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 공개", "섹션["+forumName+"-"+sectionName+"]에 사용자가 접근할 수 있습니다." );
 			//发布主题（SECTION_SUBJECT_PUBLISH）:用户可以在指定版块中发布主题
-			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_PUBLISH", "SECTION_SUBJECT_PUBLISH_" + sectionId, "版块["+forumName+"-"+sectionName+"]发布主题", "用户可以在版块["+forumName+"-"+sectionName+"]中发布主题" );
+			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_PUBLISH", "SECTION_SUBJECT_PUBLISH_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 주제 게시", "섹션["+forumName+"-"+sectionName+"]에 주제를 게시할 수 있습니다" );
             //审核主题（SECTION_SUBJECT_AUDIT）:用户可以审核在指定版块中发布的主题，如果主题需要审核
-			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_AUDIT", "SECTION_SUBJECT_AUDIT_" + sectionId, "版块["+forumName+"-"+sectionName+"]审核主题", "用户可以审核在版块["+forumName+"-"+sectionName+"]中发布的主题，如果主题需要审核" );
+			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_AUDIT", "SECTION_SUBJECT_AUDIT_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 주제 검토", "섹션["+forumName+"-"+sectionName+"]에 게시된 주제를 검토할 수 있습니다(검토가 필요한 경우)" );
             //主题管理（SECTION_SUBJECT_MANAGEMENT）:用户可以在指定版块中对已发布主题进行查询删除
-			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_MANAGEMENT", "SECTION_SUBJECT_MANAGEMENT_" + sectionId, "版块["+forumName+"-"+sectionName+"]主题管理", "用户可以在版块["+forumName+"-"+sectionName+"]中对已发布主题进行查询删除" );
+			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_MANAGEMENT", "SECTION_SUBJECT_MANAGEMENT_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 주제 관리", "섹션["+forumName+"-"+sectionName+"]에 게시된 주제를 조회하거나 삭제할 수 있습니다" );
             //发表回复（SECTION_REPLY_PUBLISH）:用户可以在指定版块中对所有主题进行回复
-			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_REPLY_PUBLISH", "SECTION_REPLY_PUBLISH_" + sectionId, "版块["+forumName+"-"+sectionName+"]发表回复", "用户可以在版块["+forumName+"-"+sectionName+"]中对所有主题进行回复" );
+			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_REPLY_PUBLISH", "SECTION_REPLY_PUBLISH_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 댓글 작성", "섹션["+forumName+"-"+sectionName+"]의 모든 주제에 댓글을 작성할 수 있습니다" );
             //审核回复（SECTION_REPLY_AUDIT）:用户可以审核在指定版块中的所有回复内容，如果回复需要审核
-			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_REPLY_AUDIT", "SECTION_REPLY_AUDIT_" + sectionId, "版块["+forumName+"-"+sectionName+"]审核回复", "用户可以审核在版块["+forumName+"-"+sectionName+"]中的所有回复内容，如果回复需要审核" );
+			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_REPLY_AUDIT", "SECTION_REPLY_AUDIT_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 댓글 검토", "섹션["+forumName+"-"+sectionName+"]의 모든 댓글을 검토할 수 있습니다(검토가 필요한 경우)" );
             //回贴管理（SECTION_REPLY_MANAGEMENT）:用户可以在指定版块中对回复进行查询或者删除
-			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_REPLY_MANAGEMENT", "SECTION_REPLY_MANAGEMENT_" + sectionId, "版块["+forumName+"-"+sectionName+"]回贴管理", "用户可以在版块["+forumName+"-"+sectionName+"]中对回复进行查询或者删除" );
+			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_REPLY_MANAGEMENT", "SECTION_REPLY_MANAGEMENT_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 댓글 관리", "섹션["+forumName+"-"+sectionName+"]의 댓글을 조회하거나 삭제할 수 있습니다" );
             //版块主题推荐（SECTION_SUBJECT_RECOMMEND）:用户可以在指定版块中对指定主题进行推荐操作
-			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_RECOMMEND", "SECTION_SUBJECT_RECOMMEND_" + sectionId, "版块["+forumName+"-"+sectionName+"]主题推荐", "用户可以在版块["+forumName+"-"+sectionName+"]中对指定主题进行推荐操作" );
+			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_RECOMMEND", "SECTION_SUBJECT_RECOMMEND_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 주제 추천", "섹션["+forumName+"-"+sectionName+"]의 주제를 추천할 수 있습니다" );
             //版块主题置顶（SECTION_SUBJECT_STICK）:用户可以在指定版块中对指定主题进行置顶操作
-			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_STICK", "SECTION_SUBJECT_STICK_" + sectionId, "版块["+forumName+"-"+sectionName+"]主题置顶", "用户可以在版块["+forumName+"-"+sectionName+"]中对指定主题进行置顶操作" );
+			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_STICK", "SECTION_SUBJECT_STICK_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 주제 상단 고정", "섹션["+forumName+"-"+sectionName+"]의 주제를 상단에 고정할 수 있습니다" );
             //版块主题申精（SECTION_SUBJECT_CREAM）:用户可以在指定版块中对指定主题进行精华主题设置操作
-			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_CREAM", "SECTION_SUBJECT_CREAM_" + sectionId, "版块["+forumName+"-"+sectionName+"]主题申精", "用户可以在版块["+forumName+"-"+sectionName+"]中对指定主题进行精华主题设置操作" );
+			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_CREAM", "SECTION_SUBJECT_CREAM_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 추천 게시물 지정", "섹션["+forumName+"-"+sectionName+"]의 주제를 추천 게시물로 지정할 수 있습니다" );
             //版块管理（SECTION_SECTION_MANAGER）:用户可以在指定版块中对子版块进行创建和删除等操作
-			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_INFO_MANAGER", "SECTION_INFO_MANAGER_" + sectionId, "版块["+forumName+"-"+sectionName+"]信息管理", "用户可以在版块["+forumName+"-"+sectionName+"]中对版块进行信息维护，子版块创建和删除等操作" );
+			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_INFO_MANAGER", "SECTION_INFO_MANAGER_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 정보 관리", "섹션["+forumName+"-"+sectionName+"]의 정보를 관리하고 하위 섹션을 만들거나 삭제할 수 있습니다" );
 			//版块权限管理（SECTION_PERMISSION_MANAGEMENT）:用户可以对论坛用户进行指定版块的权限管理
-			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_PERMISSION_MANAGEMENT", "SECTION_PERMISSION_MANAGEMENT_" + sectionId, "版块["+forumName+"-"+sectionName+"]权限管理", "用户可以对用户进行版块["+forumName+"-"+sectionName+"]的权限管理" );
+			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_PERMISSION_MANAGEMENT", "SECTION_PERMISSION_MANAGEMENT_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 권한 관리", "섹션["+forumName+"-"+sectionName+"]의 사용자 권한을 관리할 수 있습니다" );
             //版块配置管理（SECTION_CONFIG_MANAGEMENT）:用户可以对指定版块进行系统参数配置修改
-			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_CONFIG_MANAGEMENT", "SECTION_CONFIG_MANAGEMENT_" + sectionId, "版块["+forumName+"-"+sectionName+"]配置管理", "用户可以对版块["+forumName+"-"+sectionName+"]进行系统参数配置修改" );
+			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_CONFIG_MANAGEMENT", "SECTION_CONFIG_MANAGEMENT_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 설정 관리", "섹션["+forumName+"-"+sectionName+"]의 시스템 매개변수를 수정할 수 있습니다" );
 		}catch( Exception e ){
 			logger.warn( "system check and create section permission got an exception!" );
 			throw e;

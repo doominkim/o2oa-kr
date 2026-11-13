@@ -16,7 +16,7 @@ public class ApiAccessFilter implements Filter {
 				response.setStatus(403);
 				response.setHeader("Content-Type", "text/html;charset=utf-8");
 				response.getWriter()
-						.write("<html><body><div align='center'><h2>接口页面默认不开放,如需开启请在系统配置中启用.</h2></div></body></html>");
+						.write("<html><body><div align='center'><h2>인터페이스 페이지는 기본적으로 비공개입니다. 사용하려면 시스템 설정에서 활성화하세요.</h2></div></body></html>");
 			} else {
 				chain.doFilter(req, res);
 			}

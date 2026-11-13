@@ -171,7 +171,7 @@ public   class DingdingMessage extends GsonPropertyObject {
 	public static class ActionCard {
 		private String title = "";// 消息标题
 		private String markdown = "";// 消息内容
-		private String single_title = "查看详情";// 按钮文字
+		private String single_title = "상세 보기";// 按钮文字
 		private String single_url = "";// 卡片点击打开的url
 
 		public String getTitle() {

@@ -42,7 +42,7 @@ public class ProcessPlatform extends ConfigObject {
 
 	public static final String DOCTOWORDTYPE_CLOUD = "cloud";
 
-	public static final String DEFAULT_DOCTOWORDDEFAULTFILENAME = "正文.docx";
+	public static final String DEFAULT_DOCTOWORDDEFAULTFILENAME = "본문.docx";
 
 	public static final String DEFAULT_DOCTOWORDDEFAULTSITE = "$doc";
 

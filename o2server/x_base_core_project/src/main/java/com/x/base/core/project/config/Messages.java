@@ -186,66 +186,66 @@ public class Messages extends ConfigObject {
 
 	public static Messages defaultInstance() {
 		Messages o = new Messages();
-		o.application_create = MESSAGE_OUTER.cloneThenSetDescription("创建应用.");
-		o.application_update = MESSAGE_OUTER.cloneThenSetDescription("更新应用.");
-		o.application_delete = MESSAGE_OUTER.cloneThenSetDescription("删除应用.");
-		o.process_create = MESSAGE_OUTER.cloneThenSetDescription("创建流程.");
-		o.process_update = MESSAGE_OUTER.cloneThenSetDescription("更新流程.");
-		o.process_delete = MESSAGE_OUTER.cloneThenSetDescription("删除流程.");
-		o.activity_message = MESSAGE_OUTER.cloneThenSetDescription("有新的工作通过消息节点.");
-		o.work_to_workCompleted = MESSAGE_OUTER.cloneThenSetDescription("工作完成转已完成工作.");
-		o.work_create = MESSAGE_OUTER.cloneThenSetDescription("创建工作.");
-		o.work_delete = MESSAGE_OUTER.cloneThenSetDescription("删除工作.");
-		o.workCompleted_create = MESSAGE_OUTER.cloneThenSetDescription("创建已完成工作.");
-		o.workCompleted_delete = MESSAGE_OUTER.cloneThenSetDescription("删除已完成工作.");
-		o.task_to_taskCompleted = MESSAGE_OUTER.cloneThenSetDescription("待办完成转已办.");
-		o.task_create = MESSAGE_ALL.cloneThenSetDescription("创建待办.");
-		o.task_delete = MESSAGE_OUTER.cloneThenSetDescription("删除待办.");
-		o.task_urge = MESSAGE_ALL.cloneThenSetDescription("待办即将过期催办.");
-		o.task_expire = MESSAGE_ALL.cloneThenSetDescription("待办过期.");
-		o.task_press = MESSAGE_ALL.cloneThenSetDescription("待办提醒.");
-		o.taskCompleted_create = MESSAGE_OUTER.cloneThenSetDescription("创建已办.");
-		o.taskCompleted_delete = MESSAGE_OUTER.cloneThenSetDescription("删除已办.");
-		o.read_to_readCompleted = MESSAGE_OUTER.cloneThenSetDescription("待阅转已阅.");
-		o.read_create = MESSAGE_ALL.cloneThenSetDescription("创建待阅.");
-		o.read_delete = MESSAGE_OUTER.cloneThenSetDescription("删除待阅.");
-		o.readCompleted_create = MESSAGE_OUTER.cloneThenSetDescription("创建已阅.");
-		o.readCompleted_delete = MESSAGE_OUTER.cloneThenSetDescription("删除已阅.");
-		o.review_create = MESSAGE_OUTER.cloneThenSetDescription("创建参阅.");
-		o.review_delete = MESSAGE_OUTER.cloneThenSetDescription("删除参阅.");
-		o.meeting_invite = MESSAGE_ALL.cloneThenSetDescription("会议邀请.");
-		o.meeting_delete = MESSAGE_OUTER.cloneThenSetDescription("删除会议.");
-		o.meeting_accept = MESSAGE_ALL.cloneThenSetDescription("会议邀请接受.");
-		o.meeting_reject = MESSAGE_ALL.cloneThenSetDescription("会议邀请拒绝.");
-		o.attachment_create = MESSAGE_OUTER.cloneThenSetDescription("创建附件.");
-		o.attachment_delete = MESSAGE_OUTER.cloneThenSetDescription("删除附件.");
-		o.attachment_share = MESSAGE_ALL.cloneThenSetDescription("附件分享.");
-		o.attachment_shareCancel = MESSAGE_ALL.cloneThenSetDescription("附件取消分享.");
-		o.attachment_editor = MESSAGE_OUTER.cloneThenSetDescription("附件可编辑设置.");
-		o.attachment_editorCancel = MESSAGE_OUTER.cloneThenSetDescription("附件可编辑取消.");
-		o.attachment_editorModify = MESSAGE_OUTER.cloneThenSetDescription("附件可编辑修改.");
-		o.calendar_alarm = MESSAGE_ALL.cloneThenSetDescription("日历通知.");
-		o.custom_create = MESSAGE_ALL.cloneThenSetDescription("自定义消息创建.");
-		o.teamwork_taskCreate = MESSAGE_ALL.cloneThenSetDescription("工作管理任务创建.");
-		o.teamwork_taskUpdate = MESSAGE_ALL.cloneThenSetDescription("工作管理任务更新.");
-		o.teamwork_taskDelete = MESSAGE_ALL.cloneThenSetDescription("工作管理任务删除.");
-		o.teamwork_taskOvertime = MESSAGE_ALL.cloneThenSetDescription("工作管理任务超时.");
-		o.teamwork_chat = MESSAGE_NOTICE.cloneThenSetDescription("工作管理聊天.");
-		o.cms_publish = MESSAGE_OUTER.cloneThenSetDescription("内容管理发布.");
-		o.cms_publish_to_creator = MESSAGE_NOTICE.cloneThenSetDescription("内容管理发布创建者通知.");
-		o.bbs_subjectCreate = MESSAGE_ALL.cloneThenSetDescription("论坛创建贴子.");
-		o.bbs_replyCreate = MESSAGE_ALL.cloneThenSetDescription("论坛创建回复.");
-		o.mind_fileSend = MESSAGE_ALL.cloneThenSetDescription("脑图发送.");
-		o.mind_fileShare = MESSAGE_ALL.cloneThenSetDescription("脑图分享.");
+		o.application_create = MESSAGE_OUTER.cloneThenSetDescription("앱 생성.");
+		o.application_update = MESSAGE_OUTER.cloneThenSetDescription("앱 수정.");
+		o.application_delete = MESSAGE_OUTER.cloneThenSetDescription("앱 삭제.");
+		o.process_create = MESSAGE_OUTER.cloneThenSetDescription("프로세스 생성.");
+		o.process_update = MESSAGE_OUTER.cloneThenSetDescription("프로세스 수정.");
+		o.process_delete = MESSAGE_OUTER.cloneThenSetDescription("프로세스 삭제.");
+		o.activity_message = MESSAGE_OUTER.cloneThenSetDescription("새 문서가 메시지 단계를 통과함.");
+		o.work_to_workCompleted = MESSAGE_OUTER.cloneThenSetDescription("문서 완료 후 완료 문서로 전환.");
+		o.work_create = MESSAGE_OUTER.cloneThenSetDescription("문서 생성.");
+		o.work_delete = MESSAGE_OUTER.cloneThenSetDescription("문서 삭제.");
+		o.workCompleted_create = MESSAGE_OUTER.cloneThenSetDescription("완료 문서 생성.");
+		o.workCompleted_delete = MESSAGE_OUTER.cloneThenSetDescription("완료 문서 삭제.");
+		o.task_to_taskCompleted = MESSAGE_OUTER.cloneThenSetDescription("결재 대기 처리 후 결재 완료로 전환.");
+		o.task_create = MESSAGE_ALL.cloneThenSetDescription("결재 대기 생성.");
+		o.task_delete = MESSAGE_OUTER.cloneThenSetDescription("결재 대기 삭제.");
+		o.task_urge = MESSAGE_ALL.cloneThenSetDescription("결재 대기 기한 임박 독촉.");
+		o.task_expire = MESSAGE_ALL.cloneThenSetDescription("결재 대기 기한 초과.");
+		o.task_press = MESSAGE_ALL.cloneThenSetDescription("결재 대기 알림.");
+		o.taskCompleted_create = MESSAGE_OUTER.cloneThenSetDescription("결재 완료 생성.");
+		o.taskCompleted_delete = MESSAGE_OUTER.cloneThenSetDescription("결재 완료 삭제.");
+		o.read_to_readCompleted = MESSAGE_OUTER.cloneThenSetDescription("열람 대기를 열람 완료로 전환.");
+		o.read_create = MESSAGE_ALL.cloneThenSetDescription("열람 대기 생성.");
+		o.read_delete = MESSAGE_OUTER.cloneThenSetDescription("열람 대기 삭제.");
+		o.readCompleted_create = MESSAGE_OUTER.cloneThenSetDescription("열람 완료 생성.");
+		o.readCompleted_delete = MESSAGE_OUTER.cloneThenSetDescription("열람 완료 삭제.");
+		o.review_create = MESSAGE_OUTER.cloneThenSetDescription("참조 문서 생성.");
+		o.review_delete = MESSAGE_OUTER.cloneThenSetDescription("참조 문서 삭제.");
+		o.meeting_invite = MESSAGE_ALL.cloneThenSetDescription("회의 초대.");
+		o.meeting_delete = MESSAGE_OUTER.cloneThenSetDescription("회의 삭제.");
+		o.meeting_accept = MESSAGE_ALL.cloneThenSetDescription("회의 초대 수락.");
+		o.meeting_reject = MESSAGE_ALL.cloneThenSetDescription("회의 초대 거절.");
+		o.attachment_create = MESSAGE_OUTER.cloneThenSetDescription("첨부파일 생성.");
+		o.attachment_delete = MESSAGE_OUTER.cloneThenSetDescription("첨부파일 삭제.");
+		o.attachment_share = MESSAGE_ALL.cloneThenSetDescription("첨부파일 공유.");
+		o.attachment_shareCancel = MESSAGE_ALL.cloneThenSetDescription("첨부파일 공유 취소.");
+		o.attachment_editor = MESSAGE_OUTER.cloneThenSetDescription("첨부파일 편집 권한 설정.");
+		o.attachment_editorCancel = MESSAGE_OUTER.cloneThenSetDescription("첨부파일 편집 권한 취소.");
+		o.attachment_editorModify = MESSAGE_OUTER.cloneThenSetDescription("첨부파일 편집 권한 수정.");
+		o.calendar_alarm = MESSAGE_ALL.cloneThenSetDescription("일정 알림.");
+		o.custom_create = MESSAGE_ALL.cloneThenSetDescription("사용자 정의 메시지 생성.");
+		o.teamwork_taskCreate = MESSAGE_ALL.cloneThenSetDescription("업무 관리 작업 생성.");
+		o.teamwork_taskUpdate = MESSAGE_ALL.cloneThenSetDescription("업무 관리 작업 수정.");
+		o.teamwork_taskDelete = MESSAGE_ALL.cloneThenSetDescription("업무 관리 작업 삭제.");
+		o.teamwork_taskOvertime = MESSAGE_ALL.cloneThenSetDescription("업무 관리 작업 기한 초과.");
+		o.teamwork_chat = MESSAGE_NOTICE.cloneThenSetDescription("업무 관리 대화.");
+		o.cms_publish = MESSAGE_OUTER.cloneThenSetDescription("게시판 게시.");
+		o.cms_publish_to_creator = MESSAGE_NOTICE.cloneThenSetDescription("게시판 게시 작성자 알림.");
+		o.bbs_subjectCreate = MESSAGE_ALL.cloneThenSetDescription("포럼 게시물 작성.");
+		o.bbs_replyCreate = MESSAGE_ALL.cloneThenSetDescription("포럼 댓글 작성.");
+		o.mind_fileSend = MESSAGE_ALL.cloneThenSetDescription("마인드맵 보내기.");
+		o.mind_fileShare = MESSAGE_ALL.cloneThenSetDescription("마인드맵 공유.");
 		o.im_create = new Message(MessageConnector.CONSUME_WS, MessageConnector.CONSUME_PMS_INNER)
-				.cloneThenSetDescription("聊聊消息.");
-		o.im_revoke = new Message(MessageConnector.CONSUME_WS).cloneThenSetDescription("聊聊消息.");
-		o.im_conversation_delete = new Message(MessageConnector.CONSUME_WS).cloneThenSetDescription("聊聊消息.");
-		o.im_conversation_update = new Message(MessageConnector.CONSUME_WS).cloneThenSetDescription("聊聊消息.");
-		o.attendance_checkInAlert = MESSAGE_NOTICE.cloneThenSetDescription("打卡提醒消息.");
-		o.attendance_checkInException = MESSAGE_NOTICE.cloneThenSetDescription("打卡异常提醒消息.");
+				.cloneThenSetDescription("메신저 메시지.");
+		o.im_revoke = new Message(MessageConnector.CONSUME_WS).cloneThenSetDescription("메신저 메시지.");
+		o.im_conversation_delete = new Message(MessageConnector.CONSUME_WS).cloneThenSetDescription("메신저 메시지.");
+		o.im_conversation_update = new Message(MessageConnector.CONSUME_WS).cloneThenSetDescription("메신저 메시지.");
+		o.attendance_checkInAlert = MESSAGE_NOTICE.cloneThenSetDescription("출퇴근 체크 알림 메시지.");
+		o.attendance_checkInException = MESSAGE_NOTICE.cloneThenSetDescription("출퇴근 체크 이상 알림 메시지.");
 		o.custom = new LinkedHashMap<>();
-		o.custom.put("foo", MESSAGE_ALL.cloneThenSetDescription("自定义消息类型."));
+		o.custom.put("foo", MESSAGE_ALL.cloneThenSetDescription("사용자 정의 메시지 유형."));
 		o.consumers = new LinkedHashMap<>();
 		o.consumers.put("ws_demo", XGsonBuilder.instance().toJsonTree(new WsConsumer()));
 		o.consumers.put("pmsinner_demo", XGsonBuilder.instance().toJsonTree(new PmsinnerConsumer()));
@@ -305,399 +305,399 @@ public class Messages extends ConfigObject {
 
 	private Message getApplicationCreate() {
 		if (null == this.application_create) {
-			this.application_create = MESSAGE_OUTER.cloneThenSetDescription("创建应用.");
+			this.application_create = MESSAGE_OUTER.cloneThenSetDescription("앱 생성.");
 		}
 		return this.application_create;
 	}
 
 	private Message getApplicationUpdate() {
 		if (null == this.application_update) {
-			this.application_update = MESSAGE_OUTER.cloneThenSetDescription("更新应用.");
+			this.application_update = MESSAGE_OUTER.cloneThenSetDescription("앱 수정.");
 		}
 		return this.application_update;
 	}
 
 	private Message getApplicationDelete() {
 		if (null == this.application_delete) {
-			this.application_delete = MESSAGE_OUTER.cloneThenSetDescription("删除应用.");
+			this.application_delete = MESSAGE_OUTER.cloneThenSetDescription("앱 삭제.");
 		}
 		return this.application_delete;
 	}
 
 	private Message getProcessCreate() {
 		if (null == this.process_create) {
-			this.process_create = MESSAGE_OUTER.cloneThenSetDescription("创建流程.");
+			this.process_create = MESSAGE_OUTER.cloneThenSetDescription("프로세스 생성.");
 		}
 		return this.process_create;
 	}
 
 	private Message getProcessUpdate() {
 		if (null == this.process_update) {
-			this.process_update = MESSAGE_OUTER.cloneThenSetDescription("更新流程.");
+			this.process_update = MESSAGE_OUTER.cloneThenSetDescription("프로세스 수정.");
 		}
 		return this.process_update;
 	}
 
 	private Message getProcessDelete() {
 		if (null == this.process_delete) {
-			this.process_delete = MESSAGE_OUTER.cloneThenSetDescription("删除流程.");
+			this.process_delete = MESSAGE_OUTER.cloneThenSetDescription("프로세스 삭제.");
 		}
 		return this.process_delete;
 	}
 
 	private Message getActivityMessage() {
 		if (null == this.activity_message) {
-			this.activity_message = MESSAGE_OUTER.cloneThenSetDescription("有新的工作通过消息节点.");
+			this.activity_message = MESSAGE_OUTER.cloneThenSetDescription("새 문서가 메시지 단계를 통과함.");
 		}
 		return this.activity_message;
 	}
 
 	private Message getWorkToWorkCompleted() {
 		if (null == this.work_to_workCompleted) {
-			this.work_to_workCompleted = MESSAGE_OUTER.cloneThenSetDescription("工作完成转已完成工作.");
+			this.work_to_workCompleted = MESSAGE_OUTER.cloneThenSetDescription("문서 완료 후 완료 문서로 전환.");
 		}
 		return this.work_to_workCompleted;
 	}
 
 	private Message getWorkCreate() {
 		if (null == this.work_create) {
-			this.work_create = MESSAGE_OUTER.cloneThenSetDescription("创建工作.");
+			this.work_create = MESSAGE_OUTER.cloneThenSetDescription("문서 생성.");
 		}
 		return this.work_create;
 	}
 
 	private Message getWorkDelete() {
 		if (null == this.work_delete) {
-			this.work_delete = MESSAGE_OUTER.cloneThenSetDescription("删除工作.");
+			this.work_delete = MESSAGE_OUTER.cloneThenSetDescription("문서 삭제.");
 		}
 		return this.work_delete;
 	}
 
 	private Message getWorkCompletedCreate() {
 		if (null == this.workCompleted_create) {
-			this.workCompleted_create = MESSAGE_OUTER.cloneThenSetDescription("创建已完成工作.");
+			this.workCompleted_create = MESSAGE_OUTER.cloneThenSetDescription("완료 문서 생성.");
 		}
 		return this.workCompleted_create;
 	}
 
 	private Message getWorkCompletedDelete() {
 		if (null == this.workCompleted_delete) {
-			this.workCompleted_delete = MESSAGE_OUTER.cloneThenSetDescription("删除已完成工作.");
+			this.workCompleted_delete = MESSAGE_OUTER.cloneThenSetDescription("완료 문서 삭제.");
 		}
 		return this.workCompleted_delete;
 	}
 
 	private Message getTaskToTaskCompleted() {
 		if (null == this.task_to_taskCompleted) {
-			this.task_to_taskCompleted = MESSAGE_OUTER.cloneThenSetDescription("待办完成转已办.");
+			this.task_to_taskCompleted = MESSAGE_OUTER.cloneThenSetDescription("결재 대기 처리 후 결재 완료로 전환.");
 		}
 		return this.task_to_taskCompleted;
 	}
 
 	private Message getTaskCreate() {
 		if (null == this.task_create) {
-			this.task_create = MESSAGE_ALL.cloneThenSetDescription("创建待办.");
+			this.task_create = MESSAGE_ALL.cloneThenSetDescription("결재 대기 생성.");
 		}
 		return this.task_create;
 	}
 
 	private Message getTaskDelete() {
 		if (null == this.task_delete) {
-			this.task_delete = MESSAGE_OUTER.cloneThenSetDescription("删除待办.");
+			this.task_delete = MESSAGE_OUTER.cloneThenSetDescription("결재 대기 삭제.");
 		}
 		return this.task_delete;
 	}
 
 	private Message getTaskUrge() {
 		if (null == this.task_urge) {
-			this.task_urge = MESSAGE_ALL.cloneThenSetDescription("待办即将过期催办.");
+			this.task_urge = MESSAGE_ALL.cloneThenSetDescription("결재 대기 기한 임박 독촉.");
 		}
 		return this.task_urge;
 	}
 
 	private Message getTaskExpire() {
 		if (null == this.task_expire) {
-			this.task_expire = MESSAGE_ALL.cloneThenSetDescription("待办过期.");
+			this.task_expire = MESSAGE_ALL.cloneThenSetDescription("결재 대기 기한 초과.");
 		}
 		return this.task_expire;
 	}
 
 	private Message getTaskPress() {
 		if (null == this.task_press) {
-			this.task_press = MESSAGE_ALL.cloneThenSetDescription("待办提醒.");
+			this.task_press = MESSAGE_ALL.cloneThenSetDescription("결재 대기 알림.");
 		}
 		return this.task_press;
 	}
 
 	private Message getTaskCompletedCreate() {
 		if (null == this.taskCompleted_create) {
-			this.taskCompleted_create = MESSAGE_OUTER.cloneThenSetDescription("创建已办.");
+			this.taskCompleted_create = MESSAGE_OUTER.cloneThenSetDescription("결재 완료 생성.");
 		}
 		return this.taskCompleted_create;
 	}
 
 	private Message getTaskCompletedDelete() {
 		if (null == this.taskCompleted_delete) {
-			this.taskCompleted_delete = MESSAGE_OUTER.cloneThenSetDescription("删除已办.");
+			this.taskCompleted_delete = MESSAGE_OUTER.cloneThenSetDescription("결재 완료 삭제.");
 		}
 		return this.taskCompleted_delete;
 	}
 
 	private Message getReadToReadCompleted() {
 		if (null == this.read_to_readCompleted) {
-			this.read_to_readCompleted = MESSAGE_OUTER.cloneThenSetDescription("待阅转已阅.");
+			this.read_to_readCompleted = MESSAGE_OUTER.cloneThenSetDescription("열람 대기를 열람 완료로 전환.");
 		}
 		return this.read_to_readCompleted;
 	}
 
 	private Message getReadCreate() {
 		if (null == this.read_create) {
-			this.read_create = MESSAGE_ALL.cloneThenSetDescription("创建待阅.");
+			this.read_create = MESSAGE_ALL.cloneThenSetDescription("열람 대기 생성.");
 		}
 		return this.read_create;
 	}
 
 	private Message getReadDelete() {
 		if (null == this.read_delete) {
-			this.read_delete = MESSAGE_OUTER.cloneThenSetDescription("待阅删除.");
+			this.read_delete = MESSAGE_OUTER.cloneThenSetDescription("열람 대기 삭제.");
 		}
 		return this.read_delete;
 	}
 
 	private Message getReadCompletedCreate() {
 		if (null == this.readCompleted_create) {
-			this.readCompleted_create = MESSAGE_OUTER.cloneThenSetDescription("创建已阅.");
+			this.readCompleted_create = MESSAGE_OUTER.cloneThenSetDescription("열람 완료 생성.");
 		}
 		return this.readCompleted_create;
 	}
 
 	private Message getReadCompletedDelete() {
 		if (null == this.readCompleted_delete) {
-			this.readCompleted_delete = MESSAGE_OUTER.cloneThenSetDescription("已阅删除.");
+			this.readCompleted_delete = MESSAGE_OUTER.cloneThenSetDescription("열람 완료 삭제.");
 		}
 		return this.readCompleted_delete;
 	}
 
 	private Message getReviewCreate() {
 		if (null == this.review_create) {
-			this.review_create = MESSAGE_OUTER.cloneThenSetDescription("创建参阅.");
+			this.review_create = MESSAGE_OUTER.cloneThenSetDescription("참조 문서 생성.");
 		}
 		return this.review_create;
 	}
 
 	private Message getReviewDelete() {
 		if (null == this.review_delete) {
-			this.review_delete = MESSAGE_OUTER.cloneThenSetDescription("删除参阅.");
+			this.review_delete = MESSAGE_OUTER.cloneThenSetDescription("참조 문서 삭제.");
 		}
 		return this.review_delete;
 	}
 
 	private Message getMeetingInvite() {
 		if (null == this.meeting_invite) {
-			this.meeting_invite = MESSAGE_ALL.cloneThenSetDescription("会议邀请.");
+			this.meeting_invite = MESSAGE_ALL.cloneThenSetDescription("회의 초대.");
 		}
 		return this.meeting_invite;
 	}
 
 	private Message getMeetingDelete() {
 		if (null == this.meeting_delete) {
-			this.meeting_delete = MESSAGE_OUTER.cloneThenSetDescription("删除会议.");
+			this.meeting_delete = MESSAGE_OUTER.cloneThenSetDescription("회의 삭제.");
 		}
 		return this.meeting_delete;
 	}
 
 	private Message getMeetingAccept() {
 		if (null == this.meeting_accept) {
-			this.meeting_accept = MESSAGE_ALL.cloneThenSetDescription("会议邀请接受.");
+			this.meeting_accept = MESSAGE_ALL.cloneThenSetDescription("회의 초대 수락.");
 		}
 		return this.meeting_accept;
 	}
 
 	private Message getMeetingReject() {
 		if (null == this.meeting_reject) {
-			this.meeting_reject = MESSAGE_ALL.cloneThenSetDescription("会议邀请拒绝.");
+			this.meeting_reject = MESSAGE_ALL.cloneThenSetDescription("회의 초대 거절.");
 		}
 		return this.meeting_reject;
 	}
 
 	private Message getAttachmentCreate() {
 		if (null == this.attachment_create) {
-			this.attachment_create = MESSAGE_OUTER.cloneThenSetDescription("创建附件.");
+			this.attachment_create = MESSAGE_OUTER.cloneThenSetDescription("첨부파일 생성.");
 		}
 		return this.attachment_create;
 	}
 
 	private Message getAttachmentDelete() {
 		if (null == this.attachment_delete) {
-			this.attachment_delete = MESSAGE_OUTER.cloneThenSetDescription("删除附件.");
+			this.attachment_delete = MESSAGE_OUTER.cloneThenSetDescription("첨부파일 삭제.");
 		}
 		return this.attachment_delete;
 	}
 
 	private Message getAttachmentShare() {
 		if (null == this.attachment_share) {
-			this.attachment_share = MESSAGE_ALL.cloneThenSetDescription("附件分享.");
+			this.attachment_share = MESSAGE_ALL.cloneThenSetDescription("첨부파일 공유.");
 		}
 		return this.attachment_share;
 	}
 
 	private Message getAttachmentShareCancel() {
 		if (null == this.attachment_shareCancel) {
-			this.attachment_shareCancel = MESSAGE_ALL.cloneThenSetDescription("附件取消分享.");
+			this.attachment_shareCancel = MESSAGE_ALL.cloneThenSetDescription("첨부파일 공유 취소.");
 		}
 		return this.attachment_shareCancel;
 	}
 
 	private Message getAttachmentEditor() {
 		if (null == this.attachment_editor) {
-			this.attachment_editor = MESSAGE_OUTER.cloneThenSetDescription("附件可编辑设置.");
+			this.attachment_editor = MESSAGE_OUTER.cloneThenSetDescription("첨부파일 편집 권한 설정.");
 		}
 		return this.attachment_editor;
 	}
 
 	private Message getAttachmentEditorCancel() {
 		if (null == this.attachment_editorCancel) {
-			this.attachment_editorCancel = MESSAGE_OUTER.cloneThenSetDescription("附件可编辑取消.");
+			this.attachment_editorCancel = MESSAGE_OUTER.cloneThenSetDescription("첨부파일 편집 권한 취소.");
 		}
 		return this.attachment_editorCancel;
 	}
 
 	private Message getAttachmentEditorModify() {
 		if (null == this.attachment_editorModify) {
-			this.attachment_editorModify = MESSAGE_OUTER.cloneThenSetDescription("附件可编辑修改.");
+			this.attachment_editorModify = MESSAGE_OUTER.cloneThenSetDescription("첨부파일 편집 권한 수정.");
 		}
 		return this.attachment_editorModify;
 	}
 
 	private Message getCalendarAlarm() {
 		if (null == this.calendar_alarm) {
-			this.calendar_alarm = MESSAGE_ALL.cloneThenSetDescription("日历通知.");
+			this.calendar_alarm = MESSAGE_ALL.cloneThenSetDescription("일정 알림.");
 		}
 		return this.calendar_alarm;
 	}
 
 	private Message getCustomCreate() {
 		if (null == this.custom_create) {
-			this.custom_create = MESSAGE_ALL.cloneThenSetDescription("自定义消息创建.");
+			this.custom_create = MESSAGE_ALL.cloneThenSetDescription("사용자 정의 메시지 생성.");
 		}
 		return this.custom_create;
 	}
 
 	private Message getTeamworkTaskCreate() {
 		if (null == this.teamwork_taskCreate) {
-			this.teamwork_taskCreate = MESSAGE_ALL.cloneThenSetDescription("工作管理任务创建.");
+			this.teamwork_taskCreate = MESSAGE_ALL.cloneThenSetDescription("업무 관리 작업 생성.");
 		}
 		return this.teamwork_taskCreate;
 	}
 
 	private Message getTeamworkTaskUpdate() {
 		if (null == this.teamwork_taskUpdate) {
-			this.teamwork_taskUpdate = MESSAGE_ALL.cloneThenSetDescription("工作管理任务更新.");
+			this.teamwork_taskUpdate = MESSAGE_ALL.cloneThenSetDescription("업무 관리 작업 수정.");
 		}
 		return this.teamwork_taskUpdate;
 	}
 
 	private Message getTeamworkTaskDelete() {
 		if (null == this.teamwork_taskDelete) {
-			this.teamwork_taskDelete = MESSAGE_ALL.cloneThenSetDescription("工作管理任务删除.");
+			this.teamwork_taskDelete = MESSAGE_ALL.cloneThenSetDescription("업무 관리 작업 삭제.");
 		}
 		return this.teamwork_taskDelete;
 	}
 
 	private Message getTeamworkTaskOvertime() {
 		if (null == this.teamwork_taskOvertime) {
-			this.teamwork_taskOvertime = MESSAGE_ALL.cloneThenSetDescription("工作管理任务超时.");
+			this.teamwork_taskOvertime = MESSAGE_ALL.cloneThenSetDescription("업무 관리 작업 기한 초과.");
 		}
 		return this.teamwork_taskOvertime;
 	}
 
 	private Message getTeamworkChat() {
 		if (null == this.teamwork_chat) {
-			this.teamwork_chat = MESSAGE_NOTICE.cloneThenSetDescription("工作管理聊天.");
+			this.teamwork_chat = MESSAGE_NOTICE.cloneThenSetDescription("업무 관리 대화.");
 		}
 		return this.teamwork_chat;
 	}
 
 	private Message getCmsPublish() {
 		if (null == this.cms_publish) {
-			this.cms_publish = MESSAGE_OUTER.cloneThenSetDescription("内容管理发布.");
+			this.cms_publish = MESSAGE_OUTER.cloneThenSetDescription("게시판 게시.");
 		}
 		return this.cms_publish;
 	}
 
 	private Message getCmsPublishToCreator() {
 		if (null == this.cms_publish_to_creator) {
-			this.cms_publish_to_creator = MESSAGE_NOTICE.cloneThenSetDescription("内容管理发布创建者通知.");
+			this.cms_publish_to_creator = MESSAGE_NOTICE.cloneThenSetDescription("게시판 게시 작성자 알림.");
 		}
 		return this.cms_publish_to_creator;
 	}
 
 	private Message getBbsSubjectCreate() {
 		if (null == this.bbs_subjectCreate) {
-			this.bbs_subjectCreate = MESSAGE_ALL.cloneThenSetDescription("论坛创建贴子.");
+			this.bbs_subjectCreate = MESSAGE_ALL.cloneThenSetDescription("포럼 게시물 작성.");
 		}
 		return this.bbs_subjectCreate;
 	}
 
 	private Message getBbsReplyCreate() {
 		if (null == this.bbs_replyCreate) {
-			this.bbs_replyCreate = MESSAGE_ALL.cloneThenSetDescription("论坛创建回复.");
+			this.bbs_replyCreate = MESSAGE_ALL.cloneThenSetDescription("포럼 댓글 작성.");
 		}
 		return this.bbs_replyCreate;
 	}
 
 	private Message getMindFileSend() {
 		if (null == this.mind_fileSend) {
-			this.mind_fileSend = MESSAGE_ALL.cloneThenSetDescription("脑图发送.");
+			this.mind_fileSend = MESSAGE_ALL.cloneThenSetDescription("마인드맵 보내기.");
 		}
 		return this.mind_fileSend;
 	}
 
 	private Message getMindFileShare() {
 		if (null == this.mind_fileShare) {
-			this.mind_fileShare = MESSAGE_ALL.cloneThenSetDescription("脑图分享.");
+			this.mind_fileShare = MESSAGE_ALL.cloneThenSetDescription("마인드맵 공유.");
 		}
 		return this.mind_fileShare;
 	}
 
 	private Message getImCreate() {
 		if (null == this.im_create) {
-			this.im_create = MESSAGE_ALL.cloneThenSetDescription("聊聊消息.");
+			this.im_create = MESSAGE_ALL.cloneThenSetDescription("메신저 메시지.");
 		}
 		return this.im_create;
 	}
 
 	private Message getImRevoke() {
 		if (null == this.im_revoke) {
-			this.im_revoke = new Message(MessageConnector.CONSUME_WS).cloneThenSetDescription("聊聊消息.");
+			this.im_revoke = new Message(MessageConnector.CONSUME_WS).cloneThenSetDescription("메신저 메시지.");
 		}
 		return this.im_revoke;
 	}
 
 	private Message getImConversationDelete() {
 		if (null == this.im_conversation_delete) {
-			this.im_conversation_delete = new Message(MessageConnector.CONSUME_WS).cloneThenSetDescription("聊聊消息.");
+			this.im_conversation_delete = new Message(MessageConnector.CONSUME_WS).cloneThenSetDescription("메신저 메시지.");
 		}
 		return this.im_conversation_delete;
 	}
 
 	private Message getImConversationUpdate() {
 		if (null == this.im_conversation_update) {
-			this.im_conversation_update = new Message(MessageConnector.CONSUME_WS).cloneThenSetDescription("聊聊消息.");
+			this.im_conversation_update = new Message(MessageConnector.CONSUME_WS).cloneThenSetDescription("메신저 메시지.");
 		}
 		return this.im_conversation_update;
 	}
 
 	public Message getAttendanceCheckInAlert() {
 		if (null == this.attendance_checkInAlert) {
-			this.attendance_checkInAlert = MESSAGE_NOTICE.cloneThenSetDescription("打卡提醒消息.");
+			this.attendance_checkInAlert = MESSAGE_NOTICE.cloneThenSetDescription("출퇴근 체크 알림 메시지.");
 		}
 		return this.attendance_checkInAlert;
 	}
 
 	private Message getAttendanceCheckInException() {
 		if (null == this.attendance_checkInException) {
-			this.attendance_checkInException = MESSAGE_NOTICE.cloneThenSetDescription("打卡异常提醒消息.");
+			this.attendance_checkInException = MESSAGE_NOTICE.cloneThenSetDescription("출퇴근 체크 이상 알림 메시지.");
 		}
 		return this.attendance_checkInException;
 	}

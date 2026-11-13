@@ -247,7 +247,7 @@ public class ActionSave extends BaseAction {
 				if ( StringUtils.isNotEmpty( subjectInfo.getTitle() )) {
 					wrapIn.setTitle(subjectInfo.getTitle());
 				} else {
-					wrapIn.setTitle("无标题");
+					wrapIn.setTitle("제목 없음");
 				}
 			}
 		}

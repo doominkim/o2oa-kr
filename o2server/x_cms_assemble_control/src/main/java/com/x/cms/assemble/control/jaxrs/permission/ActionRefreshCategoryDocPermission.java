@@ -25,9 +25,9 @@ public class ActionRefreshCategoryDocPermission extends BaseAction {
 			try {
 				boolean flag = documentPersistService.refreshDocumentPermissionByCategory(categoryId);
 				if(flag) {
-					wo.setValue("权限处理完成！");
+					wo.setValue("권한 처리가 완료되었습니다.");
 				}else{
-					wo.setValue("权限刷新失败，可能有其他分类正在刷新权限！");
+					wo.setValue("권한 새로고침에 실패했습니다. 다른 분류에서 권한을 새로고침하고 있을 수 있습니다.");
 				}
 				result.setData(wo);
 			} catch (Exception e) {

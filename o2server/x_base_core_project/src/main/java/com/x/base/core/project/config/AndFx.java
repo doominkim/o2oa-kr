@@ -68,7 +68,7 @@ public class AndFx extends ConfigObject {
 	public static final String default_msgAppSecret = "";
 	public static final String default_msgSender = "10086102021";
 	public static final String default_msgType = "102021";
-	public static final String default_msgBoxTitle = "智慧办公消息";
+	public static final String default_msgBoxTitle = "스마트 오피스 메시지";
 	public static final String default_workUrl = "http://demo001.openlc.net/x_desktop/";
 	public static final String default_messageRedirectPortal = "";
 	public static final Boolean default_messageEnable = false;

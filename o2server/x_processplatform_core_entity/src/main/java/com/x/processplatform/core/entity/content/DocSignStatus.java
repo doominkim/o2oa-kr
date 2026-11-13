@@ -2,9 +2,9 @@ package com.x.processplatform.core.entity.content;
 
 public enum DocSignStatus {
 
-	STATUS_1(1, "暂存"),
-	STATUS_2(2, "签批正文不可以修改"),
-	STATUS_3(3, "签批正文可以修改");
+	STATUS_1(1, "임시저장"),
+	STATUS_2(2, "서명 본문 수정 불가"),
+	STATUS_3(3, "서명 본문 수정 가능");
 	private Integer value;
 	private String name;
 

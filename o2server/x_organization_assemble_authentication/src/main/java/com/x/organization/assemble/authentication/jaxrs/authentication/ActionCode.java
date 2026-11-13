@@ -33,7 +33,7 @@ class ActionCode extends BaseAction {
 				}
 			}
 			Wo wo = new Wo();
-			wo.setValue("验证码已下发，如未收到，请确认是否已绑定该号码。");
+			wo.setValue("인증번호를 보냈습니다. 받지 못했다면 이 번호가 연결되어 있는지 확인하세요.");
 			result.setData(wo);
 			Business business = new Business(emc);
 			String id = business.person().getWithCredential(credential);

@@ -8,10 +8,10 @@ import org.apache.commons.lang3.StringUtils;
  */
 public enum PersonStatusEnum {
 
-	NORMAL("0", "正常"),
-	LOCK("1", "锁定"),
-	BAN("2", "禁止"),
-	DELETE("3", "删除");
+	NORMAL("0", "정상"),
+	LOCK("1", "잠김"),
+	BAN("2", "차단"),
+	DELETE("3", "삭제");
 
 	private String value;
 	private String name;

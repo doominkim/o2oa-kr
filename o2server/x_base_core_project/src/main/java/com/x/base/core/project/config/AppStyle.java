@@ -495,7 +495,7 @@ public class AppStyle extends ConfigObject {
 			NativeApp o = new NativeApp();
 			o.setId(1);
 			o.setKey("task");
-			o.setName("待办");
+			o.setName("결재 대기");
 			o.setEnable(true);
 			o.getiOS().setCategory("native");
 			o.getiOS().setSubcategory("coding");
@@ -508,7 +508,7 @@ public class AppStyle extends ConfigObject {
 			NativeApp o = new NativeApp();
 			o.setId(2);
 			o.setKey("taskcompleted");
-			o.setName("已办");
+			o.setName("결재 완료");
 			o.setEnable(true);
 			o.getiOS().setCategory("native");
 			o.getiOS().setSubcategory("coding");
@@ -521,7 +521,7 @@ public class AppStyle extends ConfigObject {
 			NativeApp o = new NativeApp();
 			o.setId(3);
 			o.setKey("read");
-			o.setName("待阅");
+			o.setName("열람 대기");
 			o.setEnable(true);
 			o.getiOS().setCategory("native");
 			o.getiOS().setSubcategory("coding");
@@ -534,7 +534,7 @@ public class AppStyle extends ConfigObject {
 			NativeApp o = new NativeApp();
 			o.setId(4);
 			o.setKey("readcompleted");
-			o.setName("已阅");
+			o.setName("열람 완료");
 			o.setEnable(true);
 			o.getiOS().setCategory("native");
 			o.getiOS().setSubcategory("coding");
@@ -547,7 +547,7 @@ public class AppStyle extends ConfigObject {
 			NativeApp o = new NativeApp();
 			o.setId(5);
 			o.setKey("meeting");
-			o.setName("会议管理");
+			o.setName("회의 관리");
 			o.setEnable(true);
 			o.getiOS().setCategory("native");
 			o.getiOS().setSubcategory("coding");
@@ -560,7 +560,7 @@ public class AppStyle extends ConfigObject {
 			NativeApp o = new NativeApp();
 			o.setId(6);
 			o.setKey("yunpan");
-			o.setName("企业网盘");
+			o.setName("웹하드");
 			o.setEnable(true);
 			o.getiOS().setCategory("native");
 			o.getiOS().setSubcategory("coding");
@@ -573,7 +573,7 @@ public class AppStyle extends ConfigObject {
 			NativeApp o = new NativeApp();
 			o.setId(7);
 			o.setKey("bbs");
-			o.setName("企业论坛");
+			o.setName("사내 포럼");
 			o.setEnable(true);
 			o.getiOS().setCategory("native");
 			o.getiOS().setSubcategory("coding");
@@ -586,7 +586,7 @@ public class AppStyle extends ConfigObject {
 			NativeApp o = new NativeApp();
 			o.setId(8);
 			o.setKey("cms");
-			o.setName("信息中心");
+			o.setName("게시판");
 			o.setEnable(true);
 			o.getiOS().setCategory("native");
 			o.getiOS().setSubcategory("coding");
@@ -599,7 +599,7 @@ public class AppStyle extends ConfigObject {
 			NativeApp o = new NativeApp();
 			o.setId(9);
 			o.setKey("attendance");
-			o.setName("考勤打卡");
+			o.setName("출퇴근 체크");
 			o.setEnable(true);
 			o.getiOS().setCategory("native");
 			o.getiOS().setSubcategory("coding");
@@ -612,7 +612,7 @@ public class AppStyle extends ConfigObject {
 			NativeApp o = new NativeApp();
 			o.setId(11);
 			o.setKey("calendar");
-			o.setName("日程安排");
+			o.setName("일정");
 			o.setEnable(true);
 			o.getiOS().setCategory("native");
 			o.getiOS().setSubcategory("coding");
@@ -625,7 +625,7 @@ public class AppStyle extends ConfigObject {
 			NativeApp o = new NativeApp();
 			o.setId(12);
 			o.setKey("mindMap");
-			o.setName("脑图");
+			o.setName("마인드맵");
 			o.setEnable(true);
 			o.getiOS().setCategory("native");
 			o.getiOS().setSubcategory("coding");
@@ -638,7 +638,7 @@ public class AppStyle extends ConfigObject {
 			NativeApp o = new NativeApp();
 			o.setId(13);
 			o.setKey("o2AI");
-			o.setName("AI助手");
+			o.setName("AI 비서");
 			o.setEnable(true);
 			o.getiOS().setCategory("native");
 			o.getiOS().setSubcategory("coding");

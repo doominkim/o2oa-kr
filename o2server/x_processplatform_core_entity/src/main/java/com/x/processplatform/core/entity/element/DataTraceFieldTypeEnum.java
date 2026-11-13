@@ -8,9 +8,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 public enum DataTraceFieldTypeEnum {
 
-	ALL("all", "记录所有字段(不包含大字段和对象字段)"),
-	CUSTOM("custom", "记录自定义字段"),
-	NONE("none", "不记录");
+	ALL("all", "모든 필드 기록(대용량 필드와 객체 필드 제외)"),
+	CUSTOM("custom", "사용자 정의 필드 기록"),
+	NONE("none", "기록 안 함");
 
 	private String value;
 	private String name;

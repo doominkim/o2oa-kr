@@ -51,59 +51,59 @@ public class Components extends ConfigObject {
     public static Component systemComponent(String name) {
         switch (name) {
             case NAME_SYSTEMCONFIG:
-                return new Component(NAME_SYSTEMCONFIG, NAME_SYSTEMCONFIG, "系统配置", APPICON_PNG, 1,
+                return new Component(NAME_SYSTEMCONFIG, NAME_SYSTEMCONFIG, "시스템 설정", APPICON_PNG, 1,
                         Component.TYPE_SYSTEM);
             case NAME_ORG:
-                return new Component(NAME_ORG, NAME_ORG, "组织管理", APPICON_PNG, 2, Component.TYPE_SYSTEM);
+                return new Component(NAME_ORG, NAME_ORG, "조직 관리", APPICON_PNG, 2, Component.TYPE_SYSTEM);
             case NAME_CMSMANAGER:
-                return new Component(NAME_CMSMANAGER, "cms.Column", "内容管理设置", APPICON_PNG, 3, Component.TYPE_SYSTEM);
+                return new Component(NAME_CMSMANAGER, "cms.Column", "게시판 설정", APPICON_PNG, 3, Component.TYPE_SYSTEM);
             case NAME_APPLICATIONEXPLORER:
-                return new Component(NAME_APPLICATIONEXPLORER, "process.ApplicationExplorer", "流程管理平台", APPICON_PNG, 4,
+                return new Component(NAME_APPLICATIONEXPLORER, "process.ApplicationExplorer", "프로세스 관리", APPICON_PNG, 4,
                         Component.TYPE_SYSTEM);
             case NAME_PORTALEXPLORER:
-                return new Component(NAME_PORTALEXPLORER, "portal.PortalExplorer", "门户管理平台", APPICON_PNG, 5,
+                return new Component(NAME_PORTALEXPLORER, "portal.PortalExplorer", "포털 관리", APPICON_PNG, 5,
                         Component.TYPE_SYSTEM);
             case NAME_DATAEXPLORER:
-                return new Component(NAME_DATAEXPLORER, "query.QueryExplorer", "数据中心平台", APPICON_PNG, 6,
+                return new Component(NAME_DATAEXPLORER, "query.QueryExplorer", "데이터 센터", APPICON_PNG, 6,
                         Component.TYPE_SYSTEM);
             case NAME_SERVICEMANAGER:
-                return new Component(NAME_SERVICEMANAGER, NAME_SERVICEMANAGER, "服务管理平台", APPICON_PNG, 7,
+                return new Component(NAME_SERVICEMANAGER, NAME_SERVICEMANAGER, "서비스 관리", APPICON_PNG, 7,
                         Component.TYPE_SYSTEM);
             case NAME_APPSTORE:
-                return new Component(NAME_APPSTORE, NAME_APPSTORE, "应用市场", APPICON_PNG, 8, Component.TYPE_SYSTEM);
+                return new Component(NAME_APPSTORE, NAME_APPSTORE, "앱 마켓", APPICON_PNG, 8, Component.TYPE_SYSTEM);
             case NAME_APPCENTER:
-                return new Component(NAME_APPCENTER, NAME_APPCENTER, "应用管理", APPICON_PNG, 9, Component.TYPE_SYSTEM);
+                return new Component(NAME_APPCENTER, NAME_APPCENTER, "앱 관리", APPICON_PNG, 9, Component.TYPE_SYSTEM);
             case NAME_LOGVIEWER:
-                return new Component(NAME_LOGVIEWER, NAME_LOGVIEWER, "日志", APPICON_PNG, 10, Component.TYPE_SYSTEM);
+                return new Component(NAME_LOGVIEWER, NAME_LOGVIEWER, "로그", APPICON_PNG, 10, Component.TYPE_SYSTEM);
             case NAME_PROFILE:
-                return new Component(NAME_PROFILE, NAME_PROFILE, "个人设置", APPICON_PNG, 11, Component.TYPE_SYSTEM);
+                return new Component(NAME_PROFILE, NAME_PROFILE, "개인 설정", APPICON_PNG, 11, Component.TYPE_SYSTEM);
             case NAME_BAM:
-                return new Component(NAME_BAM, NAME_BAM, "流程监控", APPICON_PNG, 12, Component.TYPE_SYSTEM);
+                return new Component(NAME_BAM, NAME_BAM, "프로세스 모니터링", APPICON_PNG, 12, Component.TYPE_SYSTEM);
             case NAME_CMS:
-                return new Component(NAME_CMS, "cms.Index", "内容管理首页", APPICON_PNG, 12, Component.TYPE_SYSTEM);
+                return new Component(NAME_CMS, "cms.Index", "게시판 홈", APPICON_PNG, 12, Component.TYPE_SYSTEM);
             case NAME_WORKCENTER:
-                return new Component(NAME_WORKCENTER, "process.workcenter", "办公中心", APPICON_PNG, 13,
+                return new Component(NAME_WORKCENTER, "process.workcenter", "업무함", APPICON_PNG, 13,
                         Component.TYPE_SYSTEM);
             case NAME_HOMEPAGE:
-                return new Component(NAME_HOMEPAGE, NAME_HOMEPAGE, "首页", APPICON_PNG, 14, Component.TYPE_SYSTEM);
+                return new Component(NAME_HOMEPAGE, NAME_HOMEPAGE, "홈", APPICON_PNG, 14, Component.TYPE_SYSTEM);
             case NAME_HOTARTICLE:
-                return new Component(NAME_HOTARTICLE, NAME_HOTARTICLE, "热点", APPICON_PNG, 15, Component.TYPE_SYSTEM);
+                return new Component(NAME_HOTARTICLE, NAME_HOTARTICLE, "핫이슈", APPICON_PNG, 15, Component.TYPE_SYSTEM);
             case NAME_MEETING:
-                return new Component(NAME_MEETING, NAME_MEETING, "会议管理", APPICON_PNG, 18, Component.TYPE_SYSTEM);
+                return new Component(NAME_MEETING, NAME_MEETING, "회의 관리", APPICON_PNG, 18, Component.TYPE_SYSTEM);
             case NAME_ATTENDANCE:
-                return new Component(NAME_ATTENDANCE, NAME_ATTENDANCE, "考勤管理", APPICON_PNG, 20, Component.TYPE_SYSTEM);
+                return new Component(NAME_ATTENDANCE, NAME_ATTENDANCE, "근태 관리", APPICON_PNG, 20, Component.TYPE_SYSTEM);
             case NAME_FORUM:
-                return new Component(NAME_FORUM, NAME_FORUM, "论坛", APPICON_PNG, 21, Component.TYPE_SYSTEM);
+                return new Component(NAME_FORUM, NAME_FORUM, "포럼", APPICON_PNG, 21, Component.TYPE_SYSTEM);
             case NAME_MINDER:
-                return new Component(NAME_MINDER, NAME_MINDER, "脑图编辑器", APPICON_PNG, 22, Component.TYPE_SYSTEM);
+                return new Component(NAME_MINDER, NAME_MINDER, "마인드맵 편집기", APPICON_PNG, 22, Component.TYPE_SYSTEM);
             case NAME_CALENDAR:
-                return new Component(NAME_CALENDAR, NAME_CALENDAR, "日程安排", APPICON_PNG, 23, Component.TYPE_SYSTEM);
+                return new Component(NAME_CALENDAR, NAME_CALENDAR, "일정", APPICON_PNG, 23, Component.TYPE_SYSTEM);
             case NAME_FTSEARCH:
-                return new Component(NAME_FTSEARCH, NAME_FTSEARCH, "搜索", APPICON_PNG, 25, Component.TYPE_SYSTEM);
+                return new Component(NAME_FTSEARCH, NAME_FTSEARCH, "검색", APPICON_PNG, 25, Component.TYPE_SYSTEM);
             case NAME_IM:
-                return new Component(NAME_IM, NAME_IM, "聊聊", APPICON_PNG, 26, Component.TYPE_SYSTEM);
+                return new Component(NAME_IM, NAME_IM, "메신저", APPICON_PNG, 26, Component.TYPE_SYSTEM);
             case NAME_AI:
-                return new Component(NAME_AI, NAME_AI, "AI助手", APPICON_PNG, 27, Component.TYPE_SYSTEM);
+                return new Component(NAME_AI, NAME_AI, "AI 비서", APPICON_PNG, 27, Component.TYPE_SYSTEM);
             default:
                 return null;
         }

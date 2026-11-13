@@ -46,13 +46,13 @@ public class ActionPreCheck extends BaseAction {
             }
             WoGroupShift woGroupShift = business.getAttendanceV2ManagerFactory().getGroupShiftByPersonDate(person, today);
             if (woGroupShift == null || woGroupShift.getGroup() == null) {
-                result.setData(cannotCheckIn("没有对应的考勤组"));
+                result.setData(cannotCheckIn("해당 근태 그룹이 없습니다"));
                 return result;
             }
             AttendanceV2Group group = woGroupShift.getGroup();
             // 没有配置工作地址 不能打卡
             if (group.getWorkPlaceIdList() == null || group.getWorkPlaceIdList().isEmpty()) {
-                result.setData(cannotCheckIn("没有配置工作地址"));
+                result.setData(cannotCheckIn("근무지가 설정되지 않았습니다"));
                 return result;
             }
             // 同一人员同一天的预打卡生成串行化，避免全局单线程在高峰期阻塞所有人。
@@ -60,7 +60,7 @@ public class ActionPreCheck extends BaseAction {
             List<AttendanceV2CheckInRecord> recordList = executeWithCheckLock(lockKey,
                     new CallableImpl(person, group, woGroupShift.getShift(), nowDate));
             if (recordList == null || recordList.isEmpty()) {
-                result.setData(cannotCheckIn("没有对应的上下班打卡时间"));
+                result.setData(cannotCheckIn("해당 출퇴근 체크 시간이 없습니다"));
                 return result;
             }
             // 排序

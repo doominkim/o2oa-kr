@@ -480,7 +480,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 			if (person.getFailureCount() >= Config.person().getFailureCount()) {
 				person.setStatus(PersonStatusEnum.LOCK.getValue());
 				person.setLockExpireTime(DateTools.addMinutes(new Date(), failureInterval));
-				person.setStatusDes("登录失败超限次");
+				person.setStatusDes("로그인 실패 횟수 초과");
 			}
 		} else {
 			person.setFailureCount(1);

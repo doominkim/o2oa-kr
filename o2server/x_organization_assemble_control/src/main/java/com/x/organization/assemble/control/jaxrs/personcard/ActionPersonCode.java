@@ -66,7 +66,7 @@ class ActionPersonCode extends BaseAction {
 				content = content+"X-QQ:"+personCard.getQq()+"\n";
 			}
 			if(personCard.getWeixin()!=null && !personCard.getWeixin().equals("")){
-				content = content+"NOTE:微信:"+personCard.getWeixin()+"\n";
+				content = content+"NOTE:WeChat:"+personCard.getWeixin()+"\n";
 			}
 			if(personCard.getBirthday()!=null && !personCard.getBirthday().equals("")){
 				content = content+"BDAY:"+DateTools.formatDate(personCard.getBirthday())+"\n";

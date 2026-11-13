@@ -50,7 +50,7 @@ class ActionHtmlToPdf extends BaseAction {
 		try {
 			String workHtml = wi.getWorkHtml();
 			if (StringUtils.isEmpty(workHtml)) {
-				workHtml = "无内容";
+				workHtml = "내용 없음";
 			}
 			if (workHtml.toLowerCase().indexOf("<html") == -1) {
 				workHtml = "<html><head></head><body>" + workHtml + "</body></html>";

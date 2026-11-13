@@ -426,7 +426,7 @@ public class AttendanceStatisticalCycleService {
         attendanceStatisticalCycle.setCycleStartDateString(dateOperation.getFirstDateStringInMonth(date));
         attendanceStatisticalCycle.setCycleEndDate(dateOperation.getLastDateInMonth(date));
         attendanceStatisticalCycle.setCycleEndDateString(dateOperation.getLastDateStringInMonth(date));
-        attendanceStatisticalCycle.setDescription("系统自动创建");
+        attendanceStatisticalCycle.setDescription("시스템 자동 생성");
         try {
             attendanceStatisticalCycle = saveCycleInfo(attendanceStatisticalCycle);
         } catch (Exception e) {

@@ -60,13 +60,13 @@ public class QiyeweixinConsumeQueue extends AbstractQueue<Message> {
 					|| MessageConnector.TYPE_CMS_PUBLISH_TO_CREATOR.equals(message.getType())) {
 				String categoryName = DingdingConsumeQueue.OuterMessageHelper.getPropertiesFromBody("categoryName", message.getBody());
 				if (StringUtils.isEmpty(categoryName)) {
-					categoryName = "信息通知";
+					categoryName = "게시판 알림";
 				}
 				cardMessage.getTextcard().setTitle("【"+categoryName+"】");
 			} else {
 				String processName = DingdingConsumeQueue.OuterMessageHelper.getPropertiesFromBody("processName", message.getBody());
 				if (StringUtils.isEmpty(processName)) {
-					processName = "工作通知";
+					processName = "결재 알림";
 				}
 				cardMessage.getTextcard().setTitle("【"+processName+"】");
 			}

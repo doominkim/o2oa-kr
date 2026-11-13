@@ -13,37 +13,37 @@ import com.x.meeting.core.entity.Room;
 public class MessageFactory {
 
 	public static void meeting_invite(String person, Meeting meeting, Room room) {
-		String title = "会议邀请:" + meeting.getSubject() + ", 时间:"
+		String title = "회의 초대: " + meeting.getSubject() + ", 시간: "
 				+ DateTools.format(meeting.getStartTime(), DateTools.format_yyyyMMddHHmm);
 		if(room != null) {
-			title = title + ", 地点:" + room.getName();
+			title = title + ", 장소: " + room.getName();
 		}else{
-			title = title + ", 会议号:" + meeting.getRoomId();
+			title = title + ", 회의 번호: " + meeting.getRoomId();
 		}
 		MessageConnector.send(MessageConnector.TYPE_MEETING_INVITE, title, person, meeting);
 	}
 
 	public static void meeting_accept(String person, Meeting meeting) throws Exception {
-		String title = "(" + OrganizationDefinition.name(person) + ")接受了会议:" + meeting.getSubject() + "的邀请.";
+		String title = "(" + OrganizationDefinition.name(person) + ")님이 회의 " + meeting.getSubject() + " 초대를 수락했습니다.";
 		Wo wo = Wo.copier.copy(meeting);
 		wo.setFromPerson(person);
 		MessageConnector.send(MessageConnector.TYPE_MEETING_ACCEPT, title, meeting.getApplicant(), wo);
 	}
 
 	public static void meeting_reject(String person, Meeting meeting) throws Exception {
-		String title = "(" + OrganizationDefinition.name(person) + ")拒绝了会议:" + meeting.getSubject() + "的邀请.";
+		String title = "(" + OrganizationDefinition.name(person) + ")님이 회의 " + meeting.getSubject() + " 초대를 거절했습니다.";
 		Wo wo = Wo.copier.copy(meeting);
 		wo.setFromPerson(person);
 		MessageConnector.send(MessageConnector.TYPE_MEETING_REJECT, title, meeting.getApplicant(), wo);
 	}
 
 	public static void meeting_delete(String person, Meeting meeting) throws Exception {
-		String title = "会议:" + meeting.getSubject() + "已取消.";
+		String title = "회의 " + meeting.getSubject() + "이(가) 취소되었습니다.";
 		MessageConnector.send(MessageConnector.TYPE_MEETING_DELETE, title, person, meeting);
 	}
 
 	public static void meeting_deleteInvitePerson(String person, Meeting meeting) throws Exception {
-		String title = "会议:" + meeting.getSubject() + "已取消.";
+		String title = "회의 " + meeting.getSubject() + "이(가) 취소되었습니다.";
 		MessageConnector.send(MessageConnector.TYPE_MEETING_DELETE, title, person, meeting);
 	}
 

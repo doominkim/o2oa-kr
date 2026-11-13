@@ -258,7 +258,7 @@ public class ActionSendGetPrivateInfoMessage extends BaseAction {
             private String title = "";
             private String description = "";
             private String url = "";
-            private String btntxt = "详情";
+            private String btntxt = "상세";
 
             public String getTitle() {
                 return title;

@@ -52,7 +52,7 @@ public class MessageFactory {
 	public static void notifyManager_forNewReply( String person, MessageWo messageWo ) throws Exception {
 		if(StringUtils.isNotEmpty( person ) ){
 			String personName = StringUtils.isNotEmpty( messageWo.getCreatePerson() )?"":messageWo.getCreatePerson().split("@")[0];
-			String title = personName + "发表了新的回复:" + messageWo.getTitle();
+			String title = personName + " 님이 새 댓글을 작성했습니다: " + messageWo.getTitle();
 			logger.debug("bbs send notification:new reply for subject [" +  messageWo.getTitle() + "], target：" + person );
 			MessageConnector.send( MessageConnector.TYPE_BBS_REPLYCREATE,  title, person, messageWo );
 		}
@@ -67,7 +67,7 @@ public class MessageFactory {
 	public static void notifySubjectCreator_forNewReply( String person, MessageWo messageWo ) throws Exception {
 		if(StringUtils.isNotEmpty( person ) ){
 			String personName = StringUtils.isNotEmpty( messageWo.getCreatePerson() )?"":messageWo.getCreatePerson().split("@")[0];
-			String title = personName + "回复了您发表的主题:" + messageWo.getTitle();
+			String title = personName + " 님이 회원님의 주제에 댓글을 달았습니다: " + messageWo.getTitle();
 			logger.debug("bbs send notification:new reply for subject [" +  messageWo.getTitle() + "], target：" + person );
 			MessageConnector.send( MessageConnector.TYPE_BBS_REPLYCREATE,  title, person, messageWo );
 		}
@@ -96,7 +96,7 @@ public class MessageFactory {
 	public static void notifyManager_forNewSubject( String person, MessageWo messageWo ) throws Exception {
 		if(StringUtils.isNotEmpty( person ) ){
 			String personName = StringUtils.isNotEmpty( messageWo.getCreatePerson() )?"":messageWo.getCreatePerson().split("@")[0];
-			String title = personName + "发表了新的主题:" + messageWo.getTitle();
+			String title = personName + " 님이 새 주제를 게시했습니다: " + messageWo.getTitle();
 			logger.debug("bbs send notification:new reply for subject [" +  messageWo.getTitle() + "], target：" + person );
 			MessageConnector.send( MessageConnector.TYPE_BBS_SUBJECTCREATE,  title, person, messageWo );
 		}

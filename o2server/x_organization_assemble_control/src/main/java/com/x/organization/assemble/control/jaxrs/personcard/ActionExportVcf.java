@@ -75,7 +75,7 @@ class ActionExportVcf extends BaseAction {
 						reader.write("\r\n".getBytes());
 					}
 					if(personCard.getWeixin()!=null && !personCard.getWeixin().equals("")){
-						reader.write(("NOTE:微信:"+personCard.getWeixin()).getBytes());
+						reader.write(("NOTE:WeChat:"+personCard.getWeixin()).getBytes());
 						reader.write("\r\n".getBytes());
 					}
 					if(personCard.getBirthday()!=null && !personCard.getBirthday().equals("")){

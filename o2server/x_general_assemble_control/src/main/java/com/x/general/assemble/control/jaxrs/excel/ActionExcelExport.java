@@ -40,7 +40,7 @@ class ActionExcelExport extends BaseAction {
 		Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
 
 		if (StringUtils.isEmpty(excelName)) {
-			excelName = "无标题" + EXCEL_EXTENSION;
+			excelName = "제목 없음" + EXCEL_EXTENSION;
 		}
 		if (!excelName.toLowerCase().endsWith(EXCEL_EXTENSION)) {
 			excelName = excelName + EXCEL_EXTENSION;

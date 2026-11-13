@@ -176,10 +176,10 @@ public class CalendarService {
 			calendar.setSource( "PERSON" );
 			calendar.setCreateor( "SYSTEM" );
 			calendar.setColor( "#1462be" );
-			calendar.setDescription( "我的默认日历" );
+			calendar.setDescription( "내 기본 캘린더" );
 			calendar.setId( Calendar.createId() );
 			calendar.setIsPublic( false );
-			calendar.setName( "我的日历" );
+			calendar.setName( "내 캘린더" );
 			calendar.setSource("PERSON");
 			calendar.setType("PERSON");
 			calendar.setTarget( personName );

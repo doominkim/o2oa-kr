@@ -276,25 +276,25 @@ public class BBSConfigSettingService{
 		Boolean isMultiple = false;
 		Integer ordernumber = 0;
 
-		value = "企业论坛";
+		value = "사내 포럼";
 		type = "text";
 		selectContent = null;
 		isMultiple = false;
-		description = "论坛系统名称:可以为系统指定名称,比如以顶层组织名称作为论坛名称等等。";
+		description = "포럼 시스템 이름: 시스템 이름을 지정할 수 있습니다. 예: 최상위 조직 이름을 포럼 이름으로 사용";
 		try {
-			checkAndInitSystemConfig("BBS_LOGO_NAME", "论坛系统名称", value, description, type, selectContent, isMultiple,  ++ordernumber );
+			checkAndInitSystemConfig("BBS_LOGO_NAME", "포럼 시스템 이름", value, description, type, selectContent, isMultiple,  ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "system init system config 'BBS_LOGO_NAME' got an exception." );
 			logger.error(e);
 		}
 
-		value = " - O2OA办公软件管理系统";
+		value = " - O2OA";
 		type = "text";
 		selectContent = null;
 		isMultiple = false;
-		description = "论坛标题Tail:全站网页标题内容的后缀内容。可以为空。";
+		description = "포럼 제목 접미사: 전체 웹 페이지 제목 뒤에 붙는 내용입니다. 비워 둘 수 있습니다.";
 		try {
-			checkAndInitSystemConfig("BBS_TITLE_TAIL", "论坛标题Tail", value, description, type, selectContent, isMultiple,  ++ordernumber );
+			checkAndInitSystemConfig("BBS_TITLE_TAIL", "포럼 제목 접미사", value, description, type, selectContent, isMultiple,  ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "system init system config 'BBS_TITLE_TAIL' got an exception." );
 			logger.error(e);
@@ -304,9 +304,9 @@ public class BBSConfigSettingService{
 		type = "select";
 		selectContent = "信息|问题|投票";
 		isMultiple = true;
-		description = "主题类别：可选值：信息|问题|投票,多选。";
+		description = "주제 유형: 정보|질문|투표 중 다중 선택.";
 		try {
-			checkAndInitSystemConfig("BBS_SUBJECT_TYPECATAGORY", "主题类别", value, description, type, selectContent, isMultiple, ++ordernumber );
+			checkAndInitSystemConfig("BBS_SUBJECT_TYPECATAGORY", "주제 유형", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "system init system config 'BBS_SUBJECT_TYPECATAGORY' got an exception." );
 			logger.error(e);
@@ -316,9 +316,9 @@ public class BBSConfigSettingService{
 		type = "select";
 		selectContent = "Single|Recursively";
 		isMultiple = false;
-		description = "回复删除模式：可选值：Single|Recursively,单选。";
+		description = "댓글 삭제 방식: 선택 값 Single|Recursively, 단일 선택.";
 		try {
-			checkAndInitSystemConfig("BBS_REPLY_DELETETYPE", "回复删除模式", value, description, type, selectContent, isMultiple, ++ordernumber );
+			checkAndInitSystemConfig("BBS_REPLY_DELETETYPE", "댓글 삭제 방식", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "system init system config 'BBS_REPLY_DELETETYPE' got an exception." );
 			logger.error(e);
@@ -328,9 +328,9 @@ public class BBSConfigSettingService{
 		type = "select";
 		selectContent = "ASC|DESC";
 		isMultiple = false;
-		description = "回贴排序模式：可选值：ASC|DESC, 按创建时间正序|倒序，单选。";
+		description = "댓글 정렬 방식: 선택 값 ASC|DESC, 작성 시간 오름차순|내림차순, 단일 선택.";
 		try {
-			checkAndInitSystemConfig("BBS_REPLY_SORTTYPE", "回贴排序模式", value, description, type, selectContent, isMultiple, ++ordernumber );
+			checkAndInitSystemConfig("BBS_REPLY_SORTTYPE", "댓글 정렬 방식", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "system init system config 'BBS_REPLY_SORTTYPE' got an exception." );
 			logger.error(e);
@@ -340,9 +340,9 @@ public class BBSConfigSettingService{
 		type = "select";
 		selectContent = "ASC|DESC";
 		isMultiple = false;
-		description = "我的回贴列表排序模式：可选值：ASC|DESC, 按创建时间正序|倒序，单选。";
+		description = "내 댓글 목록 정렬 방식: 선택 값 ASC|DESC, 작성 시간 오름차순|내림차순, 단일 선택.";
 		try {
-			checkAndInitSystemConfig("BBS_MYREPLY_SORTTYPE", "我的回贴排序模式", value, description, type, selectContent, isMultiple, ++ordernumber );
+			checkAndInitSystemConfig("BBS_MYREPLY_SORTTYPE", "내 댓글 정렬 방식", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "system init system config 'BBS_MYREPLY_SORTTYPE' got an exception." );
 			logger.error(e);
@@ -352,9 +352,9 @@ public class BBSConfigSettingService{
 		type = "select";
 		selectContent = "YES|NO";
 		isMultiple = false;
-		description = "是否允许匿名访问资源：可选值：YES|NO（允许|不允许），单选。";
+		description = "익명 접근 허용 여부: 선택 값 YES|NO(허용|허용 안 함), 단일 선택.";
 		try {
-			checkAndInitSystemConfig("BBS_ANONYMOUS_PERMISSION", "是否允许匿名访问", value, description, type, selectContent, isMultiple, ++ordernumber );
+			checkAndInitSystemConfig("BBS_ANONYMOUS_PERMISSION", "익명 접근 허용 여부", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "system init system config 'BBS_ANONYMOUS_PERMISSION' got an exception." );
 			logger.error(e);
@@ -364,9 +364,9 @@ public class BBSConfigSettingService{
 		type = "select";
 		selectContent = "YES|NO";
 		isMultiple = false;
-		description = "是否启用昵称：可选值：YES|NO（允许|不允许），单选。";
+		description = "닉네임 사용 여부: 선택 값 YES|NO(허용|허용 안 함), 단일 선택.";
 		try {
-			checkAndInitSystemConfig("BBS_USE_NICKNAME", "是否启用昵称", value, description, type, selectContent, isMultiple, ++ordernumber );
+			checkAndInitSystemConfig("BBS_USE_NICKNAME", "닉네임 사용 여부", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "system init system config 'BBS_USE_NICKNAME' got an exception." );
 			logger.error(e);

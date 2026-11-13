@@ -80,21 +80,21 @@ public class ActionExportAll extends BaseAction {
 			this.listRole(business);
 
 			// 将组织信息结果组织成EXCEL
-			this.composeUnit( business, "组织信息", allUnitList );
+			this.composeUnit( business, "조직 정보", allUnitList );
 
 			// 将人员基础信息结果组织成EXCEL
-			this.composePerson( business, "人员基本信息", allPersonList );
+			this.composePerson( business, "사용자 기본 정보", allPersonList );
 
 			// 将人员身份信息结果组织成EXCEL
-			this.composeIdentity( business, "人员身份信息", allIdentityList );
+			this.composeIdentity( business, "사용자 소속 정보", allIdentityList );
 
 			// 将职务信息结果组织成EXCEL
-			this.composeDuty( business, "职务信息", allDutyList );
+			this.composeDuty( business, "직무 정보", allDutyList );
 
 			// 将群组信息结果组织成EXCEL
-			this.composeGroup( business, "群组信息", allGroupList );
+			this.composeGroup( business, "그룹 정보", allGroupList );
 
-			this.composeRole( business, "角色信息", allRoleList );
+			this.composeRole( business, "역할 정보", allRoleList );
 		}
 
 		if( wb != null ) {
@@ -207,26 +207,26 @@ public class ActionExportAll extends BaseAction {
 
 			Row row = null;
 			// 创建新的表格
-			Sheet sheet = wb.createSheet("注意事项");
+			Sheet sheet = wb.createSheet("주의 사항");
 
 			// 先创建表头
 			row = sheet.createRow(2);
-			row.createCell(0).setCellValue("注意事项:");
+			row.createCell(0).setCellValue("주의 사항:");
 
 			row = sheet.createRow(4);
-			row.createCell(0).setCellValue("1. 表格内不要做合并(拆分)单元格操作，各列顺序不能变动，更不能删除，否则会造成数据混乱；");
+			row.createCell(0).setCellValue("1. 표 안의 셀을 병합(분할)하지 마세요. 각 열의 순서를 바꾸거나 삭제하면 데이터가 꼬일 수 있습니다.");
 
 			row = sheet.createRow(6);
-			row.createCell(0).setCellValue("2. * 为必填项");
+			row.createCell(0).setCellValue("2. * 표시는 필수 항목입니다.");
 
 			row = sheet.createRow(8);
-			row.createCell(0).setCellValue("3. 如有特殊要求的格式，详见列名批注；");
+			row.createCell(0).setCellValue("3. 형식에 특별한 요구 사항이 있으면 열 이름의 메모를 참고하세요.");
 
 			row = sheet.createRow(10);
-			row.createCell(0).setCellValue("4. 表中示例数据用于示范，实际导入时需删除；");
+			row.createCell(0).setCellValue("4. 표의 예시 데이터는 참고용이므로 실제로 가져올 때는 삭제하세요.");
 
 			row = sheet.createRow(12);
-			row.createCell(0).setCellValue("5. 每个Sheet页顺序不能变动，本Sheet页不能删除。");
+			row.createCell(0).setCellValue("5. 각 시트의 순서를 바꾸지 말고 이 시트를 삭제하지 마세요.");
 
 	}
 
@@ -240,12 +240,12 @@ public class ActionExportAll extends BaseAction {
 		sheet.setDefaultColumnWidth(25);
 		// 先创建表头
 		row = sheet.createRow(0);
-		row.createCell(0).setCellValue("组织名称 *");
-		row.createCell(1).setCellValue("唯一编码 *");
-		row.createCell(2).setCellValue("组织级别名称 *");
-		row.createCell(3).setCellValue("上级组织编号");
-		row.createCell(4).setCellValue("描述");
-		row.createCell(5).setCellValue("排序号");
+		row.createCell(0).setCellValue("조직 이름 *");
+		row.createCell(1).setCellValue("고유 코드 *");
+		row.createCell(2).setCellValue("조직 레벨 이름 *");
+		row.createCell(3).setCellValue("상위 조직 코드");
+		row.createCell(4).setCellValue("설명");
+		row.createCell(5).setCellValue("정렬 순서");
 		if(ListTools.isNotEmpty(allUnitAttributeList)){
 			for(int n = 0; n < allUnitAttributeList.size(); n++){
 				row.createCell(5+n+1).setCellValue("("+allUnitAttributeList.get(n)+")");
@@ -304,13 +304,13 @@ public class ActionExportAll extends BaseAction {
 		sheet.setDefaultColumnWidth(25);
 		// 先创建表头
 		row = sheet.createRow(0);
-		row.createCell(0).setCellValue("人员姓名 *");
-		row.createCell(1).setCellValue("唯一编码 *");
-		row.createCell(2).setCellValue("手机号码 *");
-		row.createCell(3).setCellValue("人员编号");
-		row.createCell(4).setCellValue("办公电话");
-		row.createCell(5).setCellValue("性别");
-		row.createCell(6).setCellValue("邮件");
+		row.createCell(0).setCellValue("사용자 이름 *");
+		row.createCell(1).setCellValue("고유 코드 *");
+		row.createCell(2).setCellValue("휴대전화 번호 *");
+		row.createCell(3).setCellValue("사번");
+		row.createCell(4).setCellValue("사무실 전화");
+		row.createCell(5).setCellValue("성별");
+		row.createCell(6).setCellValue("이메일");
 		if(ListTools.isNotEmpty(allPersonAttributeList)){
 			for(int n = 0; n < allPersonAttributeList.size(); n++){
 				row.createCell(6+n+1).setCellValue("("+allPersonAttributeList.get(n)+")");
@@ -354,10 +354,10 @@ public class ActionExportAll extends BaseAction {
 		sheet.setDefaultColumnWidth(25);
 		// 先创建表头
 		row = sheet.createRow(0);
-		row.createCell(0).setCellValue("人员唯一编码 *");
-		row.createCell(1).setCellValue("组织唯一编码 *");
-		row.createCell(2).setCellValue("身份编码");
-		row.createCell(3).setCellValue("主兼职");
+		row.createCell(0).setCellValue("사용자 고유 코드 *");
+		row.createCell(1).setCellValue("조직 고유 코드 *");
+		row.createCell(2).setCellValue("소속 코드");
+		row.createCell(3).setCellValue("주/겸직");
 		if (ListTools.isNotEmpty(identityList) ) {
 			for (int i = 0; i < identityList.size(); i++) {
 				identity = identityList.get(i);
@@ -389,12 +389,12 @@ public class ActionExportAll extends BaseAction {
 		sheet.setDefaultColumnWidth(40);
 		// 先创建表头
 		row = sheet.createRow(0);
-		row.createCell(0).setCellValue("职务名称 *");
-		row.createCell(1).setCellValue("职务所在组织唯一编码 *");
-		row.createCell(2).setCellValue("职务编码");
-		row.createCell(3).setCellValue("职务描述");
-		row.createCell(4).setCellValue("职务所含人员唯一编码");
-		row.createCell(5).setCellValue("职务所含人员所在组织唯一编码");
+		row.createCell(0).setCellValue("직무 이름 *");
+		row.createCell(1).setCellValue("직무 소속 조직 고유 코드 *");
+		row.createCell(2).setCellValue("직무 코드");
+		row.createCell(3).setCellValue("직무 설명");
+		row.createCell(4).setCellValue("직무 구성원 고유 코드");
+		row.createCell(5).setCellValue("직무 구성원 소속 조직 고유 코드");
 		if (ListTools.isNotEmpty(dutyList) ) {
 
 			int currentRow = 0;
@@ -459,13 +459,13 @@ public class ActionExportAll extends BaseAction {
 		sheet.setDefaultColumnWidth(25);
 		// 先创建表头
 		row = sheet.createRow(0);
-		row.createCell(0).setCellValue("群组名称 *");
-		row.createCell(1).setCellValue("群组编码 *");
-		row.createCell(2).setCellValue("人员唯一编码");
-		row.createCell(3).setCellValue("身份唯一编码");
-		row.createCell(4).setCellValue("组织唯一编码");
-		row.createCell(5).setCellValue("子群组编码");
-		row.createCell(6).setCellValue("描述");
+		row.createCell(0).setCellValue("그룹 이름 *");
+		row.createCell(1).setCellValue("그룹 코드 *");
+		row.createCell(2).setCellValue("사용자 고유 코드");
+		row.createCell(3).setCellValue("소속 고유 코드");
+		row.createCell(4).setCellValue("조직 고유 코드");
+		row.createCell(5).setCellValue("하위 그룹 코드");
+		row.createCell(6).setCellValue("설명");
 		if (ListTools.isNotEmpty(groupList) ) {
 			int forNumber = 0;
 			for (int i = 0; i < groupList.size(); i++) {
@@ -566,11 +566,11 @@ public class ActionExportAll extends BaseAction {
 		sheet.setDefaultColumnWidth(25);
 		// 先创建表头
 		row = sheet.createRow(0);
-		row.createCell(0).setCellValue("角色名称 *");
-		row.createCell(1).setCellValue("角色编码 *");
-		row.createCell(2).setCellValue("人员唯一编码");
-		row.createCell(3).setCellValue("群组唯一编码");
-		row.createCell(4).setCellValue("描述");
+		row.createCell(0).setCellValue("역할 이름 *");
+		row.createCell(1).setCellValue("역할 코드 *");
+		row.createCell(2).setCellValue("사용자 고유 코드");
+		row.createCell(3).setCellValue("그룹 고유 코드");
+		row.createCell(4).setCellValue("설명");
 		if (ListTools.isNotEmpty(roleList) ) {
 			int forNumber = 0;
 			for (int i = 0; i < roleList.size(); i++) {

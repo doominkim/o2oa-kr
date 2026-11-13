@@ -28,15 +28,15 @@ abstract class BaseAction extends StandardJaxrsAction {
     protected FileCommonService fileCommonService = new FileCommonService();
 
     protected void message_send_attachment_share(Share share, String person) throws Exception {
-        String title = "收到来自(" + OrganizationDefinition.name(share.getPerson()) + ")的共享文件:" + share.getName()
+        String title = "(" + OrganizationDefinition.name(share.getPerson()) + ")님이 공유한 파일: " + share.getName()
                 + ".";
         MessageConnector.send(MessageConnector.TYPE_ATTACHMENT_SHARE, title, person,
                 XGsonBuilder.convert(share, Share.class));
     }
 
     protected void message_send_attachment_shareCancel(Share share, String person) throws Exception {
-        String title = "(" + OrganizationDefinition.name(share.getPerson()) + ")取消了对:" + share.getName()
-                + ",文件的共享.";
+        String title = "(" + OrganizationDefinition.name(share.getPerson()) + ")님이 " + share.getName()
+                + " 파일 공유를 취소했습니다.";
         MessageConnector.send(MessageConnector.TYPE_ATTACHMENT_SHARECANCEL, title, person,
                 XGsonBuilder.convert(share, Share.class));
     }

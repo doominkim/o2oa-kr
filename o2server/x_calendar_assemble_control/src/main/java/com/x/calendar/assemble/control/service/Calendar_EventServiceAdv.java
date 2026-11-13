@@ -707,7 +707,7 @@ public class Calendar_EventServiceAdv {
 			if (StringUtils.isNotEmpty(o2_calendar_event.getTitle())) {
 				summary = o2_calendar_event.getTitle();
 			} else {
-				summary = "未命名-日程事件";
+				summary = "제목 없는 일정";
 			}
 
 			if (o2_calendar_event.getStartTime() == null) {
@@ -782,7 +782,7 @@ public class Calendar_EventServiceAdv {
 					if (StringUtils.isNotEmpty(o2_calendar_event.getValarm_Summary())) {
 						valarm.getProperties().add(new Summary(o2_calendar_event.getValarm_Summary()));
 					} else {
-						valarm.getProperties().add(new Summary("日程事件提醒"));
+						valarm.getProperties().add(new Summary("일정 알림"));
 					}
 					valarm.getProperties().add(Action.AUDIO);
 					valarm.getProperties().add(Action.DISPLAY);

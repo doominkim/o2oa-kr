@@ -577,21 +577,21 @@ class ActionInputAll extends BaseAction {
 		boolean validate = true;
 		for (UnitItem o : unit) {
 			if (StringUtils.isEmpty(o.getName())) {
-				this.setUnitMemo(workbook, configurator, o, "组织名称不能为空.");
+				this.setUnitMemo(workbook, configurator, o, "조직 이름을 입력해야 합니다.");
 				validate = false;
 				continue;
 			}
 			if (StringUtils.isEmpty(o.getUnique())) {
-				this.setUnitMemo(workbook, configurator, o, "组织唯一编码不能为空.");
+				this.setUnitMemo(workbook, configurator, o, "조직 고유 코드를 입력해야 합니다.");
 				validate = false;
 				continue;
 			}
 			if (ListTools.isEmpty(o.getTypeList())) {
-				this.setUnitMemo(workbook, configurator, o, "组织级别名称不能为空.");
+				this.setUnitMemo(workbook, configurator, o, "조직 레벨 이름을 입력해야 합니다.");
 				validate = false;
 				continue;
 			}
-			this.setUnitMemo(workbook, configurator, o, "校验通过.");
+			this.setUnitMemo(workbook, configurator, o, "검증을 통과했습니다.");
 		}
 		if (validate) {
 			for (UnitItem o : unit) {
@@ -599,7 +599,7 @@ class ActionInputAll extends BaseAction {
 					if (o != item) {
 						if (StringUtils.isNotEmpty(o.getUnique())
 								&& StringUtils.equals(o.getUnique(), item.getUnique())) {
-							this.setUnitMemo(workbook, configurator, o, "唯一编码冲突,本次导入中不唯一.");
+							this.setUnitMemo(workbook, configurator, o, "고유 코드가 이번 가져오기 안에서 중복됩니다.");
 							validate = false;
 						}
 					}
@@ -608,7 +608,7 @@ class ActionInputAll extends BaseAction {
 				p = emc.flag(o.getUnique(), Unit.class);
 				if (null != p) {
 					this.setUnitMemo(workbook, configurator, o,
-							"组织编号: " + o.getUnique() + " 与已经存在组织: " + p.getName() + " 冲突.");
+							"조직 코드: " + o.getUnique() + "이(가) 기존 조직: " + p.getName() + "과(와) 충돌합니다.");
 					validate = false;
 				}
 			}
@@ -622,24 +622,24 @@ class ActionInputAll extends BaseAction {
 		EntityManagerContainer emc = business.entityManagerContainer();
 		boolean validate = true;
 		for (PersonItem o : person) {
-			this.setPersonMemo(workbook, configurator, o, "校验通过.");
+			this.setPersonMemo(workbook, configurator, o, "검증을 통과했습니다.");
 			if (StringUtils.isEmpty(o.getName())) {
-				this.setPersonMemo(workbook, configurator, o, "人员姓名不能为空.");
+				this.setPersonMemo(workbook, configurator, o, "사용자 이름을 입력해야 합니다.");
 				validate = false;
 				continue;
 			}
 			if (StringUtils.isEmpty(o.getUnique())) {
-				this.setPersonMemo(workbook, configurator, o, "员工唯一编码不能为空.");
+				this.setPersonMemo(workbook, configurator, o, "사용자 고유 코드를 입력해야 합니다.");
 				validate = false;
 				continue;
 			}
 			if (StringUtils.isEmpty(o.getMobile())) {
-				this.setPersonMemo(workbook, configurator, o, "手机号码不能为空.");
+				this.setPersonMemo(workbook, configurator, o, "휴대전화 번호를 입력해야 합니다.");
 				validate = false;
 				continue;
 			}
 			if (!this.checkMobile(business, o.getMobile())) {
-				this.setPersonMemo(workbook, configurator, o, "手机号码不符合指定规则.");
+				this.setPersonMemo(workbook, configurator, o, "휴대전화 번호가 지정된 규칙에 맞지 않습니다.");
 				validate = false;
 			}
 		}
@@ -649,13 +649,13 @@ class ActionInputAll extends BaseAction {
 					if (o != item) {
 						if (StringUtils.isNotEmpty(o.getUnique())
 								&& StringUtils.equals(o.getUnique(), item.getUnique())) {
-							this.setPersonMemo(workbook, configurator, o, "员工账号冲突,本次导入中不唯一.");
+							this.setPersonMemo(workbook, configurator, o, "사용자 계정이 이번 가져오기 안에서 중복됩니다.");
 							validate = false;
 							continue;
 						}
 						if (StringUtils.isNotEmpty(o.getMobile())
 								&& StringUtils.equals(o.getMobile(), item.getMobile())) {
-							this.setPersonMemo(workbook, configurator, o, "手机号码冲突,本次导入中不唯一.");
+							this.setPersonMemo(workbook, configurator, o, "휴대전화 번호가 이번 가져오기 안에서 중복됩니다.");
 							validate = false;
 						}
 					}
@@ -664,7 +664,7 @@ class ActionInputAll extends BaseAction {
 				p = emc.flag(o.getUnique(), Person.class);
 				if (null != p) {
 					this.setPersonMemo(workbook, configurator, o,
-							"员工账号: " + o.getUnique() + " 与已经存在人员: " + p.getName() + " 冲突.");
+							"사용자 계정: " + o.getUnique() + "이(가) 기존 사용자: " + p.getName() + "과(와) 충돌합니다.");
 					validate = false;
 					continue;
 				}
@@ -674,7 +674,7 @@ class ActionInputAll extends BaseAction {
 				if (null != pc) {
 					logger.info("手机号码: " + o.getMobile() + " 与已经存在手机号码: " + pc.getMobile() + " 冲突.");
 					this.setPersonMemo(workbook, configurator, o,
-							"手机号码: " + o.getMobile() + " 与已经存在手机号码: " + pc.getMobile() + " 冲突.");
+							"휴대전화 번호: " + o.getMobile() + "이(가) 기존 휴대전화 번호: " + pc.getMobile() + "과(와) 충돌합니다.");
 					validate = false;
 				}
 			}
@@ -704,14 +704,14 @@ class ActionInputAll extends BaseAction {
 				IdentityItem identityItem = new IdentityItem();
 				identityItem.setRow(i);
 				identitys.add(identityItem);
-				this.setIdentityMemo(workbook, configurator, identityItem, "校验通过.");
+				this.setIdentityMemo(workbook, configurator, identityItem, "검증을 통과했습니다.");
 				if (StringUtils.isEmpty(unique)) {
-					this.setIdentityMemo(workbook, configurator, identityItem, "员工唯一编码不能为空.");
+					this.setIdentityMemo(workbook, configurator, identityItem, "사용자 고유 코드를 입력해야 합니다.");
 					validate = false;
 					continue;
 				}
 				if (StringUtils.isEmpty(unitCode)) {
-					this.setIdentityMemo(workbook, configurator, identityItem, "组织唯一编码不能为空.");
+					this.setIdentityMemo(workbook, configurator, identityItem, "조직 고유 코드를 입력해야 합니다.");
 					validate = false;
 					continue;
 				}
@@ -743,12 +743,12 @@ class ActionInputAll extends BaseAction {
 				}
 
 				if (!personcheck) {
-					this.setIdentityMemo(workbook, configurator, identityItem, "系统不存在该人员.");
+					this.setIdentityMemo(workbook, configurator, identityItem, "시스템에 해당 사용자가 없습니다.");
 					validate = false;
 					continue;
 				}
 				if (!unitcheck) {
-					this.setIdentityMemo(workbook, configurator, identityItem, "系统不存在该组织.");
+					this.setIdentityMemo(workbook, configurator, identityItem, "시스템에 해당 조직이 없습니다.");
 					validate = false;
 				}
 			}
@@ -768,16 +768,16 @@ class ActionInputAll extends BaseAction {
 				DutyItem o = new DutyItem();
 				o.setRow(i);
 				if (StringUtils.isEmpty(name)) {
-					this.setDutyMemo(workbook, configurator, o, "职务名称不能为空.");
+					this.setDutyMemo(workbook, configurator, o, "직무 이름을 입력해야 합니다.");
 					validate = false;
 					continue;
 				}
 				if (StringUtils.isEmpty(uniCode)) {
-					this.setDutyMemo(workbook, configurator, o, "职务所在组织唯一编码不能为空.");
+					this.setDutyMemo(workbook, configurator, o, "직무 소속 조직 고유 코드를 입력해야 합니다.");
 					validate = false;
 					continue;
 				}
-				this.setDutyMemo(workbook, configurator, o, "校验通过.");
+				this.setDutyMemo(workbook, configurator, o, "검증을 통과했습니다.");
 			}
 		}
 		return validate;
@@ -813,12 +813,12 @@ class ActionInputAll extends BaseAction {
 				GroupItem groupItem = new GroupItem();
 				groupItem.setRow(i);
 				if (StringUtils.isEmpty(name)) {
-					this.setGroupMemo(workbook, configurator, groupItem, "群组名称不能为空.");
+					this.setGroupMemo(workbook, configurator, groupItem, "그룹 이름을 입력해야 합니다.");
 					validate = false;
 					continue;
 				}
 				if (StringUtils.isEmpty(unique)) {
-					this.setGroupMemo(workbook, configurator, groupItem, "群组编号不能为空.");
+					this.setGroupMemo(workbook, configurator, groupItem, "그룹 코드를 입력해야 합니다.");
 					validate = false;
 					continue;
 				}
@@ -848,17 +848,17 @@ class ActionInputAll extends BaseAction {
 				}
 
 				if (!personcheck) {
-					this.setGroupMemo(workbook, configurator, groupItem, "系统不存在该人员.");
+					this.setGroupMemo(workbook, configurator, groupItem, "시스템에 해당 사용자가 없습니다.");
 					validate = false;
 					continue;
 				}
 				if (!unitcheck) {
-					this.setGroupMemo(workbook, configurator, groupItem, "系统不存在该组织.");
+					this.setGroupMemo(workbook, configurator, groupItem, "시스템에 해당 조직이 없습니다.");
 					validate = false;
 					continue;
 				}
 
-				this.setGroupMemo(workbook, configurator, groupItem, "校验通过.");
+				this.setGroupMemo(workbook, configurator, groupItem, "검증을 통과했습니다.");
 
 			}
 		}
@@ -894,12 +894,12 @@ class ActionInputAll extends BaseAction {
 				RoleItem roleItem = new RoleItem();
 				roleItem.setRow(i);
 				if (StringUtils.isEmpty(name)) {
-					this.setRoleMemo(workbook, configurator, roleItem, "角色名称不能为空.");
+					this.setRoleMemo(workbook, configurator, roleItem, "역할 이름을 입력해야 합니다.");
 					validate = false;
 					continue;
 				}
 				if (StringUtils.isEmpty(unique)) {
-					this.setRoleMemo(workbook, configurator, roleItem, "角色编号不能为空.");
+					this.setRoleMemo(workbook, configurator, roleItem, "역할 코드를 입력해야 합니다.");
 					validate = false;
 					continue;
 				}
@@ -919,17 +919,17 @@ class ActionInputAll extends BaseAction {
 				}
 
 				if (!personCheck) {
-					this.setRoleMemo(workbook, configurator, roleItem, "系统不存在该人员.");
+					this.setRoleMemo(workbook, configurator, roleItem, "시스템에 해당 사용자가 없습니다.");
 					validate = false;
 					continue;
 				}
 				if (!groupCheck) {
-					this.setRoleMemo(workbook, configurator, roleItem, "系统不存在该群组.");
+					this.setRoleMemo(workbook, configurator, roleItem, "시스템에 해당 그룹이 없습니다.");
 					validate = false;
 					continue;
 				}
 
-				this.setRoleMemo(workbook, configurator, roleItem, "校验通过.");
+				this.setRoleMemo(workbook, configurator, roleItem, "검증을 통과했습니다.");
 
 			}
 		}
@@ -966,7 +966,7 @@ class ActionInputAll extends BaseAction {
 						}
 					}
 					if (validate) {
-						this.setUnitMemo(workbook, configurator, o, "已导入.");
+						this.setUnitMemo(workbook, configurator, o, "가져왔습니다.");
 					}
 				} else {
 					logger.info("respMass=" + resp);
@@ -1008,7 +1008,7 @@ class ActionInputAll extends BaseAction {
 						}
 					}
 					if (validate) {
-						this.setPersonMemo(workbook, configurator, o, "已导入.");
+						this.setPersonMemo(workbook, configurator, o, "가져왔습니다.");
 					}
 				} else {
 					logger.info("respMass=" + resp);
@@ -1030,7 +1030,7 @@ class ActionInputAll extends BaseAction {
 				String resp = this.saveIdentity("identity", identityObject);
 
 				if ("".equals(resp)) {
-					this.setIdentityMemo(workbook, configurator, o, "已导入.");
+					this.setIdentityMemo(workbook, configurator, o, "가져왔습니다.");
 				} else {
 					logger.info("respMass=" + resp);
 					this.setIdentityMemo(workbook, configurator, o, resp);
@@ -1051,7 +1051,7 @@ class ActionInputAll extends BaseAction {
 					o.copyTo(dutyObject);
 					String resp = this.saveDuty("unitduty", dutyObject);
 					if ("".equals(resp)) {
-						this.setDutyMemo(workbook, configurator, o, "已导入.");
+						this.setDutyMemo(workbook, configurator, o, "가져왔습니다.");
 					} else {
 						logger.info("respMassduty=" + resp);
 						this.setDutyMemo(workbook, configurator, o, resp);
@@ -1102,7 +1102,7 @@ class ActionInputAll extends BaseAction {
 					String respEdit = this.editGroup("group/" + g.getId(), g);
 
 					if ("".equals(respEdit)) {
-						this.setGroupMemo(workbook, configurator, o, "已导入.");
+						this.setGroupMemo(workbook, configurator, o, "가져왔습니다.");
 					} else {
 						logger.info("respEditMass=" + respEdit);
 						this.setGroupMemo(workbook, configurator, o, respEdit);
@@ -1128,7 +1128,7 @@ class ActionInputAll extends BaseAction {
 					String resp = this.saveGroup("group", groupObject);
 
 					if ("".equals(resp)) {
-						this.setGroupMemo(workbook, configurator, o, "已导入.");
+						this.setGroupMemo(workbook, configurator, o, "가져왔습니다.");
 					} else {
 						logger.info("respMass=" + resp);
 						this.setGroupMemo(workbook, configurator, o, resp);
@@ -1163,7 +1163,7 @@ class ActionInputAll extends BaseAction {
 					String respEdit = this.editRole("role/" + role.getId(), role);
 
 					if ("".equals(respEdit)) {
-						this.setRoleMemo(workbook, configurator, o, "已导入.");
+						this.setRoleMemo(workbook, configurator, o, "가져왔습니다.");
 					} else {
 						logger.info("respEditMass=" + respEdit);
 						this.setRoleMemo(workbook, configurator, o, respEdit);
@@ -1178,7 +1178,7 @@ class ActionInputAll extends BaseAction {
 					String resp = this.saveRole("role", roleObject);
 
 					if ("".equals(resp)) {
-						this.setRoleMemo(workbook, configurator, o, "已导入.");
+						this.setRoleMemo(workbook, configurator, o, "가져왔습니다.");
 					} else {
 						logger.info("respMass=" + resp);
 						this.setRoleMemo(workbook, configurator, o, resp);

@@ -76,7 +76,7 @@ public class ActionTestSendTempMessage extends BaseAction  {
 
             WeixinTempMessage message = new WeixinTempMessage();
             message.setTouser(openid);
-            message.setUrl("这里是url");
+            message.setUrl("여기에 URL 입력");
             message.setTemplate_id(tempId);
             message.setTopcolor("#fb4747");
             message.setData(data);

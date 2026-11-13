@@ -58,8 +58,8 @@ public class UnitTypeSheetConfigurator extends GsonPropertyObject {
 		}
 	}
 
-	private static List<String> typeCodeItems = Arrays.asList(new String[] { "级别编号", "组织级别编号","级别编号 *", "typeCode" });
-	private static List<String> typeNameItems = Arrays.asList(new String[] { "级别名称 *", "组织级别名称","名称", "typeName" });
+	private static List<String> typeCodeItems = Arrays.asList(new String[] { "级别编号", "组织级别编号","级别编号 *", "레벨 코드 *", "typeCode" });
+	private static List<String> typeNameItems = Arrays.asList(new String[] { "级别名称 *", "레벨 이름 *", "组织级别名称","名称", "typeName" });
 
 	public String getCellStringValue(Cell cell) {
 		if (null != cell) {

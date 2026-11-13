@@ -1,0 +1,1310 @@
+{
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/factory/BBSForumInfoFactory.java": [
+    {
+      "text": "所有人",
+      "reason": "권한 대상 저장·비교값"
+    },
+    {
+      "text": "启用",
+      "reason": "포럼·섹션 상태 저장·비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/factory/BBSPermissionInfoFactory.java": [
+    {
+      "text": "论坛权限",
+      "reason": "권한 유형 저장값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/factory/BBSReplyInfoFactory.java": [
+    {
+      "text": "无审核",
+      "reason": "댓글 검토 상태 비교값"
+    },
+    {
+      "text": "审核通过",
+      "reason": "댓글 검토 상태 비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/factory/BBSSectionInfoFactory.java": [
+    {
+      "text": "主版块",
+      "reason": "섹션 레벨 저장·비교값"
+    },
+    {
+      "text": "子版块",
+      "reason": "섹션 레벨 저장·비교값"
+    },
+    {
+      "text": "启用",
+      "reason": "포럼·섹션 상태 저장·비교값"
+    },
+    {
+      "text": "所有人",
+      "reason": "권한 대상 저장·비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/foruminfo/ActionGetAllWithPermission.java": [
+    {
+      "text": "停用",
+      "reason": "포럼 상태 비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/foruminfo/ActionSave.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    },
+    {
+      "text": "问题",
+      "reason": "주제 유형 저장값"
+    },
+    {
+      "text": "投票",
+      "reason": "주제 유형 비교값"
+    },
+    {
+      "text": "新闻|讨论",
+      "reason": "주제 유형 기본 저장값"
+    },
+    {
+      "text": "根据权限",
+      "reason": "권한 모드 저장·비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/permissioninfo/ActionCheckReplyPublishable.java": [
+    {
+      "text": "启用",
+      "reason": "포럼·섹션 상태 저장·비교값"
+    },
+    {
+      "text": "所有人",
+      "reason": "권한 대상 저장·비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/permissioninfo/ActionGetSectionOperationPermission.java": [
+    {
+      "text": "所有人",
+      "reason": "권한 대상 저장·비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/permissioninfo/ActionGetSubjectOperationPermissoin.java": [
+    {
+      "text": "所有人",
+      "reason": "권한 대상 저장·비교값"
+    },
+    {
+      "text": "启用",
+      "reason": "포럼·섹션 상태 저장·비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/replyinfo/ActionSave.java": [
+    {
+      "text": "已锁定",
+      "reason": "주제 상태 저장·비교값"
+    },
+    {
+      "text": "根据权限",
+      "reason": "권한 모드 저장·비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/roleinfo/ActionBindRoleToUser.java": [
+    {
+      "text": "人员",
+      "reason": "권한·대상 유형 비교값"
+    },
+    {
+      "text": "组织",
+      "reason": "권한·대상 유형 비교값"
+    },
+    {
+      "text": "群组",
+      "reason": "권한·대상 유형 비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/roleinfo/ActionBindUserToRole.java": [
+    {
+      "text": "人员",
+      "reason": "권한·대상 유형 비교값"
+    },
+    {
+      "text": "组织",
+      "reason": "권한·대상 유형 비교값"
+    },
+    {
+      "text": "群组",
+      "reason": "권한·대상 유형 비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/roleinfo/ActionListSelectedRoleByUnit.java": [
+    {
+      "text": "组织",
+      "reason": "권한·대상 유형 비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/roleinfo/ActionListSelectedRoleByUser.java": [
+    {
+      "text": "人员",
+      "reason": "권한·대상 유형 비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/roleinfo/ActionSave.java": [
+    {
+      "text": "论坛角色",
+      "reason": "역할 유형 저장·비교값"
+    },
+    {
+      "text": "版块角色",
+      "reason": "역할 유형 저장·비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/roleinfo/BaseAction.java": [
+    {
+      "text": "组织",
+      "reason": "권한·대상 유형 비교값"
+    },
+    {
+      "text": "群组",
+      "reason": "권한·대상 유형 비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/sectioninfo/ActionSave.java": [
+    {
+      "text": "新闻|讨论",
+      "reason": "주제 유형 기본 저장값"
+    },
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    },
+    {
+      "text": "问题",
+      "reason": "주제 유형 저장값"
+    },
+    {
+      "text": "投票",
+      "reason": "주제 유형 비교값"
+    },
+    {
+      "text": "主版块",
+      "reason": "섹션 레벨 저장·비교값"
+    },
+    {
+      "text": "子版块",
+      "reason": "섹션 레벨 저장·비교값"
+    },
+    {
+      "text": "根据权限",
+      "reason": "권한 모드 저장·비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/sectioninfo/ActionSynApplicationsFromMarket.java": [
+    {
+      "text": "应用市场",
+      "reason": "섹션 이름 검색값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/subjectinfo/ActionSubjectListForBBSIndex.java": [
+    {
+      "text": "新闻",
+      "reason": "주제 유형 비교값"
+    },
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/subjectinfo/ActionSubjectSave.java": [
+    {
+      "text": "匿名",
+      "reason": "주제 유형 비교값"
+    },
+    {
+      "text": "投票",
+      "reason": "주제 유형 비교값"
+    },
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    },
+    {
+      "text": "未知类别",
+      "reason": "주제 유형 저장값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/subjectinfo/ActionSubjectSubmitVoteResult.java": [
+    {
+      "text": "投票",
+      "reason": "주제 유형 비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/jaxrs/subjectinfo/BaseAction.java": [
+    {
+      "text": "主板块",
+      "reason": "섹션 레벨 비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/service/BBSConfigSettingService.java": [
+    {
+      "text": "信息|问题|投票",
+      "reason": "주제 유형 설정 저장값(웹 선택값)"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/service/BBSForumInfoService.java": [
+    {
+      "text": "人员",
+      "reason": "권한·대상 유형 비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/service/BBSPermissionInfoService.java": [
+    {
+      "text": "论坛权限",
+      "reason": "권한 유형 저장값"
+    },
+    {
+      "text": "版块权限",
+      "reason": "권한 유형 저장값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/service/BBSRoleInfoService.java": [
+    {
+      "text": "论坛角色",
+      "reason": "역할 유형 저장·비교값"
+    },
+    {
+      "text": "版块角色",
+      "reason": "역할 유형 저장·비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/service/BBSSectionInfoService.java": [
+    {
+      "text": "人员",
+      "reason": "권한·대상 유형 비교값"
+    },
+    {
+      "text": "所有人",
+      "reason": "권한 대상 저장·비교값"
+    },
+    {
+      "text": "可发布人员：",
+      "reason": "콘솔 로그"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/service/BBSSubjectInfoService.java": [
+    {
+      "text": "子版块",
+      "reason": "섹션 레벨 저장·비교값"
+    },
+    {
+      "text": "已锁定",
+      "reason": "주제 상태 저장·비교값"
+    },
+    {
+      "text": "启用",
+      "reason": "포럼·섹션 상태 저장·비교값"
+    }
+  ],
+  "o2server/x_bbs_assemble_control/src/main/java/com/x/bbs/assemble/control/service/UserPermissionService.java": [
+    {
+      "text": "系统获取用户所拥有的权限列表时发生异常",
+      "reason": "내부 처리 결과 메시지(로그용)"
+    },
+    {
+      "text": "系统从用户所拥有的权限里过滤论坛访问权限时发生异常",
+      "reason": "내부 처리 결과 메시지(로그용)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/Business.java": [
+    {
+      "text": "数据",
+      "reason": "cms documentType 저장·비교값"
+    },
+    {
+      "text": "所有人",
+      "reason": "권한 대상 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/factory/AppInfoFactory.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    },
+    {
+      "text": "未分类",
+      "reason": "앱 분류 저장·비교값(웹 비교값과 동일)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/factory/CategoryInfoFactory.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/factory/DocumentFactory.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    },
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionDelete.java": [
+    {
+      "text": "删除栏目信息",
+      "reason": "감사 로그 operation 이름(로그)"
+    },
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    },
+    {
+      "text": "删除",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "删除栏目：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionEditPermission.java": [
+    {
+      "text": "修改权限",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionEraseDocumentWithAppInfo.java": [
+    {
+      "text": "删除栏目下所有的文档",
+      "reason": "감사 로그 operation 이름(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionGetPublishableAppInfo.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListAll.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListAllAppType.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    },
+    {
+      "text": "未分类",
+      "reason": "앱 분류 저장·비교값(웹 비교값과 동일)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListAllManageableAppType.java": [
+    {
+      "text": "未分类",
+      "reason": "앱 분류 저장·비교값(웹 비교값과 동일)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListHasDocument.java": [
+    {
+      "text": "未分类",
+      "reason": "앱 분류 저장·비교값(웹 비교값과 동일)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListHasDocumentAppType.java": [
+    {
+      "text": "未分类",
+      "reason": "앱 분류 저장·비교값(웹 비교값과 동일)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListHasDocument_WithAppType.java": [
+    {
+      "text": "未分类",
+      "reason": "앱 분류 저장·비교값(웹 비교값과 동일)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListNextWithFilter.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListNextWithFilterAnonymous.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListPrevWithFilter.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListWhatICanManage.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListWhatICanManage_WithAppType.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListWhatICanPublish.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListWhatICanPublish_WithAppType.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListWhatICanViewAllDocType.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    },
+    {
+      "text": "未分类",
+      "reason": "앱 분류 저장·비교값(웹 비교값과 동일)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListWhatICanViewAllDocType_WithAppType.java": [
+    {
+      "text": "未分类",
+      "reason": "앱 분류 저장·비교값(웹 비교값과 동일)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListWhatICanViewArticle.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListWhatICanViewArticle_WithAppType.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListWhatICanViewData.java": [
+    {
+      "text": "数据",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionListWhatICanViewData_WithAppType.java": [
+    {
+      "text": "数据",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/ActionSave.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    },
+    {
+      "text": "数据",
+      "reason": "cms documentType 저장·비교값"
+    },
+    {
+      "text": "更新栏目名称：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "变更栏目可见权限：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "更新",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "新增",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/appinfo/BaseAction.java": [
+    {
+      "text": "未分类",
+      "reason": "앱 분류 저장·비교값(웹 비교값과 동일)"
+    },
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/categoryinfo/ActionDelete.java": [
+    {
+      "text": "删除分类：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "删除",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/categoryinfo/ActionEditPermission.java": [
+    {
+      "text": "修改权限",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/categoryinfo/ActionListNextWithFilter.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/categoryinfo/ActionListNextWithFilterAnonymous.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/categoryinfo/ActionListPrevWithFilter.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/categoryinfo/ActionListWhatICanPublish.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/categoryinfo/ActionListWhatICanView_AllType.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/categoryinfo/ActionListWhatICanView_Article.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/categoryinfo/ActionListWhatICanView_Data.java": [
+    {
+      "text": "数据",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/categoryinfo/ActionQueryListWithFilterPaging.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/categoryinfo/ActionSave.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    },
+    {
+      "text": "更新分类名称：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "变更分类可见权限：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "更新",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "新增",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/categoryinfo/ActionSaveExtContent.java": [
+    {
+      "text": "保存分类扩展信息",
+      "reason": "감사 로그 operation 이름(로그)"
+    },
+    {
+      "text": "保存扩展信息",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/categoryinfo/ActionSaveImportView.java": [
+    {
+      "text": "修改分类文档导入视图",
+      "reason": "감사 로그 operation 이름(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/comment/ActionSave.java": [
+    {
+      "text": "通过",
+      "reason": "댓글 검토 상태 저장값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/correlation/ActionUpdateWithDocument.java": [
+    {
+      "text": "{'site':'关联内容框标识','targetList':[{'type':'关联目标类型(cms或processPlatform)','bundle':'关联目标标识','view':'来源视图'}]}",
+      "reason": "API 입력 형식 예시(어노테이션성 문서 문자열)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionPersistArchive.java": [
+    {
+      "text": "文档归档",
+      "reason": "감사 로그 operation 이름(로그)"
+    },
+    {
+      "text": "归档",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionPersistBatchModifyData.java": [
+    {
+      "text": "批量修改文档数据",
+      "reason": "감사 로그 operation 이름(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionPersistChangeCategory.java": [
+    {
+      "text": "移动文档",
+      "reason": "감사 로그 operation 이름(로그)"
+    },
+    {
+      "text": "刷新文档权限：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionPersistCommend.java": [
+    {
+      "text": "文档点赞",
+      "reason": "감사 로그 operation 이름(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionPersistDeleteDocument.java": [
+    {
+      "text": "删除文档",
+      "reason": "감사 로그 operation 이름(로그)"
+    },
+    {
+      "text": "文档删除：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "删除",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionPersistDeleteWithBatch.java": [
+    {
+      "text": "根据导入批次号删除文档",
+      "reason": "감사 로그 operation 이름(로그)"
+    },
+    {
+      "text": ">>>>>>>>>正在删除第条",
+      "reason": "콘솔 로그"
+    },
+    {
+      "text": "数据......",
+      "reason": "콘솔 로그"
+    },
+    {
+      "text": "文档删除：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "按批次号删除导入文档信息！",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "删除",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionPersistPublishAndNotify.java": [
+    {
+      "text": "发布一个文档",
+      "reason": "감사 로그 operation 이름(로그)"
+    },
+    {
+      "text": "发布",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionPersistPublishByWorkFlow.java": [
+    {
+      "text": "发布",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionPersistPublishCancel.java": [
+    {
+      "text": "取消文档发布状态",
+      "reason": "감사 로그 operation 이름(로그)"
+    },
+    {
+      "text": "取消发布",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionPersistPublishContent.java": [
+    {
+      "text": "发布",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionPersistTopDocument.java": [
+    {
+      "text": "文档置顶",
+      "reason": "감사 로그 operation 이름(로그)"
+    },
+    {
+      "text": "刷新文档权限：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionPersistUnCommend.java": [
+    {
+      "text": "取消文档点赞",
+      "reason": "감사 로그 operation 이름(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionPersistUnTopDocument.java": [
+    {
+      "text": "取消文档置顶",
+      "reason": "감사 로그 operation 이름(로그)"
+    },
+    {
+      "text": "刷新文档权限：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionPersistViewRecord.java": [
+    {
+      "text": "{\\\"person\\\": \\\"阅读人员\\\", \\\"viewTime\\\": \\\"阅读时间（格式：2020-08-08）\\\"}",
+      "reason": "API 입력 형식 예시(어노테이션성 문서 문자열)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionQueryCountWithFilter.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionQueryListDraftNextWithFilter.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionQueryListNextWithFilter.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionQueryListPrevWithFilter.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/ActionUpdateDocument.java": [
+    {
+      "text": "{'permission':'权限类别：读者|作者|管理','permissionObjectType':'使用者类别：所有人|组织|人员|群组','permissionObjectCode':'使用者编码：所有人|组织编码|人员UID|群组编码','permissionObjectName':'使用者名称：所有人|组织名称|人员名称|群组名称'}",
+      "reason": "API 입력 형식 예시(어노테이션성 문서 문자열)"
+    },
+    {
+      "text": "{'site':'关联内容框标识','targetList':[{'type':'关联目标类型(cms或processPlatform)','bundle':'关联目标标识','view':'来源视图'}]}",
+      "reason": "API 입력 형식 예시(어노테이션성 문서 문자열)"
+    },
+    {
+      "text": "{'site':'附件框分类','fileInfoList':[{'id':'附件id','name':'附件名称'}],'type':'附件来源(cms或processPlatform)'}",
+      "reason": "API 입력 형식 예시(어노테이션성 문서 문자열)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/document/WrapInDocumentFilter.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    },
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    },
+    {
+      "text": "数据",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/fileinfo/ActionCopyToDoc.java": [
+    {
+      "text": "[{'id':'附件id','name':'附件名称','site':'附件位置'}]",
+      "reason": "API 입력 형식 예시(어노테이션성 문서 문자열)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/fileinfo/ActionDelete.java": [
+    {
+      "text": "删除",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/fileinfo/ActionFileEdit.java": [
+    {
+      "text": "编辑附件",
+      "reason": "감사 로그 operation 이름(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/fileinfo/ActionFileUploadWithUrl.java": [
+    {
+      "text": "上传附件",
+      "reason": "감사 로그 operation 이름(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/fileinfo/ActionReplaceToDoc.java": [
+    {
+      "text": "[{'site':'附件框分类','fileInfoList':[{'id':'附件id','name':'附件名称'}]},'type':'附件来源(cms或processPlatform)']}]",
+      "reason": "API 입력 형식 예시(어노테이션성 문서 문자열)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/form/ActionDelete.java": [
+    {
+      "text": "删除",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/form/ActionSave.java": [
+    {
+      "text": "新增",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "更新",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/input/ActionPrepareCover.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/permission/ActionAppInfoManagerSave.java": [
+    {
+      "text": "保存栏目管理员",
+      "reason": "감사 로그 operation 이름(로그)"
+    },
+    {
+      "text": "栏目：",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "权限变更",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "管理权限变更",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "栏目管理权限变更：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/permission/ActionAppInfoPublisherSave.java": [
+    {
+      "text": "保存栏目发布者",
+      "reason": "감사 로그 operation 이름(로그)"
+    },
+    {
+      "text": "栏目：",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "权限变更",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "发布权限变更",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "栏目发布权限变更：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/permission/ActionAppInfoViewerSave.java": [
+    {
+      "text": "保存栏目可见范围",
+      "reason": "감사 로그 operation 이름(로그)"
+    },
+    {
+      "text": "栏目：",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "权限变更",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "可见权限变更",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "栏目可见范围变更：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/permission/ActionCategoryInfoManagerSave.java": [
+    {
+      "text": "分类：",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "权限变更",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "管理权限变更",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "分类管理权限变更：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/permission/ActionCategoryInfoPublisherSave.java": [
+    {
+      "text": "分类：",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "权限变更",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "发布权限变更",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "分类发布权限变更：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/permission/ActionCategoryInfoViewerSave.java": [
+    {
+      "text": "分类：",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "权限变更",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "可见范围变更",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "分类可见范围变更：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/permission/element/PermissionInfo.java": [
+    {
+      "text": "人员",
+      "reason": "권한·대상 유형 비교값"
+    },
+    {
+      "text": "组织",
+      "reason": "권한·대상 유형 비교값"
+    },
+    {
+      "text": "群组",
+      "reason": "권한·대상 유형 비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/permission/element/PermissionName.java": [
+    {
+      "text": "读者",
+      "reason": "권한 유형 저장·비교값"
+    },
+    {
+      "text": "作者",
+      "reason": "권한 유형 저장·비교값"
+    },
+    {
+      "text": "管理",
+      "reason": "권한 유형 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/review/ReviewAction.java": [
+    {
+      "text": "参阅接口.",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/script/ActionCreate.java": [
+    {
+      "text": "新增",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/script/ActionDelete.java": [
+    {
+      "text": "删除",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/script/ActionUpdate.java": [
+    {
+      "text": "更新",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/search/ActionListAppSearchFilterForDocStatus.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/view/ActionDelete.java": [
+    {
+      "text": "删除",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/view/ActionListNextPageViewData.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    },
+    {
+      "text": "数据",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/view/ActionSave.java": [
+    {
+      "text": "保存",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/viewfieldconfig/ActionDelete.java": [
+    {
+      "text": "删除",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/jaxrs/viewfieldconfig/ActionSave.java": [
+    {
+      "text": "新增",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "更新",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/service/AppInfoService.java": [
+    {
+      "text": "未分类",
+      "reason": "앱 분류 저장·비교값(웹 비교값과 동일)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/service/AppInfoServiceAdv.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/service/CategoryInfoService.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    },
+    {
+      "text": "数据",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/service/CategoryInfoServiceAdv.java": [
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/service/CmsBatchOperationPersistService.java": [
+    {
+      "text": "刷新文档权限：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/service/CmsBatchOperationProcessService.java": [
+    {
+      "text": "栏目权限变更引起文档Review变更：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "分类权限变更引起文档Review变更：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "栏目删除引起文档删除：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "分类删除引起文档删除：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/service/DocumentInfoService.java": [
+    {
+      "text": "全部",
+      "reason": "cms documentType/appType 조회 비교값(전체)"
+    },
+    {
+      "text": "用户[",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "]成功创建一个文档信息",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "新增",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "]成功更新一个文档信息",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "更新",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/service/DocumentPersistService.java": [
+    {
+      "text": "刷新文档权限：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    },
+    {
+      "text": "信息",
+      "reason": "cms documentType 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/service/DocumentQueryService.java": [
+    {
+      "text": "系统在根据文档查询文档数据时发生异常，ID:",
+      "reason": "콘솔 로그"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/service/PermissionOperateService.java": [
+    {
+      "text": "所有人",
+      "reason": "권한 대상 저장·비교값"
+    },
+    {
+      "text": "读者",
+      "reason": "권한 유형 저장·비교값"
+    },
+    {
+      "text": "阅读",
+      "reason": "권한 유형 저장·비교값"
+    },
+    {
+      "text": "管理",
+      "reason": "권한 유형 저장·비교값"
+    },
+    {
+      "text": "人员",
+      "reason": "권한·대상 유형 비교값"
+    },
+    {
+      "text": "部门",
+      "reason": "권한 대상 유형 비교값"
+    },
+    {
+      "text": "组织",
+      "reason": "권한·대상 유형 비교값"
+    },
+    {
+      "text": "群组",
+      "reason": "권한·대상 유형 비교값"
+    },
+    {
+      "text": "作者",
+      "reason": "권한 유형 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/service/ReviewService.java": [
+    {
+      "text": "数据",
+      "reason": "cms documentType 저장·비교값"
+    },
+    {
+      "text": "所有人",
+      "reason": "권한 대상 저장·비교값"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/service/UserManagerService.java": [
+    {
+      "text": "根据身份获取所属组织名称时发生NullPointerException异常。identity：",
+      "reason": "콘솔 로그"
+    },
+    {
+      "text": "根据身份获取所属组织名称时发生异常。identity：",
+      "reason": "콘솔 로그"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/timertask/Timertask_BatchOperationTask.java": [
+    {
+      "text": "刷新文档权限：ID=",
+      "reason": "작업 로그·내부 기록 문구(로그)"
+    }
+  ],
+  "o2server/x_cms_assemble_control/src/main/java/com/x/cms/assemble/control/wrapin/WiSiteFileInfo.java": [
+    {
+      "text": "[{'id':'附件id','name':'附件名称'}]",
+      "reason": "API 입력 형식 예시(어노테이션성 문서 문자열)"
+    }
+  ],
+  "o2server/x_general_core_entity/src/main/java/com/x/general/core/entity/Invoice.java": [
+    {
+      "text": "未报销",
+      "reason": "송장 상태 저장값"
+    },
+    {
+      "text": "已报销",
+      "reason": "송장 상태 저장값"
+    }
+  ],
+  "o2server/x_portal_assemble_designer/src/main/java/com/x/portal/assemble/designer/factory/PageFactory.java": [
+    {
+      "text": "首页",
+      "reason": "홈 페이지 이름 판별 목록"
+    },
+    {
+      "text": "起始页",
+      "reason": "홈 페이지 이름 판별 목록"
+    }
+  ],
+  "o2server/x_portal_core_entity/src/main/java/com/x/portal/core/entity/Portal.java": [
+    {
+      "text": "未分类",
+      "reason": "앱 분류 저장·비교값(웹 비교값과 동일)"
+    }
+  ]
+}

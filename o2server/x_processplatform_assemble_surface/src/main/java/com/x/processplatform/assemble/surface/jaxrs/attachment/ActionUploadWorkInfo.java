@@ -106,7 +106,7 @@ class ActionUploadWorkInfo extends BaseAction {
 				fs.createDocument(is, "WordDocument");
 				fs.writeFilesystem(out);
 				bytes = out.toByteArray();
-				name = title + "-处理单.doc";
+				name = title + "-처리표.doc";
 			}
 		} else if ("pdf".equals(flag)) {
 			try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
@@ -123,11 +123,11 @@ class ActionUploadWorkInfo extends BaseAction {
 				pdf.setDefaultPageSize(new PageSize(width, PageSize.A4.getHeight()));
 				HtmlConverter.convertToPdf(workHtml, pdf, props);
 				bytes = out.toByteArray();
-				name = title + "-处理单.pdf";
+				name = title + "-처리표.pdf";
 			}
 		} else {
 			bytes = workHtml.getBytes(DefaultCharset.charset);
-			name = title + "-处理单.html";
+			name = title + "-처리표.html";
 		}
 		StorageMapping gfMapping = ThisApplication.context().storageMappings().random(GeneralFile.class);
 		GeneralFile generalFile = new GeneralFile(gfMapping.getName(), name, person);

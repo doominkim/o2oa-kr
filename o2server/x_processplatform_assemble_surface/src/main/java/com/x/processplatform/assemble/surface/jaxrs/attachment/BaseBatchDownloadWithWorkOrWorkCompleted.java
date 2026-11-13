@@ -66,7 +66,7 @@ class BaseBatchDownloadWithWorkOrWorkCompleted extends BaseAction {
 		for(String workId : workIdSet) {
 			Control control = new JobControlBuilder(effectivePerson, business, workId).enableAllowVisit().build();
 			if (BooleanUtils.isTrue(control.getAllowVisit())) {
-				list.add(Pair.of(StringUtils.isBlank(control.getWorkTitle()) ? "无标题" : control.getWorkTitle(), control.getWorkJob()));
+				list.add(Pair.of(StringUtils.isBlank(control.getWorkTitle()) ? "제목 없음" : control.getWorkTitle(), control.getWorkJob()));
 			}
 		}
 		return list;

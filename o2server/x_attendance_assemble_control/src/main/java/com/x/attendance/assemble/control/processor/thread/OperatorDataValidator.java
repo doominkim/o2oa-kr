@@ -100,7 +100,7 @@ public class OperatorDataValidator implements Runnable {
 					if( !personExists ) {
 						checkSuccess = false;
 						cacheImportRowDetail.setCheckStatus("error");
-						cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + ", 员工不存在！" );
+						cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + ", 직원이 없습니다!" );
 						logger.info("step 2, data check on row "+curRow+", found an error! person '"+ cacheImportRowDetail.getEmployeeName() +"' not exists." );
 					}
 				}
@@ -109,7 +109,7 @@ public class OperatorDataValidator implements Runnable {
 					if( cacheImportRowDetail.getEmployeeName() == null || cacheImportRowDetail.getEmployeeName().isEmpty() ) {
 						checkSuccess = false;
 						cacheImportRowDetail.setCheckStatus("error");
-						cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + ", '员工标识'为空！" );
+						cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + ", '직원 식별자'가 비어 있습니다!" );
 						logger.info("step 2, data check on row "+curRow+", found an error! field 'employeeName' is null." );
 					}
 				}
@@ -118,7 +118,7 @@ public class OperatorDataValidator implements Runnable {
 					if( cacheImportRowDetail.getRecordDateString() == null || cacheImportRowDetail.getRecordDateString().isEmpty() ) {
 						checkSuccess = false;
 						cacheImportRowDetail.setCheckStatus("error");
-						cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + ", '打卡日期'为空！" );
+						cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + ", '출퇴근 날짜'가 비어 있습니다!" );
 						logger.info("step 2, data check on row "+curRow+", found an error! field 'recordDateString' is null." );
 					}
 				}
@@ -142,7 +142,7 @@ public class OperatorDataValidator implements Runnable {
 					}catch( Exception e ){
 						checkSuccess = false;
 						cacheImportRowDetail.setCheckStatus("error");
-						cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + "打卡日期格式异常：" + cacheImportRowDetail.getRecordDateString() );
+						cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + "출퇴근 날짜 형식 오류: " + cacheImportRowDetail.getRecordDateString() );
 						logger.info("step 2, data check on row "+curRow+", found an error! format on field 'recordDate'：" + cacheImportRowDetail.getRecordDateString(), e);
 					}
 				}
@@ -155,7 +155,7 @@ public class OperatorDataValidator implements Runnable {
 						}catch( Exception e ){
 							checkSuccess = false;
 							cacheImportRowDetail.setCheckStatus("error");
-							cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + "上午上班打卡时间格式异常：" + cacheImportRowDetail.getOnDutyTime() );
+							cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + "오전 출근 체크 시간 형식 오류: " + cacheImportRowDetail.getOnDutyTime() );
 							logger.info("step 2, data check on row "+curRow+", found an error!format on field 'onDutyTime'：" + cacheImportRowDetail.getOnDutyTime(), e);
 						}
 					}
@@ -169,7 +169,7 @@ public class OperatorDataValidator implements Runnable {
 						}catch( Exception e ){
 							checkSuccess = false;
 							cacheImportRowDetail.setCheckStatus("error");
-							cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + "上午下班打卡时间格式异常：" + cacheImportRowDetail.getMorningOffDutyTime() );
+							cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + "오전 퇴근 체크 시간 형식 오류: " + cacheImportRowDetail.getMorningOffDutyTime() );
 							logger.info("step 2, data check on row "+curRow+", found an error!format on field 'onDutyTime'：" + cacheImportRowDetail.getMorningOffDutyTime(), e);
 						}
 					}
@@ -183,7 +183,7 @@ public class OperatorDataValidator implements Runnable {
 						}catch( Exception e ){
 							checkSuccess = false;
 							cacheImportRowDetail.setCheckStatus("error");
-							cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + "上午下班打卡时间格式异常：" + cacheImportRowDetail.getAfternoonOnDutyTime() );
+							cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + "오전 퇴근 체크 시간 형식 오류: " + cacheImportRowDetail.getAfternoonOnDutyTime() );
 							logger.info("step 2, data check on row "+curRow+", found an error!format on field 'onDutyTime'：" + cacheImportRowDetail.getAfternoonOnDutyTime(), e);
 						}
 					}
@@ -197,7 +197,7 @@ public class OperatorDataValidator implements Runnable {
 						}catch( Exception e ){
 							checkSuccess = false;
 							cacheImportRowDetail.setCheckStatus("error");
-							cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + "下午下班打卡时间格式异常：" + cacheImportRowDetail.getOffDutyTime() );
+							cacheImportRowDetail.setDescription( cacheImportRowDetail.getDescription() + "오후 퇴근 체크 시간 형식 오류: " + cacheImportRowDetail.getOffDutyTime() );
 							logger.info("step 2, data check on row "+curRow+", found an error!format on field 'offDutyTime'：" + cacheImportRowDetail.getOffDutyTime(), e);
 						}
 					}

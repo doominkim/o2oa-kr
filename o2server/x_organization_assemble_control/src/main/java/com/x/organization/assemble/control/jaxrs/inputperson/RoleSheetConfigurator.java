@@ -64,11 +64,11 @@ public class RoleSheetConfigurator extends GsonPropertyObject {
 		}
 	}
 
-	private static final List<String> uniqueItems = Arrays.asList("角色编码 *", "unique");
-	private static final List<String> nameItems = Arrays.asList("角色名称 *", "name");
-	private static final List<String> personCodeItems = Arrays.asList("人员编号", "人员唯一编码");
-	private static final List<String> groupCodeItems = Arrays.asList("群组编码", "群组唯一编码", "groupCode");
-	private static final List<String> descriptionItems = Arrays.asList("描述","群组描述", "description");
+	private static final List<String> uniqueItems = Arrays.asList("角色编码 *", "역할 코드 *", "unique");
+	private static final List<String> nameItems = Arrays.asList("角色名称 *", "역할 이름 *", "name");
+	private static final List<String> personCodeItems = Arrays.asList("人员编号", "人员唯一编码", "사용자 고유 코드");
+	private static final List<String> groupCodeItems = Arrays.asList("群组编码", "群组唯一编码", "그룹 고유 코드", "groupCode");
+	private static final List<String> descriptionItems = Arrays.asList("描述","群组描述", "설명", "description");
 
 	public String getCellStringValue(Cell cell) {
 		if (null != cell) {

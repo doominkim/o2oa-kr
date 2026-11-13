@@ -164,22 +164,22 @@ public class Indexs {
 	public static final String PREFIX_FIELD_CMS_DATES = PREFIX_FIELD_CMS + FIELD_TYPE_DATES + "_";
 
 	protected static final List<WoField> FIXEDFIELD_APPLICATION = ListUtils
-			.unmodifiableList(Arrays.asList(new WoField(Indexs.FIELD_TITLE, "标题", Indexs.FIELD_TYPE_STRING),
-					new WoField(Indexs.FIELD_CREATORPERSON, "创建者", Indexs.FIELD_TYPE_STRING),
-					new WoField(Indexs.FIELD_CREATORUNIT, "部门", Indexs.FIELD_TYPE_STRING),
-					new WoField(Indexs.FIELD_CREATETIME, "创建时间", Indexs.FIELD_TYPE_DATE),
-					new WoField(Indexs.FIELD_UPDATETIME, "更新时间", Indexs.FIELD_TYPE_DATE),
-					new WoField(Indexs.FIELD_SERIAL, "文号", Indexs.FIELD_TYPE_STRING),
-					new WoField(Indexs.FIELD_PROCESSNAME, "流程", Indexs.FIELD_TYPE_STRING)));
+			.unmodifiableList(Arrays.asList(new WoField(Indexs.FIELD_TITLE, "제목", Indexs.FIELD_TYPE_STRING),
+					new WoField(Indexs.FIELD_CREATORPERSON, "작성자", Indexs.FIELD_TYPE_STRING),
+					new WoField(Indexs.FIELD_CREATORUNIT, "부서", Indexs.FIELD_TYPE_STRING),
+					new WoField(Indexs.FIELD_CREATETIME, "생성일시", Indexs.FIELD_TYPE_DATE),
+					new WoField(Indexs.FIELD_UPDATETIME, "수정일시", Indexs.FIELD_TYPE_DATE),
+					new WoField(Indexs.FIELD_SERIAL, "문서번호", Indexs.FIELD_TYPE_STRING),
+					new WoField(Indexs.FIELD_PROCESSNAME, "결재", Indexs.FIELD_TYPE_STRING)));
 
 	protected static final List<WoField> FIXEDFIELD_APPINFO = ListUtils
-			.unmodifiableList(Arrays.asList(new WoField(Indexs.FIELD_TITLE, "标题", Indexs.FIELD_TYPE_STRING),
-					new WoField(Indexs.FIELD_CREATORPERSON, "创建者", Indexs.FIELD_TYPE_STRING),
-					new WoField(Indexs.FIELD_CREATORUNIT, "部门", Indexs.FIELD_TYPE_STRING),
-					new WoField(Indexs.FIELD_CREATETIME, "创建时间", Indexs.FIELD_TYPE_DATE),
-					new WoField(Indexs.FIELD_UPDATETIME, "更新时间", Indexs.FIELD_TYPE_DATE),
-					new WoField(Indexs.FIELD_CATEGORYNAME, "分类", Indexs.FIELD_TYPE_STRING),
-					new WoField(Indexs.FIELD_DESCRIPTION, "说明", Indexs.FIELD_TYPE_STRING)));
+			.unmodifiableList(Arrays.asList(new WoField(Indexs.FIELD_TITLE, "제목", Indexs.FIELD_TYPE_STRING),
+					new WoField(Indexs.FIELD_CREATORPERSON, "작성자", Indexs.FIELD_TYPE_STRING),
+					new WoField(Indexs.FIELD_CREATORUNIT, "부서", Indexs.FIELD_TYPE_STRING),
+					new WoField(Indexs.FIELD_CREATETIME, "생성일시", Indexs.FIELD_TYPE_DATE),
+					new WoField(Indexs.FIELD_UPDATETIME, "수정일시", Indexs.FIELD_TYPE_DATE),
+					new WoField(Indexs.FIELD_CATEGORYNAME, "분류", Indexs.FIELD_TYPE_STRING),
+					new WoField(Indexs.FIELD_DESCRIPTION, "설명", Indexs.FIELD_TYPE_STRING)));
 
 	private static final String[] QUERY_IGNORES = new String[] { ":", "\"", "-", "+", "[", "]", "*", "?", "\\", "/",
 			"(", ")", "~", "!", "{", "}", "^" };

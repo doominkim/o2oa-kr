@@ -139,22 +139,22 @@ public class ActionAppealCreate extends BaseAction {
 				String message = null;
 				String unitLevelName = null;
 				if( StringUtils.isEmpty(appeal_auditor_type)) {
-					message = "申诉审核人类别未配置!";
+					message = "소명 심사자 유형이 설정되지 않았습니다!";
 				}else if( "无".equals( appeal_auditor_type.trim() )){//当前人处理
 					attendanceAppealAuditInfo.setProcessPerson1( effectivePerson.getDistinguishedName() );
 					attendanceAppealAuditInfo.setCurrentProcessor( effectivePerson.getDistinguishedName() );// 将第一个处理人设置为当前处理人
 					attendanceAppealInfo.setCurrentProcessor( effectivePerson.getDistinguishedName() );// 将第一个处理人设置为当前处理人
 				}else if( AppealConfig.APPEAL_AUDITTYPE_UNITDUTY.equals( appeal_auditor_type )){
 					unitLevelName = userManagerService.getUnitLevelNameWithName( attendanceDetail.getUnitName() );
-					message = personName + "所属的部门["+unitLevelName+"]职务["+appeal_auditor_value+"]不存在!";
+					message = personName + "의 소속 부서["+unitLevelName+"] 직무["+appeal_auditor_value+"]가 없습니다!";
 				}else if( AppealConfig.APPEAL_AUDITTYPE_REPORTLEADER.equals( appeal_auditor_type )){
-					message = personName + "的[汇报对象]不存在!";
+					message = personName + "의 [보고 대상]이 없습니다!";
 				}else if( AppealConfig.APPEAL_AUDITTYPE_PERSONATTRIBUTE.equals( appeal_auditor_type )){
-					message = personName + "的个人属性["+appeal_auditor_value+"]不存在!";
+					message = personName + "의 개인 속성["+appeal_auditor_value+"]가 없습니다!";
 				}else if( AppealConfig.APPEAL_AUDITTYPE_PERSON.equals( appeal_auditor_type )){
-					message = "指定审核人["+appeal_auditor_value+"]不存在!";
+					message = "지정 심사자["+appeal_auditor_value+"]가 없습니다!";
 				}else {
-					message = "考勤申诉审核人类型不正确!" + appeal_auditor_type ;
+					message = "근태 소명 심사자 유형이 올바르지 않습니다! " + appeal_auditor_type ;
 				}
 				Exception exception = new ExceptionAttendanceAppealProcess( message );
 				result.error( exception );
@@ -184,18 +184,18 @@ public class ActionAppealCreate extends BaseAction {
 					String message = null;
 					String unitLevelName = null;
 					if( StringUtils.isEmpty( appeal_checker_type )) {
-						message = "申诉复核人类别未配置!";
+						message = "소명 재심사자 유형이 설정되지 않았습니다!";
 					}else if( AppealConfig.APPEAL_AUDITTYPE_UNITDUTY.equals( appeal_checker_type )){
 						unitLevelName = userManagerService.getUnitLevelNameWithName( attendanceDetail.getUnitName() );
-						message = personName + "所属的部门["+unitLevelName+"]职务["+ appeal_checker_value +"]不存在!";
+						message = personName + "의 소속 부서["+unitLevelName+"] 직무["+ appeal_checker_value +"]가 없습니다!";
 					}else if( AppealConfig.APPEAL_AUDITTYPE_REPORTLEADER.equals( appeal_checker_type )){
-						message = personName + "的[汇报对象]不存在!";
+						message = personName + "의 [보고 대상]이 없습니다!";
 					}else if( AppealConfig.APPEAL_AUDITTYPE_PERSONATTRIBUTE.equals( appeal_checker_type )){
-						message = personName + "的个人属性["+appeal_checker_value+"]不存在!";
+						message = personName + "의 개인 속성["+appeal_checker_value+"]가 없습니다!";
 					}else if( AppealConfig.APPEAL_AUDITTYPE_PERSON.equals( appeal_checker_type )){
-						message = "指定复核人["+appeal_checker_value+"]不存在!";
+						message = "지정 재심사자["+appeal_checker_value+"]가 없습니다!";
 					}else {
-						message = "考勤申诉复核人类型不正确!" + appeal_checker_type ;
+						message = "근태 소명 재심사자 유형이 올바르지 않습니다! " + appeal_checker_type ;
 					}
 					Exception exception = new ExceptionAttendanceAppealProcess( message );
 					result.error( exception );

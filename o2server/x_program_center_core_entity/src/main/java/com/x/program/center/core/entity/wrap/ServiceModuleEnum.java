@@ -3,10 +3,10 @@ package com.x.program.center.core.entity.wrap;
 
 public enum ServiceModuleEnum {
 
-	AGENT("service-agent","代理服务"),
-	INVOKE("service-invoke","接口服务"),
-	SCRIPT("service-script","脚本"),
-	DICT("service-dict","数据字典");
+	AGENT("service-agent","에이전트 서비스"),
+	INVOKE("service-invoke","인터페이스 서비스"),
+	SCRIPT("service-script","스크립트"),
+	DICT("service-dict","데이터 사전");
 
 	private String value;
 	private String description;

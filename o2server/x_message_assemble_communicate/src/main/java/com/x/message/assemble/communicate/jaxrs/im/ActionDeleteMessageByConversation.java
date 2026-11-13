@@ -45,7 +45,7 @@ public class ActionDeleteMessageByConversation extends BaseAction {
         ActionResult<Wo> result = new ActionResult<>();
         Wo wo = new Wo();
         startThread(wi);
-        wo.setMessage("删除任务已经开始执行，因数据大小不同所需时间不确定，可观察日志信息！");
+        wo.setMessage("삭제 작업을 시작했습니다. 데이터 양에 따라 소요 시간이 다르므로 로그를 확인하세요!");
         wo.setValue(true);
         result.setData(wo);
         return result;

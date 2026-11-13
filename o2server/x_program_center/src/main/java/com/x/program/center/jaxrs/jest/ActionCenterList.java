@@ -42,7 +42,7 @@ class ActionCenterList extends BaseAction {
 			    	
 			    	String httpProtocol = "http://";
 				    wo.setClassName("com.x.base.core.project.x_program_center");
-					wo.setName("中心服务");
+					wo.setName("센터 서비스");
 					if (BooleanUtils.isTrue(value.getSslEnable())) {
 						httpProtocol = "https://";
 					}

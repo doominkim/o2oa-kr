@@ -5,7 +5,7 @@ package com.x.file.core.entity.open;
  */
 public enum FileStatus {
 
-	VALID("1", "正常"), INVALID("0", "已删除");
+	VALID("1", "정상"), INVALID("0", "삭제됨");
 	private String value;
 	private String name;
 

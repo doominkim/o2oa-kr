@@ -254,7 +254,7 @@ abstract class BaseAction extends StandardJaxrsAction {
     public void sendConversationMsg(List<String> persons, IMConversation conversation,
             String messageType) {
         for (String person : persons) {
-            String title = "会话的消息";
+            String title = "대화 메시지";
             MessageConnector.send(messageType, title, person, conversation);
         }
     }
@@ -275,9 +275,9 @@ abstract class BaseAction extends StandardJaxrsAction {
         }
         for (String person : persons) {
             LOGGER.info("发送im消息， person: " + person + " messageType: " + messageType);
-            String title = "您有一条来自 " + name + " 的消息";
+            String title = name + " 님이 보낸 메시지가 있습니다";
             if (person.equals(effectivePerson.getDistinguishedName())) {
-                title = "您有一条新消息";
+                title = "새 메시지가 있습니다";
             }
             Message message = new Message();
 //            String body = imMessageBody(msg);
@@ -318,21 +318,21 @@ abstract class BaseAction extends StandardJaxrsAction {
         if ("text".equals(body.getType())) {
             return body.getBody();
         } else if ("emoji".equals(body.getType())) {
-            return "[表情]";
+            return "[이모티콘]";
         } else if ("image".equals(body.getType())) {
-            return "[图片]";
+            return "[이미지]";
         } else if ("audio".equals(body.getType())) {
-            return "[声音]";
+            return "[음성]";
         } else if ("location".equals(body.getType())) {
-            return "[位置]";
+            return "[위치]";
         } else if ("file".equals(body.getType())) {
-            return "[文件]";
+            return "[파일]";
         } else if ("process".equals(body.getType())) {
-            return "[工作]";
+            return "[결재]";
         } else if ("cms".equals(body.getType())) {
-            return "[信息]";
+            return "[게시글]";
         } else {
-            return "[其它]";
+            return "[기타]";
         }
     }
 

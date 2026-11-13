@@ -45,10 +45,10 @@ public class ActionList extends BaseAction {
 			if (null != files && files.length > 0) {
 				for (File o : files) {
 					String name = StringUtils.substringBetween(o.getName(), "node_", ".json");
-					jsonObj.addProperty(o.getName(), name + "服务节点配置");
+					jsonObj.addProperty(o.getName(), name + "서비스 노드 설정");
 				}
 			} else {
-				jsonObj.addProperty(node, "服务节点配置");
+				jsonObj.addProperty(node, "서비스 노드 설정");
 			}
 			wo.setConfig(jsonObj.toString());
 		}

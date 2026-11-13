@@ -10,8 +10,8 @@ import com.x.organization.assemble.control.Business;
 
 abstract class BaseAction extends StandardJaxrsAction {
 
-	protected static List<String> genderTypeFemaleItems = Arrays.asList(new String[] { "f","F" ,"女", "female" });
-	protected static List<String> genderTypeMaleItems = Arrays.asList(new String[] { "m", "M", "男", "male" });
+	protected static List<String> genderTypeFemaleItems = Arrays.asList(new String[] { "f","F" ,"女", "여", "female" });
+	protected static List<String> genderTypeMaleItems = Arrays.asList(new String[] { "m", "M", "男", "남", "male" });
 
 	protected CacheCategory cache = new CacheCategory(CacheInputResult.class);
 	

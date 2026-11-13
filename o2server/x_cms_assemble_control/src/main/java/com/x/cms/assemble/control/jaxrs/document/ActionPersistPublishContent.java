@@ -178,7 +178,7 @@ public class ActionPersistPublishContent extends BaseAction {
 
 		if (check) {
 			if (StringUtils.isEmpty(wi.getTitle())) {
-				wi.setTitle(appInfo.getAppName() + " - " + categoryInfo.getCategoryName() + " - 无标题文档");
+				wi.setTitle(appInfo.getAppName() + " - " + categoryInfo.getCategoryName() + " - 제목 없는 게시글");
 			}
 		}
 

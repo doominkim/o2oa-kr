@@ -48,7 +48,7 @@ public class ActionRemoveBindNew extends BaseAction {
 				wraps.setValue(true);
 			} else {
 				wraps.setValue(true);
-				result.setMessage("当前设备不存在，无需解绑！");
+				result.setMessage("등록되지 않은 기기이므로 해제할 필요가 없습니다!");
 			}
 //            List<String> deviceList = business.organization().personAttribute()
 //                    .listAttributeWithPersonWithName(effectivePerson.getDistinguishedName(), ActionListAll.DEVICE_PERSON_ATTR_KEY);
@@ -60,11 +60,11 @@ public class ActionRemoveBindNew extends BaseAction {
 //                            .setWithPersonWithName(effectivePerson.getDistinguishedName(), ActionListAll.DEVICE_PERSON_ATTR_KEY, deviceList));
 //                }else {
 //                    wraps.setValue(true);
-//                    result.setMessage("当前设备不存在，无需解绑！");
+//                    result.setMessage("등록되지 않은 기기이므로 해제할 필요가 없습니다!");
 //                }
 //            }else {
 //                wraps.setValue(true);
-//                result.setMessage("当前设备不存在，无需解绑！");
+//                result.setMessage("등록되지 않은 기기이므로 해제할 필요가 없습니다!");
 //            }
 			result.setData(wraps);
 		} catch (Exception e) {

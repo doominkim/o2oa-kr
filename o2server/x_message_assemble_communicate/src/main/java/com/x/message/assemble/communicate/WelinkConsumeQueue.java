@@ -202,20 +202,20 @@ public class WelinkConsumeQueue extends AbstractQueue<Message> {
 
 	private String appOwnerByType(String messageType) {
 		if (workMessageTypeList().contains(messageType)) {
-			return "工作消息";
+			return "결재 메시지";
 		} else {
 			if (messageType.startsWith("meeting_")) {
-				return "会议消息";
+				return "회의 메시지";
 			} else if (messageType.startsWith("attachment_")) {
-				return "文件消息";
+				return "파일 메시지";
 			} else if (messageType.startsWith("calendar_")) {
-				return "日历消息";
+				return "일정 메시지";
 			} else if (messageType.startsWith("cms_")) {
-				return "信息中心消息";
+				return "게시판 메시지";
 			} else if (messageType.startsWith("bbs_")) {
-				return "论坛消息";
+				return "포럼 메시지";
 			} else {
-				return "消息";
+				return "메시지";
 			}
 		}
 	}

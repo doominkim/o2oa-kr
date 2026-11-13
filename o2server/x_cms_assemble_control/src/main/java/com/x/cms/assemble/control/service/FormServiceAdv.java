@@ -73,7 +73,7 @@ public class FormServiceAdv {
 
 	public String getNameWithId(String formId) throws Exception {
 		if( StringUtils.isEmpty( formId )) {
-			return  "未命名表单";
+			return  "이름 없는 양식";
 		}
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			return formService.getNameWithId( emc, formId );

@@ -69,7 +69,7 @@ public class ActionUpdateForEnd extends BaseAction {
                     // 申诉成功后，更新打卡状态
                     record.setCheckInResult(AttendanceV2CheckInRecord.CHECKIN_RESULT_NORMAL);
                     record.setAppealId(info.getId()); // 申诉完成回填审核数据id
-                    record.setDescription("申诉完成！");
+                    record.setDescription("소명 완료!");
                     try {
                         if (BooleanUtils.isTrue(wi.getNeedResetTime())) {
                             Date onDutyTime = DateTools.parse(record.getRecordDateString() + " " + record.getPreDutyTime(), DateTools.format_yyyyMMddHHmm);

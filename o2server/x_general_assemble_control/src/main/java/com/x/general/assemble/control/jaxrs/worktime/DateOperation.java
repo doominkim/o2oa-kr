@@ -610,15 +610,15 @@ public class DateOperation {
         String hour = getHour(_date);
         String min = getMinites(_date);
         ch_date_string.append(year);
-        ch_date_string.append("年");
+        ch_date_string.append("년 ");
         ch_date_string.append(month);
-        ch_date_string.append("月");
+        ch_date_string.append("월 ");
         ch_date_string.append(day);
-        ch_date_string.append("日");
+        ch_date_string.append("일 ");
         ch_date_string.append(hour);
-        ch_date_string.append("时");
+        ch_date_string.append("시 ");
         ch_date_string.append(min);
-        ch_date_string.append("分");
+        ch_date_string.append("분");
         return ch_date_string.toString();
     }
 
@@ -644,17 +644,17 @@ public class DateOperation {
         String min = getMinites(_date);
         String sec = getSeconds(_date);
         ch_date_string.append(year);
-        ch_date_string.append("年");
+        ch_date_string.append("년 ");
         ch_date_string.append(month);
-        ch_date_string.append("月");
+        ch_date_string.append("월 ");
         ch_date_string.append(day);
-        ch_date_string.append("日");
+        ch_date_string.append("일 ");
         ch_date_string.append(hour);
-        ch_date_string.append("时");
+        ch_date_string.append("시 ");
         ch_date_string.append(min);
-        ch_date_string.append("分");
+        ch_date_string.append("분");
         ch_date_string.append(sec);
-        ch_date_string.append("秒");
+        ch_date_string.append("초");
         return ch_date_string.toString();
     }
 

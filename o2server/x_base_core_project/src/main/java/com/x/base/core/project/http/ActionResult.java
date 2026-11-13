@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.x.base.core.project.connection.ActionResponse;
 import com.x.base.core.project.exception.PromptException;
 import com.x.base.core.project.gson.XGsonBuilder;
+import com.x.base.core.project.i18n.KoreanMessages;
 
 public class ActionResult<T> implements Serializable {
 
@@ -53,11 +54,11 @@ public class ActionResult<T> implements Serializable {
 	}
 
 	private void append(String str) {
-		String o = StringUtils.isBlank(str) ? " " : str;
+		String o = StringUtils.isBlank(str) ? " " : KoreanMessages.translate(str);
 		if (StringUtils.isBlank(this.message)) {
 			this.message = o;
 		} else {
-			message += " , " + str;
+			message += " , " + o;
 		}
 	}
 
@@ -145,7 +146,7 @@ public class ActionResult<T> implements Serializable {
 	}
 
 	public void setMessage(String message) {
-		this.message = message;
+		this.message = KoreanMessages.translate(message);
 	}
 
 	public void setSpent(Long spent) {

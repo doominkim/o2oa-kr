@@ -6,6 +6,7 @@ import com.x.base.core.project.Context;
 import com.x.base.core.project.annotation.FieldDescribe;
 import com.x.base.core.project.gson.GsonPropertyObject;
 import com.x.base.core.project.gson.XGsonBuilder;
+import com.x.base.core.project.i18n.KoreanMessages;
 import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.x_message_assemble_communicate;
@@ -267,7 +268,7 @@ public class MessageConnector {
     public static void send(String type, String title, String person, Object body) {
         Wrap wrap = new Wrap();
         wrap.setType(type);
-        wrap.setTitle(title);
+        wrap.setTitle(KoreanMessages.translate(title));
         wrap.setPerson(person);
         wrap.setBody(gson.toJsonTree(body));
         try {

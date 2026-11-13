@@ -45,8 +45,8 @@ public class Person extends ConfigObject {
 	public static final Boolean DEFAULT_FIRSTLOGINMODIFYPWD = true;
 
 	public static final String DEFAULT_PASSWORDREGEX = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,}$";
-	public static final String DEFAULT_PASSWORDREGEXHINT = "8位以上,包含数字、字母和特殊字符.";
-	public static final String DEFAULT_LANGUAGE = "zh-CN";
+	public static final String DEFAULT_PASSWORDREGEXHINT = "8자 이상, 숫자·영문자·특수문자를 포함해야 합니다.";
+	public static final String DEFAULT_LANGUAGE = "ko";
 	public static final String DEFAULT_CAPTCHAFONT = "";
 	public static final String DEFAULT_TOKENNAME = "x-token";
 

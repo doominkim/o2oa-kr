@@ -79,7 +79,7 @@ class ActionHtmlToImage extends BaseAction {
 
 		String workHtml = wi.getWorkHtml();
 		if (StringUtils.isEmpty(workHtml)) {
-			workHtml = "无内容";
+			workHtml = "내용 없음";
 		}
 		if (workHtml.toLowerCase().indexOf("<html") == -1) {
 			workHtml = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"></head>"

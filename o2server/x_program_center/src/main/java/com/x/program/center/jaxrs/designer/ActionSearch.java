@@ -90,7 +90,7 @@ class ActionSearch extends BaseAction {
 					if (!map.isEmpty()) {
 						Wo wo = new Wo();
 						wo.setAppId("agent");
-						wo.setAppName("代理");
+						wo.setAppName("에이전트");
 						wo.setDesignerId(woAgent.getId());
 						wo.setDesignerName(woAgent.getName());
 						wo.setDesignerType(DesignerType.script.toString());
@@ -124,7 +124,7 @@ class ActionSearch extends BaseAction {
 					if (!map.isEmpty()) {
 						Wo wo = new Wo();
 						wo.setAppId("invoke");
-						wo.setAppName("接口");
+						wo.setAppName("인터페이스");
 						wo.setDesignerId(woInvoke.getId());
 						wo.setDesignerName(woInvoke.getName());
 						wo.setDesignerType(DesignerType.script.toString());
@@ -158,7 +158,7 @@ class ActionSearch extends BaseAction {
 					if (!map.isEmpty()) {
 						Wo wo = new Wo();
 						wo.setAppId("script");
-						wo.setAppName("脚本");
+						wo.setAppName("스크립트");
 						wo.setDesignerId(woScript.getId());
 						wo.setDesignerName(woScript.getName());
 						wo.setDesignerType(DesignerType.script.toString());

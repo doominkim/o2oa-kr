@@ -118,9 +118,9 @@ public class AttendanceSettingService {
 		type = "select";
 		selectContent = null;
 		isMultiple = false;
-		description = "员工申诉及申诉审批：可选值为true|false，单值。此属性控制系统中是否允许员工对考勤结果进行申诉操作.";
+		description = "직원 소명 및 소명 승인: 선택값 true|false, 단일값. 직원이 근태 결과에 소명할 수 있는지 설정합니다.";
 		try {
-			checkAndInitSystemConfig("APPEALABLE", "员工申诉及申诉审批", value, description, type, selectContent, isMultiple,  ++ordernumber );
+			checkAndInitSystemConfig("APPEALABLE", "직원 소명 및 소명 승인", value, description, type, selectContent, isMultiple,  ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "attendance system init system config 'APPEALABLE' got an exception." );
 			logger.error(e);
@@ -130,9 +130,9 @@ public class AttendanceSettingService {
 		type = "select";
 		selectContent = AppealConfig.APPEAL_AUDIFLOWTYPE_WORKFLOW + "|" + AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN;
 		isMultiple = false;
-		description = "考勤结果申诉审核人确定方式：可选值："+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+"|"+ AppealConfig.APPEAL_AUDIFLOWTYPE_WORKFLOW +"。此配置控制考勤结果申诉流程为自定义流程或者内置审批步骤（审核-复核）。";
+		description = "근태 결과 소명 결재 방식: 선택값: "+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+"|"+ AppealConfig.APPEAL_AUDIFLOWTYPE_WORKFLOW +". 근태 결과 소명을 사용자 정의 결재로 할지 내장 승인 단계(심사-재심사)로 할지 설정합니다.";
 		try {
-			checkAndInitSystemConfig("APPEAL_AUDIFLOWTYPE", "考勤结果申诉流程类型", value, description, type, selectContent, isMultiple, ++ordernumber );
+			checkAndInitSystemConfig("APPEAL_AUDIFLOWTYPE", "근태 결과 소명 결재 유형", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "attendance system init system config 'APPEAL_AUDIFLOWTYPE' got an exception." );
 			logger.error(e);
@@ -142,9 +142,9 @@ public class AttendanceSettingService {
 		type = "text";
 		selectContent = null;
 		isMultiple = false;
-		description = "考勤结果申诉流程，单值。该配置在'自定义申诉流程("+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+")'时，需要启动的申请流程ID。";
+		description = "근태 결과 소명 결재, 단일값. '사용자 정의 소명 결재("+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+")'일 때 시작할 결재 ID입니다.";
 		try {
-			checkAndInitSystemConfig("APPEAL_AUDIFLOW_ID", "自定义申诉流程", value, description, type, selectContent, isMultiple, ++ordernumber );
+			checkAndInitSystemConfig("APPEAL_AUDIFLOW_ID", "사용자 정의 소명 결재", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "system init system config 'APPEAL_AUDIFLOW_ID' got an exception." );
 			logger.error(e);
@@ -154,9 +154,9 @@ public class AttendanceSettingService {
 		type = "select";
 		selectContent = AppealConfig.APPEAL_CHOOSEVALUE_AUDITTYPE;
 		isMultiple = false;
-		description = "考勤结果申诉审核人确定方式：可选值：所属组织职务|汇报对象|个人属性|指定人。此配置控制在'内置申诉流程("+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+")'中考勤结果申诉审核人的确定方式。";
+		description = "근태 결과 소명 심사자 결정 방식: 선택값: 所属组织职务(소속 조직 직무)|汇报对象(보고 대상)|个人属性(개인 속성)|指定人(지정인). '내장 소명 결재("+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+")'에서 근태 결과 소명 심사자를 정하는 방식입니다.";
 		try {
-			checkAndInitSystemConfig("APPEAL_AUDITOR_TYPE", "内置申请过程中考勤结果申诉审核人确定方式", value, description, type, selectContent, isMultiple, ++ordernumber );
+			checkAndInitSystemConfig("APPEAL_AUDITOR_TYPE", "내장 결재의 근태 결과 소명 심사자 결정 방식", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "attendance system init system config 'APPEAL_AUDITOR_TYPE' got an exception." );
 			logger.error(e);
@@ -166,9 +166,9 @@ public class AttendanceSettingService {
 		type = "text";
 		selectContent = null;
 		isMultiple = false;
-		description = "考勤结果申诉审核人确定内容：可选值为指定的人员身份，单值。该配置在'内置申诉流程("+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+")'中与汇报流程方式中的ADMIN_AND_ALLLEADER配合使用";
+		description = "근태 결과 소명 심사자 결정 내용: 지정한 인원 신분, 단일값. '내장 소명 결재("+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+")'에서 보고 결재 방식의 ADMIN_AND_ALLLEADER와 함께 사용합니다";
 		try {
-			checkAndInitSystemConfig("APPEAL_AUDITOR_VALUE", "内置申请过程中考勤结果申诉审核人确定内容", value, description, type, selectContent, isMultiple, ++ordernumber );
+			checkAndInitSystemConfig("APPEAL_AUDITOR_VALUE", "내장 결재의 근태 결과 소명 심사자 결정 내용", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "system init system config 'APPEAL_AUDITOR_VALUE' got an exception." );
 			logger.error(e);
@@ -178,9 +178,9 @@ public class AttendanceSettingService {
 		type = "select";
 		selectContent = AppealConfig.APPEAL_CHOOSEVALUE_CHECKTYPE;
 		isMultiple = false;
-		description = "考勤结果申诉复核人确定方式：可选值：无|所属组织职务|汇报对象|个人属性|指定人。此配置在'内置申诉流程("+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+")'中控制考勤结果申诉审核人的确定方式,无-表示不需要复核。";
+		description = "근태 결과 소명 재심사자 결정 방식: 선택값: 无(없음)|所属组织职务(소속 조직 직무)|汇报对象(보고 대상)|个人属性(개인 속성)|指定人(지정인). '내장 소명 결재("+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+")'에서 근태 결과 소명 재심사자를 정하는 방식이며, 无는 재심사가 필요 없음을 뜻합니다.";
 		try {
-			checkAndInitSystemConfig("APPEAL_CHECKER_TYPE", "内置申请过程中考勤结果申诉复核人确定方式", value, description, type, selectContent, isMultiple, ++ordernumber );
+			checkAndInitSystemConfig("APPEAL_CHECKER_TYPE", "내장 결재의 근태 결과 소명 재심사자 결정 방식", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "attendance system init system config 'APPEAL_CHECKER_TYPE' got an exception." );
 			logger.error(e);
@@ -190,9 +190,9 @@ public class AttendanceSettingService {
 		type = "text";
 		selectContent = null;
 		isMultiple = false;
-		description = "考勤结果申诉复核人确定内容：可选值为指定的人员身份，单值。该配置在'内置申诉流程("+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+")'中与汇报流程方式中的ADMIN_AND_ALLLEADER配合使用";
+		description = "근태 결과 소명 재심사자 결정 내용: 지정한 인원 신분, 단일값. '내장 소명 결재("+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+")'에서 보고 결재 방식의 ADMIN_AND_ALLLEADER와 함께 사용합니다";
 		try {
-			checkAndInitSystemConfig("APPEAL_CHECKER_VALUE", "内置申请过程中考勤结果申诉复核人确定内容", value, description, type, selectContent, isMultiple, ++ordernumber );
+			checkAndInitSystemConfig("APPEAL_CHECKER_VALUE", "내장 결재의 근태 결과 소명 재심사자 결정 내용", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "system init system config 'APPEAL_CHECKER_VALUE' got an exception." );
 			logger.error(e);
@@ -202,9 +202,9 @@ public class AttendanceSettingService {
 		type = "select";
 		selectContent = "无|周六|周日";
 		isMultiple = false;
-		description = "周末设置描述：选择周六或周日。选中的为周末，未选中的按工作日计算";
+		description = "주말 설정: 周六(토요일) 또는 周日(일요일)을 선택합니다. 선택한 요일은 주말, 선택하지 않은 요일은 근무일로 계산합니다";
 		try {
-			checkAndInitSystemConfig("ATTENDANCE_WEEKEND", "周末计算日期设置", value, description, type, selectContent, isMultiple, ++ordernumber );
+			checkAndInitSystemConfig("ATTENDANCE_WEEKEND", "주말 계산 요일 설정", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {
 			logger.warn( "system init system config 'APPEAL_CHECKER_VALUE' got an exception." );
 			logger.error(e);

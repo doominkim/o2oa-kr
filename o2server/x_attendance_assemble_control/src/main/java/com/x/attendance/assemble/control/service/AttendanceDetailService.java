@@ -76,7 +76,7 @@ public class AttendanceDetailService {
 						attendanceDetail.setRecordDate( dateOperation.getDateFromString( day ) );
 						attendanceDetail.setRecordDateString( day );
 						attendanceDetail.setRecordStatus( 0 );
-						attendanceDetail.setBatchName( "系统补充" );
+						attendanceDetail.setBatchName( "시스템 보충" );
 						emc.beginTransaction( AttendanceDetail.class );
 						emc.persist( attendanceDetail );
 						emc.commit();

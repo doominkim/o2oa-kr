@@ -36,7 +36,7 @@ public class ActionImConfig extends BaseAction {
 			wo.setRevokeOutMinute(2); // 默认2分钟
 		}
 		wo.setVersionNo(310);
-		wo.setChangelog("新增群成员自主退出等功能！");
+		wo.setChangelog("그룹 멤버 직접 나가기 등 기능이 추가되었습니다!");
 		result.setData(wo);
 		return result;
 	}

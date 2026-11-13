@@ -100,11 +100,11 @@ public class ActionWipeAll extends BaseAction {
 			CacheManager.notify(Person.class);
 			CacheManager.notify(Unit.class);
 			
-			wo.setFlag("清空人员数据成功");
+			wo.setFlag("사용자 데이터를 비웠습니다.");
 			logger.info("开始删除人员组织所有数据--------end");
 		} catch (Exception e) {
 			logger.info("系统在查询所有组织人员信息时发生异常。" );
-			wo.setFlag("清空人员数据失败");
+			wo.setFlag("사용자 데이터를 비우지 못했습니다.");
 			e.printStackTrace();
 		}
 		

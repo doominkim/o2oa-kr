@@ -118,14 +118,14 @@ public class PmsinnerConsumeQueue extends AbstractQueue<Message> {
 
 	public static class BaseMessageExtra extends GsonPropertyObject {
 		public enum Type {
-			work("work", "工作"),
-			doc("doc", "文档"),
-			chat("chat", "聊天"),
-			bbs("bbs", "论坛"),
-			yunpan("yunpan", "网盘"),
-			attendance("attendance", "考勤"),
-			calendar("calendar", "日程"),
-			meeting("meeting", "会议");
+			work("work", "문서"),
+			doc("doc", "게시글"),
+			chat("chat", "메신저"),
+			bbs("bbs", "포럼"),
+			yunpan("yunpan", "웹하드"),
+			attendance("attendance", "근태"),
+			calendar("calendar", "일정"),
+			meeting("meeting", "회의");
 
 			private String key;
 			private String name;

@@ -30,10 +30,10 @@ public class ActionRefreshAllDocumentPermission extends BaseAction {
 					logger.info("开始更新所有文档权限........");
 					documentPersistService.refreshAllDocumentPermission(true);
 					logger.info("完成更新所有文档权限........");
-					wo.setValue("权限处理完成！");
+					wo.setValue("권한 처리가 완료되었습니다.");
 					lock.unlock();
 				}else{
-					wo.setValue("正在处理中！");
+					wo.setValue("처리 중입니다.");
 				}
 				result.setData(wo);
 			} catch (Exception e) {
