@@ -1,0 +1,68 @@
+{
+  "keepSource": {
+    "o2web/source/x_component_Attendance/lp/zh-cn.js": {
+      "MWF.xApplication.Attendance.LP.signinQywxTypeSelectText": "WeCom 출퇴근 조회 필터의 selectValue. 서버 데이터의 중국어 값과 비교한다.",
+      "MWF.xApplication.Attendance.LP.signinQywxResultSelectText": "WeCom 출퇴근 결과 필터의 selectValue. 서버 데이터의 중국어 값과 비교한다."
+    },
+    "o2web/source/x_component_cms_ColumnManager/lp/zh-cn.js": {
+      "MWF.xApplication.cms.ColumnManager.LP.documentTypeSelectValue": "게시판 분류의 문서 유형 저장값. x_cms_assemble_control이 \"信息\"/\"数据\"와 비교한다."
+    }
+  },
+  "relabeledKeys": {
+    "o2web/source/x_component_systemconfig/public/lp/zh-cn.js": {
+      "o2.xApplication.systemconfig.LP._worktimeConfig.weekData": "ServerWorktimeConfig.vue가 키를 체크박스 라벨로 표시한다. 키는 번역하고 값(요일 번호)과 순서는 유지한다."
+    }
+  },
+  "targetOnlyKeys": {
+    "o2web/source/o2_core/o2/lp/zh-cn.js": {
+      "o2.LP.authentication.loginBrandTitle": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "o2.LP.authentication.loginBrandDesc": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "o2.LP.authentication.loginPanelTitle": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "o2.LP.authentication.rememberId": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "o2.LP.authentication.loginCopyright": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)"
+    },
+    "o2web/source/x_component_Calendar/lp/zh-cn.js": {
+      "MWF.xApplication.Calendar.LP.monthView": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.Calendar.LP.weekView": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.Calendar.LP.dayView": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.Calendar.LP.listView": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)"
+    },
+    "o2web/source/x_component_Meeting/lp/zh-cn.js": {
+      "MWF.xApplication.Meeting.LP.monthView": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.Meeting.LP.weekView": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.Meeting.LP.dayView": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)"
+    },
+    "o2web/source/x_component_Org/lp/zh-cn.js": {
+      "MWF.xApplication.Org.LP.toggleMenu": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.Org.LP.pingyinIndex": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)"
+    },
+    "o2web/source/x_component_attendancev2/public/lp/zh-cn.js": {
+      "MWF.xApplication.attendancev2.LP.noData": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)"
+    },
+    "o2web/source/x_component_cms_Index/lp/zh-cn.js": {
+      "MWF.xApplication.cms.Index.LP.moduleTitle": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.cms.Index.LP.writeDocument": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.cms.Index.LP.publishTime": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.cms.Index.LP.noData": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)"
+    },
+    "o2web/source/x_component_cms_Module/lp/zh-cn.js": {
+      "MWF.xApplication.cms.Module.LP.writeDocument": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.cms.Module.LP.noData": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)"
+    },
+    "o2web/source/x_component_process_TaskCenter/lp/zh-cn.js": {
+      "MWF.xApplication.process.TaskCenter.LP.moduleTitle": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.process.TaskCenter.LP.startDraft": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.process.TaskCenter.LP.lnbGroupApproval": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.process.TaskCenter.LP.lnbGroupRead": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.process.TaskCenter.LP.lnbGroupDocument": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.process.TaskCenter.LP.countText": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.process.TaskCenter.LP.list_titleForm": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.process.TaskCenter.LP.list_status": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.process.TaskCenter.LP.statusProgress": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.process.TaskCenter.LP.statusCompleted": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.process.TaskCenter.LP.statusOverdue": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.process.TaskCenter.LP.weekDays": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)",
+      "MWF.xApplication.process.TaskCenter.LP.noData": "O2OA-6 한국형 디자인 화면에서 새로 쓰는 문구(중국어 원문 없음)"
+    }
+  }
+}

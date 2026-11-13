@@ -90,7 +90,7 @@ if (!window.o2) {
 
         // var supportedLanguages = ["zh-cn", "en", "es", "ko", "zh-tw", "zh-hk", "ja"];
 
-        var _lp = _language || navigator.language || "zh-cn";
+        var _lp = _language || navigator.language || "ko";
         //if (!_lp) _lp = "zh-cn";
 
         if (_par) {
@@ -122,7 +122,7 @@ if (!window.o2) {
             "v": "o2oa",
             "dev": 10,
             "build": "2025.06.28",
-            "info": "O2OA 活力办公 创意无限. Copyright © 2025, o2oa.net O2 Team All rights reserved."
+            "info": "O2OA 활기찬 업무, 무한한 창의. Copyright © 2025, o2oa.net O2 Team All rights reserved."
         };
 
         /**
@@ -156,6 +156,10 @@ if (!window.o2) {
         // if (supportedLanguages.indexOf(_lp) == -1) _lp = "zh-cn";
         this.o2.language = _lp;
         this.o2.splitStr = /\s*(?:,|;)\s*/;
+        // MooTools Date locale for calendar widgets: Korean UI uses ko-KR, others keep zh-CHS.
+        this.o2.dateLocale = function () {
+            return (o2.language || "").split("-")[0] === "ko" ? "ko-KR" : "zh-CHS";
+        };
 
         this.wrdp = this.o2;
 
@@ -1984,6 +1988,13 @@ if (!window.o2) {
         };
 
 
+        // Language pack fallback: "ko-kr" -> "ko", other languages -> "ko", "ko" -> "zh-cn".
+        var _nextLP = function (name) {
+            if (name === "zh-cn") return null;
+            if (name.indexOf("-") !== -1) return name.split("-")[0];
+            return (name === "ko") ? "zh-cn" : "ko";
+        };
+
         var _loadLP = function (name) {
             var jsPath = o2.session.path;
             jsPath = jsPath + "/lp/" + name + ".js";
@@ -1998,8 +2009,9 @@ if (!window.o2) {
                     }
                 },
                 onFailure: function (xhr) {
-                    if (name != "zh-cn") {
-                        _loadLP("zh-cn");
+                    var next = _nextLP(name);
+                    if (next) {
+                        _loadLP(next);
                     } else {
                         throw "loadLP Error: " + xhr.responseText;
                     }

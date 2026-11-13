@@ -1,0 +1,140 @@
+MWF.xApplication.query.StatDesigner.LP = {
+    "title": "통계 편집",
+    "newStat": "새 통계",
+    "property": "속성",
+    "item": "항목",
+    "type": "유형",
+    "value": "값",
+    "stat": "통계",
+    "unnamed": "제목 없는 열",
+    "unCategory": "미분류",
+
+    "id": "식별자",
+    "name": "이름",
+    "alias": "별칭",
+    "description": "설명",
+
+    "application" : "데이터 앱",
+    "copyStat" : "통계 복사",
+    "newStatName" : "새 통계 이름",
+    "copy" : "사본",
+    "ok" : "확인",
+    "cancel" : "취소",
+    "view" : "뷰",
+    "saveViewNotice" : "먼저 통계를 저장하세요!",
+
+    "sorkKeyNote": "-정렬-",
+    "createTime": "생성일시",
+    "updateTime": "수정일시",
+    "asc": "오름차순",
+    "desc": "내림차순",
+    "searchPlacholder": "이름/별칭/ID로 검색",
+    "searchAndSort": "정렬 및 검색",
+
+    "action": {
+        "move": "이동",
+        "delete": "삭제",
+        "add": "추가"
+    },
+
+    "notice": {
+        "save_success": "통계를 저장했습니다!",
+        "saveAs_success" : "통계를 다른 이름으로 저장했습니다. 통계 설정에서 새 통계를 열 수 있습니다!",
+
+        "deleteFilterTitle": "필터 조건 삭제 확인",
+        "deleteFilter": "필터 조건을 삭제하시겠습니까?",
+
+        "deleteColumnTitle": "열 삭제 확인",
+        "deleteColumn": "현재 열을 삭제하시겠습니까?",
+
+
+        "changeTypeTitle": "데이터 유형 변경 확인",
+        "changeTypeDeleteChildren": "데이터 유형을 변경하면 모든 하위 데이터가 삭제됩니다. 계속하시겠습니까?",
+        "changeType": "데이터 유형을 변경하면 데이터 값이 바뀝니다. 계속하시겠습니까?",
+
+        "inputTypeError": "입력한 데이터 유형이 올바르지 않습니다. 다시 입력하세요",
+        "sameKey": "입력한 항목 이름이 객체에 이미 있습니다. 다시 입력하세요",
+        "emptyKey": "항목 이름은 비워 둘 수 없습니다. 다시 입력하세요",
+        "numberKey": "항목 이름은 숫자일 수 없습니다. 다시 입력하세요",
+
+        "inputName": "통계 이름을 입력하세요",
+        "noModifyName": "이름 또는 별칭은 수정할 수 없습니다",
+        "inputView": "먼저 뷰를 선택하세요",
+        "errorViewColumn": "뷰 열 선택이 올바르지 않습니다. 다시 선택하세요"
+    },
+    "category": "분류",
+    "amount": "총계",
+    "propertyTemplate": {
+        "base": "기본",
+        "event": "이벤트",
+        "html": "HTML",
+        "json": "JSON",
+        "action": "작업",
+        "select": "선택",
+        "alias": "별칭",
+
+        "id": "식별자",
+        "name": "이름",
+        "description": "설명",
+        "appearance": "표시 유형",
+        "style": "스타일",
+        "attribute": "속성",
+
+        "display": "표시",
+        "hidden": "숨김",
+        "orderNumber":"정렬 순서",
+
+        "view":"뷰",
+        "viewNote":"뷰에 분류 열을 설정해야 합니다",
+        "column":"뷰 열",
+        "columnNote":"먼저 통계에 사용할 뷰를 선택하세요",
+        "calculateType":"계산 유형",
+        "sum":"합계(sum)",
+        "average":"평균(average)",
+        "count":"개수(count)",
+        "formatType":"형식",
+        "number":"숫자",
+        "percent":"백분율",
+        "currency":"통화",
+        "decimal":"소수점 자릿수",
+        "defaultValue":"기본값",
+        "code":"표시 스크립트",
+
+        "chart":"차트",
+        "bar": "막대 차트",
+        "pie":"원형 차트",
+        "line":"꺾은선 차트",
+        "authority":"실행 권한",
+        "availableIdentity":"실행 가능 사용자",
+        "availableUnit":"실행 가능 조직",
+
+        "category":"분류",
+        "isGroup":"분류별 통계",
+        "yes":"예",
+        "no":"아니요",
+        "categoryTitle":"분류 제목",
+        "isAmount":"합계",
+        "sort":"정렬",
+        "none":"없음",
+        "asc":"오름차순",
+        "desc":"내림차순",
+        "orderColumn":"정렬 열",
+        "categoryValue":"분류 값",
+        "categoryDisplay":"분류 표시",
+        "item":"뷰 열 기준 계산",
+        "specified":"지정한 분류 값 기준",
+        "intersection":"뷰 열 계산과 지정 분류 값의 교집합",
+        "sum1":"뷰 열 계산과 지정 분류 값의 합집합",
+        "groupSpecifiedList":"지정 분류 값",
+        "conversion": "행/열 전환"
+    },
+    "formToolbar":{
+        "save": "저장",
+        "saveAs": "다른 이름으로 저장",
+        "autoSave": "자동 저장",
+        "preview": "미리보기",
+        "help": "도움말",
+        "add": "새로 만들기",
+        "gotoApp": "소속 앱 열기"
+    }
+};

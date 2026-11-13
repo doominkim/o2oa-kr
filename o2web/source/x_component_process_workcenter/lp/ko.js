@@ -1,0 +1,120 @@
+MWF.xApplication.process.workcenter.LP = {
+	"title": "업무함",
+	"task": "결재 대기",
+	"read": "열람 대기",
+	"taskCompleted": "결재 완료",
+	"readCompleted": "열람 완료",
+	"draft": "임시저장",
+	"review": "참조 문서",
+	"myCreated": "내가 기안한 문서",
+	"createProcess": "새 결재",
+	"all": "전체",
+	"byType": "분류별",
+
+	"expire1": "처리 기한: {time}",
+	"expire2": "곧 기한이 초과됩니다. 처리 기한: {time}",
+	"expire3": "기한이 초과되었습니다. 처리 기한: {time}",
+
+	"firstPage": "처음",
+	"lastPage": "마지막",
+
+	"process": "다음 단계로",
+
+	"processStarted": "문서를 기안했습니다",
+	"taskProcessed": "문서를 제출했습니다",
+	"taskProcessedMessage": "결재 대기 건을 처리했습니다: ",
+	"nextActivity": "다음 단계: ",
+	"nextUser": "처리자: ",
+	"processStartedMessage": "새 문서를 기안했습니다: ",
+	"deal": "처리",
+
+	"processing": "처리 중",
+	"workCompleted": "결재가 완료된 문서",
+	"completed": "결재 완료",
+	"workProcess": "다음 단계로",
+	"next_etc": "외 {count}명",
+	"processTaskCompleted": "결재 대기를 처리했습니다",
+	"arrivedActivity": "문서가 도착한 단계: ",
+
+	"rapidEditor": "결재 대기 빠른 처리",
+	"setReadCompleted": "열람 완료로 설정",
+	"setReaded" : "열람 완료로 설정",
+	"setReadedConfirmContent" : "\"{title}\"을(를) 열람 완료로 표시하시겠습니까?",
+	"setReadedConfirmTitle" : "열람 완료 표시 확인",
+
+	"readOpinion": "열람 의견",
+	"processInfo": "결재 진행 상세",
+
+	"opinion": "의견",
+	"time": "시간",
+	"starttime": "도착 시간",
+
+	"workFlowTo": "문서 전달 단계: ",
+	"taskPerson": "처리자: ",
+	"open": "열기",
+	"select": "선택",
+	"processActivity": "처리 단계",
+	"processActivityInfo": "이 문서를 처리할 때의 단계",
+	"readActivity": "열람 대기 단계",
+	"readActivityInfo": "열람 대기를 받았을 때의 단계",
+
+	"filter": "필터",
+	"search": "검색",
+	"filterPlaceholder": "키워드를 입력하세요",
+	"commonUseProcess":"자주 쓰는 결재",
+	"searchProcessResault": "\"{key}\" 검색 결과",
+	"filterStartPlaceholder": "기안 가능한 결재 검색",
+
+	"filterCategoryList": [
+		{"key": "applicationList", "name": "앱 이름"},
+		{"key": "processList", "name": "결재 이름"},
+		{"key": "activityNameList", "name": "처리 단계"},
+		{"key": "creatorUnitList", "name": "기안 부서"},
+		{"key": "startTimeMonthList", "name": "받은 월"},
+		{"key": "completedTimeMonthList", "name": "처리 월"},
+		{"key": "completedList", "name": "결재 완료 여부"},
+		{"key": "key", "name": "키워드"}
+	],
+	"filterCategoryListReview": [
+		{"key": "applicationList", "name": "앱 이름"},
+		{"key": "processList", "name": "결재 이름"},
+		{"key": "activityNameList", "name": "처리 단계"},
+		{"key": "creatorUnitList", "name": "기안 부서"},
+		{"key": "startTimeMonthList", "name": "기안 월"},
+		{"key": "completedList", "name": "결재 완료 여부"},
+		{"key": "key", "name": "키워드"}
+	],
+	"filterCategoryShortList": [
+		{"key": "applicationList", "name": "앱"},
+		{"key": "processList", "name": "결재"},
+		{"key": "activityNameList", "name": "단계"},
+		{"key": "creatorUnitList", "name": "부서"},
+		{"key": "startTimeMonthList", "name": "받은 월"},
+		{"key": "completedTimeMonthList", "name": "처리 월"},
+		{"key": "completedList", "name": "완료"},
+		{"key": "key", "name": "키워드"}
+	],
+	"filterCategoryShortListReview": [
+		{"key": "applicationList", "name": "앱"},
+		{"key": "processList", "name": "결재"},
+		{"key": "activityNameList", "name": "단계"},
+		{"key": "creatorUnitList", "name": "부서"},
+		{"key": "startTimeMonthList", "name": "기안 월"},
+		{"key": "completedList", "name": "완료"},
+		{"key": "key", "name": "키워드"}
+	],
+	"noTask": "처리할 결재 대기가 없습니다",
+	"noTaskCompleted": "처리한 문서가 없습니다",
+	"noRead": "열람할 문서가 없습니다",
+	"noReadCompleted": "열람한 문서가 없습니다",
+	"noDraft": "임시저장 문서가 없습니다",
+	"noReview": "참조 문서가 없습니다",
+	"noMyCreated": "내가 기안한 문서가 없습니다",
+	"createWork": "새 결재 문서",
+	"readConfirm" : "선택한 문서를 읽음으로 표시하시겠습니까?",
+	"batch": "일괄 처리",
+	"selectBatch": "같은 단계의 결재 대기를 여러 개 선택해 일괄 처리합니다",
+	"cannotSelectBatch": "다른 단계의 결재 대기는 일괄 처리할 수 없습니다",
+	"unnamed": "제목 없음"
+
+};

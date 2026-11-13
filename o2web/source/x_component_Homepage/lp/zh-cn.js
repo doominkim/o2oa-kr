@@ -62,6 +62,8 @@ MWF.xApplication.Homepage.LP = o2.HPLP = {
 	"allDay": "全天",
 	"calenderInfor": "{name}，您好！{date}您有<div class='o2_homepage_calender_count_flag'>{count}</div>个日程。",
 	"noCalenderInfor": "{name}，您好！{date}无日程。",
-	"dateFormat": "%Y年%m月%d日"
+	"dateFormat": "%Y年%m月%d日",
+	"myInfo": "My Info",
+	"noUnit": "No department"
 
 };

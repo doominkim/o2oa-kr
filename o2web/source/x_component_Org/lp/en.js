@@ -2,6 +2,8 @@ MWF.xApplication = MWF.xApplication || {};
 MWF.xApplication.Org = MWF.xApplication.Org || {};
 MWF.xApplication.Org.LP={
 	"title": "Organization",
+	"toggleMenu": "Collapse/expand menu",
+	"pingyinIndex": "Initial search",
 	"manage": "Management",
 	"identity": "Identity",
 	"person": "Person",

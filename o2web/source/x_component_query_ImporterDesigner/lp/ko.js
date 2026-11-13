@@ -1,0 +1,178 @@
+MWF.xApplication.query.ImporterDesigner.LP = {
+    "title": "가져오기 모델 편집",
+    "newView": "새 가져오기 모델",
+    "property": "속성",
+    "item": "항목",
+    "type": "유형",
+    "value": "값",
+    "importer": "가져오기 모델",
+    "unnamed": "제목 없음",
+    "unCategory": "미분류",
+
+    "id": "식별자",
+    "name": "이름",
+    "alias": "별칭",
+    "description": "설명",
+    "saveViewNotice" : "먼저 가져오기 모델을 저장하세요!",
+
+    "application" : "데이터 앱",
+    "newImporter" : "새 가져오기 모델",
+    "newViewName" : "새 가져오기 모델 이름",
+    "copy" : "사본",
+    "ok" : "확인",
+    "cancel" : "취소",
+    "columnField": "Excel 열 대응 필드",
+    "calculateField": "계산 필드",
+
+    "action": {
+        "move": "이동",
+        "delete": "삭제",
+        "add": "추가"
+    },
+
+    "notice": {
+        "save_success": "가져오기 모델을 저장했습니다!",
+        "saveAs_success" : "가져오기 모델을 다른 이름으로 저장했습니다. 가져오기 모델 설정에서 새 가져오기 모델을 열 수 있습니다!",
+
+
+        "deleteColumnTitle": "열 삭제 확인",
+        "deleteColumn": "현재 열을 삭제하시겠습니까?",
+
+        "deleteFieldTitle" : "필드 삭제 확인",
+        "deleteField": "현재 필드를 삭제하시겠습니까?",
+
+        "inputTypeError": "입력한 데이터 유형이 잘못되었습니다. 다시 입력하세요",
+        "sameKey": "입력한 항목 이름이 객체에 이미 있습니다. 다시 입력하세요",
+        "emptyKey": "항목 이름은 비워 둘 수 없습니다. 다시 입력하세요",
+        "numberKey": "항목 이름은 숫자일 수 없습니다. 다시 입력하세요",
+
+        "inputName": "가져오기 모델 이름을 입력하세요",
+        "noModifyName": "이름이나 별칭은 수정할 수 없습니다",
+
+        "inputType": "가져오기 대상을 선택하세요",
+        "inputProcess": "프로세스를 선택하세요",
+        "inputCategory": "분류를 선택하세요",
+        "inputTable": "사용자 정의 테이블을 선택하세요",
+
+
+        "deleteEventTitle": "이벤트 삭제 확인",
+        "deleteEvent": "현재 이벤트를 삭제하시겠습니까?",
+
+        "cmsNoPublisherOrNoTitleTitle": "제목 또는 기안자 미설정",
+        "cmsNoPublisherOrNoTitle": "제목 또는 기안자가 설정되지 않았습니다. 저장하시겠습니까?",
+
+        "processNoPublisherOrNoTitleTitle": "제목 또는 기안자 미설정",
+        "processNoPublisherOrNoTitle": "제목 또는 기안자가 설정되지 않았습니다. 저장하시겠습니까?",
+
+        "saveNotice": "저장 안내",
+        "someFieldIsEmpty": "{text}이(가) 선택되지 않았습니다. 계속 저장하시겠습니까?"
+    },
+    "mastInputPath": "데이터 경로를 입력하세요",
+    "mastInputTitle": "제목을 입력하세요",
+    "autoAddColumns": "데이터 테이블로 열 생성",
+    "propertyTemplate": {
+        "base": "기본",
+        "event": "이벤트",
+        "html": "HTML",
+        "json": "JSON",
+        "action": "작업",
+        "select": "선택",
+        "alias": "별칭",
+
+        "id": "식별자",
+        "name": "이름",
+        "description": "설명",
+        "style": "스타일",
+        "attribute": "속성",
+
+        "hidden": "숨김",
+        "orderNumber":"정렬 순서",
+
+        "target": "대상",
+        "importTarget": "가져오기 대상",
+        "cmsData": "게시판 데이터",
+        "tableData": "사용자 정의 테이블 데이터",
+        "processPlatformData": "프로세스 플랫폼 데이터",
+        "selectCategory": "분류 선택",
+        "selectTable": "사용자 정의 테이블 선택",
+        "selectProcess": "프로세스 선택",
+        "processStatus": "프로세스 상태",
+        "draftActivity": "기안 활동(첫 번째 사람 처리 노드)",
+        "endActivity": "종료 활동",
+        "enableValidation": "검증 사용",
+        "yes": "예",
+        "no": "아니요",
+        "ececuter": "실행 가능자",
+        "ececutablePerson": "실행 가능 사용자",
+        "ececutableUnit": "실행 조직",
+
+        "fieldTitle":"필드 제목",
+        "data":"데이터",
+        "fieldPath":"필드 경로",
+        "valueScript":"값 스크립트",
+        "cmsProperty":"cms 게시글 속성",
+        "isTitle":"제목 여부(유일)",
+        "isSummary":"요약 여부(유일)",
+        "isPublisher":"작성자 여부(유일)",
+        "isAuthor":"저자 여부",
+        "isReader":"독자 여부",
+        "workProperty":"프로세스 work 속성",
+        "isProcessDrafter":"프로세스 기안자 여부(유일)",
+
+        "isName":"조직 객체",
+        "fieldType":"필드 유형",
+        "validation":"검증",
+        "allowEmpty":"빈 값 허용",
+        "validFieldType":"필드 유형 검증",
+
+        "documentType": "게시글 유형",
+        "information": "게시글",
+        "data1": "데이터",
+
+        "processDrafter": "프로세스 기안자",
+        "publisher": "게시글 작성자",
+        "selectField": "열/필드 선택",
+        "importerAsDrafter": "가져오기 실행자의 소속",
+        "setDrafterInField": "열/필드에서 설정",
+
+        "note": "참고: ",
+        "selectOrg": "조직 객체를 선택하세요",
+        "selectDate": "날짜 유형을 선택하세요",
+        "selectText": "텍스트 유형을 선택하세요",
+        "publishTime": "게시 시간",
+        "importeTimeAsPublishTime": "가져온 시간을 게시 시간으로 사용",
+        "titleField": "제목",
+        "summaryField": "요약",
+        "selectForm": "양식 지정",
+        "serialField": "일련번호/문서번호",
+        "startTimeField": "시작 날짜",
+        "completeTimeField": "종료 날짜",
+        "selectProcess1": "먼저 프로세스를 선택하세요",
+        "lineBreak": "줄바꿈 문자",
+        "valueScriptNote": "\"값 스크립트\"에서는 return으로 필드 값을 반환해야 합니다. this.target;으로 현재 가져오는 행의 데이터를 얻을 수 있습니다. 예:",
+        "valueScriptImportedDataNote": "가져온 원본 데이터",
+        "valueScriptDataNote": "설정에 따라 시스템이 생성한 업무 데이터",
+        "valueScriptDocumentNote": "CMS 게시글을 가져오는 경우 시스템이 생성한 게시글 데이터",
+        "valueScriptWorkNote": "프로세스 work를 가져오는 경우 시스템이 생성한 작업 데이터",
+        "idPathNote": "사용자 정의 테이블 데이터를 가져올 때 필드 경로가 'id'이면 기존 레코드를 업데이트합니다.",
+        "excelSelectedOption": "선택 항목 스크립트",
+        "checkInOption": "선택 항목 포함 여부 검증",
+        "defaultValueScript": "기본값 스크립트"
+    },
+    "formToolbar":{
+        "save": "저장",
+        "saveAs": "다른 이름으로 저장",
+        "autoSave": "자동 저장",
+        "preview": "미리보기",
+        "help": "도움말",
+        "add": "새로 만들기",
+        "gotoApp": "소속 앱 열기"
+    },
+    "sorkKeyNote": "-정렬-",
+    "createTime": "생성일시",
+    "updateTime": "수정일시",
+    "asc": "오름차순",
+    "desc": "내림차순",
+    "searchPlacholder": "이름/별칭/id로 검색",
+    "searchAndSort": "정렬 및 검색"
+};

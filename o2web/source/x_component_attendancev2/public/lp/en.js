@@ -24,6 +24,7 @@ MWF.xApplication.attendancev2.LP={
 	"back": "Back",
 	"alert": "Alert",
 	"operate": "Operate",
+	"noData": "No data",
 	"choose": "Choose",
 	"save": "Save",
 	"delete": "Delete",

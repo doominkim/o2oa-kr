@@ -219,6 +219,7 @@ o2.LP={
 			"star": "star"
 		},
 		"styleFlatMenu": {
+			"indigo": "Indigo",
 			"blue": "blue",
 			"red": "red",
 			"orange": "orange",
@@ -543,7 +544,12 @@ o2.LP={
 		"userAppCameraHtml": "<div>open <div styles='bindTipLinkArea'>APP </div> and scan</div>",
 		"loginToPage": "Login to the page",
 		"accessError": "Failed to access background service",
-		"return": "return"
+		"return": "return",
+		"loginBrandTitle": "A better way to work together,\nIndigo Groupware",
+		"loginBrandDesc": "Approvals, boards, calendars and the directory in one place.\nKeep work moving anywhere, quickly and securely.",
+		"loginPanelTitle": "Sign in",
+		"rememberId": "Remember ID",
+		"loginCopyright": "Copyright © Indigo Co., Ltd. All rights reserved."
 	},
 	"script": {
 		"error": "Script operation error, please check the following details"

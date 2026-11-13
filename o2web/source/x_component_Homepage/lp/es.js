@@ -60,6 +60,8 @@ MWF.xApplication.Homepage.LP={
 	"allDay": "Todo el día",
 	"calenderInfor": "{name}, ¡Hola! Tiene <div class='o2_homepage_calender_count_flag'>{count}</div> eventos programados para el {date}.",
 	"noCalenderInfor": "{name}, ¡Hola! No hay eventos programados para el {date}.",
-	"dateFormat": "%d de %m de %Y"
+	"dateFormat": "%d de %m de %Y",
+	"myInfo": "Mi información",
+	"noUnit": "Sin departamento"
 }
 MWF.xApplication.Homepage["lp."+o2.language] = MWF.xApplication.Homepage.LP

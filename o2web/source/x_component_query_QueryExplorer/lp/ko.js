@@ -1,0 +1,84 @@
+MWF.xApplication.query.QueryExplorer.LP = MWF.QueryLP = {
+    "title": "데이터 센터 관리",
+
+    "all": "전체",
+    "create": "새 앱",
+    "import": "앱 가져오기",
+    "find": "설계 찾기",
+
+    "noApplicationCreate": "시스템에 데이터 앱이 없거나 관리 권한이 있는 데이터 앱이 없습니다 <br/> 여기를 클릭해 새 데이터 앱을 만드세요",
+    "noApplication": "시스템에 데이터 앱이 없거나 관리 권한이 있는 데이터 앱이 없습니다",
+    "unDescription": "이 데이터 앱에는 설명이 없습니다",
+
+    "view": "뷰",
+    "stat": "통계",
+
+    "noView": "이 앱에는 아직 뷰가 없습니다. 여기를 클릭해 새 뷰를 만드세요",
+    "noStat": "이 앱에는 아직 통계가 없습니다. 여기를 클릭해 새 통계를 만드세요",
+    "unCategory": "미분류 앱",
+
+    "name": "데이터 앱 이름",
+    "alias": "데이터 앱 별칭",
+    "description": "데이터 앱 설명",
+    "type": "데이터 앱 유형",
+    "icon": "데이터 앱 아이콘",
+    "action_ok": "완  료",
+    "action_cancel": "취  소",
+
+    "createApplication_cancel_title": "데이터 앱 만들기 취소 확인",
+    "createApplication_cancel": "데이터 앱 만들기를 취소하시겠습니까?",
+    "createApplicationSuccess": "데이터 앱을 만들었습니다!",
+    "searchAppPlacholder": "앱 검색",
+    "searchAppTitle": "앱 이름, 별칭, id로 검색할 수 있습니다",
+    "application": {
+        // "action_ok": "完  成",
+        // "action_cancel": "取  消",
+        //
+        // "create": "新建应用",
+        // "search": "搜索应用",
+        // "searchText": "请输入关键字",
+        // "allCategory": "全部",
+        // "unCategory": "未分类",
+        // "selectCategory": "筛选",
+        //
+        // "name": "应用名称",
+        // "alias": "应用别名",
+        // "description": "应用描述",
+        // "type": "应用类型",
+        // "icon": "应用图标",
+        //
+        "export": "데이터 앱 내보내기",
+        "export_ok": "확  인",
+        "export_cancel": "취  소",
+        "view": "뷰",
+        "stat": "통계",
+        "page": "페이지",
+        "process": "프로세스",
+        "form": "양식",
+        "dictionary": "데이터 사전",
+        "script": "스크립트",
+        //
+        "import": "앱 가져오기",
+        "import_confirm_title": "데이터 앱 가져오기 확인",
+        "import_confirm": "가져올 데이터 앱이 이미 있습니다. 덮어쓰시겠습니까? \n\"확인\"을 클릭하면 기존 데이터 앱을 덮어쓰며, 이 작업은 되돌릴 수 없습니다",
+        //
+        "createApplication_cancel_title": "데이터 앱 만들기 취소 확인",
+        "createApplication_cancel": "데이터 앱 만들기를 취소하시겠습니까?",
+        "inputApplicationName": "데이터 앱 이름을 입력하세요!",
+        "createApplicationSuccess": "데이터 앱을 만들었습니다!",
+        // "unDescription": "此应用没有描述",
+        // "noProcess": "此应用还没有流程，点击此处创建新流程",
+        // "noForm": "此应用还没有表单，点击此处创建新表单",
+        // "noApplicationCreate": "系统没有应用或没有您有权限管理的应用，点击此处创建新应用",
+        // "noApplication": "系统没有应用或没有您有权限管理的应用",
+        //
+        "deleteElements": "선택한 데이터 앱 삭제",
+        "deleteElementsTitle": "데이터 앱 삭제 확인",
+        "deleteElementsConfirm": "선택한 데이터 앱을 삭제하시겠습니까? <br><font style='color: red'>이 작업은 선택한 데이터 앱의 뷰, 통계, 데이터 테이블 등 모든 설계 요소를 삭제하며 복구할 수 없습니다<br></font>",
+        "deleteApplicationAllConfirm": "완료된 프로세스 인스턴스도 함께 삭제",
+        "deleteElementsConfirmAgain": "<font style='color: #00F; font-size:14px'>다음 데이터 앱을 삭제할지 다시 확인하세요: </font>",
+        "deleteElementsAllConfirmAgain": "<font style='color: #00F; font-size:14px'>다음 데이터 앱을 삭제할지 다시 확인하세요: </font>",
+        // "loadding": "正在加载……",
+        "select": "선택 반전"
+    }
+};

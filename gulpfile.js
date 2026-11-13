@@ -28,7 +28,7 @@ const debug = require('gulp-debug');
 var git = require('gulp-git');
 const sourcemaps = require('gulp-sourcemaps');
 
-var supportedLanguage = ["zh-cn", "en", "es"];
+var supportedLanguage = ["zh-cn", "en", "es", "ko"];
 var translateLanguage = {
     "en": "en",
     "es": "spa"

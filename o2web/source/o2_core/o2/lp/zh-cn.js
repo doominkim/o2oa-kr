@@ -253,6 +253,7 @@ o2.LP.desktop = {
         "star": "星空"
     },
     "styleFlatMenu": {
+        "indigo": "Indigo",
         "blue": "蓝色",
         "red": "红色",
         "orange": "水果橙",

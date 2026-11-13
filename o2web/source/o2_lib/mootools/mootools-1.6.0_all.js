@@ -19792,6 +19792,55 @@ Locale.define('zh-CHS', 'Date', {
 
 });
 
+// Korean (o2oa-kr). Formats mirror zh-CHS so stored date strings stay compatible.
+Locale.define('ko-KR', 'Date', {
+
+	months: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	months_abbr: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	days: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+	days_abbr: ['일', '월', '화', '수', '목', '금', '토'],
+
+	// Culture's date order: YYYY-MM-DD
+	dateOrder: ['year', 'month', 'date'],
+	shortDate: '%Y-%m-%d',
+	shortTime: '%I:%M%p',
+	AM: 'AM',
+	PM: 'PM',
+	firstDayOfWeek: 1,
+
+	// Date.Extras
+	ordinal: '',
+
+	lessThanMinuteAgo: '방금 전',
+	minuteAgo: '약 1분 전',
+	minutesAgo: '{delta}분 전',
+	hourAgo: '약 1시간 전',
+	hoursAgo: '약 {delta}시간 전',
+	dayAgo: '1일 전',
+	daysAgo: '{delta}일 전',
+	weekAgo: '1주 전',
+	weeksAgo: '{delta}주 전',
+	monthAgo: '1개월 전',
+	monthsAgo: '{delta}개월 전',
+	yearAgo: '1년 전',
+	yearsAgo: '{delta}년 전',
+
+	lessThanMinuteUntil: '1분 이내',
+	minuteUntil: '약 1분 후',
+	minutesUntil: '약 {delta}분 후',
+	hourUntil: '약 1시간 후',
+	hoursUntil: '약 {delta}시간 후',
+	dayUntil: '1일 후',
+	daysUntil: '{delta}일 후',
+	weekUntil: '1주 후',
+	weeksUntil: '{delta}주 후',
+	monthUntil: '1개월 후',
+	monthsUntil: '{delta}개월 후',
+	yearUntil: '1년 후',
+	yearsUntil: '{delta}년 후'
+
+});
+
 // Traditional Chinese
 Locale.define('zh-CHT', 'Date', {
 

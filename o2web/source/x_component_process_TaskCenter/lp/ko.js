@@ -1,0 +1,101 @@
+MWF.xApplication.process = MWF.xApplication.process || {};
+MWF.xApplication.process.TaskCenter = MWF.xApplication.process.TaskCenter || {};
+MWF.xApplication.process.TaskCenter.LP = {
+	"title": "업무함",
+    "searchKey": "키워드를 입력하세요",
+
+    "task": "결재 대기",
+    "done": "결재 완료",
+    "draft": "임시저장함",
+    "myfile": "내 문서",
+    "read": "열람 대기",
+    "readed": "열람 완료",
+    "review": "참조 문서",
+    "myCreated": "내가 기안한 문서",
+    "start": "기안",
+    "startTop5": "자주 쓰는 결재",
+    "startProcess": "기안 가능한 결재",
+    "back": "뒤로",
+    "unnamed": "제목 없음",
+    "draftTab": "임시저장",
+
+
+    "list_title": "제목",
+    "list_application": "앱",
+    "list_process": "결재",
+    "list_activity": "단계",
+    "list_owner": "처리자",
+    "list_creator": "기안자",
+    "list_departmet": "기안 부서",
+    "list_comedate": "도착 시간",
+    "list_createDate": "기안 시간",
+
+    "processStarted": "문서를 기안했습니다",
+    "taskProcessed": "문서를 제출했습니다",
+    "taskProcessedMessage": "결재 대기 건을 처리했습니다: ",
+    "nextActivity": "다음 단계: ",
+    "nextUser": "처리자: ",
+    "processStartedMessage": "새 문서를 기안했습니다: ",
+
+    "filter": "필터",
+    "all": "전체",
+    "ok": "확인",
+    "clear": "지우기",
+
+    "currentFileStatus": "문서 현재 상태",
+    "fileat": "문서가",
+    "flowto": "에 이동한 단계:",
+    "doing": "현재",
+    "deal": "처리",
+    "processing": "처리 중",
+    "workCompleted": "문서 결재 완료",
+    "completed": "결재 완료",
+    "workProcess": "결재 계속 진행",
+
+    "applicationList": "결재 앱",
+    "processList": "결재 이름",
+    "creatorUnitList": "작성 조직",
+    "creatorCompanyList": "회사",
+    "creatorDepartmentList": "부서",
+    "activityNameList": "처리 단계",
+    "completedTimeMonthList": "처리 시간",
+    "startTimeMonthList": "도착 시간",
+    "completedList": "완료 상태",
+    "key": "키워드",
+    "year": "년",
+    "month": "월",
+
+    "expire1": "처리 기한: {time}",
+    "expire2": "곧 기한이 초과됩니다. 처리 기한: {time}",
+    "expire3": "기한이 초과되었습니다. 처리 기한: {time}",
+
+    "unit": "조직",
+    "duty": "직무",
+    "searchProcess": "키워드를 입력해 기안 가능한 결재를 검색하세요",
+    "searchProcessResault": "\"{key}\" 검색 결과",
+    "datch": "일괄 처리",
+
+    "setReaded" : "열람 완료로 설정",
+    "setReadedConfirmContent" : "\"{title}\"을(를) 열람 완료로 표시하시겠습니까?",
+    "setReadedConfirmTitle" : "열람 완료 표시 확인",
+
+    "open" : "열기",
+
+    "workcenter": "새 업무함이 출시되었습니다. 새 업무함으로 전환하시겠습니까?",
+    "gotoWorkcenter": "새 업무함으로 전환",
+
+    "moduleTitle": "결재",
+    "startDraft": "결재 기안",
+    "lnbGroupApproval": "결재함",
+    "lnbGroupRead": "열람함",
+    "lnbGroupDocument": "문서함",
+    "countText": "{count}건",
+    "list_titleForm": "제목 / 양식",
+    "list_status": "상태",
+    "statusProgress": "진행",
+    "statusCompleted": "종결",
+    "statusOverdue": "기한 초과",
+    "weekDays": ["일", "월", "화", "수", "목", "금", "토"],
+    "noData": "데이터가 없습니다"
+
+};
