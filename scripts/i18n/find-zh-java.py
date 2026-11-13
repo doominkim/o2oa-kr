@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
-"""Finds Chinese text in o2server Java sources that can reach the UI untranslated.
+"""Finds Chinese text and untranslated English error messages in o2server Java sources.
 
 Usage: python3 scripts/i18n/find-zh-java.py [--max 20] [--dump leftovers.json] [module ...]
 
-Chinese string literals (comments ignored) are grouped by context:
+String literals (comments ignored) are grouped by context:
   annotation  @FieldDescribe / @Jaxrs*Describe API docs   -> ignored (developer-facing)
   log         LOGGER.* / logger.* calls                    -> ignored
-  exception   exception classes and `new ...Exception(`    -> must have a Korean entry in
+  exception   exception classes (super(...)) and `new ...Exception(` -> Chinese or English
+              (two or more Latin words) text must have a Korean entry in
               o2server/x_base_core_project/src/main/resources/ko-messages.json
-              (translated at runtime by KoreanMessages)
-  other       everything else                              -> must be translated in place or
+              (translated at runtime by KoreanMessages). A literal concatenated with a value
+              matches the template form with `{}` on that side.
+  other       Chinese text anywhere else               -> must be translated in place or
               listed with a reason in scripts/i18n/server-keep-han/*.json
 Exit code is 1 when anything is left.
 """
@@ -17,6 +19,7 @@ import glob, json, os, re, subprocess, sys
 
 ROOT = subprocess.run(["git", "rev-parse", "--show-toplevel"], capture_output=True, text=True).stdout.strip()
 HAN = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
+WORDS = re.compile(r"[A-Za-z]{2,}")
 ANNOT = re.compile(r"@(FieldDescribe|JaxrsDescribe|JaxrsMethodDescribe|JaxrsParameterDescribe|JaxrsFieldDescribe|Schema|Operation|Parameter)\s*\([^)]*$")
 LOG = re.compile(r"(LOGGER|logger|log|LOG)\s*\.\s*(debug|info|warn|error|trace|print)\s*\([^;]*$")
 
@@ -63,7 +66,7 @@ def unescape(s):
         return s
 
 
-table = {e["zh"] for e in json.load(open(os.path.join(ROOT, "o2server/x_base_core_project/src/main/resources/ko-messages.json"), encoding="utf-8"))}
+table = {e["src"] for e in json.load(open(os.path.join(ROOT, "o2server/x_base_core_project/src/main/resources/ko-messages.json"), encoding="utf-8"))}
 keep = {}
 for p in glob.glob(os.path.join(ROOT, "scripts/i18n/server-keep-han/*.json")):
     for f, items in json.load(open(p, encoding="utf-8")).items():
@@ -76,22 +79,27 @@ for f in files:
     if "/src/test/" in f or (modules and f.split("/")[1] not in modules):
         continue
     src = open(os.path.join(ROOT, f), encoding="utf-8").read()
-    if not HAN.search(src):
-        continue
     hits = []
     for line, raw, pos in literals(src):
-        if not HAN.search(raw):
+        han = bool(HAN.search(raw))
+        if not han and len(WORDS.findall(raw)) < 2:
             continue
         before = src[max(0, pos - 300):pos]
         stmt = before[before.rfind(";") + 1:]
         text = unescape(raw)
         if ANNOT.search(before[-200:]) or LOG.search(stmt):
             continue
-        is_exception = re.search(r"Exception\w*\.java$", f) or re.search(r"new\s+\w*Exception\w*\s*\([^;]*$", stmt)
+        if han:
+            is_exception = re.search(r"Exception\w*\.java$", f) or re.search(r"new\s+\w*Exception\w*\s*\([^;]*$", stmt)
+        else:
+            is_exception = ((re.search(r"Exception\w*\.java$", f) and re.search(r"super\s*\([^;]*$", stmt))
+                            or re.search(r"new\s+\w*Exception\w*\s*\([^;]*$", stmt))
         if is_exception:
-            if text not in table:
-                hits.append((line, "exception (no ko-messages entry)", text))
-        elif text not in keep.get(f, ()) and raw not in keep.get(f, ()):
+            after = src[pos + len(raw) + 2:pos + len(raw) + 12].lstrip()
+            form = ("{}" if stmt.rstrip().endswith("+") else "") + text + ("{}" if after.startswith("+") else "")
+            if text not in table and form not in table:
+                hits.append((line, "exception (no ko-messages entry)", form))
+        elif han and text not in keep.get(f, ()) and raw not in keep.get(f, ()):
             hits.append((line, "other", text))
     if hits:
         left += len(hits)
@@ -103,5 +111,5 @@ for f in files:
             print(f"  ... {len(hits) - limit} more")
 if dump:
     json.dump(dumped, open(dump, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-print(f"\n{left} Chinese strings left")
+print(f"\n{left} strings left")
 sys.exit(1 if left else 0)
