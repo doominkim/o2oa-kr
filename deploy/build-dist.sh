@@ -2,7 +2,7 @@
 # Assembles the runnable o2server distribution for the container image:
 #   official release (deploy/release.env) + this fork's web build + patched server classes.
 #
-# Usage: deploy/build-dist.sh <release zip> <JDK 11 home> <output dir>
+# Usage: deploy/build-dist.sh <release zip> <JDK 21 home> <output dir>  (the release was built with JDK 21)
 # Prerequisite: `npx gulp build_web` has produced target/o2server/servers/webServer.
 # Result: <output dir>/o2server, ready for deploy/Dockerfile.
 set -euo pipefail

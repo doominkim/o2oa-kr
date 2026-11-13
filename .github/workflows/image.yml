@@ -25,10 +25,12 @@ jobs:
         with:
           node-version: 24
 
+      # The 10.1.0 release was compiled by JDK 21 (--release 11); patch-classes compares our classes
+      # with the release bytecode, so the same compiler generation is needed.
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "11"
+          java-version: "21"
 
       - name: Read release pin
         run: grep -E '^[A-Z_]+=' deploy/release.env >> "$GITHUB_ENV"
