@@ -42,7 +42,7 @@
     "font-size" : "16px"
   },
   "calendarSubjectNode_over" : {
-    "color" : "#3C76B7"
+    "color" : "#2768B0"
   },
   "calendarDescriptionNode" : {
     "margin-top" : "20px",

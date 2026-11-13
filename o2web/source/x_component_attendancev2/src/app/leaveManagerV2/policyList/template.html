@@ -10,7 +10,7 @@
         <div style="margin: 10px 0;float: left;">
             <button class="mainColor_bg" @click="clickAddPolicy">{{$.lp.leaveManagerV2.addTypePolicy}}</button>
         </div>
-        <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table">
+        <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table" data-empty="{{$.lp.noData || ''}}">
             <thead>
                 <th>{{$.lp.leaveManagerV2.policy.policyName}}</th>
                 <th>{{$.lp.leaveManagerV2.policy.grantScopeType}}</th>

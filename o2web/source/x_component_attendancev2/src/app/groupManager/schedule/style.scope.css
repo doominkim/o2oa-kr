@@ -226,7 +226,7 @@
   background-color: #fff;
   background-image: none;
   border-radius: var(--att-default-radius);
-  border: 1px solid #dedede;
+  border: 1px solid var(--att-input-border);
   transition: all 0.3s;
   align-items: center;
 }

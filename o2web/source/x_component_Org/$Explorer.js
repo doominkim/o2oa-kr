@@ -77,7 +77,7 @@ MWF.xApplication.Org.$Explorer = new Class({
         }.bind(this));
 
 
-        this.rootNameNode = new Element("div.mainColor_bg", {"styles": this.css.rootNameNode, text: this.app.lp.title}).inject(this.listAreaNode);
+        this.rootNameNode = new Element("div", {"styles": this.css.rootNameNode, text: this.app.lp.title}).inject(this.listAreaNode);
         o2.Actions.load('x_organization_assemble_control').UnitAction.getRoot().then(function(json){
             if (json.data){
                 this.rootNameNode.textContent = json.data.name;

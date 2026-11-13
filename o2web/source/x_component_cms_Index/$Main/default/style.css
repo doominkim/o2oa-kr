@@ -1,0 +1,25 @@
+/* 인디고 테마: 다른 스킨의 게시판 홈 전역 규칙이 LNB 모양을 덮지 않도록 막는다. */
+.ik-cms-index .o2_cms_index_all_current,
+.ik-cms-index .o2_cms_index_categoryItem_current {
+    color: #2768B0 !important;
+    border-bottom: 0 !important;
+    background: #EAF2FB !important;
+}
+.ik-cms-index .o2_cms_index_categoryItem_text {
+    color: #2768B0 !important;
+}
+.ik-cms-index .o2_cms_index_categoryItem_text_over {
+    color: #FFFFFF !important;
+    border-color: #2768B0 !important;
+    background-color: #2768B0 !important;
+}
+.ik-cms-index .ik-cms-writeBtn {
+    background-image: none !important;
+}
+.ik-cms-index .ik-cms-lnb::-webkit-scrollbar {
+    width: 6px;
+}
+.ik-cms-index .ik-cms-lnb::-webkit-scrollbar-thumb {
+    background: #D9DDE3;
+    border-radius: 3px;
+}

@@ -1,6 +1,6 @@
 {
     "node": {
-        "margin": "10px 0px",
+        "margin": "0px",
         "overflow": "hidden",
         "background-color": "#fff",
 //        "position": "absolute",
@@ -22,59 +22,74 @@
     "calendarTitleNode": {
         "height": "50px",
         "overflow": "hidden",
-        "border-bottom": "1px solid #CCC"
+        "display": "flex",
+        "align-items": "center",
+        "padding-left": "20px",
+        "box-sizing": "border-box",
+        "border-bottom": "1px solid #EDEFF2"
     },
     "calendarBodyNode": {
         "overflow": "hidden"
     },
 
-"calendarPrevMonthNode": {
-        "height": "30px",
-        "width": "24px",
-        "margin": "12px 0px 10px 40px",
-        "color": "#999",
-        "font-size": "24px",
-//        "background": "url(../x_component_Calendar/$MonthView/default/icon/left24_gray.png) no-repeat center center",
-        "cursor": "pointer",
-        "float": "left"
+    "calendarPrevMonthNode": {
+        "order": "1",
+        "box-sizing": "border-box",
+        "height": "28px",
+        "width": "28px",
+        "line-height": "26px",
+        "text-align": "center",
+        "margin": "0px 0px 0px 12px",
+        "border": "1px solid #CCD1D9",
+        "border-radius": "2px 0px 0px 2px",
+        "background-color": "#FFF",
+        "color": "#666",
+        "font-size": "14px",
+        "cursor": "pointer"
     },
     "calendarPrevMonthNode_over": {
-        "color": "#4990e2"
+        "color": "#2768B0"
 //        "background": "url(../x_component_Calendar/$MonthView/default/icon/left24_blue.png) no-repeat center center"
     },
     "calendarPrevMonthNode_down": {
 //        "background": "url(../x_component_Calendar/$MonthView/default/icon/left24_blue.png) no-repeat center center"
     },
     "calendarNextMonthNode": {
-        "height": "30px",
-        "width": "24px",
-        "margin": "12px 0px 10px 0px",
-        "color": "#999",
-        "font-size": "24px",
-//        "background": "url(../x_component_Calendar/$MonthView/default/icon/right24_gray.png) no-repeat center center",
-        "cursor": "pointer",
-        "float": "left"
+        "order": "2",
+        "box-sizing": "border-box",
+        "height": "28px",
+        "width": "28px",
+        "line-height": "26px",
+        "text-align": "center",
+        "margin": "0px 0px 0px -1px",
+        "border": "1px solid #CCD1D9",
+        "border-radius": "0px 2px 2px 0px",
+        "background-color": "#FFF",
+        "color": "#666",
+        "font-size": "14px",
+        "cursor": "pointer"
     },
     "calendarNextMonthNode_over": {
-        "color": "#4990e2"
+        "color": "#2768B0"
 //        "background": "url(../x_component_Calendar/$MonthView/default/icon/right24_blue.png) no-repeat center center"
     },
     "calendarNextMonthNode_down": {
 //        "background": "url(../x_component_Calendar/$MonthView/default/icon/right24_blue.png) no-repeat center center"
     },
     "calendarTitleTextNode": {
-        "line-height": "48px",
-        "color" : "#333",
-        "margin": "0px 10px",
-        "font-size": "20px",
-        "float": "left",
+        "order": "0",
+        "line-height": "28px",
+        "color" : "#222",
+        "margin": "0px",
+        "font-size": "18px",
+        "font-weight": "bold",
         "cursor": "pointer"
     },
     "calendarTitleTextNode_over": {
-        "color": "#4990e2"
+        "color": "#2768B0"
     },
     "calendarTitleTextNode_down": {
-        "color": "#4990e2"
+        "color": "#2768B0"
     },
     "calendarMonthSelectNode": {
         "width": "260px",
@@ -122,14 +137,14 @@
         "line-height": "50px"
     },
     "calendarMonthSelectCurrentNode" : {
-        "color" : "#4990e2",
+        "color" : "#2768B0",
         "cursor": "pointer",
         "font-size": "14px",
         "height" : "30px",
         "line-height" : "30px",
         "border-radius" : "100px",
         "width" : "30px",
-        "border" : "1px solid #4990e2",
+        "border" : "1px solid #2768B0",
         "background-color" : "#fff",
         "margin" : "auto"
     },
@@ -141,8 +156,8 @@
         "line-height" : "30px",
         "border-radius" : "100px",
         "width" : "30px",
-        "border" : "1px solid #4990e2",
-        "background-color" : "#4990e2",
+        "border" : "1px solid #2768B0",
+        "background-color" : "#2768B0",
         "margin" : "auto"
     },
     "calendarMonthSelectTdNode": {
@@ -153,7 +168,7 @@
         "font-size": "14px"
     },
     "calendarMonthSelectTdNode_over": {
-        "color": "#4990e2"
+        "color": "#2768B0"
     },
     "calendarMonthSelectTdNode_down": {
         "color": "#8894e9"
@@ -167,7 +182,7 @@
         "color": "#333"
     },
     "calendarMonthSelectBottomNode_over": {
-        "color": "#4990e2"
+        "color": "#2768B0"
     },
 
     "listViewTable": {
@@ -196,9 +211,9 @@
     "listViewTableTd_ToDay": {
         "height": "50px",
         "line-height": "50px",
-        "border-bottom": "1px solid #4990e2",
+        "border-bottom": "1px solid #2768B0",
         "background-color": "#FFF",
-        "color": "#4990e2",
+        "color": "#2768B0",
         "padding": "0px 10px",
         "font-size": "14px",
         "font-weight" : "bold",

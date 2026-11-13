@@ -1,8 +1,12 @@
 <div class="att" id="app-attendance-v2">
+  <div class="index_page_module_bar">
+    <i class="ooicon-person_clock index_page_module_bar_icon"></i>
+    <span class="index_page_module_bar_title">{{$.lp.title}}</span>
+  </div>
   <div class="index_page_content_container">
     <div class="index_page_nav_container">
 <!--       <my-menu oo-prop="$.menu"></my-menu>-->
-      <oo-nav style="width:100%;" searchable="false" icon-prefix="" id="app-attendance-v2-menu"></oo-nav>
+      <oo-nav style="width:100%;" searchable="false" icon-prefix="" css-link="../x_component_attendancev2/$Main/default/nav.css" id="app-attendance-v2-menu"></oo-nav>
     </div>
     <div class="index_page_route_container">
       <app-container oo-prop:menu="$.menu.currentMenu"></app-container>

@@ -329,7 +329,7 @@
     },
     {
       "icon_id": "44330103",
-      "name": "勾选",
+      "name": "체크",
       "font_class": "gouxuan",
       "unicode": "e771",
       "unicode_decimal": 59249
@@ -427,7 +427,7 @@
     },
     {
       "icon_id": "44180157",
-      "name": "calendar备份 4",
+      "name": "calendar 사본 4",
       "font_class": "a-calendarbeifen4",
       "unicode": "e75b",
       "unicode_decimal": 59227
@@ -1610,7 +1610,7 @@
     },
     {
       "icon_id": "42287229",
-      "name": "create；加号",
+      "name": "create; 더하기",
       "font_class": "create",
       "unicode": "e6a8",
       "unicode_decimal": 59048
@@ -2653,133 +2653,133 @@
     },
     {
       "icon_id": "42264933",
-      "name": "person_clock；访客管理；历史人员；历史用户",
+      "name": "person_clock; 방문자 관리; 이전 사용자; 이전 사용자 기록",
       "font_class": "person_clock",
       "unicode": "e709",
       "unicode_decimal": 59145
     },
     {
       "icon_id": "42264861",
-      "name": "gongwentaizhang；公文台账；公文包",
+      "name": "gongwentaizhang; 공문 대장; 서류 가방",
       "font_class": "gongwentaizhang",
       "unicode": "e6e1",
       "unicode_decimal": 59105
     },
     {
       "icon_id": "42264127",
-      "name": "gongzuolianxidan；工作联系单；公司职员；员工资料",
+      "name": "gongzuolianxidan; 업무 연락서; 회사 직원; 직원 정보",
       "font_class": "gongzuolianxidan",
       "unicode": "e70c",
       "unicode_decimal": 59148
     },
     {
       "icon_id": "42264128",
-      "name": "guizhangzhidu；规章制度；公文；",
+      "name": "guizhangzhidu; 규정; 공문;",
       "font_class": "guizhangzhidu",
       "unicode": "e70d",
       "unicode_decimal": 59149
     },
     {
       "icon_id": "42264129",
-      "name": "home_zd；自定义主页；主页编辑；房子",
+      "name": "home_zd; 사용자 정의 홈; 홈 편집; 집",
       "font_class": "home_zd",
       "unicode": "e70e",
       "unicode_decimal": 59150
     },
     {
       "icon_id": "42264130",
-      "name": "information；信息采编；信息编辑；文件编辑",
+      "name": "information; 정보 취재·편집; 정보 편집; 파일 편집",
       "font_class": "information1",
       "unicode": "e70f",
       "unicode_decimal": 59151
     },
     {
       "icon_id": "42264131",
-      "name": "hetongshenpi合同审批；盖章",
+      "name": "hetongshenpi 계약 결재; 날인",
       "font_class": "hetongshenpi",
       "unicode": "e710",
       "unicode_decimal": 59152
     },
     {
       "icon_id": "42264132",
-      "name": "hetongbiangeng；合同变更；印章申请",
+      "name": "hetongbiangeng; 계약 변경; 인장 신청",
       "font_class": "hetongbiangeng",
       "unicode": "e711",
       "unicode_decimal": 59153
     },
     {
       "icon_id": "42264133",
-      "name": "hangyexinwen；行业新闻；行业动态",
+      "name": "hangyexinwen; 업계 소식; 업계 동향",
       "font_class": "hangyexinwen",
       "unicode": "e712",
       "unicode_decimal": 59154
     },
     {
       "icon_id": "42264134",
-      "name": "gongziitiao；工资条；项目资金；账单",
+      "name": "gongziitiao; 급여 명세서; 프로젝트 자금; 청구서",
       "font_class": "gongzjitiao",
       "unicode": "e713",
       "unicode_decimal": 59155
     },
     {
       "icon_id": "42264012",
-      "name": "gongwen;公文；文件；",
+      "name": "gongwen; 공문; 파일;",
       "font_class": "gongwen",
       "unicode": "e70b",
       "unicode_decimal": 59147
     },
     {
       "icon_id": "42262745",
-      "name": "caigoushenqing；采购申请；采购审批；购物车；",
+      "name": "caigoushenqing; 구매 신청; 구매 결재; 장바구니;",
       "font_class": "caigoushenqing",
       "unicode": "e702",
       "unicode_decimal": 59138
     },
     {
       "icon_id": "42262746",
-      "name": "dingbiaobaogao；定标报告；订单；审核通过",
+      "name": "dingbiaobaogao; 낙찰 보고서; 주문; 검토 통과",
       "font_class": "dingbiaobaogao",
       "unicode": "e703",
       "unicode_decimal": 59139
     },
     {
       "icon_id": "42262747",
-      "name": "duchaduban；督查督办；警务办公；警务处理",
+      "name": "duchaduban; 감독·독촉; 경무 업무; 경무 처리",
       "font_class": "duchaduban",
       "unicode": "e704",
       "unicode_decimal": 59140
     },
     {
       "icon_id": "42262748",
-      "name": "dingcan；订餐",
+      "name": "dingcan; 식사 주문",
       "font_class": "dingcan",
       "unicode": "e705",
       "unicode_decimal": 59141
     },
     {
       "icon_id": "42262749",
-      "name": "fawen；发文；文件发送",
+      "name": "fawen; 발송 공문; 파일 발송",
       "font_class": "fawen",
       "unicode": "e706",
       "unicode_decimal": 59142
     },
     {
       "icon_id": "42262750",
-      "name": "baojiashenqing;报价申请；财务；记账",
+      "name": "baojiashenqing; 견적 신청; 재무; 기장",
       "font_class": "baojiashenqing",
       "unicode": "e707",
       "unicode_decimal": 59143
     },
     {
       "icon_id": "42262751",
-      "name": "fapiaoguanli；发票管理",
+      "name": "fapiaoguanli; 세금계산서 관리",
       "font_class": "fapiaoguanli",
       "unicode": "e708",
       "unicode_decimal": 59144
     },
     {
       "icon_id": "42262596",
-      "name": "gonghai；公海；人；用户",
+      "name": "gonghai; 공용 고객 풀; 사람; 사용자",
       "font_class": "gonghai",
       "unicode": "e700",
       "unicode_decimal": 59136

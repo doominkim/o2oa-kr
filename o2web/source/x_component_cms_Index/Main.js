@@ -37,9 +37,23 @@ MWF.xApplication.cms.Index.Main = new Class({
 	},
 	createNode: function(){
 		this.content.setStyle("overflow", "hidden");
-		this.node = new Element("div", {
+		this.content.loadCss("../x_component_cms_Index/$Main/default/style.css");
+		this.node = new Element("div.ik-cms-index", {
 			"styles": this.css.container
 		}).inject(this.content);
+
+		this.moduleBarNode = new Element("div.moduleBarNode", {
+			"styles": this.css.moduleBarNode
+		}).inject(this.node);
+		new Element("i.ooicon-menu", {"styles": this.css.moduleBarIconNode}).inject(this.moduleBarNode);
+		new Element("div", {"styles": this.css.moduleBarTextNode, "text": this.lp.moduleTitle || this.lp.title}).inject(this.moduleBarNode);
+
+		this.lnbNode = new Element("div.ik-cms-lnb", {
+			"styles": this.css.lnbNode
+		}).inject(this.node);
+		this.mainNode = new Element("div.ik-cms-main", {
+			"styles": this.css.mainNode
+		}).inject(this.node);
 	},
 	loadApplicationContent: function(){
 		this.loadTitle();
@@ -56,16 +70,30 @@ MWF.xApplication.cms.Index.Main = new Class({
 	loadTitleBar: function(){
 		this.titleBarContainer = new Element("div", {
 			"styles": this.css.titleBarContainer
-		}).inject(this.node);
+		}).inject(this.mainNode);
 		this.titleBar = new Element("div", {
 			"styles": this.css.titleBar
 		}).inject(this.titleBarContainer);
+		this.titleTextNode = new Element("div", {
+			"styles": this.css.titleTextNode,
+			"text": this.lp.allColumn
+		}).inject(this.titleBar);
+		this.titleCountNode = new Element("div", {
+			"styles": this.css.titleCountNode
+		}).inject(this.titleBar);
+	},
+	setColumnCount: function( count ){
+		if( this.titleCountNode )this.titleCountNode.set("text", (typeOf(count) === "number") ? count : "");
 	},
 	loadAllTypeNode : function(){
+		this.lnbTreeNode = new Element("div", {
+			"styles": this.css.lnbTreeNode
+		}).inject(this.lnbNode);
 		this.allTypeNode =  new Element("div.columnTop_All",{
 			"styles" : this.css.columnTop_All,
 			"text" : this.lp.allColumn //"全部栏目"
-		}).inject( this.titleBar );
+		}).inject( this.lnbTreeNode );
+		new Element("i.ooicon-documents", {"styles": this.css.columnTop_AllIcon}).inject(this.allTypeNode, "top");
 		this.allTypeNode.addEvents({
 			"mouseover" : function(){
 				if( this.currentAppTypeNode !== this.allTypeNode )this.allTypeNode.setStyles( this.css.columnTop_All_over );
@@ -79,10 +107,11 @@ MWF.xApplication.cms.Index.Main = new Class({
 		});
 	},
 	loadCreateDocumentActionNode: function() {
-		this.createDocumentAction = new Element("div", {
+		this.createDocumentAction = new Element("div.ik-cms-writeBtn", {
 			"styles": this.css.createDocumentAction,
-			"text" : this.lp.start
-		}).inject(this.titleBar);
+			"text" : this.lp.writeDocument || this.lp.start
+		}).inject(this.lnbNode, "top");
+		new Element("i.ooicon-edit", {"styles": this.css.createDocumentIcon}).inject(this.createDocumentAction, "top");
 		this.createDocumentAction.addEvents({
 			"click": function(e){
 				MWF.xDesktop.requireApp("cms.Index", "Newer", function(){
@@ -92,11 +121,9 @@ MWF.xApplication.cms.Index.Main = new Class({
 			}.bind(this),
 			"mouseover" : function(e){
 				this.createDocumentAction.setStyles( this.css.createDocumentAction_over );
-				this.createDocumentAction.addClass( "o2_cms_index_createDocument_over" );
 			}.bind(this),
 			"mouseout" : function(e){
 				this.createDocumentAction.setStyles( this.css.createDocumentAction );
-				this.createDocumentAction.removeClass( "o2_cms_index_createDocument_over" );
 			}.bind(this)
 		});
 	},
@@ -162,14 +189,15 @@ MWF.xApplication.cms.Index.Main = new Class({
 		var _self = this;
 		this.typeListContainer = new Element("div.columnTop_category", {
 			"styles": this.css.columnTop_category
-		}).inject(this.titleBar);
+		}).inject(this.lnbTreeNode);
 
 		// this.restActions.listAllAppType( function( json ){
 		o2.Actions.load("x_cms_assemble_control").AppInfoAction.listHasDocumentAppType( function( json ){
 			(json.data || []).each( function( typeObject ){
-				new Element( "div.columnTop_category", {
+				var typeNode = new Element( "div.columnTop_category", {
 					"styles" : this.css.columnTop_categoryItem,
-					"text" : typeObject.appType + "(" + typeObject.count + ")",
+					"text" : typeObject.appType,
+					"title" : typeObject.appType,
 					"events" : {
 						"mouseover" : function( ev ){
 							if( this.currentAppTypeNode !== ev.target )ev.target.setStyles( this.css.columnTop_categoryItem_over );
@@ -181,7 +209,11 @@ MWF.xApplication.cms.Index.Main = new Class({
 							_self.setCurrentAppType( this, ev.target );
 						}.bind( typeObject.appType )
 					}
-				}).inject( this.typeListContainer )
+				}).inject( this.typeListContainer );
+				new Element("span", {
+					"styles": this.css.columnTop_categoryCount,
+					"text": typeObject.count
+				}).inject( typeNode );
 			}.bind(this));
 			if (this.typeListContainer.getScrollSize().y> Math.round(this.typeListContainer.getSize().y) && !this.columnTypeExpandNode ) this.createTypeExpandButton();
 		}.bind(this))
@@ -230,6 +262,8 @@ MWF.xApplication.cms.Index.Main = new Class({
 		}
 		this.currentAppType = appType;
 		this.currentAppTypeNode = target;
+		if( this.titleTextNode )this.titleTextNode.set("text", appType === "all" ? this.lp.allColumn : appType );
+		this.setColumnCount();
 
 		this.createColumnNodes();
 	},
@@ -254,7 +288,7 @@ MWF.xApplication.cms.Index.Main = new Class({
 		//}).inject(this.node);
 		this.scrollNode = new Element("div", {
 			"styles": this.css.scrollNode
-		}).inject(this.node);
+		}).inject(this.mainNode);
 		this.contentWarpNode = new Element("div", {
 			"styles": this.css.node
 		}).inject(this.scrollNode);
@@ -316,6 +350,13 @@ MWF.xApplication.cms.Index.Main = new Class({
 			column.load();
 			this.columns.push(column);
 		}.bind(this));
+		this.setColumnCount( json.data.length );
+		if( !json.data.length )this.showEmptyNode();
+	},
+	showEmptyNode: function(){
+		var emptyNode = new Element("div", {"styles": this.css.emptyNode}).inject(this.contentNode);
+		new Element("i.ooicon-file-text", {"styles": this.css.emptyIconNode}).inject(emptyNode);
+		new Element("div", {"styles": this.css.emptyTextNode, "text": this.lp.noData || ""}).inject(emptyNode);
 	},
 	search : function( key ){
 		if(!key)key = this.searchBarInputNode.get("value");
@@ -376,18 +417,15 @@ MWF.xApplication.cms.Index.Main = new Class({
 		//this.contentContainerNode.setStyle("height", ""+height+"px");
 
 		var nodeSize = this.content.getSize();
+		var moduleBarSize = this.moduleBarNode ? this.moduleBarNode.getSize() : {"x":0,"y":0};
+		var bodyHeight = nodeSize.y-moduleBarSize.y;
+		if( this.lnbNode )this.lnbNode.setStyle("height", ""+bodyHeight+"px");
+		if( this.mainNode )this.mainNode.setStyle("height", ""+bodyHeight+"px");
 		var titlebarSize = this.titleBarContainer ? this.titleBarContainer.getSize() : {"x":0,"y":0};
 
-		this.scrollNode.setStyle("height", ""+(nodeSize.y-titlebarSize.y)+"px");
+		this.scrollNode.setStyle("height", ""+(bodyHeight-titlebarSize.y)+"px");
 
 		if (this.contentWarpNode){
-			var count = (nodeSize.x/550).toInt();
-			var x = 550 * count;
-			var m = (nodeSize.x-x)/2-10;
-			this.contentWarpNode.setStyles({
-				"width": ""+x+"px",
-				"margin-left": ""+m+"px"
-			});
 			//this.titleBar.setStyles({
 			//	"margin-left": ""+(m+10)+"px",
 			//	"margin-right": ""+(m+10)+"px"
@@ -461,6 +499,13 @@ MWF.xApplication.cms.Index.Column = new Class({
 			"styles" : this.app.css.categoryList
 		}).inject(this.categoryContainer);
 
+		this.documentHead = new Element("div.documentHead",{
+			"styles" : this.app.css.documentHead
+		}).inject(this.rightNode);
+		new Element("div", {"styles": this.app.css.documentHeadTitle, "text": this.app.lp.documentTitle}).inject(this.documentHead);
+		new Element("div", {"styles": this.app.css.documentHeadPerson, "text": this.app.lp.person}).inject(this.documentHead);
+		new Element("div", {"styles": this.app.css.documentHeadDate, "text": this.app.lp.publishTime || ""}).inject(this.documentHead);
+
 		this.documentList = new Element("div",{
 			"styles" : this.app.css.documentList
 		}).inject(this.rightNode);
@@ -522,6 +567,12 @@ MWF.xApplication.cms.Index.Column = new Class({
 			"text" : description,
 			"title" : description
 		}).inject(textNode);
+
+		var moreNode = new Element("div",{
+			"styles" : this.app.css.columnItemMoreNode,
+			"text" : this.app.lp.more
+		}).inject(leftNode);
+		new Element("i.ooicon-right", {"styles": this.app.css.columnItemMoreIcon}).inject(moreNode);
 
 		var _self = this;
 		leftNode.addEvents({
@@ -687,10 +738,13 @@ MWF.xApplication.cms.Index.Column = new Class({
 	listDocument:function(data){
 		var _self = this;
 		var documentItem = new Element("div",{
-			"text" : data.title,
 			"title" : data.title,
 			"styles" : this.app.css.documentItem
 		}).inject(this.documentList);
+		new Element("div",{
+			"styles" : this.app.css.documentItemTitle,
+			"text" : data.title
+		}).inject(documentItem);
 
 		var topNode;
 		if( data.isTop ){
@@ -699,6 +753,14 @@ MWF.xApplication.cms.Index.Column = new Class({
 				styles : this.app.css.documentTopNode
 			}).inject(documentItem)
 		}
+		new Element("div",{
+			"styles" : this.app.css.documentItemPerson,
+			"text" : (data.creatorPersonShort || data.creatorPerson || "").split("@")[0]
+		}).inject(documentItem);
+		new Element("div",{
+			"styles" : this.app.css.documentItemDate,
+			"text" : (data.publishTime || "").substr(0, 10)
+		}).inject(documentItem);
 		documentItem.store("documentId",data.id);
 		documentItem.addEvents({
 			"mouseover" : function(){

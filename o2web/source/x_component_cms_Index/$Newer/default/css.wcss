@@ -41,7 +41,7 @@
 	"background": "url("+MWF.defaultPath+"/xDesktop/$Authentication/default/icon/o2_logo.png) no-repeat center center"
   },
   "formTopTextNode" : {
-	//"font-family" : "PingFang-SC-Medium",
+	//"font-family" : "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 	"margin-top" : "6px",
 	"padding-left" : "20px",
 	"font-size": "18px",
@@ -142,7 +142,7 @@
 	"height": "20px",
 	"line-height": "20px",
 	"overflow": "hidden",
-	"font-family": "Microsoft YaHei",
+	"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 	"font-size": "18px",
 	"font-weight" : "normal",
 	"float": "left",
@@ -168,7 +168,7 @@
 	"margin": "auto",
 	"font-size": "14px",
 	"color": "#666",
-	"font-family": "Microsoft YaHei",
+	"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 	"overflow" : "hidden",
 	"position" : "relative"
   },
@@ -258,7 +258,7 @@
 		"line-height": "38px",
 		"text-align": "center",
 		"font-size": "16px",
-		"font-family": "Microsoft YaHei",
+		"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 		"border-radius": "5px",
 		//	"border": "1px solid #354f67",
 		"color": "#FFF",
@@ -277,7 +277,7 @@
 		"line-height": "38px",
 		"text-align": "center",
 		"font-size": "16px",
-		"font-family": "Microsoft YaHei",
+		"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 		"border-radius": "5px",
 		"color": "#333",
 		"margin-top": "20px",
@@ -295,7 +295,7 @@
 //	"line-height": "30px",
 //	"padding-left": "65px",
 //	"font-size": "16px",
-//	"font-family": "Microsoft YaHei",
+//	"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 //	"border-radius": "3px",
 //	"border": "1px solid #354f67",
 //	"color": "#FFF",
@@ -312,7 +312,7 @@
 //	"line-height": "30px",
 //	"padding-left": "40px",
 //	"font-size": "16px",
-//	"font-family": "Microsoft YaHei",
+//	"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 //	"border-radius": "3px",
 //	"color": "#FFF",
 //	"margin-top": "20px",
@@ -381,7 +381,7 @@
 	"background-color" : "#fff"
   },
   "columnItemNode_current" : {
-	"color" : "#3c76b7",
+	"color" : "#2768B0",
 	"background-color" : "#fff"
   },
   "columnItemIconNode" : {
@@ -432,8 +432,8 @@
 	"background-color" : "#f0f0f0"
   },
   "categoryItemNode_current" : {
-	"border-left" : "4px solid #3c76b7",
-	"color" : "#3c76b7",
+	"border-left" : "4px solid #2768B0",
+	"color" : "#2768B0",
 	"background-color" : "#f7f7f7"
   },
   "categoryItemTextNode" : {

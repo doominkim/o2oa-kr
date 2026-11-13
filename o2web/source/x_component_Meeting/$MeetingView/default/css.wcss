@@ -1,9 +1,9 @@
 {
   "node": {
     //"margin": "60px 0px 10px 0px",
-    "margin": "10px 0px",
+    "margin": "0px",
     "overflow": "hidden",
-    "background-color": "#f0f0f0",
+    "background-color": "#F4F5F7",
     "position": "absolute",
     "width": "100%",
     "top": "0px",
@@ -14,24 +14,25 @@
 
   "titleNode": {
     "background-color" : "#fff",
-    "height": "60px",
+    "height": "50px",
     "overflow": "hidden",
-    "border-bottom": "1px solid #CCC"
+    "border-bottom": "1px solid #EDEFF2"
   },
   "todayNode" : {
       "float": "left",
-      "font-size" : "24px",
-      "line-height" : "60px",
-      "color" : "#333",
-      "margin-left" : "50px"
+      "font-size" : "18px",
+      "font-weight" : "bold",
+      "line-height" : "50px",
+      "color" : "#222",
+      "margin-left" : "20px"
   },
   "monthSelectContainer": {
     "width": "400px",
     "float": "left",
-    "line-height": "60px",
-    "margin-left": "40px",
-    "color": "#333",
-    "font-size": "16px",
+    "line-height": "50px",
+    "margin-left": "24px",
+    "color": "#666",
+    "font-size": "13px",
     "text-align": "right",
     "overflow" : "hidden"
   },
@@ -39,11 +40,12 @@
       "float" : "left"
   },
   "monthSelect": {
-    "border-radius" : "4px",
-    "border" : "1px solid #ccc",
-    "font-size": "16px",
+    "border-radius" : "2px",
+    "border" : "1px solid #D9D9D9",
+    "font-size": "13px",
     "height": "28px",
-    "color": "#666"
+    "margin": "0px 4px",
+    "color": "#333"
   },
 
   "scrollNode" : {
@@ -113,7 +115,7 @@
   },
   "dayTitleNode_today" : {
     "padding-top" : "30px",
-    "background-color" : "#4990E2",
+    "background-color" : "#2768B0",
     "width" : "300px",
     "height" : "90px",
     "border-radius" : "4px 4px 0 0",
@@ -172,7 +174,7 @@
     "border-radius" : "40px",
     "left" : "110px",
     "bottom" : "-40px",
-    "background": "#4990E2",
+    "background": "#2768B0",
     "position" : "absolute",
     "height" : "80px",
     "line-height" : "80px",
@@ -186,7 +188,7 @@
     "border-radius" : "40px",
     "left" : "110px",
     "bottom" : "-40px",
-    "background": "#3C76B7",
+    "background": "#2768B0",
     "position" : "absolute",
     "height" : "80px",
     "line-height" : "80px",

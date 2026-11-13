@@ -29,11 +29,11 @@ MWF.xApplication.Meeting.WeekView = new Class({
     resetNodeSize: function(){
 
         var size = this.container.getSize();
-        var y = size.y-60;
+        var y = size.y-50;
 
         this.node.setStyle("height", ""+y+"px");
         if( !this.app.inContainer  ){
-            this.node.setStyle("margin-top", "60px");
+            this.node.setStyle("margin-top", "50px");
         }
 
 
@@ -1223,7 +1223,7 @@ MWF.xApplication.Meeting.WeekView.WeekCalendar = new Class({
     initialize: function(node, options){
 
         this.options.weekBegin = "0";
-        Locale.use("zh-CHS");
+        Locale.use(o2.dateLocale());
         this.options.defaultTime = ""+this.options.baseDate.getHours()+":"+this.options.baseDate.getMinutes()+":"+this.options.baseDate.getSeconds();
         this.setOptions(options);
 

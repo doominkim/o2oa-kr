@@ -25,7 +25,7 @@ export default content({
             totalPage: 1,
             appealEnable: false,
             loading: false,
-            emptyText: '暂无考勤异常数据'
+            emptyText: '근태 이상 데이터가 없습니다'
         };
     },
     afterRender() {
@@ -50,13 +50,13 @@ export default content({
                 this.bind.appealList = list.map((appeal) => this.buildAppealItem(appeal));
                 this.bind.totalCount = count;
                 this.bind.totalPage = Math.max(1, Math.ceil(count / this.bind.size));
-                this.bind.emptyText = '暂无考勤异常数据';
+                this.bind.emptyText = '근태 이상 데이터가 없습니다';
             }
         } catch (err) {
-            console.error('查询考勤异常数据失败', err);
+            console.error('근태 이상 데이터 조회 실패', err);
             this.bind.appealList = [];
-            this.bind.emptyText = '考勤异常数据加载失败';
-            o2.api.page.notice('考勤异常数据加载失败，请重试！', 'error');
+            this.bind.emptyText = '근태 이상 데이터를 불러오지 못했습니다';
+            o2.api.page.notice('근태 이상 데이터를 불러오지 못했습니다. 다시 시도하세요!', 'error');
         } finally {
             this.bind.loading = false;
         }
@@ -214,7 +214,7 @@ export default content({
             job: jobIds[0] || ''
         };
         const json = await appealInfoAction('startProcess', id, body);
-        console.debug('更新成功', json);
+        console.debug('업데이트했습니다', json);
         this.loadAppealList();
         if (currentTask.length > 0) {
             o2.api.page.openWork(currentTask[0]);
@@ -248,7 +248,7 @@ export default content({
     },
     async resetStatus(id) {
         const json = await appealInfoAction('resetStatus', id);
-        console.debug('还原状态成功', json);
+        console.debug('상태를 복원했습니다', json);
         this.loadAppealList();
     }
 });

@@ -85,15 +85,15 @@
                             if(result){
                                 redirectTo();
                             }else{
-                                $("ssoerror").set("html","单点失败！"+responseJSON.message + "<br/>地址：" + window.location).show();
+                                $("ssoerror").set("html","SSO 로그인에 실패했습니다! "+responseJSON.message + "<br/>주소: " + window.location).show();
                             }
                         }.bind(this),
                         function(xhr){
                             var json = JSON.parse(xhr.responseText);
-                            $("ssoerror").set("html", "单点登录失败: " + json.message + "<br/>" + (json.prompt || "") + "<br/>地址：" + window.location ).show();
+                            $("ssoerror").set("html", "SSO 로그인 실패: " + json.message + "<br/>" + (json.prompt || "") + "<br/>주소: " + window.location ).show();
                         }.bind(this),
                         function(text, error){
-                            $("ssoerror").set("html", text + "<br/>地址：" + window.location).show();
+                            $("ssoerror").set("html", text + "<br/>주소: " + window.location).show();
                         }.bind(this)
                     );
                 };
@@ -111,7 +111,7 @@
                     } else if (navigator && navigator.WebContainer && navigator.WebContainer.feixinGetToken) {
                         navigator.WebContainer.feixinGetToken(JSON.stringify(param))
                     } else {
-                        $("ssoerror").set("html","单点失败，无token api！" + "<br/>地址：" + window.location).show();
+                        $("ssoerror").set("html","SSO 로그인에 실패했습니다. token API가 없습니다!" + "<br/>주소: " + window.location).show();
                     }
                 }
 
@@ -124,13 +124,13 @@
                             if( info ){
                                 loginCallback(info, enterId);
                             }else{
-                                $("ssoerror").set("html","单点失败，通过API未获取到token！" + "<br/>地址：" + window.location).show();
+                                $("ssoerror").set("html","SSO 로그인에 실패했습니다. API에서 token을 가져오지 못했습니다!" + "<br/>주소: " + window.location).show();
                             }
                         }
                         feixinGetTokenFun();
                     }
                 // }else{
-                //     $("ssoerror").set("html","单点失败，enterId为空！" + "<br/>地址：" + window.location).show();
+                //     $("ssoerror").set("html","单点失败，enterId为空！" + "<br/>주소: " + window.location).show();
                 // }
             };
 
@@ -217,9 +217,12 @@
             who( login, redirectTo, login)
         }
     </script>
+    <link rel="icon" href="../favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="img/brand/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png" />
 </head>
 <body style="background: rgb(239, 239, 244);">
-<div id="ssoerror" style="text-align:center;line-height: 30px;word-break: break-all;display:none;">单点失败，请联系管理员！</div>
+<div id="ssoerror" style="text-align:center;line-height: 30px;word-break: break-all;display:none;">SSO 로그인에 실패했습니다. 관리자에게 문의하세요!</div>
 <button onclick="buttonLogin()"></button>
 </body>
 </html>

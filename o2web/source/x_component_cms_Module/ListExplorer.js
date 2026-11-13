@@ -157,12 +157,13 @@ MWF.xApplication.cms.Module.ListExplorer = new Class({
         var toolbarSize = this.toolbarNode ? this.toolbarNode.getSize() : {"x":0,"y":0};
         var titlebarSize = this.app.titleBar ? this.app.titleBar.getSize() : {"x":0,"y":0};
         var nodeSize = this.app.node.getSize();
+        var moduleBarSize = this.app.moduleBarNode ? this.app.moduleBarNode.getSize() : {"x":0,"y":0};
         var pt = 0; //this.elementContentNode.getStyle("padding-top").toFloat();
         var pb = 0; // this.elementContentNode.getStyle("padding-bottom").toFloat();
 
         var filterConditionSize = this.filterConditionNode ? this.filterConditionNode.getSize() : {"x":0,"y":0};
 
-        var height = nodeSize.y-toolbarSize.y-pt-pb-filterConditionSize.y-titlebarSize.y;
+        var height = nodeSize.y-moduleBarSize.y-toolbarSize.y-pt-pb-filterConditionSize.y-titlebarSize.y;
         this.elementContentNode.setStyle("height", ""+height+"px");
 
         this.pageCount = (height/40).toInt()+5;
@@ -349,7 +350,7 @@ MWF.xApplication.cms.Module.ListExplorer.DefaultList = new Class({
             "styles": this.css.elementContentListNode
         }).inject(this.container);
 
-        this.table = new Element("table",{ "width" : "100%", "border" : "0", "cellpadding" : "5", "cellspacing" : "0",  "class" : "editTable"}).inject(this.node);
+        this.table = new Element("table",{ "width" : "100%", "border" : "0", "cellpadding" : "5", "cellspacing" : "0",  "class" : "editTable ik-cms-list"}).inject(this.node);
         this.initSortData();
         this.createListHead();
         this.loadElementList( null,  callback );
@@ -372,7 +373,7 @@ MWF.xApplication.cms.Module.ListExplorer.DefaultList = new Class({
         this.node = new Element("div", {
             "styles": this.css.elementContentListNode
         }).inject(this.container);
-        this.table = new Element("table",{ "width" : "100%", "border" : "0", "cellpadding" : "5", "cellspacing" : "0",  "class" : "editTable"}).inject(this.node);
+        this.table = new Element("table",{ "width" : "100%", "border" : "0", "cellpadding" : "5", "cellspacing" : "0",  "class" : "editTable ik-cms-list"}).inject(this.node);
         this.createListHead();
         this.loadElementList();
     },
@@ -504,6 +505,7 @@ MWF.xApplication.cms.Module.ListExplorer.DefaultList = new Class({
                 this._getCurrentPageData(function(json){
                     this.count = json.count;
                     this.itemDataCount = json.count;
+                    if( this.app && this.app.setListCount )this.app.setListCount( json.count );
 
                     //if (!this.isCountShow){
                     //    this.filterAllProcessNode.getFirst("span").set("text", "("+this.count+")");
@@ -519,6 +521,7 @@ MWF.xApplication.cms.Module.ListExplorer.DefaultList = new Class({
                             this.documents[data.id] = item;
                         }
                     }.bind(this));
+                    if( !this.items.length )this.showEmptyNode();
 
                     this.isItemLoadding = false;
 
@@ -532,6 +535,12 @@ MWF.xApplication.cms.Module.ListExplorer.DefaultList = new Class({
                 this.loadItemQueue++;
             }
         }
+    },
+    showEmptyNode: function(){
+        if( !this.node || (this.emptyNode && this.emptyNode.getParent() === this.node) )return;
+        this.emptyNode = new Element("div", {"styles": this.css.noElementNode}).inject(this.node);
+        new Element("i.ooicon-file-text", {"styles": this.css.noElementIconNode}).inject(this.emptyNode);
+        new Element("div", {"styles": this.css.noElementTextNode, "text": this.app.lp.noData || ""}).inject(this.emptyNode);
     },
     _getCurrentPageData: function(callback, count){
         if(!count)count=this.explorer.countPerPage;

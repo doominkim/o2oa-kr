@@ -48,8 +48,8 @@ MWF.xApplication.Meeting.ListView = new Class({
 
         //if( this.app.inContainer )return;
         var size = this.container.getSize();
-        var y = size.y-60;
-        this.node.setStyle("margin-top", "60px");
+        var y = size.y-50;
+        this.node.setStyle("margin-top", "50px");
         this.node.setStyle("height", ""+y+"px");
 
         var sideBar = this.app.sideBar ? this.app.sideBar.getSize() : { x : 0, y : 0 };
@@ -309,8 +309,8 @@ MWF.xApplication.Meeting.ListView.View = new Class({
                 itemSize: this.docTotal,
                 useMainColor: true,
                 text: {
-                    firstPage: "第一页",
-                    lastPage: "最后一页"
+                    firstPage: "첫 페이지",
+                    lastPage: "마지막 페이지"
                 },
                 // pageSize: pageSize,
                 onJumpingPage: function (pageNum) {

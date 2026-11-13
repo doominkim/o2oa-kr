@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 
-                <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table margin-top" style="table-layout: fixed;">
+                <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table margin-top" data-empty="{{$.lp.noData || ''}}" style="table-layout: fixed;">
                     <thead>
                         <th style="width: 24px;"> </th>
                         <th style="width: 42px;">{{$.lp.groupForm.tableThDay}}</th>
@@ -204,7 +204,7 @@
                     </div>
                 </div> -->
                 <div class="margin-top" oo-if="$.workPlaceSelector.workAddressSelected.length > 0">
-                    <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table margin-top">
+                    <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table margin-top" data-empty="{{$.lp.noData || ''}}">
                         <thead>
                             <th>{{$.lp.workAddressName}}</th>
                             <th style="width: 20%;">{{$.lp.workAddressRange}}</th>
@@ -263,7 +263,7 @@
                     </div>
                 </div>
                 <div class="margin-top" oo-if="$.requiredCheckInDateForTableList.length > 0">
-                    <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table margin-top">
+                    <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table margin-top" data-empty="{{$.lp.noData || ''}}">
                         <thead>
                             <th>{{$.lp.groupForm.requiredCheckInDateThDate}}</th>
                             <th>{{$.lp.groupForm.requiredCheckInDateThShift}}</th>
@@ -301,7 +301,7 @@
                     </div>
                 </div>
                 <div class="margin-top" oo-if="$.noNeedCheckInDateForTableList.length > 0">
-                    <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table margin-top">
+                    <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table margin-top" data-empty="{{$.lp.noData || ''}}">
                         <thead>
                             <th>{{$.lp.groupForm.requiredCheckInDateThDate}}</th>
                             <th>{{$.lp.groupForm.requiredCheckInDateThShift}}</th>

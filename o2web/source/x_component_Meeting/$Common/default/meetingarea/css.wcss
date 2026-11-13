@@ -42,7 +42,7 @@
     "font-size" : "16px"
   },
   "meetingSubjectNode_over" : {
-    "color" : "#3C76B7"
+    "color" : "#2768B0"
   },
   "meetingDescriptionNode" : {
     "margin-top" : "20px",
@@ -78,7 +78,7 @@
 //    "background" : "url(../x_component_Meeting/$Main/default/icon/icon_bianji.png) no-repeat center center"
   },
   "action_edit_over" : {
-    "color": "#3C76B7"
+    "color": "#2768B0"
 //    "background" : "url(../x_component_Meeting/$Main/default/icon/icon_bianji_click.png) no-repeat center center"
   },
   "action_remove" : {
@@ -91,7 +91,7 @@
 //    "background" : "url(../x_component_Meeting/$Main/default/icon/icon_delete_grey.png) no-repeat center center"
   },
   "action_remove_over" : {
-    "color": "#3C76B7"
+    "color": "#2768B0"
     //"background" : "url(../x_component_Meeting/$Main/default/icon/icon_delete_blue_click.png) no-repeat center center"
   },
   "action_accept" : {
@@ -104,7 +104,7 @@
     //"background" : "url(../x_component_Meeting/$Main/default/icon/icon_ok2.png) no-repeat center center"
   },
   "action_accept_over" : {
-    "color": "#3C76B7"
+    "color": "#2768B0"
     //"background" : "url(../x_component_Meeting/$Main/default/icon/icon_ok2_click.png) no-repeat center center"
   },
   "action_reject" : {
@@ -117,7 +117,7 @@
     //"background" : "url(../x_component_Meeting/$Main/default/icon/icon_off_round.png) no-repeat center center"
   },
   "action_reject_over" : {
-    "color": "#3C76B7"
+    "color": "#2768B0"
     //"background" : "url(../x_component_Meeting/$Main/default/icon/icon_off_round_click.png) no-repeat center center"
   }
 }

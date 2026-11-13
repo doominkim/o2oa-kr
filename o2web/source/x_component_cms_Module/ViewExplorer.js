@@ -126,6 +126,7 @@ MWF.xApplication.cms.Module.ViewExplorer = new Class({
         var toolbarSize = this.toolbarNode ? this.toolbarNode.getSize() : {"x":0,"y":0};
         var titlebarSize = {"x":0,"y":0}; //this.app.titleBar ? this.app.titleBar.getSize() : {"x":0,"y":0};
         var nodeSize = this.app.node.getSize();
+        if( this.app.moduleBarNode )nodeSize.y = nodeSize.y - this.app.moduleBarNode.getSize().y;
         var pt = 0; //this.elementContentNode.getStyle("padding-top").toFloat();
         var pb = 0; // this.elementContentNode.getStyle("padding-bottom").toFloat();
 

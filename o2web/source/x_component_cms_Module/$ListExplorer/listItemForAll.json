@@ -6,7 +6,16 @@
     "item" : "title",
     "name" : "titleAreaNode",
     "sortByClickTitle" : "yes",
-    "width" : "38%"
+    "width" : "40%"
+  },
+  {
+    "title" : MWF.xApplication.cms.Module.LP.category,
+    "headStyles" : "categoryAreaHeadNode",
+    "contentStyles" : "categoryAreaContentNode",
+    "item" : "categoryName",
+    "name" : "categoryAreaNode",
+    "sortByClickTitle" : "yes",
+    "width" : "12%"
   },
   {
     "title" : MWF.xApplication.cms.Module.LP.creatorPerson,
@@ -15,7 +24,7 @@
     "item" : "creatorPersonShort",
     "name" : "personAreaNode",
     "sortByClickTitle" : "yes",
-    "width" : "11%"
+    "width" : "10%"
   },
   {
     "title" : MWF.xApplication.cms.Module.LP.creatorDepartment,
@@ -23,15 +32,6 @@
     "contentStyles" : "departmentAreaContentNode",
     "item" : "creatorUnitNameShort",
     "name" : "departmentAreaNode",
-    "sortByClickTitle" : "yes",
-    "width" : "11%"
-  },
-  {
-    "title" : MWF.xApplication.cms.Module.LP.category,
-    "headStyles" : "categoryAreaHeadNode",
-    "contentStyles" : "categoryAreaContentNode",
-    "item" : "categoryName",
-    "name" : "categoryAreaNode",
     "sortByClickTitle" : "yes",
     "width" : "11%"
   },
@@ -51,6 +51,6 @@
     "contentStyles" : "actionAreaContentNode",
     "item" : "action",
     "name" : "actionAreaNode",
-    "width" : "13%"
+    "width" : "12%"
   }
 ]

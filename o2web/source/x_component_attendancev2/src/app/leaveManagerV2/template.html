@@ -30,7 +30,7 @@
             <div style="margin: 10px 0;float: left;">
                 <button class="mainColor_bg" @click="clickAddType">{{$.lp.leaveManagerV2.addType}}</button>
             </div>
-            <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table">
+            <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table" data-empty="{{$.lp.noData || ''}}">
                 <thead>
                     <th>{{$.lp.leaveManagerV2.type.name}}</th>
                     <th>{{$.lp.leaveManagerV2.type.quotaType}}</th>
@@ -95,7 +95,7 @@
                         @touchstart="startUnlockLedgerImportHistoryDelete" @touchend="stopUnlockLedgerImportHistoryDelete"
                         @touchcancel="stopUnlockLedgerImportHistoryDelete">{{$.lp.leaveManagerV2.ledgerImportHistory}}</div>
                     <div class="leave-import-history-empty" oo-if="!$.currentImportHistoryList || $.currentImportHistoryList.length == 0">{{$.lp.leaveManagerV2.ledgerImportHistoryEmpty}}</div>
-                    <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table leave-import-history-table"
+                    <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table leave-import-history-table" data-empty="{{$.lp.noData || ''}}"
                         oo-if="$.currentImportHistoryList && $.currentImportHistoryList.length > 0">
                         <thead>
                             <th style="width: 150px;">{{$.lp.leaveManagerV2.ledgerImportGrantPeriod}}</th>

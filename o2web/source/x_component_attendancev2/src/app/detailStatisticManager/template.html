@@ -30,7 +30,7 @@
                 @click="statisticExport">{{$.lp.statisticExport}}</button>
         </div>
         <div style="clear: both;overflow: auto;height: calc(100% - 50px);">
-            <table class="scroll-table">
+            <table class="scroll-table" data-empty="{{$.lp.noData || ''}}">
                 <thead>
                     <tr>
                         <th>{{$.lp.detailTable.person}}</th>

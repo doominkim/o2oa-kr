@@ -62,7 +62,7 @@
 //    "float": "left"
 //  },
   "columnTextNode": {
-    "font-family": "Microsoft YaHei",
+    "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
     "height": "64px",
     "margin-left": "74px",
     "line-height": "64px",

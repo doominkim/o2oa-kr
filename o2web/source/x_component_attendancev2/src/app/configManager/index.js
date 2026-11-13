@@ -75,7 +75,7 @@ export default content({
         this.bind.form.properties.checkInAlertOffDutyAfterMinutes = 10;
       }
       if (!json.properties.statisticUnitDutyNameList) {
-        this.bind.form.properties.statisticUnitDutyNameList = ["考勤管理员"];
+        this.bind.form.properties.statisticUnitDutyNameList = ["근태 관리자"];
       } 
       this.bind.form.properties.statisticUnitDutyNameListInput = this.bind.form.properties.statisticUnitDutyNameList.join(", ");
       if (json.holidayList) {
@@ -132,15 +132,15 @@ export default content({
     }
     if (form.checkInAlertEnable === true) {
       const onDutyBefore = form.properties.checkInAlertOnDutyBeforeMinutes;
-      // 上班前提醒分钟数必须为整数且大于等于0 小于等于60
+      // 출근 전 알림 시간(분)은 0 이상 60 이하의 정수여야 합니다
       if (!isInt(onDutyBefore) || onDutyBefore < 0 || onDutyBefore > 60) {
-        o2.api.page.notice("上班前提醒分钟数必须为整数且大于等于0 小于等于60", "error");
+        o2.api.page.notice("출근 전 알림 시간(분)은 0 이상 60 이하의 정수여야 합니다", "error");
         return;
       }
       const offDutyAfter = form.properties.checkInAlertOffDutyAfterMinutes;
-      // 下班后提醒分钟数必须为整数且大于等于0 小于等于60
+      // 퇴근 후 알림 시간(분)은 0 이상 60 이하의 정수여야 합니다
       if (!isInt(offDutyAfter) || offDutyAfter < 0 || offDutyAfter > 60) {
-        o2.api.page.notice("下班后提醒分钟数必须为整数且大于等于0 小于等于60", "error");
+        o2.api.page.notice("퇴근 후 알림 시간(분)은 0 이상 60 이하의 정수여야 합니다", "error");
         return;
       }
     }
@@ -148,7 +148,7 @@ export default content({
     if (form.exceptionAlertEnable === true && form.exceptionAlertDateNumber === 0) {
       const alertTimeMinutes = this.getTimeMinutes(form.exceptionAlertTime);
       if (alertTimeMinutes < 18 * 60) {
-        o2.api.page.notice("异常打卡提醒选择当天时，提醒时间必须为18:00或之后", "error");
+        o2.api.page.notice("이상 체크 알림을 당일로 선택하면 알림 시간은 18:00 이후여야 합니다", "error");
         return;
       }
     }

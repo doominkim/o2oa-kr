@@ -86,7 +86,7 @@ MWF.xApplication.cms.Module.ImportForm = new Class({
                 if (files.length) {
                     var file = files.item(0);
                     if( file.name.indexOf(" ") > -1 ){
-                        this.app.notice("上传的文件不能带空格", "error");
+                        this.app.notice("업로드할 파일 이름에 공백이 있으면 안 됩니다", "error");
                         return false;
                     }
                     this.file = file;

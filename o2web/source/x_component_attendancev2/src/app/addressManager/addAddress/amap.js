@@ -5,7 +5,7 @@ import { getPublicData } from "../../../utils/actions";
 const template = `
   <div class=" {{ $.isMax ? 'bd-map-container-fixed': 'bd-map-container'}}">
       <div class="bd-map" id="amap-container">
-          <!-- 高德地图 -->
+          <!-- AMap 지도 -->
       </div>
       <div class="icon bd-map-btn" @click="mapMaxOrMini" ><i class="{{  $.isMax ? 'o2icon-shrink' : 'o2icon-enlarge' }}"></i></div>
   </div>
@@ -39,7 +39,7 @@ export default content({
       if (config && config.aMapAccountKey) {
         accountkey = config.aMapAccountKey;
       } else {
-        console.error("没有配置地图 Key ！！！");
+        console.error("지도 Key가 설정되지 않았습니다!");
       }
       let apiPath = "http://webapi.amap.com/maps?v=1.4.15&key=" + accountkey;
       if (window.location.protocol.toLowerCase() === "https:") {
@@ -47,7 +47,7 @@ export default content({
         apiPath = "//webapi.amap.com/maps?v=1.4.15&key=" + accountkey;
       }
       o2.load(apiPath, () => {
-        console.debug("高德地图加载API加载完成，开始载入地图！");
+        console.debug("AMap API 로드 완료, 지도를 불러옵니다!");
         window.AMapApiLoaded = true;
         this.loadViewOrLocation();
       });
@@ -77,7 +77,7 @@ export default content({
   },
   // 加载百度地图
   createMap(point) {
-    console.debug("开始创建高德地图！", point);
+    console.debug("AMap 지도 생성 시작!", point);
     if (!this.map) {
       this.map = new AMap.Map("amap-container", {
         zoom: 17, //级别
@@ -112,7 +112,7 @@ export default content({
         // 在图面添加比例尺控件，展示地图在当前层级和纬度下的比例尺
         this.map.addControl(new AMap.Scale());
         if (!this.bind.form.isView) {
-          console.log("开始定位！！！！！");
+          console.log("위치 확인 시작!");
           // 创建工作场所需要定位当前位置
           const geolocation = new AMap.Geolocation({
             enableHighAccuracy: true, //是否使用高精度定位，默认:true
@@ -129,7 +129,7 @@ export default content({
   },
   addMapClick() {
     this.map.on("click", (e) => {
-      console.debug("点击的经纬度：", e);
+      console.debug("클릭한 위경도: ", e);
       this.addMarkPoint(new AMap.LngLat(e.lnglat.getLng(), e.lnglat.getLat()));
       this.bind.form.longitude = e.lnglat.getLng();
       this.bind.form.latitude = e.lnglat.getLat();

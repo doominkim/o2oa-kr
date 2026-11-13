@@ -6,13 +6,13 @@ import template from './template.html';
 import style from './style.scope.css';
 
 const RESULT_TEXT = {
-    PreCheckIn: '待打卡',
-    NotSigned: '未打卡',
-    Normal: '正常',
-    Late: '迟到',
-    Early: '早退',
-    SeriousLate: '严重迟到',
-    Absenteeism: '旷工'
+    PreCheckIn: '체크 예정',
+    NotSigned: '체크 누락',
+    Normal: '정상',
+    Late: '지각',
+    Early: '조퇴',
+    SeriousLate: '심한 지각',
+    Absenteeism: '무단결근'
 };
 const NOT_CHECKED_RESULTS = ['PreCheckIn', 'NotSigned'];
 
@@ -41,7 +41,7 @@ export default content({
             lp,
             person: '',
             title: lp.menu.myAttendance,
-            todayLabel: '今天',
+            todayLabel: '오늘',
             todayString: '',
             currentDateTime: 0,
             currentYear: 0,
@@ -53,7 +53,7 @@ export default content({
             loading: false,
             showRecordPanel: false,
             selectedDate: '',
-            selectedRecordTitle: '上下班打卡',
+            selectedRecordTitle: '출퇴근 체크',
             selectedRecordList: []
         };
     },
@@ -71,7 +71,7 @@ export default content({
         }
         const currentPerson = (layout.session && layout.session.user) ? layout.session.user.distinguishedName : '';
         if (this.bind.person && this.bind.person !== currentPerson) {
-            this.bind.title = `${formatPersonName(this.bind.person)}的考勤`;
+            this.bind.title = `${formatPersonName(this.bind.person)}의 근태`;
         }
     },
     loadDayList() {
@@ -231,9 +231,9 @@ export default content({
         const recordList = detail.recordList || [];
         const duration = this.hasNotCheckedRecord(recordList) ? 0 : (detail.workTimeDuration || detail.workTimeMinutes || detail.duration || this.calcWorkDuration(recordList));
         if (!duration) {
-            return '上下班打卡';
+            return '출퇴근 체크';
         }
-        return `上下班打卡（工时 ${this.formatDuration(duration)}）`;
+        return `출퇴근 체크 (근무 시간 ${this.formatDuration(duration)})`;
     },
     hasNotCheckedRecord(list) {
         return (list || []).some((record) => {
@@ -261,29 +261,29 @@ export default content({
         const hours = Math.floor(minutes / 60);
         const restMinutes = minutes % 60;
         if (!hours) {
-            return `${restMinutes}分钟`;
+            return `${restMinutes}분`;
         }
-        return `${hours}小时${restMinutes}分钟`;
+        return `${hours}시간 ${restMinutes}분`;
     },
     formatRecordResult(record) {
         if (record.fieldWork) {
-            return lp.appeal && lp.appeal.fieldWork ? fieldWorkFormat(record) : '外勤';
+            return lp.appeal && lp.appeal.fieldWork ? fieldWorkFormat(record) : '외근';
         }
         return RESULT_TEXT[record.checkInResult] || '';
     },
     formatSource(record) {
         if (record.fieldWork) {
-            return lp.appeal && lp.appeal.fieldWork ? fieldWorkFormat(record) : '外勤';
+            return lp.appeal && lp.appeal.fieldWork ? fieldWorkFormat(record) : '외근';
         }
         switch (record.sourceType) {
             case 'USER_CHECK':
-                return lp.record && lp.record.sourceTypeUser ? lp.record.sourceTypeUser : '用户打卡';
+                return lp.record && lp.record.sourceTypeUser ? lp.record.sourceTypeUser : '사용자 체크';
             case 'AUTO_CHECK':
-                return '自动';
+                return '자동';
             case 'FAST_CHECK':
-                return lp.record && lp.record.sourceTypeFast ? lp.record.sourceTypeFast : '极速打卡';
+                return lp.record && lp.record.sourceTypeFast ? lp.record.sourceTypeFast : '빠른 체크';
             case 'SYSTEM_IMPORT':
-                return lp.record && lp.record.sourceTypeImport ? lp.record.sourceTypeImport : '数据导入';
+                return lp.record && lp.record.sourceTypeImport ? lp.record.sourceTypeImport : '데이터 가져오기';
             default:
                 break;
         }

@@ -64,12 +64,12 @@ export default content({
                     apiPath = "//webapi.amap.com/maps?v=1.4.15&key=" + config.aMapAccountKey;
                 }
                 o2.load(apiPath, () => {
-                    console.debug("高德地图加载API加载完成，开始载入地图！");
+                    console.debug("AMap API 로드 완료, 지도를 불러옵니다!");
                     window.AMapApiLoaded = true;
                     this.showAMap();
                 });
             } else {
-                console.error("没有配置地图 Key ！！！");
+                console.error("지도 Key가 설정되지 않았습니다!");
                 this.bind.showAMap = false; // 不显示地图，显示定位信息
             }
         } else {
@@ -84,7 +84,7 @@ export default content({
     },
     // 创建高德地图
     createAMap(point) {
-        console.debug("开始创建高德地图！", point);
+        console.debug("AMap 지도 생성 시작!", point);
         if (!this.amap) {
             this.amap = new AMap.Map("amap-container", {
                 zoom: 17, //级别
@@ -140,7 +140,7 @@ export default content({
             const config = await configAction('get');
             this.bind.checkInAlertConfigEnable = !config || config.checkInAlertEnable !== false;
         } catch (err) {
-            console.error('查询考勤配置失败', err);
+            console.error('근태 설정 조회 실패', err);
             this.bind.checkInAlertConfigEnable = true;
         }
     },
@@ -181,7 +181,7 @@ export default content({
             this.bind.checkInCycle.tip = this.getCheckInTip(this.bind.nextCheckInRecord);
         } else {
             this.bind.checkInCycle.title = lp.mobile.menu.checkIn;
-            this.bind.checkInCycle.tip = '今日暂无待打卡班次';
+            this.bind.checkInCycle.tip = '오늘 체크할 근무조가 없습니다';
         }
         this.qywxCalDistance();
     },
@@ -226,7 +226,7 @@ export default content({
         if (!record || !record.preDutyTime) {
             return '';
         }
-        return record.checkInType === 'OffDuty' ? `请 ${record.preDutyTime} 后打卡` : `请 ${record.preDutyTime} 前打卡`;
+        return record.checkInType === 'OffDuty' ? `${record.preDutyTime} 이후에 체크하세요` : `${record.preDutyTime} 이전에 체크하세요`;
     },
     async loadBDMap() {
         const bdKey = await getPublicData('baiduAccountKey');
@@ -301,11 +301,11 @@ export default content({
                 // 查询地址
                 this.getQywxGeoAddress(res.latitude, res.longitude);
             } else {
-                console.error('获取企业微信定位失败', res);
+                console.error('WeCom 위치 조회 실패', res);
                 this.setLocationError();
             }
         }).catch((err) => {
-            console.error('获取企业微信定位失败', err);
+            console.error('WeCom 위치 조회 실패', err);
             this.setLocationError();
         });
     },
@@ -344,7 +344,7 @@ export default content({
             this.bind.location.status = true;
             this.bind.location.locating = false;
             this.bind.location.address = address;
-            this.bind.location.title = address || '已获取当前位置';
+            this.bind.location.title = address || '현재 위치를 가져왔습니다';
             this.calDistance();
         });
     },
@@ -356,14 +356,14 @@ export default content({
         const address = result && result.value ? result.value.address : '';
         const err = result && result.value ? result.value.err : '';
         if (err) {
-            console.error('查询地址错误',  err);
+            console.error('주소 조회 오류',  err);
             // this.setLocationError();
             // return;
         }
         this.bind.location.status = true;
         this.bind.location.locating = false;
         this.bind.location.address = address;
-        this.bind.location.title = address || '已获取当前位置';
+        this.bind.location.title = address || '현재 위치를 가져왔습니다';
         this.qywxCalDistance();
     },
     // 企业微信计算距离
@@ -474,7 +474,7 @@ export default content({
             return;
         }
         const record = this.bind.updateOffDutyRecord;
-        this.confirmCheckIn('会将当前时间更新到最后一条下班打卡记录，是否继续？', () => {
+        this.confirmCheckIn('현재 시간을 마지막 퇴근 체크 기록으로 업데이트합니다. 계속하시겠습니까?', () => {
             this.submitCheckInRecord(record);
         });
     },
@@ -483,7 +483,7 @@ export default content({
             const personConfig = await this.loadPersonCheckInAlertConfig();
             this.showCheckInAlertConfigDialog(personConfig);
         } catch (err) {
-            console.error('查询个人打卡提醒配置失败', err);
+            console.error('개인 체크 알림 설정 조회 실패', err);
             o2.api.page.notice(lp.dataError, 'error');
         }
     },
@@ -512,7 +512,7 @@ export default content({
             });
         });
         o2.DL.open({
-            title: '打卡提醒设置',
+            title: '출퇴근 체크 알림 설정',
             width: '100%',
             height: '220',
             style: 'user',
@@ -531,8 +531,8 @@ export default content({
     getCheckInAlertConfigDialogHtml(personConfig) {
         const properties = personConfig.properties || {};
         return [
-            this.getCheckInAlertSwitchRowHtml('checkInAlertOnDutyEnable', '上班打卡提醒', properties.checkInAlertOnDutyEnable !== false),
-            this.getCheckInAlertSwitchRowHtml('checkInAlertOffDutyEnable', '下班打卡提醒', properties.checkInAlertOffDutyEnable !== false)
+            this.getCheckInAlertSwitchRowHtml('checkInAlertOnDutyEnable', '출근 체크 알림', properties.checkInAlertOnDutyEnable !== false),
+            this.getCheckInAlertSwitchRowHtml('checkInAlertOffDutyEnable', '퇴근 체크 알림', properties.checkInAlertOffDutyEnable !== false)
         ].join('');
     },
     getCheckInAlertSwitchRowHtml(key, label, enable) {
@@ -562,8 +562,8 @@ export default content({
             o2.api.page.notice(lp.saveSuccess, 'success');
         } catch (err) {
             personConfig.properties[key] = oldValue;
-            console.error('保存打卡提醒配置失败', err);
-            o2.api.page.notice(lp.saveFail || '保存失败', 'error');
+            console.error('체크 알림 설정 저장 실패', err);
+            o2.api.page.notice(lp.saveFail || '저장에 실패했습니다', 'error');
         }
         this.setCheckInAlertConfigDialogSaving(node, false);
         this.renderCheckInAlertConfigDialog(node, personConfig);
@@ -645,10 +645,10 @@ export default content({
         }
         const now = new Date();
         if (record.checkInType === 'OnDuty' && now.getTime() > dutyTime.getTime()) {
-            return '当前已超过上班打卡时间，打卡可能会记为迟到，是否继续？';
+            return '출근 체크 시간이 지났습니다. 지각으로 기록될 수 있습니다. 계속하시겠습니까?';
         }
         if (record.checkInType === 'OffDuty' && now.getTime() < dutyTime.getTime()) {
-            return '当前未到下班打卡时间，打卡可能会记为早退，是否继续？';
+            return '아직 퇴근 체크 시간이 아닙니다. 조퇴로 기록될 수 있습니다. 계속하시겠습니까?';
         }
         return '';
     },
@@ -690,8 +690,8 @@ export default content({
         const html = [
             "<div class='check-in-fieldwork-dialog' style='position:relative;padding:10px 0;'>",
             "<textarea class='check-in-fieldwork-remark' style='box-sizing:border-box;width:100%;height:96px;padding:8px;border:1px solid #dcdcdc;border-radius:4px;font-size:14px;line-height:20px;resize:none;' placeholder='" + lp.mobile.outsideRemarkPlaceholder + "'></textarea>",
-            requiredPhoto ? "<div class='check-in-fieldwork-photo-tip' style='margin-top:8px;color:#8c8c8c;font-size:13px;line-height:20px;'>点击确定后需拍照提交</div>" : '',
-            "<div class='check-in-fieldwork-loading' style='display:none;position:fixed;left:0;right:0;top:0;bottom:0;z-index:9999;align-items:center;justify-content:center;background:rgba(255,255,255,0.72);color:#333;font-size:15px;line-height:24px;text-align:center;'>正在提交，请稍候...</div>",
+            requiredPhoto ? "<div class='check-in-fieldwork-photo-tip' style='margin-top:8px;color:#8c8c8c;font-size:13px;line-height:20px;'>확인을 누른 후 사진을 찍어 제출해야 합니다</div>" : '',
+            "<div class='check-in-fieldwork-loading' style='display:none;position:fixed;left:0;right:0;top:0;bottom:0;z-index:9999;align-items:center;justify-content:center;background:rgba(255,255,255,0.72);color:#333;font-size:15px;line-height:24px;text-align:center;'>제출하는 중입니다. 잠시 기다려 주세요...</div>",
             '</div>'
         ].join('');
         const _self = this;
@@ -723,8 +723,8 @@ export default content({
                             _self.checkInPost(record, null, true, signDescription, photoIds);
                             dialog.close();
                         }).catch((err) => {
-                            console.error('外勤拍照上传失败', err);
-                            o2.api.page.notice('外勤拍照上传失败，请重试！', 'error');
+                            console.error('외근 사진 업로드 실패', err);
+                            o2.api.page.notice('외근 사진 업로드에 실패했습니다. 다시 시도하세요!', 'error');
                             submitting = false;
                             _self.setFieldWorkDialogLoading(dialog, false);
                         });
@@ -940,18 +940,18 @@ export default content({
         let checked = false;
         try {
             const result = await mobileAction('checkIn', post);
-            console.debug('打卡结果', result);
+            console.debug('체크 결과', result);
             checked = true;
-            o2.api.page.notice('打卡成功！', 'success');
+            o2.api.page.notice('체크했습니다!', 'success');
         } catch (err) {
-            console.error('打卡失败', err);
-            o2.api.page.notice('打卡失败，请重试！', 'error');
+            console.error('체크 실패', err);
+            o2.api.page.notice('체크에 실패했습니다. 다시 시도하세요!', 'error');
         } finally {
             this.bind.checkInCycle.submitting = false;
         }
         if (checked) {
             this.getPreCheckData().catch((err) => {
-                console.error('刷新预打卡数据失败', err);
+                console.error('예정 체크 데이터 새로고침 실패', err);
             });
         }
     },

@@ -1,0 +1,13 @@
+/* 인디고 그룹웨어 기본 스킨. 메인 색은 (주)인디고 마크의 #2768B0. */
+:root {
+    --oo-color-main: #2768B0;
+    --oo-color-main-light: #5B8FCB;
+    --oo-color-main-deep: #1F5A9C;
+    --oo-color-over: #DCE8F5;
+    --oo-color-deep: #12345C;
+    --oo-color-light: #F4F8FC;
+    --oo-color-hover: #EEF4FA;
+    --oo-color-icon: #8C93A3;
+    --oo-color-hover2: #E3EDF8;
+    --oo-color-odd-even: #FAFBFC;
+}

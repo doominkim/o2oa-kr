@@ -18,7 +18,7 @@
         o2.addReady(function(){
             o2.load(["../o2_lib/mootools/plugin/mBox.Notice.js", "../o2_lib/mootools/plugin/mBox.Tooltip.js"], {"sequence": true}, function(){
                 //MWF.defaultPath = "../x_desktop"+MWF.defaultPath;
-                MWF.loadLP("zh-cn");
+                MWF.loadLP(MWF.language);
                 MWF.require("MWF.xDesktop.Layout", function(){
                     MWF.require("MWF.xDesktop.Authentication", null, false);
 
@@ -63,6 +63,9 @@
             });
         });
     </script>
+    <link rel="icon" href="../favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="img/brand/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png" />
 </head>
 <body style="overflow: auto; margin: 0px;">
 <div id="layout" class="layout" style="overflow: auto; height:100%">

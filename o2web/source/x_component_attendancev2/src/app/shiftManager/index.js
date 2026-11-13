@@ -179,7 +179,7 @@ export default content({
   },
   listenEventBus() {
     this.$topParent.listenEventBus('shift', (data) => {
-      console.log('接收到了shift消息', data);
+      console.log('shift 메시지 수신', data);
       this.loadShiftList();
     });
   },

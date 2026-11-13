@@ -43,11 +43,11 @@
     </div>
 
     <div class="record-empty" oo-if="!$.recordList.length">
-      <div oo-if="$.loading">加载中...</div>
+      <div oo-if="$.loading">불러오는 중...</div>
       <div oo-else>{{$.emptyText}}</div>
     </div>
 
-    <!-- 进入申诉管理页面 -->
-    <div class="appeal-manager-link" @click="goAppealManagerPage">考勤异常数据</div>
+    <!-- 이의 신청 관리 페이지로 이동 -->
+    <div class="appeal-manager-link" @click="goAppealManagerPage">근태 이상 데이터</div>
   </div>
 </div>

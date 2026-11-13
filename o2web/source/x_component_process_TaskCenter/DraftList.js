@@ -83,16 +83,16 @@ MWF.xApplication.process.TaskCenter.DraftList = new Class({
         // this.app.action.listReviewFilterCount(function(json){
         //     if (callback) callback(json);
         // });
+    },
+    _getListHeadDateText: function(){
+        return this.app.lp.list_createDate;
     }
 });
 
 MWF.xApplication.process.TaskCenter.DraftList.Item = new Class({
     Extends: MWF.xApplication.process.TaskCenter.List.Item,
     setContent: function(){
-        this.applicationTitleNode.set("text", this.data.applicationName);
-        this.titleNode.set("html", "<font style=\"color: #333;\">["+o2.txt(this.data.processName)+"]&nbsp;&nbsp;</font>"+o2.txt(this.data.title || ""));
-        this.titleNode.set("title", this.data.title);
-        this.activityNode.set("text", "( "+this.list.app.lp.draftTab+" )");
+        this.setRowContent(this.data.createTime, this.data.person, this.data.unit, {"type": "wait", "text": this.list.app.lp.draftTab});
 
         this.timeContentNode.set("text", this.list.app.lp.list_createDate+": "+this.data.createTime);
 

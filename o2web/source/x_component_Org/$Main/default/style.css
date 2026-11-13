@@ -101,3 +101,42 @@
   cursor: pointer;
   padding: 8px 0px 5px 0px;
 }
+
+/* 인디고 그룹웨어 테마 (O2OA-6). 이 파일은 앱 영역으로 범위가 한정되어 로드되므로 선택자는 한 줄로 쓴다.
+   앱 영역에는 .appContent * { box-sizing: content-box !important } 가 걸려 있으므로 크기는 content-box 기준으로 잡는다. */
+/* 모듈 제목 띠 */
+.ik-org-titlebar { display: flex; align-items: center; height: 44px; background-color: #2768B0; color: #FFFFFF; }
+.ik-org-titlebar-menu { flex: none; width: 24px; height: 24px; margin: 0 12px 0 16px; cursor: pointer; background-color: #FFFFFF; -webkit-mask: url(../x_component_Org/$Main/default/icon/lnb/menu.svg) center / 22px no-repeat; mask: url(../x_component_Org/$Main/default/icon/lnb/menu.svg) center / 22px no-repeat; }
+.ik-org-titlebar-text { font-size: 18px; font-weight: 500; line-height: 44px; white-space: nowrap; }
+
+/* 앱 내부 좌측 메뉴(LNB) */
+.ik-org-lnb .ik-org-navi:hover { background-color: #F4F6F8; }
+.ik-org-lnb .ik-org-navi-icon { background: currentColor !important; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; -webkit-mask-size: 20px; mask-repeat: no-repeat; mask-position: center; mask-size: 20px; }
+.ik-org-lnb .ik-org-navi-org .ik-org-navi-icon { -webkit-mask-image: url(../x_component_Org/$Main/default/icon/lnb/org.svg); mask-image: url(../x_component_Org/$Main/default/icon/lnb/org.svg); }
+.ik-org-lnb .ik-org-navi-group .ik-org-navi-icon { -webkit-mask-image: url(../x_component_Org/$Main/default/icon/lnb/group.svg); mask-image: url(../x_component_Org/$Main/default/icon/lnb/group.svg); }
+.ik-org-lnb .ik-org-navi-role .ik-org-navi-icon { -webkit-mask-image: url(../x_component_Org/$Main/default/icon/lnb/role.svg); mask-image: url(../x_component_Org/$Main/default/icon/lnb/role.svg); }
+.ik-org-lnb .ik-org-navi-person .ik-org-navi-icon { -webkit-mask-image: url(../x_component_Org/$Main/default/icon/lnb/person.svg); mask-image: url(../x_component_Org/$Main/default/icon/lnb/person.svg); }
+.ik-org-lnb .ik-org-navi-xls .ik-org-navi-icon { -webkit-mask-image: url(../x_component_Org/$Main/default/icon/lnb/xls.svg); mask-image: url(../x_component_Org/$Main/default/icon/lnb/xls.svg); }
+.ik-org-lnb-index:empty { visibility: hidden; }
+.ik-org-lnb-index:hover { background-color: #F4F6F8; }
+.ik-org-lnb-index > div { width: 100% !important; background: none !important; }
+.ik-org-lnb-index::before { content: ""; position: absolute; left: 12px; top: 10px; width: 20px; height: 20px; background-color: #666666; pointer-events: none; -webkit-mask: url(../x_component_Org/$Main/default/icon/lnb/index.svg) center / 20px no-repeat; mask: url(../x_component_Org/$Main/default/icon/lnb/index.svg) center / 20px no-repeat; }
+.ik-org-lnb-index::after { content: attr(data-label); position: absolute; left: 42px; top: 0; line-height: 40px; font-size: 12px; color: #666666; white-space: nowrap; pointer-events: none; }
+.ik-org-collapsed .ik-org-lnb { width: 47px !important; }
+.ik-org-collapsed .ik-org-navi { margin: 0 6px 2px 6px !important; padding: 0 7px !important; }
+.ik-org-collapsed .ik-org-navi-text { display: none !important; }
+.ik-org-collapsed .ik-org-lnb-index::before { left: 6px; }
+.ik-org-collapsed .ik-org-lnb-index::after { display: none; }
+
+/* 조직 트리·목록: 선택 행은 연한 메인 색 배경 + 메인 색 글자 */
+.MWF_listAreaNode .mainColor_bg { background-color: #EAF2FB !important; color: #2768B0 !important; box-shadow: inset 3px 0 0 #2768B0; }
+.MWF_listAreaNode .mainColor_bg_opacity { background-color: #F4F8FC !important; }
+
+/* 상세 영역: 제목(사진·이름) 배경 그림 제거, 밑줄형 탭, 주 버튼 색 */
+div:has(> div > #titleInfor), div:has(> #titleInfor) { background-image: none !important; }
+.MWF_listAreaNode ~ div .mainColor_bg { background-color: #2768B0 !important; color: #FFFFFF !important; }
+.MWF_listAreaNode ~ div div:has(> .tabNodeContainerLeft) { width: auto !important; margin: 0 !important; height: 42px !important; }
+.MWF_listAreaNode ~ div .tabNodeContainerArea > div { width: auto !important; margin: 0 24px 0 0 !important; padding: 0 2px; height: 40px !important; line-height: 40px !important; font-size: 14px !important; font-weight: normal !important; }
+.MWF_listAreaNode ~ div .tabNodeContainerArea > div > div { display: inline-block; }
+.MWF_listAreaNode ~ div .tabNodeContainerArea > div:not(.mainColor_border) { color: #666666 !important; border-bottom-color: transparent !important; }
+.MWF_listAreaNode ~ div .tabNodeContainerArea > .mainColor_border { color: #2768B0 !important; border-bottom: 2px solid #2768B0 !important; font-weight: bold !important; }

@@ -49,17 +49,25 @@ MWF.xApplication.cms.Module.Main = new Class({
 	},
 	createNode: function(){
 		this.content.setStyle("overflow", "hidden");
-		this.node = new Element("div", {
+		this.node = new Element("div.ik-cms-module", {
 			"styles": this.css.node
 		}).inject(this.content);
+
+		this.moduleBarNode = new Element("div.moduleBarNode", {
+			"styles": this.css.moduleBarNode
+		}).inject(this.node);
+		new Element("i.ooicon-menu", {"styles": this.css.moduleBarIconNode}).inject(this.moduleBarNode);
+		new Element("div", {"styles": this.css.moduleBarTextNode, "text": this.lp.title}).inject(this.moduleBarNode);
 
 		this.naviContainerNode = new Element("div.naviContainerNode", {
 			"styles": this.css.naviContainerNode
 		}).inject(this.node);
+		this.lnbActionNode = new Element("div.lnbActionNode", {
+			"styles": this.css.lnbActionNode
+		}).inject(this.naviContainerNode);
 		this.leftTitleNode = new Element("div.leftTitleNode", {
 			"styles": this.css.leftTitleNode
 		}).inject(this.naviContainerNode);
-		this.leftTitleNode.addClass("mainColor_border");
 
 		this.rightContentNode = new Element("div", {
 			"styles":this.css.rightContentNode
@@ -67,9 +75,29 @@ MWF.xApplication.cms.Module.Main = new Class({
 		this.titleBar = new Element("div", {
 			"styles": this.css.titleBar
 		}).inject(this.rightContentNode );
+		this.contentTitleNode = new Element("div.contentTitleNode", {
+			"styles": this.css.contentTitleNode
+		}).inject(this.titleBar );
+		this.contentCountNode = new Element("div.contentCountNode", {
+			"styles": this.css.contentCountNode
+		}).inject(this.titleBar );
 		this.titleActionBar = new Element("div", {
 			"styles": this.css.titleActionBar
 		}).inject(this.titleBar );
+	},
+	setContentTitle: function( navi ){
+		var text = "";
+		if( navi && navi.node ){
+			text = navi.node.get("text");
+			if( navi.category && navi.category.data ){
+				text = navi.category.data.name + " · " + text;
+			}
+		}
+		if( this.contentTitleNode )this.contentTitleNode.set("text", text);
+		this.setListCount();
+	},
+	setListCount: function( count ){
+		if( this.contentCountNode )this.contentCountNode.set("text", (typeOf(count) === "number") ? count : "");
 	},
 	loadApplicationContent: function(){
 		var columnId = (this.options.columnData && this.options.columnData.id ) ||
@@ -250,10 +278,10 @@ MWF.xApplication.cms.Module.Main = new Class({
 			if( json.data && json.data.length ){
 				this.createDocumentAction = new Element("div", {
 					"styles": this.css.createDocumentAction,
-					"text" : this.lp.start
-				}).inject(this.titleActionBar);
-				this.createDocumentIcon = new Element("i.o2icon-newfiles", {
-					"styles": this.css.actionIcon
+					"text" : this.lp.writeDocument || this.lp.start
+				}).inject(this.lnbActionNode);
+				this.createDocumentIcon = new Element("i.ooicon-edit", {
+					"styles": this.css.createDocumentIcon
 				}).inject(this.createDocumentAction, "top");
 				this.createDocumentAction.addEvents({
 					"click": function(e){
@@ -279,17 +307,9 @@ MWF.xApplication.cms.Module.Main = new Class({
 					}.bind(this),
 					"mouseover" : function(e){
 						this.createDocumentAction.setStyles( this.css.createDocumentAction_over );
-						this.createDocumentAction.addClass("mainColor_color");
-
-						this.createDocumentIcon.setStyles( this.css.actionIcon_over );
-						this.createDocumentIcon.addClass("mainColor_color");
 					}.bind(this),
 					"mouseout" : function(e){
 						this.createDocumentAction.setStyles( this.css.createDocumentAction );
-						this.createDocumentAction.removeClass("mainColor_color");
-
-						this.createDocumentIcon.setStyles( this.css.actionIcon );
-						this.createDocumentIcon.removeClass("mainColor_color");
 					}.bind(this)
 				});
 			}
@@ -1013,7 +1033,7 @@ MWF.xApplication.cms.Module.Main = new Class({
 		}).inject(this.titleContentNode);
 	},
 	loadSearchNode : function(){
-		this.searchNode = new Element("div").inject( this.titleBar );
+		this.searchNode = new Element("div.searchNode", {"styles": this.css.searchNode}).inject( this.titleBar );
 	},
 	loadMenu: function(callback){
 
@@ -1080,6 +1100,7 @@ MWF.xApplication.cms.Module.Main = new Class({
 		}
 	},
 	openView : function(el, categoryData, revealData, searchKey, navi){
+		this.setContentTitle( navi );
 		if( revealData && revealData.type == "queryview" ){
 			this.loadQueryView(el, categoryData, revealData, searchKey, navi);
 		}else{
@@ -1149,11 +1170,13 @@ MWF.xApplication.cms.Module.Main = new Class({
 	setNaviSize: function(){
 		//var titlebarSize = this.titleBar ? this.titleBar.getSize() : {"x":0,"y":0};
 		var nodeSize = this.node.getSize();
+		var moduleBarSize = this.moduleBarNode ? this.moduleBarNode.getSize() : {"x":0,"y":0};
 		//var pt = this.naviContainerNode.getStyle("padding-top").toFloat();
 		//var pb = this.naviContainerNode.getStyle("padding-bottom").toFloat();
 
 		//var height = nodeSize.y-pt-pb-titlebarSize.y;
-		this.naviContainerNode.setStyle("height", ""+nodeSize.y+"px");
+		this.naviContainerNode.setStyle("height", ""+(nodeSize.y-moduleBarSize.y)+"px");
+		this.rightContentNode.setStyle("height", ""+(nodeSize.y-moduleBarSize.y)+"px");
 	}
 });
 

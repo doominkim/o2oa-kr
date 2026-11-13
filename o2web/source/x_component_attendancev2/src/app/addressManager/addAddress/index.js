@@ -74,7 +74,7 @@ export default content({
             return;
         }
         const json = await attendanceWorkPlaceV2Action("post", myForm);
-        console.debug('新增成功', json);
+        console.debug('추가했습니다', json);
         o2.api.page.notice(lp.workAddressForm.success, 'success');
         this.close();
     },

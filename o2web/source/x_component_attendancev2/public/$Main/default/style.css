@@ -163,34 +163,62 @@
 
 /* 变量  */
 :root {
-  /* 考勤颜色变量 */
+  /* 考勤颜色变量 (인디고 테마: 정상 ok, 지각·조퇴 wait, 결근·누락 danger) */
   /* 正常 */
-  --att-record-status-normal-color: #4a90e2;
+  --att-record-status-normal-color: #20C997;
   /* 早退 */
-  --att-record-status-early-color: #8b572a;
+  --att-record-status-early-color: #F0C325;
   /* 迟到 */
-  --att-record-status-late-color: #f5a623;
+  --att-record-status-late-color: #F0C325;
   /* 严重迟到 */
-  --att-record-status-serilate-color: #ff8080;
+  --att-record-status-serilate-color: #F08A3C;
   /* 未打卡 */
-  --att-record-status-nosign-color: #fb4747;
+  --att-record-status-nosign-color: #F0504F;
   /* 外勤 */
-  --att-record-status-fieldwork-color: #e233ff;
+  --att-record-status-fieldwork-color: #8E6BD8;
   /* 申诉 */
-  --att-record-status-appeal-color: #4fb2e3;
+  --att-record-status-appeal-color: #5B8FCB;
   /* 外出请假 */
-  --att-record-status-leave-color: #78c06e;
+  --att-record-status-leave-color: #2768B0;
   /* 旷工 */
-  --att-record-status-absenteeism-color: #ff8080;
+  --att-record-status-absenteeism-color: #F0504F;
 
-  --att-color-bg: #f7f7f7;
-  --att-color-divider: #e6e6e6;
+  --att-color-bg: #F4F5F7;
+  --att-color-divider: #EDEFF2;
 
   --att-default-radius: 2px;
+
+  /* 인디고 테마 토큰 */
+  --att-brand: #2768B0;
+  --att-brand-hover: #1F5A9C;
+  --att-brand-light: #EAF2FB;
+  --att-border: #E6E6E6;
+  --att-line: #EDEFF2;
+  --att-table-head-bg: #F2F6F8;
+  --att-text: #222222;
+  --att-text-sub: #666666;
+  --att-text-mute: #8C8C8C;
+  --att-input-border: #D9D9D9;
+  --att-button-border: #CCD1D9;
+  --att-radius-m: 4px;
+  --att-radius-l: 8px;
+  --att-shadow-card: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
 .mainColor_bg {
   background-color: var(--oo-color-main) !important;
+  color: #ffffff;
+}
+/* 데스크톱 스킨의 .mainColor_bg 가 뒤에 로드돼도 앱 안에서는 회사 메인 색을 쓴다 */
+.att .mainColor_bg {
+  background-color: var(--att-brand) !important;
+  color: #ffffff !important;
+}
+.att .mainColor_bg:hover {
+  background-color: var(--att-brand-hover) !important;
+}
+.att .lightColor_bg {
+  background-color: var(--att-brand-light) !important;
 }
 
 /* common */
@@ -272,59 +300,132 @@
   font-size: 16px;
 }
 .light-border-button {
-  border: 1px solid #DEDEDE !important;
+  border: 1px solid var(--att-button-border) !important;
   background-color: #ffffff !important;
-  color: #666666;
+  color: #333333;
+}
+.light-border-button:hover {
+  border-color: var(--att-brand) !important;
+  color: var(--att-brand);
 }
 .white-bg {
   background-color: white;
 }
 .att {
+  /* 앱 안에서는 회사 메인 색을 고정한다 */
+  --oo-color-main: #2768B0;
+  --oo-color-main-light: #5B8FCB;
+  --oo-color-main-deep: #1F5A9C;
+  --oo-color-light: #F4F8FC;
+  --oo-color-hover: #EEF4FA;
+  --oo-color-hover2: #E3EDF8;
+  display: flex;
+  flex-direction: column;
   background-color: var(--att-color-bg);
   height: 100%;
+  color: var(--att-text);
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-size: 13px;
 }
+/* .appContent * 가 content-box 를 강제하므로 높이·폭은 테두리를 뺀 값으로 적는다 */
 .att button {
+  height: 28px;
   border-radius: var(--att-default-radius);
-  border: 0;
-  padding: 6px 20px;
+  border: 1px solid transparent;
+  padding: 0 14px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 28px;
   cursor: pointer;
   margin-left: 10px;
+  vertical-align: middle;
+}
+.att button.lightColor_bg {
+  border: 1px solid var(--att-button-border);
+  background-color: #ffffff !important;
+  color: #333333;
+}
+.att button.lightColor_bg:hover {
+  border-color: var(--att-brand);
+  color: var(--att-brand);
+}
+.att input,
+.att select {
+  font-family: inherit;
+}
+.att input[type="text"]:focus,
+.att input[type="number"]:focus,
+.att select:focus,
+.att textarea:focus {
+  outline: none;
+  border-color: var(--att-brand) !important;
 }
 /* table */
+.att_table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
 .att_table thead {
   width: 100%;
-  height: 40px;
-  background-color: var(--att-color-bg);
-  color: rgb(102, 102, 102);
+  height: 30px;
+  background-color: var(--att-table-head-bg);
+  color: var(--att-text-mute);
   font-weight: normal;
-  line-height: 40px;
-  font-size: 15px;
+  line-height: 30px;
+  font-size: 12px;
 }
 .att_table th {
-  background-color: var(--att-color-bg);
+  background-color: var(--att-table-head-bg);
+  color: var(--att-text-mute);
+  font-size: 12px;
   text-align: center;
-  line-height: 24px;
-  padding: 8px 0;
+  line-height: 20px;
+  padding: 5px 4px;
   font-weight: normal;
-  /*border-top: 1px solid rgb(255, 255, 255);*/
-  /*border-bottom: 1px solid var(--att-color-divider);*/
+}
+.att_table thead th:first-child,
+.att_table thead tr th:first-child {
+  border-radius: var(--att-radius-m) 0 0 var(--att-radius-m);
+}
+.att_table thead th:last-child,
+.att_table thead tr th:last-child {
+  border-radius: 0 var(--att-radius-m) var(--att-radius-m) 0;
 }
 .att_table tr {
   overflow: hidden;
   background-color: rgb(255, 255, 255);
   min-height: 29px;
-  color: rgb(102, 102, 102);
-  font-family: "Microsoft YaHei";
-  font-size: 14px;
+  color: var(--att-text);
+  font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
+  font-size: 13px;
+  transition: background-color 0.15s;
+}
+.att_table tbody tr:hover td,
+.att_table > tr:hover td {
+  background-color: var(--att-brand-light);
 }
 .att_table .selector tr {
   cursor: pointer;
 }
 .att_table td {
-  height: 39px;
+  height: 44px;
   text-align: center;
   overflow: hidden;
   border-bottom: 1px solid var(--att-color-divider);
+}
+
+/* 빈 상태: 행(td)이 없는 목록 표 아래에 회색 아이콘 + 안내 문구 */
+.att_table[data-empty]:not([data-empty=""]):not(:has(td))::after,
+.scroll-table[data-empty]:not([data-empty=""]):not(:has(td))::after {
+  content: attr(data-empty);
+  display: table-caption;
+  caption-side: bottom;
+  padding: 64px 0 32px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--att-text-mute);
+  background: no-repeat center 24px / 32px 32px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%23C4C8CF' stroke-width='1.6' stroke-linejoin='round'%3E%3Cpath d='M4 18 8 7h16l4 11v7H4z'/%3E%3Cpath d='M4 18h7l1.5 3h7L21 18h7'/%3E%3C/svg%3E");
 }
 
 /* 滚动的 table */
@@ -341,20 +442,32 @@
   padding: 0.5rem 1rem;
 }
 .scroll-table thead th {
-  line-height: 24px;
-  padding: 8px 0;
+  line-height: 20px;
+  padding: 5px 4px;
   font-weight: normal;
+  font-size: 12px;
+  color: var(--att-text-mute);
   /* position: sticky; */
   top: 0;
   z-index: 1;
   width: 120px;
-  background-color: #f0f0f0;
+  background-color: var(--att-table-head-bg);
+}
+.scroll-table thead th:first-child {
+  border-radius: var(--att-radius-m) 0 0 var(--att-radius-m);
+}
+.scroll-table thead th:last-child {
+  border-radius: 0 var(--att-radius-m) var(--att-radius-m) 0;
 }
 .scroll-table td {
   background: #ffffff;
   padding: 4px 5px;
+  height: 34px;
   text-align: center;
   width: 120px;
+  font-size: 13px;
+  color: var(--att-text);
+  border-bottom: 1px solid var(--att-color-divider);
 }
 
 /* .scroll-table tbody th {
@@ -373,21 +486,36 @@
   left: 0;
   background: #ffffff;
   z-index: 1;
+  font-weight: normal;
+  font-size: 13px;
+  color: var(--att-text);
+  border-bottom: 1px solid var(--att-color-divider);
+}
+.scroll-table tbody tr:hover td,
+.scroll-table tbody tr:hover th {
+  background-color: var(--att-brand-light);
 }
 
 .att .primary_color {
   color: var(--oo-color-main) !important;
 }
 .att .operator_link_underline {
-  color: #666666;
+  color: var(--att-brand);
   margin-left: 10px;
-  text-decoration: underline;
+  text-decoration: none;
   cursor: pointer;
 }
+.att .operator_link_underline:hover {
+  text-decoration: underline;
+}
 .att .operator_link {
-  color: #666666;
+  color: var(--att-brand);
   margin-left: 10px;
   cursor: pointer;
+}
+.att .operator_link:hover {
+  color: var(--att-brand-hover);
+  text-decoration: underline;
 }
 .att .link_btn {
   line-height: 32px;
@@ -396,9 +524,9 @@
   margin-left: 10px;
 }
 .att .text_hint_info {
-  color: #999999;
+  color: var(--att-text-mute);
   line-height: 24px;
-  font-size: 14px;
+  font-size: 12px;
   margin-left: 10px;
 }
 .att .flex_wrap {
@@ -406,53 +534,85 @@
   flex-wrap: wrap;
 }
 /* index */
-.index_page_header_container {
+/* 모듈 제목 띠 */
+.index_page_module_bar {
+  flex-shrink: 0;
   display: flex;
-  margin: 20px 30px 0 30px;
+  align-items: center;
+  height: 44px;
+  padding: 0 16px;
+  background-color: var(--att-brand);
+  color: #ffffff;
+}
+.index_page_module_bar_icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+.index_page_module_bar_title {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+}
+/* 본문 제목 줄 */
+.index_page_header_container {
+  flex-shrink: 0;
+  display: flex;
+  min-height: 49px;
+  margin: 0;
+  padding: 0 20px;
   align-items: center;
   justify-content: space-between;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--att-line);
 }
 .index_page_header_title {
-  font-size: 17px;
+  font-size: 18px;
   line-height: 24px;
-  color: #333;
+  font-weight: 500;
+  color: var(--att-text);
 }
 .index_page_content_container {
   display: flex;
-  height: 100%;
-  gap: 0.71rem;
-  padding-right: 0.71rem;
+  flex: 1;
+  min-height: 0;
+  height: calc(100% - 44px);
+  gap: 0;
+  padding-right: 0;
 }
+/* 좌측 메뉴(LNB) */
 .index_page_nav_container {
   flex-shrink: 0;
   overflow: auto;
-  width: 12rem;
-  background-color: white;
+  width: 191px;
+  background-color: #ffffff;
+  border-right: 1px solid var(--att-line);
 }
 .index_page_route_container {
   flex: 1;
   overflow: hidden;
   position: relative;
-  background-color: white;
-  margin: 0.71rem 0;
+  background-color: #ffffff;
+  margin: 0;
 }
 /* form 表单弹出窗口 */
 .index_page_form_container {
   width: 540px;
   background-color: white;
-  margin: 0.71rem 0;
+  margin: 0;
+  border-left: 1px solid var(--att-line);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.06);
 }
 /* 主页顶层样式 */
 .manager-box {
   position: relative;
   overflow: auto;
-  margin: 10px;
-  height: calc(100% - 20px);
+  margin: 0;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
 .manager-box-content {
-  padding: 20px;
+  padding: 16px 20px;
   height: inherit;
   overflow: auto;
 }
@@ -527,32 +687,29 @@
   flex-direction: column;
 }
 .o2-form-header {
-  padding: 20px;
-  padding-bottom: 10px;
-  padding-right: 16px;
+  padding: 13px 16px 13px 20px;
   text-align: left;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--att-line);
 }
 .o2-form-footer {
   background-color: #ffffff;
-  padding: 20px;
-  padding-top: 10px;
-  padding-right: 16px;
+  padding: 12px 16px 12px 20px;
   text-align: right;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--att-line);
 }
 .o2-form-header .title {
   line-height: 24px;
-  font-size: 18px;
-  color: #333333;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--att-text);
 }
 .o2-form-header .close {
   position: absolute;
-  top: 6px;
+  top: 0;
   right: 0;
   padding: 0;
-  width: 54px;
-  height: 54px;
+  width: 50px;
+  height: 50px;
   background: transparent;
   border: none;
   outline: none;
@@ -582,31 +739,28 @@
   flex-direction: column;
 }
 .s-dialog-header {
-  padding: 20px;
-  padding-bottom: 10px;
-  padding-right: 16px;
+  padding: 13px 16px 13px 20px;
   text-align: left;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--att-line);
 }
 .s-dialog-footer {
-  padding: 20px;
-  padding-top: 10px;
-  padding-right: 16px;
+  padding: 12px 16px 12px 20px;
   text-align: right;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--att-line);
 }
 .s-dialog-header .title {
   line-height: 24px;
-  font-size: 18px;
-  color: #333333;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--att-text);
 }
 .s-dialog-header .close {
   position: absolute;
-  top: 6px;
+  top: 0;
   right: 0;
   padding: 0;
-  width: 54px;
-  height: 54px;
+  width: 50px;
+  height: 50px;
   background: transparent;
   border: none;
   outline: none;
@@ -623,8 +777,8 @@
 .sl-dialog {
   background-color: rgb(255, 255, 255);
   overflow: hidden;
-  border: 1px solid rgb(102, 102, 102);
-  border-radius: 10px;
+  border: 1px solid var(--att-border);
+  border-radius: var(--att-radius-l);
   position: absolute;
   box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.04),
   0px 8px 20px rgba(0, 0, 0, 0.08);
@@ -632,24 +786,23 @@
   flex-direction: column;
 }
 .sl-dialog-header {
-  padding: 20px;
-  padding-bottom: 10px;
-  padding-right: 16px;
+  padding: 13px 16px 13px 20px;
   text-align: left;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--att-line);
 }
 .sl-dialog-header .title {
   line-height: 24px;
-  font-size: 18px;
-  color: #333333;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--att-text);
 }
 .sl-dialog-header .close {
   position: absolute;
-  top: 6px;
+  top: 0;
   right: 0;
   padding: 0;
-  width: 54px;
-  height: 54px;
+  width: 50px;
+  height: 50px;
   background: transparent;
   border: none;
   outline: none;
@@ -658,11 +811,9 @@
   color: #999999;
 }
 .sl-dialog-footer {
-  padding: 20px;
-  padding-top: 10px;
-  padding-right: 16px;
+  padding: 12px 16px 12px 20px;
   text-align: right;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--att-line);
 }
 .sl-dialog-content {
   padding: 20px;
@@ -678,48 +829,48 @@
 }
 .form-item-line-label {
   /* height: 36px; */
-  line-height: 36px;
-  font-size: 15px;
-  color: #333333;
+  line-height: 32px;
+  font-size: 13px;
+  color: var(--att-text);
   flex: 1;
   text-align: left;
 }
 .form-item-line-label .required {
-  color: #ff5219;
+  color: var(--att-record-status-nosign-color);
   font-size: 12px;
   margin-right: 6px;
 }
 .form-item-line-content {
   width: 320px;
-  height: 36px;
-  line-height: 36px;
-  color: #666666;
+  height: 32px;
+  line-height: 32px;
+  color: var(--att-text-sub);
 }
 .form-item-label {
   /* height: 32px; */
   line-height: 32px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
-  color: #333333;
+  color: var(--att-text);
 }
 .form-item-label .required {
-  color: #ff5219;
+  color: var(--att-record-status-nosign-color);
   font-size: 12px;
   margin-right: 6px;
 }
 .form-item-content {
-  font-size: 15px;
-  color: #333333;
+  font-size: 13px;
+  color: var(--att-text);
 }
 .form-item-content .required {
-  color: #ff5219;
+  color: var(--att-record-status-nosign-color);
   font-size: 12px;
   margin-right: 6px;
 }
 
 .form-alert {
-  color: #999999;
-  font-size: 14px;
+  color: var(--att-text-mute);
+  font-size: 12px;
 }
 
 .tag-container {
@@ -733,8 +884,9 @@
   font-size: 12px;
   cursor: pointer;
   background-color: rgba(255, 255, 255) !important;
-  border-radius: 4px !important;
-  padding: 5px;
+  border: 1px solid var(--att-border);
+  border-radius: var(--att-radius-m) !important;
+  padding: 0 8px;
   line-height: 24px;
 }
 
@@ -744,10 +896,11 @@
   list-style: none;
   position: relative;
   background-color: var(--att-color-bg);
-  border-radius: var(--att-default-radius);
+  border-radius: var(--att-radius-m);
 }
 .a-card-gray {
-  background-color: rgba(23, 26, 29, 0.04);
+  background-color: var(--att-color-bg);
+  border: 1px solid var(--att-border);
   margin-bottom: 12px;
 }
 .a-card-head {
@@ -757,17 +910,17 @@
   background: transparent;
 }
 .a-card-head-tile {
-  border-radius: 0 16px 16px 0;
+  border-radius: 0 var(--att-default-radius) var(--att-default-radius) 0;
   background-color: var(--oo-color-main);
   color: #ffffff;
   font-size: 12px;
   display: inline-block;
-  padding: 5px 10px;
+  padding: 4px 10px;
 }
 .a-card-body {
   padding: 12px;
-  color: #333333;
-  font-size: 14px;
+  color: var(--att-text);
+  font-size: 13px;
 }
 
 /* icon */
@@ -775,14 +928,14 @@
   width: 16px;
   height: 16px;
   display: inline-flex;
-  color: #666666;
+  color: var(--att-text-sub);
   cursor: pointer;
 }
 .o2-icon-14 {
   width: 14px;
   height: 14px;
   display: inline-flex;
-  color: #999999;
+  color: var(--att-text-mute);
   cursor: pointer;
 }
 
@@ -790,12 +943,12 @@
 .o2-selctor {
   position: absolute;
   z-index: 1050;
-  font-size: 14px;
+  font-size: 13px;
   white-space: nowrap;
   background: #fff;
-  border-radius: 6px;
-  box-shadow: 0 3px 6px -4px rgb(0 0 0 / 12%), 0 6px 16px 0 rgb(0 0 0 / 8%),
-  0 9px 28px 8px rgb(0 0 0 / 5%);
+  border: 1px solid var(--att-border);
+  border-radius: var(--att-radius-m);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 .o2-selctor-ul {
   margin: 0;
@@ -815,4 +968,8 @@
   text-overflow: ellipsis;
   cursor: pointer;
   transition: all 0.3s;
+}
+.o2-selctor-li:hover {
+  background-color: var(--att-brand-light);
+  color: var(--att-brand);
 }

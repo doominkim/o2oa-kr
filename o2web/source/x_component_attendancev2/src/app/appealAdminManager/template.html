@@ -25,7 +25,7 @@
                 <span style="margin-left: 6px;">{{$.lp.recursive}}</span>
             </div>
         </div>
-        <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table">
+        <table width="100%" border="0" cellpadding="5" cellspacing="0" class="att_table" data-empty="{{$.lp.noData || ''}}">
             <thead>
                 <th>{{$.lp.detailTable.person}}</th>
                 <th>{{$.lp.appeal.date}}</th>

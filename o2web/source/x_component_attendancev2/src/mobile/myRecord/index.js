@@ -5,15 +5,15 @@ import { fieldWorkFormat } from '../../utils/common';
 import template from './template.html';
 import style from './style.scope.css';
 
-const DAY_NAMES = ['日', '一', '二', '三', '四', '五', '六'];
+const DAY_NAMES = ['일', '월', '화', '수', '목', '금', '토'];
 const RESULT_TEXT = {
-    PreCheckIn: '待打卡',
-    NotSigned: '未打卡',
-    Normal: '正常',
-    Late: '迟到',
-    Early: '早退',
-    SeriousLate: '严重迟到',
-    Absenteeism: '旷工'
+    PreCheckIn: '체크 예정',
+    NotSigned: '체크 누락',
+    Normal: '정상',
+    Late: '지각',
+    Early: '조퇴',
+    SeriousLate: '심한 지각',
+    Absenteeism: '무단결근'
 };
 const NOT_CHECKED_RESULTS = ['PreCheckIn', 'NotSigned'];
 
@@ -35,9 +35,9 @@ export default content({
             calendarTitle: '',
             weekList: [],
             recordList: [],
-            summaryTitle: '上下班打卡',
+            summaryTitle: '출퇴근 체크',
             loading: false,
-            emptyText: '暂无打卡记录'
+            emptyText: '체크 기록이 없습니다'
         };
     },
     afterRender() {
@@ -61,7 +61,7 @@ export default content({
             });
         }
         this.bind.weekList = weekList;
-        this.bind.calendarTitle = `${date.getFullYear()}年${date.getMonth() + 1}月`;
+        this.bind.calendarTitle = `${date.getFullYear()}년 ${date.getMonth() + 1}월`;
     },
     getWeekStart(date) {
         const start = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -126,14 +126,14 @@ export default content({
             const recordList = this.getDisplayRecordList(normalized);
             this.bind.recordList = this.buildRecordList(recordList);
             this.bind.summaryTitle = this.buildSummaryTitle(Object.assign({}, normalized, { recordList }));
-            this.bind.emptyText = '暂无打卡记录';
+            this.bind.emptyText = '체크 기록이 없습니다';
         } catch (err) {
             if (this.loadingDate !== date) {
                 return;
             }
-            console.error('查询打卡记录失败', err);
-            this.bind.emptyText = '打卡记录加载失败';
-            o2.api.page.notice('打卡记录加载失败，请重试！', 'error');
+            console.error('체크 기록 조회 실패', err);
+            this.bind.emptyText = '체크 기록을 불러오지 못했습니다';
+            o2.api.page.notice('체크 기록을 불러오지 못했습니다. 다시 시도하세요!', 'error');
         } finally {
             if (this.loadingDate === date) {
                 this.bind.loading = false;
@@ -206,9 +206,9 @@ export default content({
         const recordList = detail.recordList || [];
         const duration = this.hasNotCheckedRecord(recordList) ? 0 : (detail.workTimeDuration || detail.workTimeMinutes || detail.duration || this.calcWorkDuration(recordList));
         if (!duration) {
-            return '上下班打卡';
+            return '출퇴근 체크';
         }
-        return `上下班打卡（工时 ${this.formatDuration(duration)}）`;
+        return `출퇴근 체크 (근무 시간 ${this.formatDuration(duration)})`;
     },
     calcWorkDuration(list) {
         if (this.hasNotCheckedRecord(list)) {
@@ -234,29 +234,29 @@ export default content({
         const hours = Math.floor(minutes / 60);
         const restMinutes = minutes % 60;
         if (!hours) {
-            return `${restMinutes}分钟`;
+            return `${restMinutes}분`;
         }
-        return `${hours}小时${restMinutes}分钟`;
+        return `${hours}시간 ${restMinutes}분`;
     },
     formatRecordResult(record) {
         if (record.fieldWork) {
-            return lp.appeal && lp.appeal.fieldWork ? fieldWorkFormat(record) : '外勤';
+            return lp.appeal && lp.appeal.fieldWork ? fieldWorkFormat(record) : '외근';
         }
         return RESULT_TEXT[record.checkInResult] || '';
     },
     formatSource(record) {
         if (record.fieldWork) {
-            return lp.appeal && lp.appeal.fieldWork ? fieldWorkFormat(record) : '外勤';
+            return lp.appeal && lp.appeal.fieldWork ? fieldWorkFormat(record) : '외근';
         }
         switch (record.sourceType) {
             case 'USER_CHECK':
-                return lp.record && lp.record.sourceTypeUser ? lp.record.sourceTypeUser : '用户打卡';
+                return lp.record && lp.record.sourceTypeUser ? lp.record.sourceTypeUser : '사용자 체크';
             case 'AUTO_CHECK':
-                return '自动';
+                return '자동';
             case 'FAST_CHECK':
-                return lp.record && lp.record.sourceTypeFast ? lp.record.sourceTypeFast : '极速打卡';
+                return lp.record && lp.record.sourceTypeFast ? lp.record.sourceTypeFast : '빠른 체크';
             case 'SYSTEM_IMPORT':
-                return lp.record && lp.record.sourceTypeImport ? lp.record.sourceTypeImport : '数据导入';
+                return lp.record && lp.record.sourceTypeImport ? lp.record.sourceTypeImport : '데이터 가져오기';
             default:
                 break;
         }

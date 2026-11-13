@@ -85,7 +85,7 @@ MWF.xApplication.Meeting.DayView = new Class({
 
         var availableX = size.x - leftNodeSize.x - rightNodeSize.x - sideBarSize.x ;
 
-        this.dayNodeHeight = size.y-110;
+        this.dayNodeHeight = size.y-100;
 
         var leftTop = ( this.dayNodeHeight - leftNodeSize.y ) / 2;
         var rightTop = ( this.dayNodeHeight - rightNodeSize.y ) / 2;
@@ -94,9 +94,9 @@ MWF.xApplication.Meeting.DayView = new Class({
 
         var dayCount = (availableX/330).toInt();
 
-        this.scrollNode.setStyle("height", ""+(size.y-60)+"px");
+        this.scrollNode.setStyle("height", ""+(size.y-50)+"px");
         if( !this.app.inContainer ){
-            this.scrollNode.setStyle("margin-top", "60px");
+            this.scrollNode.setStyle("margin-top", "50px");
         }
         this.scrollNode.setStyle("margin-right", sideBarSize.x);
 

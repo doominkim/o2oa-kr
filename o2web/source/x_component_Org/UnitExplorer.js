@@ -198,7 +198,7 @@ MWF.xApplication.Org.UnitExplorer.Unit = new Class({
     load: function(){
         this.node = new Element("div", {"styles": this.style.node}).inject(this.listNode);
         this.contentNode = new Element("div", {"styles": this.style.contentNode}).inject(this.node);
-        var left = (10*this.level);
+        var left = (16*this.level);
         this.contentNode.setStyle("padding-left", ""+left+"px");
 
         if ((this.level%2)===1){

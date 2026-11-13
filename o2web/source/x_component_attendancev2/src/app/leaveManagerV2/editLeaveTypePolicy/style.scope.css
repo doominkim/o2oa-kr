@@ -23,7 +23,7 @@
 }
 
 .leave-policy-label .required {
-  color: #ff5219;
+  color: var(--att-record-status-nosign-color);
   font-size: 12px;
   margin-right: 6px;
 }
@@ -53,7 +53,7 @@
   background-color: #fff;
   background-image: none;
   border-radius: var(--att-default-radius);
-  border: 1px solid #DEDEDE;
+  border: 1px solid var(--att-input-border);
   transition: all .3s;
   color: #666666;
   font-size: 14px;
@@ -69,7 +69,7 @@
   height: 30px;
   line-height: 30px;
   box-sizing: border-box;
-  border: 1px solid #DEDEDE;
+  border: 1px solid var(--att-input-border);
   border-radius: var(--att-default-radius);
   background-color: #fff;
   color: #666666;

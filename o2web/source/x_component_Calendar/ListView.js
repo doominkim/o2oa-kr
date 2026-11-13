@@ -50,7 +50,7 @@ MWF.xApplication.Calendar.ListView = new Class({
 
         var titleSize = this.titleNode ? this.titleNode.getSize() : {x:0, y:0};
 
-        var y = size.y-50;
+        var y = size.y;
         //this.node.setStyle("margin-top", "60px");
         this.node.setStyle("height", ""+y+"px");
 

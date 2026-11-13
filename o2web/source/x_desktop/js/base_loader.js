@@ -241,7 +241,7 @@ if (!layout.isReady) {
                 var content = $("appContent") || $("layout");
                 if (content) content.empty();
                 layout.authentication = new o2.xDesktop.Authentication({
-                    "style": "flat",
+                    "style": "indigo",
                     "onLogin": _load.bind(layout)
                 });
                 layout.authentication.loadLogin(document.body);
@@ -277,7 +277,7 @@ if (!layout.isReady) {
                         if (n) {
                             n.destroy();
                         }
-                        document.id("layout").set("html", "<div>企业微信单点异常！</div>");
+                        document.id("layout").set("html", "<div>WeCom SSO 로그인 중 오류가 발생했습니다!</div>");
                     }.bind(this)
                 });
             };
@@ -366,12 +366,14 @@ if (!layout.isReady) {
         o2.load('../o2_lib/sjcl.min.js', {}, () => {
 
             o2.getJSON("../x_desktop/res/config/config.json", function (config) {
-                var supportedLanguages = Object.keys(config.supportedLanguages);
+                var supportedLanguages = Object.keys(config.supportedLanguages).map(function (key) {
+                    return key.toLowerCase();
+                });
 
                 if (supportedLanguages.indexOf(o2.language) === -1) {
                     o2.language = o2.language.substring(0, o2.language.indexOf('-'));
                 }
-                if (supportedLanguages.indexOf(o2.language) === -1) o2.language = "zh-cn";
+                if (supportedLanguages.indexOf(o2.language) === -1) o2.language = "ko";
 
                 if (!o2.LP) {
                     var lp = "../x_desktop/js/base_lp_" + o2.language + ((o2.session.isDebugger) ? "" : ".min") + ".js?v=" + o2.version.v;

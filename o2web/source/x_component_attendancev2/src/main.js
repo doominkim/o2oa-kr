@@ -12,7 +12,7 @@ loadComponent('attendancev2', (d, cb) => {
     const status = component.status || {};
     const navAction = status.navAction || "";
     if (navAction === "detailStatisticManager") { // 统计页面
-        document.title = "统计";
+        document.title = "통계";
         publicStatistic.render(d, { bind: { person: status.person || "" } }).then(() => {
             cb();
         });
@@ -22,25 +22,25 @@ loadComponent('attendancev2', (d, cb) => {
         const page = uri.getData("page");
         switch (page) {
             case "qywx":
-                document.title = "打卡";
+                document.title = "출퇴근 체크";
                 checkIn.render(d).then(() => {
                     cb();
                 });
                 break;
             case "myRecord":
-                document.title = "我的记录";
+                document.title = "내 기록";
                 myRecord.render(d).then(() => {
                     cb();
                 });
                 break;
             case "appealManager":
-                document.title = "考勤异常";
+                document.title = "근태 이상";
                 appealManager.render(d).then(() => {
                     cb();
                 });
                 break;
             default:
-                document.title = "考勤";
+                document.title = "근태";
                 mobile.render(d).then(() => {
                     cb();
                 });

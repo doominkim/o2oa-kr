@@ -1,8 +1,8 @@
 <div class="appeal-manager-page">
   <div class="appeal-toolbar">
-    <div class="appeal-count">共 {{$.totalCount}} 条</div>
+    <div class="appeal-count">총 {{$.totalCount}}건</div>
     <button class="appeal-refresh" @click="refresh">
-      <span>刷新</span>
+      <span>새로고침</span>
     </button>
   </div>
 
@@ -36,7 +36,7 @@
     </div>
 
     <div class="appeal-empty" oo-if="!$.appealList.length">
-      <div oo-if="$.loading">加载中...</div>
+      <div oo-if="$.loading">불러오는 중...</div>
       <div oo-else>{{$.emptyText}}</div>
     </div>
   </div>

@@ -1,5 +1,10 @@
 [
   {
+    "title": MWF.LP.desktop.styleFlatMenu.indigo || "인디고",
+    "style": "indigo",
+    "color": "#2768B0"
+  },
+  {
     "title": MWF.LP.desktop.styleFlatMenu.blue,
     "style": "blue",
     "color": "#4A90E2"

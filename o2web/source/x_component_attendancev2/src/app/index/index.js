@@ -202,6 +202,7 @@ export default content({
         accessMenus.push(
           {
             "title": lp.menu.config,
+            "icon": "ooicon-systemconfig",
             "text": lp.menu.config,
             "name": '3',
             "access": 2,
@@ -223,7 +224,7 @@ export default content({
     return [
       {
         "name": "1",
-        "icon": "",
+        "icon": "ooicon-person_clock",
         "title": lp.menu.myAttendance,
         "text": lp.menu.myAttendance,
         "access": 0,
@@ -257,6 +258,7 @@ export default content({
       },
       {
         "title": lp.menu.statistic,
+        "icon": "ooicon-reports",
         "text": lp.menu.statistic,
         "name": '2',
         "access": 1,
@@ -289,6 +291,7 @@ export default content({
       },
       {
         "title": lp.menu.config,
+        "icon": "ooicon-systemconfig",
         "text": lp.menu.config,
         "name": '3',
         "access": 2,

@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("fonts/noto-sans-kr/noto-sans-kr.css");
 
 html{
 	overflow: hidden;
@@ -10,7 +11,9 @@ body {
 	margin:0;
 	padding:0;
 	height: 100%;
-	font-family: "Microsoft YaHei", "SimSun", "宋体", serif;
+	font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
+	word-break: keep-all;
+	overflow-wrap: break-word;
     font-size:14px;
 	-webkit-overflow-scrolling: touch;
 	/*background-color: #F1F1F1;*/

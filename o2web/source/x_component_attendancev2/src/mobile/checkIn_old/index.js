@@ -100,14 +100,14 @@ export default content({
         // 开启SDK辅助定位 app webview 支持
         // geolocation.enableSDKLocation();
         geolocation.getCurrentPosition(function(r){
-            console.debug("定位返回", r);
+            console.debug("위치 확인 결과", r);
             if(this.getStatus() == BMAP_STATUS_SUCCESS){
-                console.debug('您的位置：'+r.point.lng+','+r.point.lat);
+                console.debug('현재 위치: '+r.point.lng+','+r.point.lat);
                  self.bind.location.lnglat.longitude = r.point.lng;
                  self.bind.location.lnglat.latitude = r.point.lat;
                  self.getGeoAddress(r.point);
             } else {
-                console.log("定位失败。。。。。。。");
+                console.log("위치 확인에 실패했습니다.");
                 self.bind.location.title = lp.mobile.locationError;
             } 
         }, {
@@ -129,7 +129,7 @@ export default content({
     },
     // 接收gps定位地址
     callGpsLocation(position) {
-        console.debug("gps定位位置信息", position);
+        console.debug("GPS 위치 정보", position);
         if (position && position.coords) {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
@@ -138,29 +138,29 @@ export default content({
             const convertor = new BMap.Convertor();
             const pointArr = [];
             pointArr.push(gpsPoint);
-            console.debug("开始转化百度位置");
+            console.debug("Baidu 좌표 변환 시작");
             convertor.translate(pointArr, 1, 5, this.translateBMapPointSuccess.bind(this));
         } else {
-            console.error(" gps定位错误！");
+            console.error(" GPS 위치 확인 오류!");
             this.bind.location.title = lp.mobile.locationError;
         }
     },
     // 转化百度坐标
     translateBMapPointSuccess(data) {
-        console.debug("转化百度位置返回结果", data);
+        console.debug("Baidu 좌표 변환 결과", data);
         if (data.status === 0 && data.points && data.points[0]) {
-            console.debug('您的位置：'+data.points[0].lng+','+data.points[0].lat);
+            console.debug('현재 위치: '+data.points[0].lng+','+data.points[0].lat);
             this.bind.location.lnglat.longitude = data.points[0].lng;
             this.bind.location.lnglat.latitude = data.points[0].lat;
             this.getGeoAddress(data.points[0]);
         } else {
-            console.error("百度转化gps位置错误！");
+            console.error("Baidu GPS 좌표 변환 오류!");
             this.bind.location.title = lp.mobile.locationError; 
         }
     },
     // 百度查询地址
     async getGeoAddress(point) {
-        console.debug("开始查询定位的详细地址")
+        console.debug("위치 상세 주소 조회 시작")
         const gc = new BMap.Geocoder();
         gc.getLocation(point, (rs) => {
             console.debug(rs);
@@ -229,7 +229,7 @@ export default content({
                 this.bind.recordItemList = recordItemList;
             }
         } else {
-            console.error("请求错误，没有返回打卡数据！");
+            console.error("요청 오류: 체크 데이터가 반환되지 않았습니다!");
         }
     },
     
@@ -247,7 +247,7 @@ export default content({
                 const range = this.map.getDistance(testA, testB).toFixed(2);
                 console.log(range);
                 if (range <= workPlace.errorRange) {
-                    console.log("范围内打卡", workPlace);
+                    console.log("범위 내 체크", workPlace);
                     this.bind.location.workPlace = workPlace;
                     this.bind.location.isNotFieldWork = true;
                     this.bind.location.title = workPlace.placeName;
@@ -262,10 +262,10 @@ export default content({
         if (record && record.isLastRecord) {
             if (this.bind.location.isNotFieldWork) {
                 // 正常打卡
-                console.log('正常打卡！');
+                console.log('정상 체크!');
                 this.checkInPost(record, this.bind.location.workPlace.id, false, null);
             } else {
-                console.debug('外勤打卡！');
+                console.debug('외근 체크!');
                 this.outSide(record);
             }
         }
@@ -275,10 +275,10 @@ export default content({
         if (this.bind.checkInCycle.canCheckIn) {
             if (this.bind.location.isNotFieldWork) {
                 // 正常打卡
-                console.log('正常打卡！');
+                console.log('정상 체크!');
                 this.checkInPost(this.bind.nextCheckInRecord, this.bind.location.workPlace.id, false, null);
             } else {
-                console.debug('外勤打卡！');
+                console.debug('외근 체크!');
                 this.outSide(this.bind.nextCheckInRecord);
             }
         }
@@ -286,7 +286,7 @@ export default content({
     // 外勤打卡
     outSide(record) {
         if (!record) {
-            console.error("错误的数据！");
+            console.error("잘못된 데이터입니다!");
             return;
         }
         if (!this.bind.checkInCycle.allowFieldWork) {

@@ -27,7 +27,7 @@ var MWFCalendarMonthView = MWF.xApplication.Calendar.MonthView = new Class({
 
     resetNodeSize: function(){
         var size = this.container.getSize();
-        var y = size.y-50;
+        var y = size.y;
         this.node.setStyle("height", ""+y+"px");
         //this.node.setStyle("margin-top", "60px");
 
@@ -242,6 +242,13 @@ MWFCalendarMonthView.Calendar = new Class({
 
         this.nextMonthNode =  new Element("div.ooicon-arrow_forward", {"styles": this.css.calendarNextMonthNode}).inject(this.titleNode);
 
+        this.todayNode = new Element("div", {"styles": this.css.calendarTodayNode, "text": this.app.lp.today}).inject(this.titleNode);
+        this.todayNode.addEvents({
+            "mouseover": function(){ this.todayNode.addClass("mainColor_color"); }.bind(this),
+            "mouseout": function(){ this.todayNode.removeClass("mainColor_color"); }.bind(this),
+            "click": function(){ this.changeMonthTo(new Date()); }.bind(this)
+        });
+
         this.prevMonthNode.addEvents({
             "mouseover": function(){
                 this.prevMonthNode.setStyles(this.css.calendarPrevMonthNode_over);
@@ -328,6 +335,8 @@ MWFCalendarMonthView.Calendar = new Class({
         this.calendarTableTitleTr.setStyles(this.css.calendarTableTitleTr);
         var ths = this.calendarTableTitleTr.getElements("th");
         ths.setStyles(this.css.calendarTableTh);
+        ths[ this.weekBegin == "1" ? 6 : 0 ].setStyles(this.css.calendarTableTh_sunday);
+        ths[ this.weekBegin == "1" ? 5 : 6 ].setStyles(this.css.calendarTableTh_saturday);
     },
     setBodyNode: function(){
         var html = "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
@@ -698,21 +707,23 @@ MWFCalendarMonthView.Calendar = new Class({
 
         if( type === "today" ){
             titleDayNode.addClass("mainColor_bg");
+        }else if( date.getDay() === 0 || date.getDay() === 6 ){
+            titleDayNode.setStyles(this.css[ (date.getDay() === 0 ? "dayTitleDay_sunday_" : "dayTitleDay_saturday_") + type ]);
         }
 
         //var contentNode = new Element("div", {"styles": this.css.dayContentNode}).inject(node);
 
     },
     setCurrentTd : function(td){
-        td.setStyle("background-color","#fffdf2");
+        td.setStyle("background-color","#F7FAFD");
         if( this.currentSelectedTd ){
-            this.currentSelectedTd.setStyle("background-color",this.currentSelectedTd.retrieve("type")=="today"?"#F8FBFF":"#fff");
+            this.currentSelectedTd.setStyle("background-color",this.currentSelectedTd.retrieve("type")=="today"?"#EAF2FB":"#fff");
         }
         this.currentSelectedTd = td;
     },
     cancelCurrentTd : function(){
         if( this.currentSelectedTd ){
-            this.currentSelectedTd.setStyle("background-color",this.currentSelectedTd.retrieve("type")=="today"?"#F8FBFF":"#fff");
+            this.currentSelectedTd.setStyle("background-color",this.currentSelectedTd.retrieve("type")=="today"?"#EAF2FB":"#fff");
         }
         this.currentSelectedTd = null;
     },
@@ -845,7 +856,7 @@ MWFCalendarMonthView.Calendar = new Class({
         if( this.selectedTds ){
             this.selectedTds.each( function( td ){
                 var type = td.retrieve("type");
-                if( !tds.contains(td) )td.setStyle("background-color", type == "today" ?  "#F8FBFF" : "#fff");
+                if( !tds.contains(td) )td.setStyle("background-color", type == "today" ?  "#EAF2FB" : "#fff");
             }.bind(this));
             tds.each( function( td ){
                 if( !this.selectedTds.contains(td) )td.setStyle("background-color", "#fffdf2");
@@ -873,7 +884,7 @@ MWFCalendarMonthView.Calendar = new Class({
         if( this.selectedTds && this.selectedTds.length ){
             this.selectedTds.each( function( td ){
                 var type = td.retrieve("type");
-                td.setStyle("background-color", type == "today" ?  "#F8FBFF" : "#fff");
+                td.setStyle("background-color", type == "today" ?  "#EAF2FB" : "#fff");
             }.bind(this));
             var startTime = this.selectedTds[0].retrieve("dateStr");
             var endTime = this.selectedTds.getLast().retrieve("dateStr");
@@ -964,6 +975,7 @@ MWFCalendarMonthView.Calendar.WholeDayWeek = new Class({
                 "overflow" : "hidden",
                 "height" : "20px",
                 "line-height" : "20px",
+                "color" : "#222",
                 "border-top" : "1px solid " + lightColor,
                 "border-bottom" : "1px solid " + lightColor,
                 "background-color": lightColor
@@ -990,24 +1002,25 @@ MWFCalendarMonthView.Calendar.WholeDayWeek = new Class({
 
         if( this.weekInfor.isEventStart ){
             node.setStyles({
-                "border-left" : "1px solid " + lightColor,
-                "border-top-left-radius" : "10px",
-                "border-bottom-left-radius" : "10px"
+                "border-left" : "3px solid " + this.data.color,
+                "border-top-left-radius" : "2px",
+                "border-bottom-left-radius" : "2px"
             })
         }
         if( this.weekInfor.isEventEnd ){
             node.setStyles({
                 "border-right" : "1px solid " + lightColor,
-                "border-top-right-radius" : "10px",
-                "border-bottom-right-radius" : "10px"
+                "border-top-right-radius" : "2px",
+                "border-bottom-right-radius" : "2px"
             })
         }
 
         if( this.weekInfor.isEventStart ){
             this.timeNode = new Element("div",{
                 styles : {
-                    "font-size" : "10px",
-                    "padding-left" : "2px",
+                    "font-size" : "11px",
+                    "font-weight" : "bold",
+                    "padding-left" : "4px",
                     "float" : "left"
                 },
                 text : this.timeStart.format("%m-%d %H:%M") + MWF.xApplication.Calendar.LP.to + this.timeEnd.format("%m-%d %H:%M")
@@ -1018,6 +1031,7 @@ MWFCalendarMonthView.Calendar.WholeDayWeek = new Class({
             styles : {
                 "padding-left" : "5px",
                 "font-size" : "12px",
+                "color" : "#222",
                 "float" : "left",
                 "overflow" : "hidden",
                 "text-overflow" : "ellipsis",
@@ -1102,17 +1116,20 @@ MWFCalendarMonthView.Calendar.InOnDayDocument = new Class({
         this.createNode();
     },
     createNode : function(){
-        var lightColor = this.lightColor = MWFCalendar.ColorOptions.getLightColor( this.data.color );
+        var lightColor = MWFCalendar.ColorOptions.getLightColor( this.data.color );
+        this.lightColor = "transparent";
 
         var node = this.node = new Element("div",{
             styles : {
                 position : "absolute",
-                border : "1px solid "+lightColor,
-                "background-color" : lightColor,
+                border : "1px solid transparent",
+                "background-color" : "transparent",
                 "overflow" : "hidden",
                 "height" : "20px",
                 "line-height" : "20px",
-                "border-radius" : "10px"
+                "border-radius" : "2px",
+                "color" : "#222",
+                "white-space" : "nowrap"
             },
             events : {
                 click : function(){
@@ -1135,13 +1152,24 @@ MWFCalendarMonthView.Calendar.InOnDayDocument = new Class({
         node.setStyles(coordinate);
 
         //if( this.isFirst ){
+        this.dotNode = new Element("div",{
+            styles : {
+                "float" : "left",
+                "width" : "6px",
+                "height" : "6px",
+                "margin" : "7px 0px 0px 6px",
+                "border-radius" : "1px",
+                "background-color" : this.data.color || lightColor
+            }
+        }).inject( node );
         this.timeNode = new Element("div",{
             styles : {
-                "font-size" : "10px",
-                "padding-left" : "2px",
+                "font-size" : "12px",
+                "font-weight" : "bold",
+                "padding-left" : "4px",
                 "float" : "left"
             },
-            text : this.timeStart.format("%H:%M") + MWF.xApplication.Calendar.LP.to + this.timeEnd.format("%H:%M")
+            text : this.timeStart.format("%H:%M")
         }).inject( node );
 
         this.titleNode = new Element("div",{
@@ -1156,7 +1184,7 @@ MWFCalendarMonthView.Calendar.InOnDayDocument = new Class({
             text : this.data.title
         }).inject( node );
 
-        this.titleNode.setStyle("width", coordinate.width - this.timeNode.getSize().x - 6 );
+        this.titleNode.setStyle("width", coordinate.width - this.timeNode.getSize().x - 18 );
         //}
 
 
@@ -1186,7 +1214,7 @@ MWFCalendarMonthView.Calendar.InOnDayDocument = new Class({
     resize : function(){
         var coordinate = this.getCoordinate();
         this.node.setStyles( coordinate );
-        this.titleNode.setStyle("width", coordinate.width - this.timeNode.getSize().x - 6 );
+        this.titleNode.setStyle("width", coordinate.width - this.timeNode.getSize().x - 18 );
     },
     reload: function(){
         if( this.tooltip )this.tooltip.destroy();
@@ -1371,17 +1399,17 @@ MWFCalendarMonthView.MonthSelector = new Class({
                 new Element("div", {
                     class: "mainColor_bg",
                     styles : _self.css.calendarMonthSelectTodayNode,
-                    text : ""+m+ (MWF.language.substr(0,2) === "zh" ? this.app.lp.month : "")
+                    text : ""+m+ (["zh", "ko"].indexOf(MWF.language.substr(0,2)) > -1 ? this.app.lp.month : "")
                 }).inject( td );
             }else if ((this.year == thisY) && (idx == thisM)){
                 //td.setStyle("background-color", "#EEE");
                 new Element("div", {
                     class: "mainColor_border mainColor_color",
                     styles : _self.css.calendarMonthSelectCurrentNode,
-                    text : ""+m+ (MWF.language.substr(0,2) === "zh" ? this.app.lp.month : "")
+                    text : ""+m+ (["zh", "ko"].indexOf(MWF.language.substr(0,2)) > -1 ? this.app.lp.month : "")
                 }).inject( td );
             }else{
-                td.set("text", ""+m+ (MWF.language.substr(0,2) === "zh" ? this.app.lp.month : ""));
+                td.set("text", ""+m+ (["zh", "ko"].indexOf(MWF.language.substr(0,2)) > -1 ? this.app.lp.month : ""));
             }
 
             td.addEvents({

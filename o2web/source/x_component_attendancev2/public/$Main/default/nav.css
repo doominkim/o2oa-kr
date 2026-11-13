@@ -1,0 +1,75 @@
+/* 근태 앱 좌측 메뉴(LNB): oo-nav 의 css-link 로 shadow DOM 안에 적용된다. */
+.content {
+    --item-color: #444444;
+    --item-bg: transparent;
+    --item-over: #222222;
+    --item-over-bg: #F4F5F7;
+    --item-selected: #2768B0;
+    --item-selected-bg: #EAF2FB;
+    --item-group-color: #222222;
+    --item-count-color: #2768B0;
+    font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    font-size: 13px;
+}
+.navContent {
+    padding: 8px 0;
+    border-radius: 0;
+}
+.item {
+    min-height: 36px;
+    line-height: 20px;
+    font-size: 13px;
+    padding-right: 12px;
+}
+.item .text {
+    padding: 8px 0;
+    line-height: 20px;
+}
+/* 1단계: 13px bold #222 + 아이콘 */
+.item.level1 {
+    min-height: 40px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #222222;
+    padding-left: 16px !important;
+}
+.item.level1 .icon {
+    width: 16px;
+    margin-right: 8px;
+    font-size: 16px;
+    font-weight: normal;
+    color: #555555;
+}
+.item.level1 .icon.hide {
+    display: none;
+}
+/* 2단계: 13px #444, 1단계 글자 위치에 맞춰 들여쓰기 */
+.item.level2 {
+    padding-left: 40px !important;
+    color: #444444;
+}
+.item.level2 .icon {
+    display: none;
+}
+.item.level2.selected {
+    color: #2768B0;
+    font-weight: 700;
+    background-color: #EAF2FB;
+}
+.item.level1.selected,
+.item.level1.selected .icon {
+    color: #2768B0;
+}
+.arrowArea {
+    padding: 0 0 0 8px;
+    color: #8C8C8C;
+    font-size: 12px;
+}
+.arrow {
+    font-size: 12px;
+    color: #8C8C8C;
+}
+.item .count {
+    font-size: 12px;
+    color: #2768B0;
+}

@@ -116,7 +116,7 @@ export default content({
   },
   listenEventBus() {
     this.$topParent.listenEventBus("address", (data) => {
-      console.log("接收到了address消息", data);
+      console.log("address 메시지 수신", data);
       this.loadMapConfig();
       this.loadWorkAddressData();
     });

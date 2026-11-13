@@ -1,3 +1,4 @@
+@import url("../fonts/noto-sans-kr/noto-sans-kr.css");
 :root {
     --oo-color-main: #2E82F7;
     --oo-color-main-light: #64a3ec;
@@ -60,7 +61,7 @@
     --oo-shadow-border-focus: inset 0 0 0 1px var(--oo-color-main);
     --oo-shadow-border-error: inset 0 0 0 1px var(--oo-color-error);
 
-    --oo-font-family: "PingFangSC-Regular", "Microsoft YaHei", "YaHei", "SimSun", "宋体", sans-serif;
+    --oo-font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     --oo-font-size-default: 1rem;   /*~16*/
     --oo-font-size-small: 0.875rem;     /*~14*/
     --oo-font-size-smaller: 0.75rem;   /*~12*/
@@ -81,6 +82,36 @@
     --oo-menu-shadow: 0em 0em 0.5em 0.125em var(--oo-color-gray-e);
     --oo-menu-bg-color: var(--oo-color-bg-white);
     --oo-dialog-shadow: 0.2em 0.2em 1em 0.125em var(--oo-color-gray-b);
+
+    /****** 인디고 그룹웨어 레이아웃 토큰 (O2OA-6, 명세: 아마란스형 셸) *****/
+    --ik-rail-width: 48px;
+    --ik-rail-expanded-width: 240px;
+    --ik-rail-bg: #333948;
+    --ik-rail-active-bg: #262B37;
+    --ik-rail-text: #B4B9C4;
+    --ik-rail-text-active: #FFFFFF;
+    --ik-header-height: 50px;
+    --ik-module-bar-height: 44px;
+    --ik-lnb-width: 192px;
+    --ik-page-bg: #F4F5F7;
+    --ik-surface: #FFFFFF;
+    --ik-border: #E6E6E6;
+    --ik-line: #EDEFF2;
+    --ik-table-head-bg: #F2F6F8;
+    --ik-text: #222222;
+    --ik-text-sub: #666666;
+    --ik-text-mute: #8C8C8C;
+    --ik-status-progress: var(--oo-color-main);
+    --ik-status-ok: #20C997;
+    --ik-status-wait: #F0C325;
+    --ik-status-danger: #F0504F;
+    --ik-radius-s: 2px;
+    --ik-radius-m: 4px;
+    --ik-radius-l: 8px;
+    --ik-shadow-card: 0 1px 4px rgba(0, 0, 0, 0.08);
+    --ik-font-size: 13px;
+    --ik-font-size-sub: 12px;
+    --ik-font-size-title: 18px;
     /*****************/
 
 
@@ -89,7 +120,9 @@
 
     box-sizing: border-box;
 
-    font-family: "PingFangSC-Regular", "Microsoft YaHei", "YaHei", "SimSun", "宋体", sans-serif;
+    font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
+    word-break: keep-all;
+    overflow-wrap: break-word;
 
     padding: 0;
 }

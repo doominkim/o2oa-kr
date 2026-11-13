@@ -6,7 +6,7 @@ import { getPublicData } from "../../../utils/actions";
 const template = `
   <div class=" {{ $.isMax ? 'bd-map-container-fixed': 'bd-map-container'}}">
       <div class="bd-map">
-          <!-- 腾讯地图 -->
+          <!-- Tencent 지도 -->
       </div>
       <div class="icon bd-map-btn" @click="mapMaxOrMini" ><i class="{{  $.isMax ? 'o2icon-shrink' : 'o2icon-enlarge' }}"></i></div>
   </div>
@@ -39,11 +39,11 @@ export default content({
       if (config && config.txMapAccountKey) {
         accountkey = config.txMapAccountKey;
       } else {
-        console.error("没有配置地图 Key ！！！");
+        console.error("지도 Key가 설정되지 않았습니다!");
       }
       const apiPath = "https://map.qq.com/api/gljs?v=1.exp&key=" + accountkey;
       o2.load(apiPath, () => {
-        console.debug("腾讯地图加载API加载完成，开始载入地图！");
+        console.debug("Tencent 지도 API 로드 완료, 지도를 불러옵니다!");
         window.TencentMapApiLoaded = true;
         this.loadViewOrLocation();
       });
@@ -76,7 +76,7 @@ export default content({
   },
   // 加载腾讯地图
   createMap(point) {
-    console.debug("开始创建腾讯地图！", point);
+    console.debug("Tencent 지도 생성 시작!", point);
     this.mapNode = this.dom.querySelector(".bd-map");
     if (this.mapNode) {
       if (!this.map) {
@@ -102,7 +102,7 @@ export default content({
     }
     this.mapClickAdded = true;
     this.map.on("click", (e) => {
-      console.debug("点击的经纬度：", e);
+      console.debug("클릭한 위경도: ", e);
       const latitude = e.latLng.getLat();
       const longitude = e.latLng.getLng();
       const point = new TMap.LatLng(latitude, longitude);

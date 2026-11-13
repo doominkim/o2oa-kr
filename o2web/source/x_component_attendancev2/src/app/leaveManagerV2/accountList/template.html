@@ -37,7 +37,7 @@
 
         <!-- Table data -->
         <div class="leave-account-table-scroll">
-            <table border="0" cellpadding="5" cellspacing="0" class="att_table leave-account-table"
+            <table border="0" cellpadding="5" cellspacing="0" class="att_table leave-account-table" data-empty="{{$.lp.noData || ''}}"
                 oo-if="$.personList.length > 0">
                 <thead>
                     <th class="sticky-row sticky-col">{{$.lp.leaveManagerV2.account.person}}</th>

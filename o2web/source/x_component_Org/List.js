@@ -35,7 +35,7 @@ MWF.xApplication.Org.List = new Class({
         this.headers = headers;
         //this.node = new Element("div", {"styles": this.css.node}).inject(this.contentNode);
 
-        var html = "<table cellspacing='0' cellpadding='5' border='0' width='80%' align='center' style='line-height:normal; clear: both;'>";
+        var html = "<table cellspacing='0' cellpadding='5' border='0' style='width: calc(100% - 48px); margin: 0px 24px; line-height:normal; clear: both;'>";
         html += "<tr><th style='width:20px'></th>";
         headers.each(function(title){
             html += "<th style='"+title.style+"'>"+o2.txt(title.text)+"</th>";

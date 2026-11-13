@@ -217,7 +217,7 @@ export default content({
             job: (jobIds[0] || "")
         };
         const json = await appealInfoAction("startProcess", id, body);
-        console.debug('更新成功', json);
+        console.debug('업데이트했습니다', json);
         this.refreshClickDateRecordList();
         // 打开流程工作文档 移动端页面会跳转 最后再打开
         if (currentTask.length > 0){
@@ -255,7 +255,7 @@ export default content({
     // 还原数据状态
     async resetStatus(id) {
         const json = await appealInfoAction("resetStatus", id);
-        console.debug('还原状态成功', json);
+        console.debug('상태를 복원했습니다', json);
         this.refreshClickDateRecordList();
     },
     refreshClickDateRecordList() {

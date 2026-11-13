@@ -15,8 +15,8 @@
   min-height: 32px;
   background-color: #fff;
   background-image: none;
-  border: 1px solid #d9d9d9;
-  border-radius: 6px;
+  border: 1px solid var(--att-input-border);
+  border-radius: var(--att-default-radius);
   transition: all .3s;
 }
 
@@ -33,7 +33,7 @@
   background-color: #fff;
   background-image: none;
   border-radius: var(--att-default-radius);
-  border: 1px solid #DEDEDE;
+  border: 1px solid var(--att-input-border);
   transition: all .3s;
   color: #666666;
   font-size: 14px;
@@ -42,7 +42,7 @@
     height: 30px;
     width: 40px;
     padding: 0 10px;
-    border: 1px solid #DEDEDE;
+    border: 1px solid var(--att-input-border);
     border-radius: var(--att-default-radius);
     box-sizing: border-box;
     font-size: 14px;
@@ -52,7 +52,7 @@
     height: 30px;
     width: 280px;
     padding: 0 10px;
-    border: 1px solid #DEDEDE;
+    border: 1px solid var(--att-input-border);
     border-radius: var(--att-default-radius);
     box-sizing: border-box;
     font-size: 14px;
@@ -63,7 +63,7 @@
     width: 72px;
     margin: 0 4px;
     padding: 0 8px;
-    border: 1px solid #DEDEDE;
+    border: 1px solid var(--att-input-border);
     border-radius: var(--att-default-radius);
     box-sizing: border-box;
     font-size: 14px;

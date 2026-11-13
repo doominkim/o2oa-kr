@@ -15,7 +15,8 @@ MWF.xApplication.Homepage.Main = new Class({
 		"isResize": true,
 		"isMax": true,
 		"title": MWF.xApplication.Homepage.LP.title,
-		"minHeight": 700
+		"minHeight": 700,
+		"cardGap": 20
 	},
 	onQueryLoad: function(){
 		this.lp = MWF.xApplication.Homepage.LP;
@@ -34,6 +35,7 @@ MWF.xApplication.Homepage.Main = new Class({
 	},
 	loadApp: function(callback){
 		//this.initNode();
+		this.loadMyInfo();
 		this.initNodeSize();
 
 		this.taskLoaded = false;
@@ -71,6 +73,27 @@ MWF.xApplication.Homepage.Main = new Class({
 		this.resizeNodeSize();
 		this.addEvent("resize", this.resizeNodeSize.bind(this));
 	},
+	loadMyInfo: function(){
+		var user = layout.session.user || {};
+		var detail = layout.session.userDetail || {};
+		var name = o2.name.cn(user.name || user.distinguishedName || "");
+		var unit = "";
+		if (detail.identityList && detail.identityList.length){
+			unit = detail.identityList[0].unitName || o2.name.cn(detail.identityList[0].unit || "");
+		}
+		if (!unit && detail.unitList && detail.unitList.length) unit = detail.unitList[0].name || "";
+
+		this.myInfoNameNode.set("text", name);
+		this.myInfoUnitNode.set("text", unit || this.lp.noUnit);
+		this.myInfoDateNode.set("text", (new Date()).format(this.lp.dateFormat));
+		this.myInfoAvatarNode.set("text", name.substr(0, 1));
+
+		var userNode = layout.desktop && layout.desktop.userInforNode;
+		var bg = (userNode && userNode.getFirst()) ? userNode.getFirst().getStyle("background-image") : "";
+		if (bg && bg!=="none"){
+			this.myInfoAvatarNode.set("text", "").setStyle("background-image", bg);
+		}
+	},
 	resizeNodeSize: function(){
 		var size = this.content.getSize();
 		var edge = this.node.getEdgeHeight();
@@ -78,15 +101,15 @@ MWF.xApplication.Homepage.Main = new Class({
 		if (height<this.options.minHeight) height = this.options.minHeight;
 		this.node.setStyle("height", ""+height+"px");
 
-
+		var rowHeight = Math.floor((height - this.options.cardGap)/2);
 		var rightHeight = height - this.calendarContentNode.getEdgeHeight();
-		var leftHeight = this.ltlLayout.getSize().y - this.taskContentNode.getEdgeHeight();
+		var sideHeight = height - this.myInfoNode.getSize().y - this.meetingContentNode.getEdgeHeight();
 
 		this.calendarContentNode.setStyle("height", ""+rightHeight+"px");
-		this.taskContentNode.setStyle("height", ""+leftHeight+"px");
-		this.meetingContentNode.setStyle("height", ""+leftHeight+"px");
-		this.inforContentNode.setStyle("height", ""+leftHeight+"px");
-		this.fileContentNode.setStyle("height", ""+leftHeight+"px");
+		this.meetingContentNode.setStyle("height", ""+sideHeight+"px");
+		this.taskContentNode.setStyle("height", ""+(rowHeight - this.taskContentNode.getEdgeHeight())+"px");
+		this.inforContentNode.setStyle("height", ""+(rowHeight - this.inforContentNode.getEdgeHeight())+"px");
+		this.fileContentNode.setStyle("height", ""+(rowHeight - this.fileContentNode.getEdgeHeight())+"px");
 	},
 	loadTaskContent: function(callback){
 		this.taskContent = new MWF.xApplication.Homepage.TaskContent(this, this.taskContentNode, {

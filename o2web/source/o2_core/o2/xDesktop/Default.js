@@ -8,7 +8,7 @@ o2.require("o2.widget.PinYin", null, false);
 o2.xDesktop.Default = new Class({
     Implements: [Options, Events],
     options: {
-        "style": "blue",
+        "style": "indigo",
         "index": "Homepage"
     },
     zoomOut: function(){
@@ -106,7 +106,7 @@ o2.xDesktop.Default = new Class({
         this.path = o2.session.path+"/xDesktop/$Default/";
         this.node = $(node);
         this.node.empty();
-        this.options.style = layout.config.defaultSkin || "blue";
+        this.options.style = layout.config.defaultSkin || "indigo";
         this.initData();
         this.zoom(layout.config.scaleConfig===false ? 1 : 0);
     },
@@ -199,9 +199,39 @@ o2.xDesktop.Default = new Class({
             }
         }.bind(this), 50);
     },
+    isTaskBarHorizontal: function(){
+        //한 줄 가로 스크롤 탭 바(indigo 셸)인지 여부
+        return !!this.taskContentAreaNode && this.taskContentAreaNode.getStyle("overflow-x")==="auto";
+    },
+    scrollTaskItemIntoView: function(node){
+        var area = this.taskContentAreaNode;
+        var areaRect = area.getBoundingClientRect();
+        var rect = node.getBoundingClientRect();
+        if (rect.left<areaRect.left){
+            area.scrollLeft -= (areaRect.left-rect.left)+8;
+        }else if (rect.right>areaRect.right){
+            area.scrollLeft += (rect.right-areaRect.right)+8;
+        }
+    },
+    setTaskBarWheel: function(){
+        //세로 휠을 가로 스크롤로 바꿔 넘친 탭을 볼 수 있게 한다
+        var area = this.taskContentAreaNode;
+        if (!area || !this.isTaskBarHorizontal()) return;
+        area.addEventListener("wheel", function(e){
+            if (area.scrollWidth<=area.clientWidth) return;
+            if (Math.abs(e.deltaY)>Math.abs(e.deltaX)){
+                area.scrollLeft += e.deltaY;
+                e.preventDefault();
+            }
+        }, {"passive": false});
+    },
     checkTaskBarScrollTo: function(app){
         var currentApp = app || this.currentApp;
         if (currentApp && currentApp.taskitem){
+            if (this.isTaskBarHorizontal()){
+                this.scrollTaskItemIntoView(currentApp.taskitem.node);
+                return;
+            }
             var size = this.taskContentAreaNode.getSize();
             var scroll = this.taskContentAreaNode.getScroll();
             var scrollSize = this.taskContentAreaNode.getScrollSize();
@@ -296,10 +326,19 @@ o2.xDesktop.Default = new Class({
             }
 
             this.sliderNode.getLast().set("title", o2.LP.desktop.returnZoom);
+            if (this.userUnitNode) this.userUnitNode.set("text", this.getUserUnitText());
 
             this.node.loadCss(skinCss);
             if (callback) callback();
         }.bind(this));
+    },
+    getUserUnitText: function(){
+        var detail = layout.session.userDetail || {};
+        if (detail.identityList && detail.identityList.length){
+            return detail.identityList[0].unitName || o2.name.cn(detail.identityList[0].unit || "");
+        }
+        if (detail.unitList && detail.unitList.length) return detail.unitList[0].name || "";
+        return "";
     },
 
 
@@ -332,6 +371,7 @@ o2.xDesktop.Default = new Class({
 
         this.resizeHeight();
         this.addEvent("resize", this.resizeHeight.bind(this));
+        this.setTaskBarWheel();
 
         o2.require("o2.widget.ScrollBar", function(){
             this.appScrollBar = new o2.widget.ScrollBar(this.lnkContentNode, {
@@ -484,6 +524,11 @@ o2.xDesktop.Default = new Class({
         }else{
             this.lnks.push(lnk);
         }
+    },
+    setCurrentLnk: function(app){
+        this.lnks.each(function(lnk){
+            if (lnk.node) lnk.setCurrent(lnk.isApp(app));
+        });
     },
 
     openWebSocket: function(){
@@ -2932,6 +2977,7 @@ o2.xDesktop.Default.TaskItem = new Class({
             //this.closeNode.show();
         }
         this.desktop.checkTaskBarScrollTo(this.app);
+        if (this.desktop.setCurrentLnk) this.desktop.setCurrentLnk(this.app);
         //this.refreshNode.show();
         if (this.actionNode) this.actionNode.show();
 
@@ -2974,8 +3020,22 @@ o2.xDesktop.Default.Lnk = new Class({
             this.iconNode.setStyle("background-image", "url("+icon+")");
             this.setEvent();
         }.bind(this));
-
-
+        this.setCurrent(this.isApp(this.layout.currentApp));
+    },
+    isApp: function(app){
+        //레일 아이콘이 가리키는 앱이 현재 앱인지 (활성 표시용)
+        if (!app || !app.options || !this.data) return false;
+        if (this.data.name==="Homepage" && app.options.isHomepage) return true;
+        if (this.data.name!==app.options.name) return false;
+        var opt = this.data.options;
+        return !(opt && opt.appId && opt.appId!==app.options.appId);
+    },
+    setCurrent: function(flag){
+        if (flag){
+            this.node.addClass("layout_menu_lnk_item_current");
+        }else{
+            this.node.removeClass("layout_menu_lnk_item_current");
+        }
     },
     setEvent: function(){
         this.node.addEvents({

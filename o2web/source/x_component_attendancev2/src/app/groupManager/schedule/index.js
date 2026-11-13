@@ -168,7 +168,7 @@ export default content({
     // 获取月份数据
     async loadMonthScheduleList() {
         await showLoading(this);
-        console.log("开始获取月份数据", this.bind.month, this.bind.groupId);
+        console.log("월 데이터 조회 시작", this.bind.month, this.bind.groupId);
         try {
             const list = await groupScheduleAction("listMonth", this.bind.groupId, this.bind.month);
             const scheduleList = list || [];
@@ -529,7 +529,7 @@ export default content({
             return;
         }
         if (this.bind.trueParticipantList.length === 0) {
-            console.error("没有参与人");
+            console.error("참여자가 없습니다");
             return;
         }
         // 开始创建 excel 文件

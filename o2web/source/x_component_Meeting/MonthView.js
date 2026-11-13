@@ -27,10 +27,10 @@ MWF.xApplication.Meeting.MonthView = new Class({
     resetNodeSize: function(){
         //if( this.app.inContainer )return;
         var size = this.container.getSize();
-        var y = size.y-60;
+        var y = size.y-50;
         this.node.setStyle("height", ""+y+"px");
         if( !this.app.inContainer  ) {
-            this.node.setStyle("margin-top", "60px");
+            this.node.setStyle("margin-top", "50px");
         }
 
 
@@ -195,6 +195,13 @@ MWF.xApplication.Meeting.MonthView.Calendar = new Class({
 
         this.nextMonthNode =  new Element("div.ooicon-arrow_forward", {"styles": this.css.calendarNextMonthNode}).inject(this.titleNode);
 
+        this.todayNode = new Element("div", {"styles": this.css.calendarTodayNode, "text": this.app.lp.today}).inject(this.titleNode);
+        this.todayNode.addEvents({
+            "mouseover": function(){ this.todayNode.addClass("mainColor_color"); }.bind(this),
+            "mouseout": function(){ this.todayNode.removeClass("mainColor_color"); }.bind(this),
+            "click": function(){ this.changeMonthTo(new Date()); }.bind(this)
+        });
+
         this.prevMonthNode.addEvents({
             "mouseover": function(){
                 this.prevMonthNode.setStyles(this.css.calendarPrevMonthNode_over);
@@ -292,6 +299,8 @@ MWF.xApplication.Meeting.MonthView.Calendar = new Class({
         this.calendarTableTitleTr.setStyles(this.css.calendarTableTitleTr);
         var ths = this.calendarTableTitleTr.getElements("th");
         ths.setStyles(this.css.calendarTableTh);
+        ths[ this.weekBegin == "1" ? 6 : 0 ].setStyles(this.css.calendarTableTh_sunday);
+        ths[ this.weekBegin == "1" ? 5 : 6 ].setStyles(this.css.calendarTableTh_saturday);
 
         //var tds = this.calendarTable.getElements("td");
         //tds.setStyles(this.css.calendarTableCell);
@@ -372,10 +381,10 @@ MWF.xApplication.Meeting.MonthView.Calendar.Day = new Class({
         this.load();
     },
     load: function(){
-        this.color = "#666";
+        this.color = "#BBBBBB";
         if(  this.type == "thisMonth" ){
         }else if( this.type == "otherMonth" ){
-            this.color = "#ccc";
+            this.color = "#DDDDDD";
         }
         this.day = this.date.getDate();
         this.month = this.date.getMonth();
@@ -390,6 +399,8 @@ MWF.xApplication.Meeting.MonthView.Calendar.Day = new Class({
 
         if( this.type === "today" ){
             this.titleDayNode.addClass("mainColor_bg");
+        }else if( this.date.getDay() === 0 || this.date.getDay() === 6 ){
+            this.titleDayNode.setStyles(this.css[ (this.date.getDay() === 0 ? "dayTitleDay_sunday_" : "dayTitleDay_saturday_") + this.type ]);
         }
 
         if ((new Date()).diff(this.date)>=0){
@@ -444,7 +455,7 @@ MWF.xApplication.Meeting.MonthView.Calendar.Day = new Class({
                 var node = new Element("div", {
                     "styles": {
                         "line-height": "40px",
-                        "font-size": "14px",
+                        "font-size": "12px",
                         "text-align" : "center",
                         "color" : this.color,
                         "padding": "0px 10px"
@@ -477,26 +488,6 @@ MWF.xApplication.Meeting.MonthView.Calendar.Day = new Class({
                 }
             }
 
-            if(this.firstStatus){
-                switch (this.firstStatus){
-                    case "wait":
-                        this.titleNode.setStyles({ "border-left": "6px solid #51B749" });
-                        break;
-                    case "processing":
-                        this.titleNode.setStyles({ "border-left": "6px solid #5484ED" });
-                        break;
-                    case "completed":
-                        this.titleNode.setStyles({ "border-left": "6px solid #FBD75B" });
-                        break;
-                    case "applying":
-                        this.titleNode.setStyles({ "border-left": "6px solid #F9905A" });
-                        break;
-                    case "myWaitAccept":
-                        this.titleNode.setStyles({ "border-left": "6px solid #F6A623" });
-                        break
-                }
-            }
-
             if( this.lastStatus ){
                 var heigth=0;
                 if( meetingCount >= 3 ){
@@ -509,23 +500,6 @@ MWF.xApplication.Meeting.MonthView.Calendar.Day = new Class({
                         "height" : ""+heigth+"px"
                     }
                 }).inject( this.node );
-                switch (this.lastStatus){
-                    case "wait":
-                        bottomEmptyNode.setStyles({ "border-left": "6px solid #51B749" });
-                        break;
-                    case "processing":
-                        bottomEmptyNode.setStyles({ "border-left": "6px solid #5484ED" });
-                        break;
-                    case "completed":
-                        bottomEmptyNode.setStyles({ "border-left": "6px solid #FBD75B" });
-                        break;
-                    case "applying":
-                        bottomEmptyNode.setStyles({ "border-left": "6px solid #F9905A" });
-                        break;
-                    case "myWaitAccept":
-                        bottomEmptyNode.setStyles({ "border-left": "6px solid #F6A623" });
-                        break
-                }
             }
         }.bind(this));
 
@@ -628,34 +602,23 @@ MWF.xApplication.Meeting.MonthView.Calendar.Day.Meeting = new Class({
 
         switch (this.data.status){
             case "wait":
-                this.node.setStyles({
-                    "border-left": "6px solid #51B749"
-                });
+                this.iconNode.setStyle("background-color", "#51B749");
                 break;
             case "processing":
-                this.node.setStyles({
-                    "border-left": "6px solid #5484ED"
-                });
+                this.iconNode.setStyle("background-color", "#5484ED");
                 break;
             case "applying":
-                this.node.setStyles({
-                    "border-left": "6px solid #F9905A"
-                });
+                this.iconNode.setStyle("background-color", "#F9905A");
                 break;
             case "completed":
                 //add attachment
-                this.node.setStyles({
-                    "border-left": "6px solid #FBD75B"
-                });
+                this.iconNode.setStyle("background-color", "#FBD75B");
                 //this.textNode.setStyle("color", "#666");
 
                 break;
         }
         if (this.data.myWaitAccept){
-            this.node.setStyles({
-                "border-left": "6px solid #F6A623"
-            });
-
+            this.iconNode.setStyle("background-color", "#F6A623");
         }
         this.node.addEvents({
             mouseenter : function(){
@@ -803,17 +766,17 @@ MWF.xApplication.Meeting.MonthView.Calendar.MonthSelector = new Class({
                 new Element("div", {
                     class: "mainColor_bg",
                     styles : _self.css.calendarMonthSelectTodayNode,
-                    text : ""+m+ (MWF.language.substr(0,2) === "zh" ? this.app.lp.month : "")
+                    text : ""+m+ (["zh", "ko"].indexOf(MWF.language.substr(0,2)) > -1 ? this.app.lp.month : "")
                 }).inject( td );
             }else if ((this.year == thisY) && (idx == thisM)){
                 //td.setStyle("background-color", "#EEE");
                 new Element("div", {
                     class: "mainColor_border mainColor_color",
                     styles : _self.css.calendarMonthSelectCurrentNode,
-                    text : ""+m+ (MWF.language.substr(0,2) === "zh" ? this.app.lp.month : "")
+                    text : ""+m+ (["zh", "ko"].indexOf(MWF.language.substr(0,2)) > -1 ? this.app.lp.month : "")
                 }).inject( td );
             }else{
-                td.set("text", ""+m+ (MWF.language.substr(0,2) === "zh" ? this.app.lp.month : ""));
+                td.set("text", ""+m+ (["zh", "ko"].indexOf(MWF.language.substr(0,2)) > -1 ? this.app.lp.month : ""));
             }
 
             td.addEvents({

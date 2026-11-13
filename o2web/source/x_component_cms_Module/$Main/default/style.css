@@ -84,3 +84,34 @@
 .o2icon-spinner:before {
   content: "\e97d";
 }
+/* 인디고 테마: 게시글 목록(머리글 30px, 카드형 행) */
+.ik-cms-list {
+  border-collapse: separate;
+  border-spacing: 0 6px;
+  margin-top: -6px;
+}
+.ik-cms-list th {
+  background-color: #F2F6F8;
+}
+.ik-cms-list th:first-child {
+  border-radius: 4px 0 0 4px;
+}
+.ik-cms-list th:last-child {
+  border-radius: 0 4px 4px 0;
+}
+.ik-cms-list td {
+  background-color: inherit;
+  border-top: 1px solid #E6E6E6;
+  border-bottom: 1px solid #E6E6E6;
+}
+.ik-cms-list td:first-child {
+  border-left: 1px solid #E6E6E6;
+  border-radius: 4px 0 0 4px;
+}
+.ik-cms-list td:last-child {
+  border-right: 1px solid #E6E6E6;
+  border-radius: 0 4px 4px 0;
+}
+.ik-cms-module .naviContainerNode .mainColor_bg_opacity {
+  background-color: #EAF2FB !important;
+}

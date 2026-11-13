@@ -36,6 +36,7 @@ MWF.xApplication.process.TaskCenter.List = new Class({
         this.contentNode = new Element("div", {"styles": this.css.listContentNode}).inject(this.container);
 
         this.createActionBarNode();
+        if (!layout.mobile) this.createListHeadNode();
         this.createListAreaNode();
 
         this.resetListAreaHeight();
@@ -74,11 +75,13 @@ MWF.xApplication.process.TaskCenter.List = new Class({
                     if (!this.isCountShow){
                         this.currentFilterNode.getFirst("span").set("text", "("+this.count+")");
                         this.isCountShow = true;
+                        if (this.app.setListCount) this.app.setListCount(this);
                     }
 
                     json.data.each(function(task){
                         this.items.push(this._createItem(task));
                     }.bind(this));
+                    if (!this.items.length) this.createEmptyNode();
 
                     if (json.count<=this.items.length){
                         this.isItemsLoaded = true;
@@ -394,6 +397,24 @@ MWF.xApplication.process.TaskCenter.List = new Class({
             this.currentFilterNode.setStyles(this.app.css.appFilterNode_current);
         }
     },
+    _getListHeadDateText: function(){
+        return this.app.lp.list_comedate;
+    },
+    createListHeadNode: function(){
+        var lp = this.app.lp;
+        this.listHeadNode = new Element("div", {"styles": this.css.listHeadNode}).inject(this.contentNode);
+        new Element("div", {"styles": this.css.listHeadIconCellNode}).inject(this.listHeadNode);
+        new Element("div", {"styles": this.css.listHeadDateCellNode, "text": this._getListHeadDateText()}).inject(this.listHeadNode);
+        new Element("div", {"styles": this.css.listHeadTitleCellNode, "text": lp.list_titleForm || lp.list_title}).inject(this.listHeadNode);
+        new Element("div", {"styles": this.css.listHeadCreatorCellNode, "text": lp.list_creator}).inject(this.listHeadNode);
+        new Element("div", {"styles": this.css.listHeadStatusCellNode, "text": lp.list_status || lp.list_activity}).inject(this.listHeadNode);
+        new Element("div", {"styles": this.css.listHeadActionCellNode}).inject(this.listHeadNode);
+    },
+    createEmptyNode: function(){
+        var node = new Element("div", {"styles": this.css.listEmptyNode}).inject(this.listAreaNode);
+        new Element("div", {"styles": this.css.listEmptyIconNode}).inject(node);
+        new Element("div", {"styles": this.css.listEmptyTextNode, "text": this.app.lp.noData || ""}).inject(node);
+    },
 
     createListAreaNode: function(){
         this.listScrollAreaNode = new Element("div", {"styles": this.css.listScrollAreaNode}).inject(this.contentNode);
@@ -479,36 +500,28 @@ MWF.xApplication.process.TaskCenter.List = new Class({
 
         var size = this.contentNode.getSize();
         var y = size.y;
-        if (this.actionBarNode){
-            var barSize = this.actionBarNode.getSize();
-            y = size.y - barSize.y;
-        }
-        // var barSize = this.actionBarNode.getSize();
-        // var y = size.y - barSize.y;
+        if (this.actionBarNode) y = y - this.actionBarNode.getSize().y;
+        if (this.listHeadNode) y = y - this.listHeadNode.getSize().y - this.listHeadNode.getStyle("margin-top").toInt() - this.listHeadNode.getStyle("margin-bottom").toInt();
 
         this.listScrollAreaNode.setStyle("height", ""+y+"px");
 
         if (this.listAreaNode){
-            var count = (size.x/350).toInt();
-            var x = 350 * count;
-            var m = (size.x-x)/2;
-            this.listAreaNode.setStyles({
-                "width": ""+x+"px",
-                "margin-left": ""+m+"px"
+            //Full-width card rows: 24px side padding, 54px row + 6px gap.
+            var m = 24;
+            var x = size.x - m*2;
+            if (x<0) x = 0;
+            [this.listAreaNode, this.actionBarNode, this.listHeadNode].each(function(node){
+                if (node) node.setStyles({
+                    "width": ""+x+"px",
+                    "margin-left": ""+m+"px"
+                });
             });
 
-            if (this.actionBarNode) this.actionBarNode.setStyles({
-                "width": ""+x+"px",
-                "margin-left": ""+m+"px"
-            });
-
-            var hCount = (y/182).toInt()+1;
-            this.pageCount = count*hCount;
+            this.pageCount = Math.max((y/60).toInt()+2, 15);
 
             if (this.items.length<this.pageCount){
                 this.listItemNext(this.pageCount-this.items.length);
             }
-            //this.listAreaNode
         }
 
     },
@@ -665,8 +678,11 @@ MWF.xApplication.process.TaskCenter.List.Item = new Class({
         this.actionContentNode = new Element("div", {"styles": this.list.css.itemMainActionContentAreaNode}).inject(this.mainContentNode);
 
         this.rightContentNode = new Element("div", {"styles": this.list.css.itemMainRightContentAreaNode}).inject(this.mainContentNode);
-        this.applicationTitleNode = new Element("div", {"styles": this.list.css.itemApplicationTitleNode}).inject(this.rightContentNode);
-        this.titleNode = new Element("div", {"styles": this.list.css.itemTitleNode}).inject(this.rightContentNode);
+        this.dateNode = new Element("div", {"styles": this.list.css.itemDateNode}).inject(this.rightContentNode);
+        this.titleAreaNode = new Element("div", {"styles": this.list.css.itemTitleAreaNode}).inject(this.rightContentNode);
+        this.titleNode = new Element("div", {"styles": this.list.css.itemTitleNode}).inject(this.titleAreaNode);
+        this.metaNode = new Element("div", {"styles": this.list.css.itemMetaNode}).inject(this.titleAreaNode);
+        this.creatorNode = new Element("div", {"styles": this.list.css.itemCreatorNode}).inject(this.rightContentNode);
         this.activityNode = new Element("div", {"styles": this.list.css.itemActivityNode}).inject(this.rightContentNode);
 
 
@@ -807,12 +823,12 @@ MWF.xApplication.process.TaskCenter.List.Item = new Class({
 
 
     showAction: function(){
-        // if (this.editNode) this.editNode.fade("in");
-        // if (this.closeNode) this.closeNode.fade("in");
+        if (this.selectedStatus || this.nodeClone) return;
+        this.mainContentNode.setStyles(this.list.css.itemMainContentAreaNode_over);
     },
     hideAction: function(){
-        // if (this.editNode) this.editNode.fade("out");
-        // if (this.closeNode) this.closeNode.fade("out");
+        if (this.selectedStatus || this.nodeClone) return;
+        this.mainContentNode.setStyles(this.list.css.itemMainContentAreaNode_out);
     },
 
     openTask: function(e){
@@ -1251,16 +1267,56 @@ MWF.xApplication.process.TaskCenter.List.Item = new Class({
     },
 
     setContent: function(){
-        this.applicationTitleNode.set("text", this.data.applicationName);
-        this.titleNode.set("html", "<font style=\"color: #333;\">["+o2.txt(this.data.processName)+"]&nbsp;&nbsp;</font>"+o2.txt(this.data.title || ""));
-        this.titleNode.set("title", this.data.title);
-        this.activityNode.set("text", "( "+(this.data.activityName || this.list.app.lp.completed)+" )");
+        this.setRowContent(this.data.startTime, this.data.creatorPerson, this.data.creatorUnit, this._getRowStatus());
 
         this.timeContentNode.set("text", this.list.app.lp.list_comedate+": "+this.data.startTime);
 
         this.loadActions();
         this.loadApplicationIcon();
         //this.setTimeIconNode();
+    },
+    _getRowStatus: function(){
+        var lp = this.list.app.lp;
+        if (this.data.completed) return {"type": "ok", "text": lp.statusCompleted || lp.completed};
+        var activity = (this.data.activityName) ? " ("+this.data.activityName+")" : "";
+        if (this.data.expireTime){
+            var expire = Date.parse(this.data.expireTime);
+            if (expire && expire.getTime() < Date.now()) return {"type": "danger", "text": (lp.statusOverdue || "")+activity};
+        }
+        return {"type": "progress", "text": (lp.statusProgress || lp.processing)+activity};
+    },
+    _formatRowDate: function(text){
+        if (!text) return "";
+        var d = Date.parse(text);
+        if (!d || isNaN(d.getTime())) return text;
+        if (d.getFullYear() !== new Date().getFullYear()) return d.format("%Y-%m-%d");
+        var weekDays = this.list.app.lp.weekDays;
+        return d.format("%m-%d") + ((weekDays) ? " ("+weekDays[d.getDay()]+")" : "") + " " + d.format("%H:%M");
+    },
+    setRowContent: function(time, person, unit, status){
+        var css = this.list.css;
+        var lp = this.list.app.lp;
+        var shortName = function(dn){ return (dn || "").split("@")[0]; };
+
+        this.dateNode.set({"text": this._formatRowDate(time), "title": time || ""});
+        this.titleNode.set({"text": this.data.title || lp.unnamed, "title": this.data.title || ""});
+
+        this.metaNode.empty();
+        [this.data.processName, this.data.serial].each(function(text){
+            if (!text) return;
+            if (this.metaNode.getFirst()) new Element("span", {"styles": css.itemMetaSplitNode, "text": "|"}).inject(this.metaNode);
+            new Element("span", {"text": text}).inject(this.metaNode);
+        }.bind(this));
+
+        this.creatorNode.empty();
+        new Element("div", {"styles": css.itemCreatorNameNode, "text": shortName(person)}).inject(this.creatorNode);
+        new Element("div", {"styles": css.itemCreatorUnitNode, "text": shortName(unit)}).inject(this.creatorNode);
+
+        var color = css.itemStatusColors[status.type];
+        this.activityNode.empty();
+        this.activityNode.set("title", status.text);
+        new Element("span", {"styles": css.itemStatusDotNode}).setStyle("background-color", color).inject(this.activityNode);
+        new Element("span", {"styles": css.itemStatusTextNode, "text": status.text}).setStyle("color", color).inject(this.activityNode);
     },
     loadActions: function(){
         if (this.data.allowRapid){
@@ -1271,10 +1327,8 @@ MWF.xApplication.process.TaskCenter.List.Item = new Class({
     loadApplicationIcon: function(){
         this.getApplicationIcon(function(icon){
             if (icon.icon){
-                //this.mainContentNode.setStyle("border-top", "4px solid "+icon.iconHue);
                 this.applicationIconNode.setStyle("background-image", "url(data:image/png;base64,"+icon.icon+")");
             }else{
-                this.mainContentNode.setStyle("border-top", "4px solid #4e82bd");
                 this.applicationIconNode.setStyle("background-image", "url("+"../x_component_process_ApplicationExplorer/$Main/default/icon/application.png)");
             }
         }.bind(this));

@@ -80,8 +80,14 @@ MWF.xApplication.Meeting.MainPc = new Class({
     },
     createNode: function(){
         this.content.setStyle("overflow", "hidden");
+        this.moduleBarNode = new Element("div.moduleBarNode", {
+            "styles": this.css.moduleBarNode
+        }).inject(this.content);
+        new Element("i.ooicon-menu", {"styles": this.css.moduleBarIconNode}).inject(this.moduleBarNode);
+        new Element("div", {"styles": this.css.moduleBarTextNode, "text": this.lp.title}).inject(this.moduleBarNode);
+
         this.node = new Element("div", {
-            "styles": {"width": "100%", "height": "100%", "overflow": "hidden"}
+            "styles": {"width": "100%", "height": "calc(100% - 44px)", "position": "relative", "overflow": "hidden"}
         }).inject(this.content);
     },
     loadLayout: function(){
@@ -248,9 +254,9 @@ MWF.xApplication.Meeting.MainPc = new Class({
     },
     loadTopMenus: function(){
         this.createTopMenu(this.lp.myMeeting, "ooicon-meeting", "toMyMeeting");
-        this.createTopMenu(this.lp.month, "ooicon-calendar", "toMonth");
-        this.createTopMenu(this.lp.week, "ooicon-weekly", "toWeek");
-        this.createTopMenu(this.lp.day, "ooicon-clock", "toDay");
+        this.createTopMenu(this.lp.monthView || this.lp.month, "ooicon-calendar", "toMonth");
+        this.createTopMenu(this.lp.weekView || this.lp.week, "ooicon-weekly", "toWeek");
+        this.createTopMenu(this.lp.dayView || this.lp.day, "ooicon-clock", "toDay");
         this.createTopMenu(this.lp.list, "ooicon-list-alt", "toList");
         this.createTopMenu(this.lp.room, "ooicon-home", "toRoom");
         this.loadTopMenus_right();
@@ -929,7 +935,7 @@ MWF.xApplication.Meeting.MainMobile = new Class({
         const names = o2.name.cns(d.inviteMemberList);
         if (names.length>4){
             const someNames = names.slice(0, 4);
-            d.names = someNames.join(', ')+ ' 等'+names.length+'人';
+            d.names = someNames.join(', ')+ ' 등 총 '+names.length+'명';
         }else{
             d.names = names.join(', ');
         }
@@ -1358,7 +1364,7 @@ MWF.xApplication.Meeting.Config = new Class({
 
             this.onlineProductNode = this.contentNode.getElement("[item='onlineProduct']");
             this.onlineProduct = new MDomItem(this.onlineProductNode, {
-                name : "onlineProduct", type : "select", selectValue : ["其他","好视通"], selectText : [this.lp.other,"好视通"],
+                name : "onlineProduct", type : "select", selectValue : ["其他","好视通"], selectText : [this.lp.other,"FSMeeting"],
                 value : d.onlineProduct || "其他",
                 event: {
                     change: function (item, ev ) {

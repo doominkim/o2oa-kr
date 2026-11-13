@@ -30,7 +30,7 @@ var MWFCalendarDayView = MWF.xApplication.Calendar.DayView = new Class({
     resetNodeSize: function(){
         //if( this.app.inContainer )return;
         var size = this.container.getSize();
-        var y = size.y-50;
+        var y = size.y;
 
         this.node.setStyle("height", ""+y+"px");
         //this.node.setStyle("margin-top", "60px");
@@ -364,14 +364,14 @@ MWFCalendarDayView.Calendar = new Class({
         td.setStyle("background-color","#fffdf2");
         if( this.currentSelectedTd ){
             var flag = this.isToday( this.date );
-            this.currentSelectedTd.setStyle("background-color",flag?"#F8FBFF":"#fff");
+            this.currentSelectedTd.setStyle("background-color",flag?"#EAF2FB":"#fff");
         }
         this.currentSelectedTd = td;
     },
     cancelCurrentTd : function(){
         if( this.currentSelectedTd ){
             var flag = this.isToday( this.date );
-            this.currentSelectedTd.setStyle("background-color",flag?"#F8FBFF":"#fff");
+            this.currentSelectedTd.setStyle("background-color",flag?"#EAF2FB":"#fff");
         }
         this.currentSelectedTd = null;
     },
@@ -671,7 +671,7 @@ MWFCalendarDayView.Calendar = new Class({
             var oldIndex = this.selectedIndexRange;
             this.selectedIndexRange.each( function( index ){
                 if( !indexs.contains(index) ){
-                    this.hourTdMap[index].setStyle("background-color", flag ?  "#F8FBFF" : "#fff");
+                    this.hourTdMap[index].setStyle("background-color", flag ?  "#EAF2FB" : "#fff");
                 }
             }.bind(this));
             indexs.each( function( index ){
@@ -701,7 +701,7 @@ MWFCalendarDayView.Calendar = new Class({
         var flag = this.isToday( this.date );
         if( this.selectedIndexRange && this.selectedIndexRange.length ){
             this.selectedIndexRange.each( function( index ){
-                this.hourTdMap[index ].setStyle("background-color", flag ?  "#F8FBFF" : "#fff");
+                this.hourTdMap[index ].setStyle("background-color", flag ?  "#EAF2FB" : "#fff");
             }.bind(this));
             var beginIndex = this.selectedIndexRange[0];
             var endIndex = this.selectedIndexRange.getLast();

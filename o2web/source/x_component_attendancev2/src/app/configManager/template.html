@@ -40,11 +40,11 @@
                         <i class="{{ $.form.checkInAlertEnable ? 'o2icon-icon__ok2_click_b primary_color' : 'o2icon-icon_quan'}}"></i>
                     </div>
                     <label style="margin: 5px;" >
-                        是否启用打卡提醒 (上班前
+                        출퇴근 체크 알림 사용 (출근
                         <input class="config-form-input" oo-model="form.properties.checkInAlertOnDutyBeforeMinutes" name="checkInAlertOnDutyBeforeMinutes" type="text">
-                        分钟、下班后
+                        분 전, 퇴근
                         <input class="config-form-input" oo-model="form.properties.checkInAlertOffDutyAfterMinutes" name="checkInAlertOffDutyAfterMinutes" type="text">
-                        分钟会收到提醒消息，不要忘记打卡)
+                        분 후에 알림 메시지를 받습니다. 출퇴근 체크를 잊지 마세요)
                     </label>
                 </div>
                 <!-- 异常打卡提醒 -->
@@ -55,8 +55,8 @@
                     <label style="margin: 5px;" >
                         {{$.lp.config.exceptionAlertEnable}} 
                         <select class="config-form-select" name="exceptionAlertDateNumber" @change="changeExceptionAlertDateNumber">
-                            <option value="0" .selected="($.form.exceptionAlertDateNumber == 0)">当天</option>
-                            <option value="1" .selected="($.form.exceptionAlertDateNumber == 1)">次日</option>
+                            <option value="0" .selected="($.form.exceptionAlertDateNumber == 0)">당일</option>
+                            <option value="1" .selected="($.form.exceptionAlertDateNumber == 1)">다음 날</option>
                         </select>
                         <o-time-picker oo-prop="{'value': $.form.exceptionAlertTime, 'key': 'form.exceptionAlertTime'}"></o-time-picker>
                         {{$.lp.config.exceptionAlertEnableTime2}} 
@@ -100,7 +100,7 @@
         <div class="margin-top" oo-if="$.form.aliFaceControlEnable">
             <div class="form-item-label">
                 {{$.lp.config.faceDetectionLabel}}
-                <label style="margin-left: 10px;color: var(--oo-color-main);font-size: 14px;text-decoration: underline;cursor: pointer;" @click="clickToAliface" >人脸模块配置</label>
+                <label style="margin-left: 10px;color: var(--oo-color-main);font-size: 14px;text-decoration: underline;cursor: pointer;" @click="clickToAliface" >얼굴 인식 모듈 설정</label>
             </div>
             <div class="form-item-content margin-top padding-bottom">
                 <div class="margin-top margin-left flex" @click="clickFaceDetectionEnable">

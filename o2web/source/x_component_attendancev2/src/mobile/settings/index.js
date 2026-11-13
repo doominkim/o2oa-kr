@@ -5,7 +5,7 @@ import {lp, o2} from '@o2oa/component';
  
 
 export default content({
-    template: "<div>设置</div>",
+    template: "<div>설정</div>",
     autoUpdate: true,
     
     bind(){

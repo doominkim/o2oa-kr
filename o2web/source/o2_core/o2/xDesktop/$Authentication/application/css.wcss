@@ -37,7 +37,7 @@
 	"background": "url("+MWF.defaultPath+"/xDesktop/$Authentication/default/icon/o2_logo.png) no-repeat center center"
   },
   "formTopTextNode" : {
-	//"font-family" : "PingFang-SC-Medium",
+	//"font-family" : "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 	"border-left" : "1px solid #fff",
 	"margin-top" : "22px",
 	"padding-left" : "18px",
@@ -117,7 +117,7 @@
 	"height": "20px",
 	"line-height": "20px",
 	"overflow": "hidden",
-	"font-family": "Microsoft YaHei",
+	"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 	"font-size": "18px",
 	"font-weight" : "normal",
 	"float": "left",
@@ -143,7 +143,7 @@
 	"margin": "auto",
 	"font-size": "14px",
 	"color": "#666",
-	"font-family": "Microsoft YaHei",
+	"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 	"overflow" : "hidden",
 	"position" : "relative"
   },

@@ -21,18 +21,18 @@ export default content({
             },
             mapTypeList: [
                 {
-                    name: "无",
+                    name: "없음",
                     key: ""
                 },{
-                    name: "百度地图",
+                    name: "Baidu 지도",
                     key: "baidu"
                 },
                 {
-                    name: "高德地图",
+                    name: "AMap 지도",
                     key: "amap"
                 },
                 {
-                    name: "腾讯地图",
+                    name: "Tencent 지도",
                     key: "tx"
                 }
             ]
@@ -45,7 +45,7 @@ export default content({
     chooseMapType(e) {
         const value = e.target.value;
         this.bind.mapConfig.mapType = value;
-        console.debug("设置类型： " + value);
+        console.debug("설정 유형: " + value);
     },
     async submitAdd() {
         debugger;
@@ -62,7 +62,7 @@ export default content({
             return ;
         }
         const bdKey = await putPublicData("attendanceMapConfig", this.bind.mapConfig);
-        console.debug('配置成功', bdKey);
+        console.debug('설정했습니다', bdKey);
         this.close();
     },
    

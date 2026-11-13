@@ -27,7 +27,7 @@ export default content({
   },
   listenEventBus() {
     this.$topParent.listenEventBus("group", (data) => {
-      console.log("接收到了group消息", data);
+      console.log("group 메시지 수신", data);
       this.loadGroupList();
     });
   },
@@ -186,7 +186,7 @@ export default content({
   // 点击事件 打开排班编辑
   async clickEditSchedule(group) {
     if (!group || !group.id) {
-      console.log('数据异常！');
+      console.log('데이터에 이상이 있습니다!');
       return ;
     }
     this.$topParent.closeFormVm(); // 关闭表单
@@ -204,7 +204,7 @@ export default content({
   // 打开排班界面
   async openScheduleWindow(bind) {
     if (!bind || !bind.bind || !bind.bind.trueParticipantList || !bind.bind.groupId) {
-      console.log('数据异常！');
+      console.log('데이터에 이상이 있습니다!');
       return ;
     }
     const c = (await import("./schedule/index.js")).default;

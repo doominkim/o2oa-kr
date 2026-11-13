@@ -1,0 +1,1050 @@
+/* 인디고 데스크톱 셸: 왼쪽 아이콘 레일 48px + 흰 상단바 50px.
+   색은 x_desktop/css/v10/root.css 의 --ik-* 토큰과 스킨의 --oo-color-main 을 쓴다.
+   .layout_main * 는 content-box 이므로 폭·높이는 안쪽 크기 기준이다. */
+.layout_desktop {
+    height: 100%;
+    overflow: hidden;
+}
+
+/* ---------- 왼쪽 레일 ---------- */
+.layout_menu {
+    height: 100%;
+    width: var(--ik-rail-width, 48px);
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: var(--ik-rail-bg, #333948);
+    transition: width 0.18s ease-out, box-shadow 0.18s ease-out;
+}
+/* 앱 아이콘 위에 마우스를 올리면 240px로 펼쳐 앱 이름을 보여 준다 (본문 위에 겹침) */
+.layout_menu:has(.layout_menu_lnk:hover) {
+    width: var(--ik-rail-expanded-width, 240px);
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.18);
+    z-index: 30000 !important;
+    transition-delay: 0.15s;
+}
+.layout_menu_inner {
+    width: var(--ik-rail-expanded-width, 240px);
+    height: 100%;
+}
+.layout_content {
+    height: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0 0 0 var(--ik-rail-width, 48px);
+    background-color: var(--ik-page-bg, #F4F5F7);
+}
+.layout_content_table {
+    display: table;
+    width: 100%;
+    height: 100%;
+    table-layout: fixed;
+}
+.layout_content_row {
+    display: table-row;
+}
+
+/* 레일 맨 위: 전체 메뉴(그리드) 버튼 */
+.layout_menu_start {
+    height: 50px;
+    width: var(--ik-rail-width, 48px);
+}
+.layout_menu_start_button,
+.layout_menu_start_button.mainColor_bg,
+.layout_menu_start_button.overColor_bg {
+    height: 50px;
+    width: var(--ik-rail-width, 48px);
+    background-color: transparent !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    cursor: pointer;
+}
+.layout_menu_start_button:hover,
+.layout_menu_start_button.overColor_bg {
+    background-color: var(--ik-rail-active-bg, #262B37) !important;
+}
+
+/* 레일 앱 아이콘 */
+.layout_menu_lnk {
+    overflow: hidden;
+}
+.layout_menu_lnk_area {
+    overflow: hidden;
+    padding-top: 4px;
+}
+.layout_menu_lnk_item {
+    height: 48px;
+    width: var(--ik-rail-expanded-width, 240px);
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    overflow: hidden;
+}
+.layout_menu_lnk_item.overColor_bg {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+}
+.layout_menu_lnk_item_current,
+.layout_menu_lnk_item_current.overColor_bg {
+    background-color: var(--ik-rail-active-bg, #262B37) !important;
+}
+.opacity50 {
+    opacity: 0.5;
+}
+.layout_menu_lnk_item_icon {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.72;
+}
+.layout_menu_lnk_item:hover .layout_menu_lnk_item_icon,
+.layout_menu_lnk_item_current .layout_menu_lnk_item_icon {
+    opacity: 1;
+}
+.layout_menu_lnk_item_drag {
+    height: 40px;
+    width: 40px;
+}
+.layout_menu_lnk_item_icon_drag {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 22px;
+    border-radius: 8px;
+    margin: auto;
+    height: 40px;
+    width: 40px;
+}
+.layout_menu_lnk_item_icon_drag_del {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    float: right;
+    top: -44px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+/* 앱 이름: 접힌 레일에서는 잘려 보이지 않고, 펼치면 모두 보인다 */
+.layout_menu_lnk_item_text {
+    position: absolute;
+    left: var(--ik-rail-width, 48px);
+    top: 0;
+    right: 36px;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 4px;
+    color: var(--ik-rail-text, #B4B9C4);
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+.layout_menu_lnk_item:hover .layout_menu_lnk_item_text,
+.layout_menu_lnk_item_current .layout_menu_lnk_item_text {
+    color: var(--ik-rail-text-active, #FFFFFF);
+}
+.layout_menu_lnk_item_action {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    position: absolute;
+    right: 14px;
+    top: 17px;
+    border-radius: 8px;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+}
+.layout_menu_lnk_item_action_shadow {
+    background-color: #000000;
+}
+.layout_menu_lnk_item_position {
+    height: 2px;
+    background-color: var(--oo-color-main, #2768B0);
+    width: 40px;
+    margin-left: 4px;
+    position: absolute;
+}
+
+/* 레일 아래: 화면 배율 */
+.layout_menu_setting {
+    height: 56px;
+    width: var(--ik-rail-width, 48px);
+}
+.layout_menu_setting_button {
+    height: 44px;
+    padding-top: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+/* ---------- 상단바 ---------- */
+.layout_content_taskbar {
+    height: 50px;
+    display: table-cell;
+}
+.layout_content_taskbar_area {
+    height: 49px;
+    line-height: 49px;
+    background-color: var(--ik-surface, #FFFFFF);
+    border-bottom: 1px solid var(--ik-line, #EDEFF2);
+    color: var(--ik-text, #222222);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+.layout_content_taskbar_area_logo {
+    flex: none;
+    width: 135px;
+    height: 26px;
+    margin: 0 20px 0 20px;
+    background: url(../o2_core/o2/xDesktop/$Default/indigo/icons/indigo_logo_h.svg) left center / contain no-repeat;
+}
+
+/* 열린 앱 탭: 한 줄 가로 스크롤 */
+.layout_content_taskbar_area_tabs {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 49px;
+    overflow: hidden;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+.layout_content_taskbar_area_tabs_action {
+    display: none !important;
+}
+.layout_content_taskbar_area_tabs_action_up,
+.layout_content_taskbar_area_tabs_action_down {
+    display: none;
+}
+.layout_content_taskbar_area_tabs_contentArea {
+    height: 49px;
+    margin: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+}
+.layout_content_taskbar_area_tabs_contentArea::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+.layout_content_taskbar_area_tabs_content {
+    height: 49px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: visible;
+}
+
+/* 탭 칩 */
+.layout_content_taskbar_item {
+    flex: none;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 8px 0 12px;
+    margin-right: 6px;
+    border: 1px solid #DDE1E6;
+    border-radius: 3px;
+    background-color: #FFFFFF;
+    font-size: 12px;
+    color: #555555;
+    text-align: left;
+    overflow: hidden;
+    cursor: pointer;
+}
+.layout_content_taskbar_item:hover {
+    border-color: #C5CBD3;
+    color: var(--ik-text, #222222);
+}
+.layout_content_taskbar_item.mainColor_bg {
+    background-color: #EAF2FB !important;
+    background-color: color-mix(in srgb, var(--oo-color-main, #2768B0) 10%, #FFFFFF) !important;
+    border-color: var(--oo-color-main, #2768B0);
+    color: var(--oo-color-main, #2768B0) !important;
+}
+.layout_content_taskbar_item_icon {
+    width: 16px;
+    height: 30px;
+    margin-left: 4px;
+    float: right;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    border-radius: 2px;
+}
+.layout_content_taskbar_item .layout_content_taskbar_item_icon.icon_close {
+    background-image: url(../o2_core/o2/xDesktop/$Default/indigo/icons/ik_tab_close.svg) !important;
+}
+.layout_content_taskbar_item .layout_content_taskbar_item_icon.icon_close_focus {
+    background-image: url(../o2_core/o2/xDesktop/$Default/indigo/icons/ik_tab_close_active.svg) !important;
+}
+.layout_content_taskbar_item_icon:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+}
+.layout_content_taskbar_item_refresh {
+    width: 16px;
+    height: 30px;
+    margin-right: 4px;
+    float: left;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 14px;
+}
+.layout_content_taskbar_item_action {
+    width: 12px;
+    height: 30px;
+    margin-left: 2px;
+    float: right;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 12px 12px;
+}
+.layout_content_taskbar_item .layout_content_taskbar_item_action.icon_taskitem_down {
+    background-image: url(../o2_core/o2/xDesktop/$Default/indigo/icons/ik_chevron_down_active.svg) !important;
+}
+.layout_content_taskbar_item_text {
+    height: 30px;
+    float: left;
+    overflow: hidden;
+    max-width: 160px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 30px;
+    min-width: 10px;
+}
+
+/* 통합검색: 아이콘만 보이다가 마우스를 올리거나 입력 중이면 펼친다 */
+.layout_content_taskbar_area_search {
+    flex: none;
+    height: 49px;
+    margin-left: 12px;
+    display: flex;
+    align-items: center;
+}
+.layout_content_taskbar_area_search_box {
+    height: 30px;
+    width: 30px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    overflow: hidden;
+    transition: width 0.2s ease-out, border-color 0.2s;
+    background-color: #FFFFFF;
+}
+.layout_content_taskbar_area_search_box:hover,
+.layout_content_taskbar_area_search_box:focus-within,
+.layout_content_taskbar_area_search_box_focus {
+    width: 220px;
+    border-color: #D9D9D9;
+}
+.layout_content_taskbar_area_search_box_focus.mainColor_border {
+    border-color: var(--oo-color-main, #2768B0) !important;
+}
+.layout_content_taskbar_area_search_icon {
+    float: right;
+    height: 30px;
+    width: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    cursor: pointer;
+}
+.layout_content_taskbar_area_search_icon.icon_search {
+    background-image: url(../o2_core/o2/xDesktop/$Default/indigo/icons/ik_search.svg) !important;
+}
+.layout_content_taskbar_area_search_icon.icon_search_focus {
+    background-image: url(../o2_core/o2/xDesktop/$Default/indigo/icons/ik_search_focus.svg) !important;
+}
+.layout_content_taskbar_area_search_icon_focus {
+}
+.layout_content_taskbar_area_search_clear {
+    float: right;
+    height: 30px;
+    width: 16px;
+    background-image: none;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.layout_content_taskbar_area_search_clear_show {
+    cursor: pointer;
+}
+.layout_content_taskbar_area_search_inputArea {
+    height: 30px;
+    padding: 0 8px;
+    margin-right: 46px;
+}
+.layout_content_taskbar_area_search_input {
+    height: 30px;
+    width: 99%;
+    line-height: 30px;
+    border: 0;
+    padding: 0;
+    font-size: 12px;
+    color: var(--ik-text, #222222);
+    background: transparent;
+    float: left;
+}
+
+/* 아이콘 버튼 (알림·테마) */
+.layout_content_taskbar_area_action {
+    flex: none;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    margin-left: 4px;
+}
+.layout_content_taskbar_area_action_item {
+    width: 30px;
+    height: 30px;
+    margin-left: 8px;
+    border-radius: 2px;
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    cursor: pointer;
+}
+.layout_content_taskbar_area_action_item:hover {
+    background-color: #F2F4F7;
+}
+.layout_content_taskbar_area_action_item.mainColor_bg {
+    background-color: #EAF2FB !important;
+    background-color: color-mix(in srgb, var(--oo-color-main, #2768B0) 10%, #FFFFFF) !important;
+}
+.layout_content_taskbar_area_action_item.icon_msg {
+    background-image: url(../o2_core/o2/xDesktop/$Default/indigo/icons/ik_bell.svg) !important;
+}
+.layout_content_taskbar_area_action_item.icon_msg_focus {
+    background-image: url(../o2_core/o2/xDesktop/$Default/indigo/icons/ik_bell_focus.svg) !important;
+}
+.layout_content_taskbar_area_action_item.icon_skin {
+    background-image: url(../o2_core/o2/xDesktop/$Default/indigo/icons/ik_palette.svg) !important;
+}
+.layout_content_taskbar_area_action_item.icon_skin_focus {
+    background-image: url(../o2_core/o2/xDesktop/$Default/indigo/icons/ik_palette_focus.svg) !important;
+}
+.layout_content_taskbar_area_action_msg {
+}
+.layout_content_taskbar_area_action_skin {
+}
+.layout_content_taskbar_area_action_skin_focus {
+}
+
+/* 사용자: 사진 28px + 이름/부서 */
+.layout_content_taskbar_area_user {
+    flex: none;
+    height: 49px;
+    margin: 0 16px 0 16px;
+    padding-left: 16px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.layout_content_taskbar_area_user:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 16px;
+    height: 16px;
+    border-left: 1px solid #E3E6EA;
+}
+.layout_content_taskbar_area_user_icon {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    margin-right: 8px;
+    background-color: #E9ECF0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+}
+.layout_content_taskbar_area_user_text {
+    padding-right: 16px;
+    line-height: 16px;
+    background: url(../o2_core/o2/xDesktop/$Default/indigo/icons/ik_chevron_down.svg) right center / 12px 12px no-repeat;
+}
+.layout_content_taskbar_area_user_name {
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--ik-text, #222222);
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.layout_content_taskbar_area_user_unit {
+    font-size: 11px;
+    color: var(--ik-text-sub, #666666);
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.layout_content_taskbar_area_user_unit:empty {
+    display: none;
+}
+
+/* ---------- 앱 영역 ---------- */
+.layout_content_apps {
+    display: table-cell;
+    height: 100%;
+    background-color: var(--ik-page-bg, #F4F5F7);
+}
+.layout_content_apps_content {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.layout_component_node {
+    height: 100%;
+    width: 100%;
+    background-color: var(--ik-page-bg, #F4F5F7);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.layout_component_content {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.layout_component_node_show {
+    opacity: 1;
+    z-index: 100;
+}
+.layout_component_node_hide {
+    opacity: 0;
+    z-index: 1;
+}
+
+/* ---------- 전체 메뉴(StartMenu): 흰 패널 + 카드형 앱 목록 ---------- */
+.layout_start_content_mask {
+    width: 456px;
+    background-color: #FFF;
+    position: absolute;
+    top: 0;
+    left: -456px;
+    opacity: 1;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: none;
+}
+.layout_start_content {
+    background: var(--ik-surface, #FFFFFF);
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.12);
+    border-right: 1px solid var(--ik-line, #EDEFF2);
+    width: 456px;
+    position: absolute;
+    top: 0;
+    left: -456px;
+    opacity: 1;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.layout_start_content_lnkArea {
+    overflow: hidden;
+}
+.layout_start_content_lnkTitle {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--ik-text, #222222);
+    text-align: left;
+    padding: 0 20px;
+    height: 50px;
+    line-height: 50px;
+}
+.layout_start_content_lnkScrollContent {
+    padding-right: 20px;
+    overflow: auto;
+}
+.layout_start_content_lnkContent {
+    overflow: hidden;
+    padding-left: 8px;
+}
+
+.layout_start_content_appArea {
+    overflow: hidden;
+}
+.layout_start_content_appTitle {
+    font-size: 13px;
+    color: var(--ik-text-sub, #666666);
+    text-align: left;
+    padding: 9px 16px 8px 16px;
+    height: 32px;
+    line-height: 32px;
+    border-bottom: 1px solid var(--ik-line, #EDEFF2);
+    margin-bottom: 12px;
+}
+.layout_start_content_appScrollContent {
+    padding-right: 10px;
+    overflow: auto;
+}
+.layout_start_content_appContent {
+    overflow: hidden;
+    padding-left: 6px;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 300px;
+}
+
+.layout_menu_start_triangle {
+    display: none !important;
+}
+
+.layout_start_item {
+    width: 90px;
+    height: 86px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+    float: left;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    background: var(--ik-surface, #FFFFFF);
+    border: 1px solid var(--ik-border, #E6E6E6);
+    border-radius: 4px;
+    transition: border-color 0.15s, background-color 0.15s;
+}
+.layout_start_item:hover {
+    border-color: var(--oo-color-main, #2768B0);
+    background-color: #EAF2FB;
+    background-color: color-mix(in srgb, var(--oo-color-main, #2768B0) 8%, #FFFFFF);
+}
+.layout_start_item_over {
+    width: 52px;
+    height: 52px;
+    opacity: 0.3;
+    position: absolute;
+    border-radius: 8px;
+    z-index: 10000;
+}
+.layout_start_item_iconArea {
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+    margin: 14px auto 0 auto;
+}
+.layout_start_item_icon {
+    width: 36px;
+    height: 36px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 8px;
+}
+.layout_start_item_icon_flat {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background-size: 20px 20px;
+}
+
+.layout_start_item_badge {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+}
+.layout_start_item_text {
+    padding: 6px 4px 0 4px;
+    height: 30px;
+    line-height: 15px;
+    font-size: 12px;
+    color: var(--ik-text, #222222);
+    overflow: hidden;
+    word-break: keep-all;
+}
+.layout_start_tab {
+    min-width: 40px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 8px;
+    text-align: center;
+    float: left;
+    margin-right: 4px;
+    font-size: 13px;
+    color: var(--ik-text-sub, #666666);
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+}
+.layout_start_tab:hover {
+    color: var(--ik-text, #222222);
+}
+.layout_start_tab.mainColor_bg {
+    background-color: transparent !important;
+    color: var(--oo-color-main, #2768B0) !important;
+    border-bottom-color: var(--oo-color-main, #2768B0);
+    font-weight: bold;
+}
+.layout_tab_current {
+    color: #ffffff;
+}
+.layout_start_search {
+    height: 28px;
+    width: 28px;
+    margin-left: 4px;
+    float: right;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ffffff;
+    border-radius: 2px;
+}
+.layout_start_search.mainColor_border {
+    border-color: var(--oo-color-main, #2768B0) !important;
+}
+.layout_start_search_load {
+    width: 320px;
+}
+
+.layout_start_search_icon {
+    height: 28px;
+    width: 28px;
+    float: right;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.layout_start_search_clear {
+    float: right;
+    height: 28px;
+    width: 16px;
+    background-image: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.layout_start_search_area {
+    height: 28px;
+    padding: 0 10px;
+    margin-right: 46px;
+}
+.layout_start_search_input {
+    height: 26px;
+    width: 99%;
+    line-height: 26px;
+    border: 0;
+    border-radius: 2px;
+    float: left;
+}
+
+/* ---------- 알림 패널 ---------- */
+.layout_content_message {}
+.layout_message_mask {
+    width: 360px;
+    background-color: #FFF;
+    position: absolute;
+    z-index: 20000;
+    opacity: 1;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    display: none;
+}
+.layout_message {
+    width: 360px;
+    position: absolute;
+    overflow: hidden;
+    display: none;
+    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.12);
+    border-left: 1px solid var(--ik-line, #EDEFF2);
+    z-index: 20000;
+    background-color: #ffffff;
+}
+.layout_message_scroll {
+    overflow: hidden;
+    margin-right: 12px;
+}
+.layout_message_content {
+    padding: 5px;
+    overflow: hidden;
+}
+.layout_message_operation {
+    height: 44px;
+    overflow: hidden;
+    border-top: 1px solid var(--ik-line, #EDEFF2);
+}
+.layout_message_operation_clear {
+    height: 30px;
+    line-height: 30px;
+    width: 120px;
+    margin: 7px auto;
+    text-align: center;
+    font-size: 13px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.layout_message_operation_clear .over {
+    border: 1px solid #333;
+    background-color: #666;
+    box-shadow: 1px 1px 3px #666;
+    color: #FFF;
+}
+.layout_message_operation_clear .down {
+    border: 1px solid #333;
+    background-color: #666;
+    box-shadow: 0 0 0 #333;
+    color: #FFF;
+}
+.layout_message_item {
+    padding: 8px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--ik-line, #EDEFF2);
+    background: transparent;
+    cursor: default;
+}
+.layout_message_item_top {
+    min-height: 20px;
+    line-height: 20px;
+    padding-top: 2px;
+    padding-bottom: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--oo-color-main, #2768B0);
+}
+.layout_message_item_top_close {
+    height: 24px;
+    width: 16px;
+    float: right;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.layout_message_item_top_subject {
+    min-height: 20px;
+    margin-right: 18px;
+}
+.layout_message_item_content {
+    overflow: hidden;
+    color: var(--ik-text, #222222);
+    font-size: 12px;
+    line-height: 20px;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+.layout_message_item_bottom {
+    height: 24px;
+    font-size: 12px;
+    line-height: 24px;
+}
+.layout_message_item_bottom_date {
+    width: 120px;
+    color: var(--ik-text-mute, #8C8C8C);
+    float: left;
+}
+.layout_message_item_bottom_action {
+    margin-left: 130px;
+}
+.layout_message_tooltipArea {
+    position: absolute;
+    width: 340px;
+    z-index: 500000
+}
+.layout_message_tooltip_item {
+    margin: 10px 10px 0 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    width: 300px;
+    padding: 6px 12px;
+    overflow: hidden;
+    border: 1px solid var(--ik-border, #E6E6E6);
+    background: #ffffff;
+    cursor: default;
+    border-radius: 8px;
+}
+.layout_message_unread_node {
+    min-width: 16px;
+    height: 16px;
+    padding: 0 3px;
+    background: var(--ik-status-danger, #F0504F);
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 10px;
+    line-height: 16px;
+    border-radius: 8px;
+    position: relative;
+    top: -2px;
+    left: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+.layout_refresh_node {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #666666;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    z-index: 300000;
+    top: -40px;
+    opacity: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+.layout_start_groupItem_menu {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-size: 22px 22px;
+    overflow: hidden;
+}
+.layout_start_groupItem_menuMask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    top: 0;
+    left: 0;
+}
+.layout_start_groupItem_menu_title {
+    height: 60px;
+    padding: 8px 0 12px 0;
+    line-height: 40px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    overflow: hidden;
+}
+.layout_start_groupItem_menu_scroll {
+    overflow: hidden;
+}
+.layout_start_item_icon_group {
+    width: 28px;
+    height: 28px;
+    padding: 5px 3px 3px 5px;
+    border-radius: 8px;
+    background-size: 20px 20px;
+}
+.layout_start_groupItem_menu_content {
+    overflow: hidden;
+    padding-top: 10px;
+}
+.layout_start_item_icon_group_sub {
+    width:  12px;
+    height: 12px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    border-radius: 3px;
+    float: left;
+    background-repeat: no-repeat;
+    background-size: 9px 9px;
+    background-position: center;
+}
+.layout_start_item_icon_group_subIcon {
+    width:  12px;
+    height: 12px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    border-radius: 3px;
+    float: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.layout_start_item_sub {
+    margin-left: 12px;
+}
+.layout_start_groupItem_menu_title_edit {
+    border: 0;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    font-size: 15px;
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    border-radius: 4px;
+}
+
+/* ---------- 화면 배율 ---------- */
+.layout_menu_scale_zoomValue {
+    height: 32px;
+    line-height: 32px;
+    width: 40px;
+    border-radius: 4px;
+    margin: auto;
+    text-align: center;
+    background: transparent;
+    cursor: pointer;
+    font-size: 11px;
+    color: var(--ik-rail-text, #B4B9C4);
+}
+.layout_menu_scale_zoomValue:hover {
+    background: var(--ik-rail-active-bg, #262B37);
+    color: var(--ik-rail-text-active, #FFFFFF);
+}
+.layout_menu_scale_zoomSlider {
+    width: 110px;
+    height: 5px;
+    margin-left: 10px;
+    border-radius: 3px;
+    background: #ffffff;
+    position: relative;
+}
+.layout_menu_scale_zoomSliderKnob {
+    width: 12px;
+    height: 12px;
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;
+    cursor: pointer;
+    position: absolute;
+    top: -6px;
+}
+.layout_menu_scale_slider {
+    width: 0;
+    height: 38px;
+    overflow: hidden;
+    padding-top: 32px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    position: absolute;
+    bottom: 0;
+    left: var(--ik-rail-width, 48px);
+    z-index: 40000;
+    display: none;
+}
+.layout_menu_scale_zoomReturn {
+    width: 20px;
+    height: 20px;
+    float: right;
+    background: url(../o2_core/o2/xDesktop/$Default/indigo/icons/icon_refresh.png) center center no-repeat;
+    cursor: pointer;
+    margin-top: -12px;
+    margin-right: 15px;
+}

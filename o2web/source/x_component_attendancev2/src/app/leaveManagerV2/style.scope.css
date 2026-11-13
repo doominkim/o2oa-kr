@@ -7,14 +7,14 @@
 }
 
 .leave-page-header {
-    align-items: flex-start;
-    padding-bottom: 16px;
-    border-bottom: 1px solid #eeeeee;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: 1px solid var(--att-line);
 }
 
 .leave-page-header .index_page_header_title {
     flex: 0 0 auto;
-    padding-top: 6px;
 }
 
 .leave-subnav {
@@ -23,65 +23,65 @@
     flex-wrap: wrap;
     justify-content: flex-end;
     min-width: 0;
-    margin: -4px 0 0 20px;
+    margin: 0 0 0 20px;
 }
 
 .leave-subnav-button {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    min-width: 112px;
-    height: 34px;
-    margin: 4px 0 4px 8px !important;
-    padding: 0 14px !important;
-    border: 1px solid #dddddd !important;
-    border-radius: 4px !important;
+    min-width: 104px;
+    height: 30px;
+    margin: 4px 0 4px 6px !important;
+    padding: 0 12px !important;
+    border: 1px solid var(--att-button-border) !important;
+    border-radius: var(--att-default-radius) !important;
     background-color: #ffffff !important;
-    color: #555555;
-    font-size: 14px;
-    line-height: 32px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    color: #333333;
+    font-size: 13px;
+    line-height: 28px;
     white-space: nowrap;
 }
 
 .leave-subnav-button i {
     margin-right: 6px;
     color: var(--oo-color-main);
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .leave-subnav-button:hover {
     border-color: var(--oo-color-main) !important;
-    color: #333333;
-    box-shadow: 0 3px 10px rgba(74, 144, 226, 0.14);
+    color: var(--oo-color-main);
 }
 
 .leave-section-toolbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 36px;
-    margin: 0 0 14px;
+    min-height: 32px;
+    margin: 0 0 8px;
 }
 
 .leave-section-title {
-    padding-left: 10px;
-    color: #333333;
-    font-size: 16px;
+    padding-left: 0;
+    color: var(--att-text);
+    font-size: 15px;
     font-weight: bold;
-    line-height: 36px;
+    line-height: 32px;
 }
 
 .leave-copy-id {
     margin-left: 10px;
-    color: #2f80ed;
-    text-decoration: underline;
+    color: var(--oo-color-main);
+    font-size: 12px;
+    text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
 }
 
 .leave-copy-id:hover {
-    color: #1b5fc4;
+    color: var(--att-brand-hover);
+    text-decoration: underline;
 }
 
 .leave-import-mask {
@@ -178,7 +178,7 @@
 }
 
 .leave-import-upload:hover {
-    border-color: #4a90e2;
+    border-color: var(--oo-color-main);
     color: #333333;
 }
 
@@ -219,9 +219,9 @@
     gap: 6px;
     margin: 0 0 10px;
     padding: 7px 10px;
-    border: 1px solid #e5edf7;
+    border: 1px solid var(--att-border);
     border-radius: 4px;
-    background: #f7fbff;
+    background: var(--att-brand-light);
     color: #666666;
     font-size: 12px;
     line-height: 18px;
@@ -262,7 +262,7 @@
   position: sticky;
   top: 0;
   z-index: 2;                /* 层级高于普通单元格 */
-  background-color: #f4f4f4; /* 表头背景色 */
+  background-color: var(--att-table-head-bg); /* 表头背景色 */
 }
 
 .leave-account-table .sticky-col {
@@ -277,7 +277,7 @@
   top: 0;
   left: 0;
   z-index: 3;                /* 层级最高！防止被滚动的首行或首列遮挡 */
-  background-color: #e0e0e0; /* 交叉点可以换个特殊颜色区分 */
+  background-color: var(--att-table-head-bg); /* 交叉点可以换个特殊颜色区分 */
 }
 
 .leave-account-balance {
@@ -329,10 +329,10 @@
     height: 26px;
     margin: 0 !important;
     padding: 0 10px !important;
-    border: 1px solid #d7e6f8 !important;
-    border-radius: 3px !important;
-    background: #f7fbff !important;
-    color: #2f80ed;
+    border: 1px solid #C9DCF0 !important;
+    border-radius: var(--att-default-radius) !important;
+    background: var(--att-brand-light) !important;
+    color: var(--oo-color-main);
     font-size: 12px;
     line-height: 24px;
     cursor: pointer;
@@ -340,8 +340,8 @@
 }
 
 .leave-account-adjust-button:hover {
-    border-color: #2f80ed !important;
-    background: #eef6ff !important;
+    border-color: var(--oo-color-main) !important;
+    background: var(--att-brand-light) !important;
 }
 
 .leave-adjust-form {

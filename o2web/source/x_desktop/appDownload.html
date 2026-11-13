@@ -8,7 +8,7 @@
   <meta content="yes" name="apple-mobile-web-app-capable" />
   <meta content="black" name="apple-mobile-web-app-status-bar-style" />
   <meta content="telephone=no" name="format-detection" />
-  <title>移动客户端</title>
+  <title>모바일 앱</title>
   <style>
     html {
       margin: 0;
@@ -163,6 +163,9 @@
     <script src="../o2_core/o2.min.js"></script>
     <script src="js/base_simple_anonymous.js"></script>
   
+    <link rel="icon" href="../favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="img/brand/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png" />
 </head>
 <body>
   <!-- 移动端app下载页面，用于自助打包发布的app下载 目前就只有android -->
@@ -180,14 +183,14 @@
         <div
           id="android_version"
           class="app_version"
-        >当前最新版本：{{android.versionName}}</div>
+        >현재 최신 버전: {{android.versionName}}</div>
         <div
           id="actions_android"
           class="actions type-android"
         >
           <a   id="android_download_link">
             <img src="./img/action_android.png" />
-            下载安装
+            다운로드 및 설치
           </a>
         </div>
       </div>
@@ -214,7 +217,7 @@
         <p
           class="mask_alert"
           id="mask_alert"
-        >请点右上角菜单，在浏览器打开</p>
+        >오른쪽 위 메뉴를 눌러 브라우저에서 여세요</p>
       </div>
     </div>
   </div>
@@ -254,7 +257,7 @@
           var _loadLastPublishAPK = function() {
               o2.Actions.load("x_program_center").AppPackAnonymousAction.androidPackLastAPk(function(json) {
                 if (json && json.data && json.data.id) {
-                  $("android_version").set("text", "当前最新版本："+json.data.appVersionName);
+                  $("android_version").set("text", "현재 최신 버전: "+json.data.appVersionName);
                   var downloadUrl = o2.Actions.getHost("x_program_center") + "/x_program_center/jaxrs/apppackanony/pack/info/file/download/" + json.data.id;
                   downloadUrl = o2.filterUrl(downloadUrl);
                   $("android_download_link").set("href", downloadUrl);

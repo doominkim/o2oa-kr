@@ -30,7 +30,7 @@ var MWFCalendarWeekView = MWF.xApplication.Calendar.WeekView = new Class({
     resetNodeSize: function(){
         //if( this.app.inContainer )return;
         var size = this.container.getSize();
-        var y = size.y-50;
+        var y = size.y;
 
         this.node.setStyle("height", ""+y+"px");
         //this.node.setStyle("margin-top", "60px");
@@ -391,7 +391,7 @@ MWFCalendarWeekView.Calendar = new Class({
             } ).inject( tr );
             td.setStyle("min-height","80px");
             var node = new Element("div",{
-                text : "全天"
+                text : "종일"
             }).inject( td );
             td.store("hour",i );
             this.wholeDayTdMap = {};
@@ -527,14 +527,14 @@ MWFCalendarWeekView.Calendar = new Class({
         td.setStyle("background-color","#fffdf2");
         if( this.currentSelectedTd ){
             var flag = this.currentSelectedTd.retrieve("index") == this.todayIndex;
-            this.currentSelectedTd.setStyle("background-color",flag?"#F8FBFF":"#fff");
+            this.currentSelectedTd.setStyle("background-color",flag?"#EAF2FB":"#fff");
         }
         this.currentSelectedTd = td;
     },
     cancelCurrentTd : function(){
         if( this.currentSelectedTd ){
             var flag = this.currentSelectedTd.retrieve("index") == this.todayIndex;
-            this.currentSelectedTd.setStyle("background-color",flag?"#F8FBFF":"#fff");
+            this.currentSelectedTd.setStyle("background-color",flag?"#EAF2FB":"#fff");
         }
         this.currentSelectedTd = null;
     },
@@ -934,7 +934,7 @@ MWFCalendarWeekView.Calendar = new Class({
             var oldIndex = this.selectedIndexRange;
             this.selectedIndexRange.each( function( index ){
                 if( !indexs.contains(index) ){
-                    this.getTdByIndexString( index ).setStyle("background-color", flag && ( index.split("_")[0] ==this.todayIndex ) ?  "#F8FBFF" : "#fff");
+                    this.getTdByIndexString( index ).setStyle("background-color", flag && ( index.split("_")[0] ==this.todayIndex ) ?  "#EAF2FB" : "#fff");
                 }
             }.bind(this));
             indexs.each( function( index ){
@@ -964,7 +964,7 @@ MWFCalendarWeekView.Calendar = new Class({
         var flag = this.todayIndex > -1;
         if( this.selectedIndexRange && this.selectedIndexRange.length ){
             this.selectedIndexRange.each( function( index ){
-                this.getTdByIndexString( index ).setStyle("background-color", flag && ( index.split("_")[0] ==this.todayIndex ) ?  "#F8FBFF" : "#fff");
+                this.getTdByIndexString( index ).setStyle("background-color", flag && ( index.split("_")[0] ==this.todayIndex ) ?  "#EAF2FB" : "#fff");
             }.bind(this));
             var beginIndex = this.selectedIndexRange[0].split("_");
             var endIndex = this.selectedIndexRange.getLast().split("_");
@@ -1015,7 +1015,7 @@ MWFCalendarWeekView.Calendar = new Class({
             var oldIndex = this.selectedIndexRange_wholeDay;
             this.selectedIndexRange_wholeDay.each( function( index ){
                 if( !indexs.contains(index) ){
-                    this.wholeDayTdMap[index].setStyle("background-color", flag && ( index == this.todayIndex ) ?  "#F8FBFF" : "#fff");
+                    this.wholeDayTdMap[index].setStyle("background-color", flag && ( index == this.todayIndex ) ?  "#EAF2FB" : "#fff");
                 }
             }.bind(this));
             indexs.each( function( index ){
@@ -1034,7 +1034,7 @@ MWFCalendarWeekView.Calendar = new Class({
         var flag = this.todayIndex > -1;
         if( this.selectedIndexRange_wholeDay && this.selectedIndexRange_wholeDay.length ){
             this.selectedIndexRange_wholeDay.each( function( index ){
-                this.wholeDayTdMap[index].setStyle("background-color", flag && ( index == this.todayIndex ) ?  "#F8FBFF" : "#fff");
+                this.wholeDayTdMap[index].setStyle("background-color", flag && ( index == this.todayIndex ) ?  "#EAF2FB" : "#fff");
             }.bind(this));
             var beginIndex = this.selectedIndexRange_wholeDay[0];
             var endIndex = this.selectedIndexRange_wholeDay.getLast();
@@ -1536,7 +1536,7 @@ MWFCalendarWeekView.WeekCalendar = new Class({
     Extends : MWF.widget.Calendar,
     initialize: function(node, options){
         this.options.weekBegin = "0";
-        Locale.use("zh-CHS");
+        Locale.use(o2.dateLocale());
         this.options.defaultTime = ""+this.options.baseDate.getHours()+":"+this.options.baseDate.getMinutes()+":"+this.options.baseDate.getSeconds();
         this.setOptions(options);
 
@@ -1616,8 +1616,8 @@ MWFCalendarWeekView.WeekCalendar = new Class({
         thisMonth++;
 
         var text;
-        if( MWF.language.substr(0, 2) === "zh" ){
-            text = thisYear+ MWF.xApplication.Calendar.LP.year +thisMonth+ MWF.xApplication.Calendar.LP.month;
+        if( ["zh", "ko"].indexOf(MWF.language.substr(0, 2)) > -1 ){
+            text = thisYear+ o2.LP.widget.year +thisMonth+ o2.LP.widget.month;
         }else{
             text = thisYear+ "-" +thisMonth;
         }

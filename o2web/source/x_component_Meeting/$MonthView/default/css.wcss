@@ -2,7 +2,7 @@
 
 
     "node": {
-        "margin": "10px 0px",
+        "margin": "0px",
         "overflow": "hidden",
         "background-color": "#fff",
         "position": "absolute",
@@ -23,7 +23,7 @@
         "background-color" : "#f0f0f0"
     },
     "contentWarpNode" : {
-        "margin" : "0px auto 20px auto",
+        "margin" : "0px auto 20px 20px",
         "overflow" : "hidden"
     },
     "contentContainerNode" : {
@@ -37,61 +37,85 @@
     },
 
     "calendarTitleNode": {
-        "height": "60px",
+        "height": "50px",
         "overflow": "hidden",
-        "border-bottom": "1px solid #CCC"
+        "display": "flex",
+        "align-items": "center",
+        "padding-left": "20px",
+        "box-sizing": "border-box"
     },
     "calendarBodyNode": {
         "overflow": "hidden"
     },
 
     "calendarPrevMonthNode": {
-        "height": "30px",
-        "width": "24px",
-        "margin": "18px 0px 10px 40px",
-        "color": "#999",
-        "font-size": "24px",
-//       "background": "url(../x_component_Meeting/$MonthView/default/icon/left24_gray.png) no-repeat center center",
-        "cursor": "pointer",
-        "float": "left"
+        "order": "1",
+        "box-sizing": "border-box",
+        "height": "26px",
+        "width": "26px",
+        "line-height": "26px",
+        "text-align": "center",
+        "margin": "0px 0px 0px 12px",
+        "border": "1px solid #CCD1D9",
+        "border-radius": "2px 0px 0px 2px",
+        "background-color": "#FFF",
+        "color": "#666",
+        "font-size": "14px",
+        "cursor": "pointer"
     },
     "calendarPrevMonthNode_over": {
-        "color": "#4990e2"
-//   "background": "url(../x_component_Meeting/$MonthView/default/icon/left24_blue.png) no-repeat center center"
+        "color": "#2768B0"
     },
     "calendarPrevMonthNode_down": {
-  //      "background": "url(../x_component_Meeting/$MonthView/default/icon/left24_blue.png) no-repeat center center"
     },
     "calendarNextMonthNode": {
-        "height": "30px",
-        "width": "24px",
-        "margin": "18px 0px 10px 0px",
-        "color": "#999",
-        "font-size": "24px",
-//        "background": "url(../x_component_Meeting/$MonthView/default/icon/right24_gray.png) no-repeat center center",
-        "cursor": "pointer",
-        "float": "left"
+        "order": "2",
+        "box-sizing": "border-box",
+        "height": "26px",
+        "width": "26px",
+        "line-height": "26px",
+        "text-align": "center",
+        "margin": "0px 0px 0px -1px",
+        "border": "1px solid #CCD1D9",
+        "border-radius": "0px 2px 2px 0px",
+        "background-color": "#FFF",
+        "color": "#666",
+        "font-size": "14px",
+        "cursor": "pointer"
     },
     "calendarNextMonthNode_over": {
-        "color": "#4990e2"
-        //"background": "url(../x_component_Meeting/$MonthView/default/icon/right24_blue.png) no-repeat center center"
+        "color": "#2768B0"
     },
     "calendarNextMonthNode_down": {
-        //"background": "url(../x_component_Meeting/$MonthView/default/icon/right24_blue.png) no-repeat center center"
+    },
+    "calendarTodayNode": {
+        "order": "3",
+        "box-sizing": "border-box",
+        "height": "26px",
+        "line-height": "26px",
+        "padding": "0px 12px",
+        "margin-left": "6px",
+        "border": "1px solid #CCD1D9",
+        "border-radius": "2px",
+        "background-color": "#FFF",
+        "color": "#333",
+        "font-size": "12px",
+        "cursor": "pointer"
     },
     "calendarTitleTextNode": {
-        "line-height": "60px",
-        "color" : "#333",
-        "margin": "0px 10px",
-        "font-size": "24px",
-        "float": "left",
+        "order": "0",
+        "line-height": "28px",
+        "color" : "#222",
+        "margin": "0px",
+        "font-size": "18px",
+        "font-weight": "bold",
         "cursor": "pointer"
     },
     "calendarTitleTextNode_over": {
-        "color": "#4990e2"
+        "color": "#2768B0"
     },
     "calendarTitleTextNode_down": {
-        "color": "#4990e2"
+        "color": "#2768B0"
     },
     "calendarMonthSelectNode": {
         "width": "260px",
@@ -139,14 +163,14 @@
         "line-height": "50px"
     },
     "calendarMonthSelectCurrentNode" : {
-        "color" : "#4990e2",
+        "color" : "#2768B0",
         "cursor": "pointer",
         "font-size": "14px",
         "height" : "30px",
         "line-height" : "30px",
         "border-radius" : "100px",
         "width" : "30px",
-        "border" : "1px solid #4990e2",
+        "border" : "1px solid #2768B0",
         "background-color" : "#fff",
         "margin" : "auto"
     },
@@ -158,8 +182,8 @@
         "line-height" : "30px",
         "border-radius" : "100px",
         "width" : "30px",
-        "border" : "1px solid #4990e2",
-        "background-color" : "#4990e2",
+        "border" : "1px solid #2768B0",
+        "background-color" : "#2768B0",
         "margin" : "auto"
     },
     "calendarMonthSelectTdNode": {
@@ -170,7 +194,7 @@
         "font-size": "14px"
     },
     "calendarMonthSelectTdNode_over": {
-        "color": "#4990e2"
+        "color": "#2768B0"
     },
     "calendarMonthSelectTdNode_down": {
         "color": "#8894e9"
@@ -184,122 +208,142 @@
         "color": "#333"
     },
     "calendarMonthSelectBottomNode_over": {
-        "color": "#4990e2"
+        "color": "#2768B0"
     },
 
 
     "calendarTable": {
-        "width": "100%"
+        "width": "100%",
+        "table-layout" : "fixed",
+        "border-left": "1px solid #E6E6E6"
     },
     "calendarTableTitleTr": {
-        "height": "50px"
+        "height": "36px"
     },
     "calendarTableTh": {
         "width": "14.28%",
-        "background-color" : "#f3f3f3",
-        "color": "#333",
-        "font-size": "18px",
-        "font-weight" : "normal",
+        "background-color" : "#F2F6F8",
+        "color": "#222",
+        "font-size": "13px",
+        "font-weight" : "bold",
         "min-width": "120px",
-        "border-bottom": "1px solid #CCC",
+        "border-top": "1px solid #E6E6E6",
+        "border-right": "1px solid #E6E6E6",
+        "border-bottom": "1px solid #E6E6E6",
         "text-align" : "center"
     },
+    "calendarTableTh_sunday": {
+        "color": "#E5484D"
+    },
+    "calendarTableTh_saturday": {
+        "color": "#2768B0"
+    },
     "calendarTableCell_thisMonth": {
-        "margin": "7px",
+        "margin": "0px",
         "overflow": "hidden",
         "background-color": "#fff",
-        "border": "1px solid #CCC",
-        "border-radius": "4px",
+        "border-right": "1px solid #E6E6E6",
+        "border-bottom": "1px solid #E6E6E6",
         "height" : "140px"
     },
     "calendarTableCell_otherMonth": {
-        "margin": "7px",
+        "margin": "0px",
         "overflow": "hidden",
         "color" : "#ccc",
         "background-color": "#fff",
-        "border": "1px solid #CCC",
-        "border-radius": "4px",
+        "border-right": "1px solid #E6E6E6",
+        "border-bottom": "1px solid #E6E6E6",
         "height" : "140px"
     },
     "calendarTableCell_today": {
-        "margin": "7px",
+        "margin": "0px",
         "overflow": "hidden",
-        "background-color": "#F8FBFF",
-        "border": "1px solid #CCC",
-        "border-radius": "4px",
+        "background-color": "#EAF2FB",
+        "box-shadow": "inset 0 0 0 1px #2768B0",
+        "border-right": "1px solid #E6E6E6",
+        "border-bottom": "1px solid #E6E6E6",
         "height" : "140px"
     },
 
     "dayTitle_thisMonth": {
-        "padding" : "8px 0px 5px 10px",
-        "height": "30px",
+        "padding" : "5px 0px 3px 8px",
+        "height": "22px",
         "cursor": "pointer",
-        "line-height": "30px",
-        "background-color": "#FFF"
+        "line-height": "22px"
     },
     "dayTitle_otherMonth": {
-        "padding" : "8px 0px 5px 10px",
-        "height": "30px",
+        "padding" : "5px 0px 3px 8px",
+        "height": "22px",
         "cursor": "pointer",
-        "line-height": "30px",
-        "background-color": "#FFF"
+        "line-height": "22px"
     },
     "dayTitle_today": {
-        "padding" : "8px 0px 5px 10px",
-        "height": "30px",
+        "padding" : "5px 0px 3px 6px",
+        "height": "22px",
         "cursor": "pointer",
-        "line-height": "24px",
-        "background-color": "#F8FBFF"
+        "line-height": "22px"
     },
     "dayTitleDay_thisMonth": {
-        "font-size" : "16px",
-        "margin-left": "10px",
-        "height": "30px",
+        "font-size" : "13px",
+        "min-width" : "20px",
+        "height": "22px",
         "float": "left",
-        "color": "#333"
+        "color": "#222"
     },
     "dayTitleDay_otherMonth": {
-        "color" : "#ccc",
-        "font-size" : "16px",
-        "margin-left": "10px",
-        "height": "30px",
+        "font-size" : "13px",
+        "min-width" : "20px",
+        "height": "22px",
         "float": "left",
-        "color": "#ccc"
+        "color": "#BBBBBB"
+    },
+    "dayTitleDay_sunday_thisMonth": {
+        "color": "#E5484D"
+    },
+    "dayTitleDay_sunday_otherMonth": {
+        "color": "#F2A4A6"
+    },
+    "dayTitleDay_saturday_thisMonth": {
+        "color": "#2768B0"
+    },
+    "dayTitleDay_saturday_otherMonth": {
+        "color": "#A9C3DF"
     },
     "dayTitleDay_today": {
-        "margin-top" : "3px",
-        "font-size" : "14px",
-        "background": "#3C76B7",
+        "font-size" : "12px",
+        "font-weight" : "bold",
+        "background": "#2768B0",
         "border-radius": "100px",
         "text-align" : "center",
-        "width": "24px",
-        "height": "24px",
+        "line-height": "22px",
+        "width": "22px",
+        "height": "22px",
         "float": "left",
         "color": "#fff"
     },
     "dayTitleInfor_thisMonth": {
-        "margin-right": "10px",
-        "height": "30px",
-        "font-size" : "14px",
-        "line-height": "30px",
+        "margin-right": "8px",
+        "height": "22px",
+        "font-size" : "12px",
+        "line-height": "22px",
         "text-align": "right",
-        "color": "#3C76B7"
+        "color": "#2768B0"
     },
     "dayTitleInfor_otherMonth": {
-        "margin-right": "10px",
-        "height": "30px",
-        "font-size" : "14px",
-        "line-height": "30px",
+        "margin-right": "8px",
+        "height": "22px",
+        "font-size" : "12px",
+        "line-height": "22px",
         "text-align": "right",
         "color": "#999"
     },
     "dayTitleInfor_today": {
-        "margin-right": "10px",
-        "height": "30px",
-        "font-size" : "14px",
-        "line-height": "30px",
+        "margin-right": "8px",
+        "height": "22px",
+        "font-size" : "12px",
+        "line-height": "22px",
         "text-align": "right",
-        "color": "#3C76B7"
+        "color": "#2768B0"
     },
 
     "dayContentNode": {
@@ -308,44 +352,50 @@
         "margin": "0px 5px 0px 0px"
     },
     "meetingNode_today": {
-        "height": "30px",
-        "background-color": "#F8FBFF",
-        "margin": "0px",
+        "height": "24px",
+        "background-color": "transparent",
+        "margin": "0px 4px",
+        "border-radius": "2px",
         "cursor": "pointer",
-        "font-size": "14px",
-        "color": "#333",
-        "line-height": "30px"
+        "font-size": "12px",
+        "color": "#222",
+        "line-height": "24px"
     },
     "meetingNode": {
-        "height": "30px",
-        "background-color": "#FFF",
-        "margin": "0px",
+        "height": "24px",
+        "background-color": "transparent",
+        "margin": "0px 4px",
+        "border-radius": "2px",
         "cursor": "pointer",
-        "font-size": "14px",
-        "color": "#333",
-        "line-height": "30px"
+        "font-size": "12px",
+        "color": "#222",
+        "line-height": "24px"
     },
     "meetingNode_over" : {
-        "background-color": "#F8F8F8",
-        "color" : "#3C76B7"
+        "background-color": "#F4F5F7",
+        "color" : "#2768B0"
     },
     "meetingIconNode": {
-        "height": "30px",
-        "width": "20px",
+        "height": "6px",
+        "width": "6px",
+        "margin": "9px 5px 0px 4px",
+        "border-radius": "1px",
+        "background-color": "#2768B0",
         "float": "left"
     },
     "meetingTextNode": {
-        "margin-left": "20px",
-        "margin-right": "48px",
-        "height": "30px",
-        "overflow": "hidden"
+        "height": "24px",
+        "overflow": "hidden",
+        "white-space": "nowrap",
+        "text-overflow": "ellipsis"
     },
     "meetingTimeNode":{
-        "height": "30px",
-        "width": "40px",
-        "color" : "#999",
-        "font-size": "14px",
-        "float": "right"
+        "height": "24px",
+        "color" : "#222",
+        "font-weight" : "bold",
+        "font-size": "12px",
+        "margin-right": "4px",
+        "float": "left"
     }
 
 }

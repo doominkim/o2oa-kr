@@ -56,6 +56,9 @@ See https://github.com/adobe-type-tools/cmap-resources
 <script src="../o2_lib/pdfjs/pdf-lib/fontkit.umd.min.js"></script>
 <script src="../o2_lib/pdfjs/build/pdf.js"></script>
 
+    <link rel="icon" href="../favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="img/brand/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png" />
   </head>
 
   <body tabindex="1" class="loadingInProgress">
@@ -427,10 +430,10 @@ See https://github.com/adobe-type-tools/cmap-resources
                   console.log("session.sessionPromise then .....")
                   _loadPDF();
                 },function(){
-                  console.log("认证失败 。。。。。。。。。");
+                  console.log("인증 실패 .........");
                 });
             } else {
-              console.log("没有promise.....")
+              console.log("promise 없음.....")
             }
           }
 

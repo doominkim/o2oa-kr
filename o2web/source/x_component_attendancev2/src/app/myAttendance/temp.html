@@ -1,17 +1,17 @@
-<div class="manager-box">
+<div class="manager-box my-attendance-page">
   <div class="index_page_header_container">
     <div class="index_page_header_title">{{$.lp.myAttendanceTitle}}</div>
   </div>
-  <div style="margin-top: 20px;">
+  <div class="my-attendance-body">
     <div class="my-statistic-box my-statistic-block">
       <!-- 统计周期 -->
       <div class="my-statistic-block-first">
         <div class="row-box">
           <div class="o2-icon-16" @click="this.clickToPreMonth()"><i class="o2icon-icon_arrow_left"></i></div>
-          <div style="font-size: 18px;color: #333333;line-height: 20px;margin: 0 20px;">{{$.cycleMonth}}</div>
+          <div class="my-statistic-cycle-month">{{$.cycleMonth}}</div>
           <div class="o2-icon-16" @click="this.clickToNextMonth()"><i class="o2icon-icon_arrow_right"></i></div>
         </div>
-        <div style="font-size: 12px; color: #666666; line-height: 16px;margin-top: 20px;">
+        <div class="my-statistic-cycle-date">
           {{$.lp.myStatistic.title}}{{$.cycleDate}}</div>
       </div>
       <div class="my-statistic-block-divider"></div>

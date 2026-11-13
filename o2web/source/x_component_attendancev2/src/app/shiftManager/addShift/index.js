@@ -271,10 +271,10 @@ export default content({
         }
         if (myForm.id && myForm.id !== '') {
             const json = await attendanceShiftAction("shiftUpdate", myForm);
-            console.debug('更新成功', json);
+            console.debug('업데이트했습니다', json);
         } else {
             const json = await attendanceShiftAction("shiftCreate", myForm);
-            console.debug('新增成功', json);
+            console.debug('추가했습니다', json);
         }
         o2.api.page.notice(lp.shiftForm.success, 'success');
         this.closeShift();

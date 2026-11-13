@@ -1,61 +1,80 @@
 
 .pager-node {
-  height: 80px;
+  height: 64px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 12px;
+  color: var(--att-text-sub);
 }
 .pager-content {
-  height: 60px;
+  height: 28px;
+  line-height: 28px;
 }
 .pager-first,
 .pager-last,
 .pager-item,
 .pager-prev,
 .pager-next {
-  height: 24px;
-  width: 80px;
+  height: 26px;
+  min-width: 14px;
+  padding: 0 10px;
   border-radius: var(--att-default-radius);
   background: #ffffff;
-  border: 1px solid #e6e6e6;
+  border: 1px solid var(--att-input-border);
+  color: var(--att-text);
   font-size: 12px;
-  line-height: 24px;
+  line-height: 26px;
   text-align: center;
   cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.pager-first:hover,
+.pager-last:hover,
+.pager-item:hover {
+  border-color: var(--att-brand);
+  color: var(--att-brand);
+}
+.pager-item.mainColor_bg {
+  border-color: var(--att-brand);
+  color: #ffffff;
 }
 .pager-first {
   float: left;
 }
 .pager-last {
   float: right;
-  margin-left: 10px;
+  margin-left: 6px;
 }
 .pager-prev {
   float: left;
-  margin-left: 10px;
-  width: 24px;
+  margin-left: 6px;
+  width: 26px;
   font-size: 24px;
-  color: #999999;
+  color: var(--att-text-mute);
 }
 .pager-next {
   float: right;
-  margin-left: 10px;
-  width: 24px;
+  margin-left: 6px;
+  width: 26px;
   font-size: 24px;
-  color: #999999;
+  color: var(--att-text-mute);
 }
 .pager-number-area {
   float: left;
+  margin-left: 10px;
 }
 .pager-item {
     float: left;
-    width: 24px;
-    margin-left: 10px;
+    min-width: 18px;
+    padding: 0 4px;
+    margin-left: 6px;
 }
 .pager-input-page {
-  height: 60px;
+  height: 28px;
   font-size: 12px;
-  line-height: 24px;
+  line-height: 28px;
   display: flex;
+  align-items: center;
   margin: 0 10px;
 }

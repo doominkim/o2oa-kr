@@ -1,42 +1,53 @@
 .importPersonAreaNode {
-    padding: 20px;
-    margin: 20px 40px;
+    padding: 0px;
+    margin: 24px;
 }
 .importPersonTitleNode {
     height: 40px;
     line-height: 40px;
     font-weight: bold;
     font-size: 18px;
-    color: #666666;
+    color: #222222;
+    border-bottom: 1px solid #EDEFF2;
 }
 .importPersonTemplateNode {
-    margin-top: 10px;
-    height: 40px;
-    line-height: 40px;
-    font-size: 14px;
-    color: #999999;
+    margin-top: 12px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 13px;
+    color: #666666;
+}
+.importPersonTemplateNode a {
+    color: #2768B0;
 }
 .importPersonNode {
-    margin: 10px 0px;
+    margin: 8px 0px;
     height: 30px;
     line-height: 30px;
-    width: 180px;
-    border: 1px solid #999999;
-    border-radius: 8px;
-    background-color: #3c76b7;
+    width: fit-content;
+    padding: 0px 16px;
+    border: 1px solid #2768B0;
+    border-radius: 2px;
+    background-color: #2768B0;
     color: #ffffff;
+    font-size: 13px;
     text-align: center;
     cursor: pointer;
 }
+.importPersonNode:hover {
+    background-color: #1F5A9C;
+}
 .exportPersonNode{
-    margin: 50px 0px;
+    margin: 32px 0px;
     height: 30px;
     line-height: 30px;
-    width: 160px;
-    border: 1px solid #999999;
-    border-radius: 8px;
-    background-color: #3c76b7;
-    color: #ffffff;
+    width: fit-content;
+    padding: 0px 16px;
+    border: 1px solid #CCD1D9;
+    border-radius: 2px;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 13px;
     text-align: center;
     cursor: pointer;
 }
@@ -45,8 +56,8 @@
     margin-top: 20px;
     height: 40px;
     line-height: 40px;
-    font-size: 14px;
-    color: #999999;
+    font-size: 13px;
+    color: #666666;
     padding-left: 40px;
     background: url(../x_component_Org/$Main/default/icon/ok.png) no-repeat left center;
 }

@@ -48,8 +48,8 @@ MWF.xApplication.Homepage.CalendarContent  = new Class({
                 var td = flag.retrieve("td");
                 if (td) flag.position({
                     "relativeTo": td,
-                    "position": 'topRight',
-                    "edge": 'topRight'
+                    "position": 'bottomCenter',
+                    "edge": 'bottomCenter'
                 });
             });
         }
@@ -139,8 +139,8 @@ MWF.xApplication.Homepage.CalendarContent  = new Class({
         var flag = new Element("div.o2_homepage_calender_item_flag").inject(this.calenderFlagArea);
         flag.position({
             "relativeTo": td,
-            "position": 'topRight',
-            "edge": 'topRight'
+            "position": 'bottomCenter',
+            "edge": 'bottomCenter'
         });
         flag.store("td", td);
         this.dayFlags.push(flag);

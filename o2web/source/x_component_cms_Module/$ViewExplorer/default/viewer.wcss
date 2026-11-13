@@ -487,11 +487,11 @@
 //    "background": "url("+"../x_component_cms_Module/$ListExplorer/default/icon/delete.png) no-repeat center center"
   },
   "actionDeleteNode_over":{
-    "color": "#3C76B7"
+    "color": "#F0504F"
 //    "background": "url("+"../x_component_cms_Module/$ListExplorer/default/icon/delete_over.png) no-repeat center center"
   },
   "actionDeleteNode_down":{
-    "color": "#3C76B7"
+    "color": "#F0504F"
 //    "background": "url("+"../x_component_cms_Module/$ListExplorer/default/icon/delete_over.png) no-repeat center center"
   },
 
@@ -508,11 +508,11 @@
 //    "background": "url("+"../x_component_cms_Module/$ListExplorer/default/icon/editing.png) no-repeat center center"
   },
   "actionEditNode_over":{
-    "color": "#3C76B7"
+    "color": "#2768B0"
 //    "background": "url("+"../x_component_cms_Module/$ListExplorer/default/icon/editing_over.png) no-repeat center center"
   },
   "actionEditNode_down":{
-    "color": "#3C76B7"
+    "color": "#2768B0"
 //    "background": "url("+"../x_component_cms_Module/$ListExplorer/default/icon/editing_over.png) no-repeat center center"
   },
 

@@ -109,9 +109,9 @@ MWF.xApplication.Meeting.MeetingView = new Class({
         var size = this.container.getSize();
 
         if( !this.app.inContainer ){
-            var y = size.y-60;
+            var y = size.y-50;
             this.node.setStyle("height", ""+y+"px");
-            this.node.setStyle("margin-top", "60px");
+            this.node.setStyle("margin-top", "50px");
         }
 
         var titleSize = this.titleNode.getSize();

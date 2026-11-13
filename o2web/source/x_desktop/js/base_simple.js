@@ -219,7 +219,7 @@ o2.addReady(function () {
             //o2.require("o2.widget.Common", null, false);
             //o2.require("o2.xDesktop.Authentication", function () {
                 layout.authentication = new o2.xDesktop.Authentication({
-                    "style": "flat",
+                    "style": "indigo",
                     "onLogin": _load.bind(layout)
                 });
                 layout.authentication.loadLogin(document.body);
@@ -351,7 +351,7 @@ o2.addReady(function () {
         }else if (options.draft){
             window.location = o2.filterUrl("../x_desktop/workmobilewithaction.html?draft=" + JSON.stringify(options.draft) + ((layout.debugger) ? "&debugger" : "") + "&redirectlink=" + redirectlink);
         }else {
-            console.log("open work 错误，缺少参数！");
+            console.log("open work 오류: 매개변수가 누락되었습니다!");
         }
     };
     var _openWork = function (options) {

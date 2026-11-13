@@ -4,24 +4,6 @@
         "height": "50px",
         "background-color": "#4e82bd"
     },
-    "taskTitleUserNode": {
-        "width": "100px",
-        "height": "20px",
-        "margin-top": "15px",
-        "float": "right"
-    },
-    "taskTitleUserIconNode": {
-        "background": "url("+"../x_component_process_TaskCenter/$Main/default/icon/user.png) center center no-repeat",
-        "width": "20px",
-        "height": "20px",
-        "float": "left"
-    },
-    "taskTitleUserTextNode": {
-        "margin-left": "20px",
-        "color": "#FFF",
-        "font-size": "14px",
-        "line-height": "20px"
-    },
     "startProcessAction": {
         "width": "59px",
         "height": "50px",
@@ -30,27 +12,198 @@
         //"border-right": "1px solid #FFF",
         "cursor": "pointer"
     },
-    "taskTitleTextNode": {
-        "padding-left": "20px",
-        "color": "#FFF",
-        "font-size": "18px",
-        "line-height": "50px",
-        "font-weight": "bold",
-        "width": "160px",
-        "float": "left"
+
+    //PC frame: module bar + LNB + main area
+    "moduleBarNode": {
+        "height": "44px",
+        "background-color": "#2768B0",
+        "display": "flex",
+        "align-items": "center",
+        "padding": "0px 16px",
+        "overflow": "hidden",
+        "box-sizing": "border-box"
     },
-    "taskTitleInforTextNode": {
-        "padding": "0 20px",
-        "color": "#333333",
-        "font-size": "14px",
-        "line-height": "24px",
+    "moduleMenuNode": {
+        "width": "24px",
         "height": "24px",
-        "margin-top": "12px",
-        "border": "1px solid #cccccc",
-        "border-radius": "12px",
-        "background-color": "#ffffff",
-        "float": "left",
+        "flex": "none",
+        "margin-right": "12px",
+        "background": "url("+"../x_component_process_TaskCenter/$Main/default/lnb/menu.svg) center center no-repeat",
         "cursor": "pointer"
+    },
+    "moduleTitleNode": {
+        "flex": "1",
+        "color": "#FFFFFF",
+        "font-size": "18px",
+        "line-height": "44px",
+        "font-weight": "500",
+        "white-space": "nowrap",
+        "overflow": "hidden"
+    },
+    "moduleActionNode": {
+        "flex": "none",
+        "height": "28px",
+        "line-height": "26px",
+        "padding": "0px 12px",
+        "border": "1px solid rgba(255,255,255,0.7)",
+        "border-radius": "2px",
+        "color": "#FFFFFF",
+        "font-size": "12px",
+        "box-sizing": "border-box",
+        "cursor": "pointer"
+    },
+    "bodyNode": {
+        "display": "flex",
+        "overflow": "hidden",
+        "background-color": "#FFFFFF"
+    },
+    "lnbNode": {
+        "display": "block",
+        "width": "192px",
+        "flex": "0 0 192px",
+        "background-color": "#FFFFFF",
+        "border-right": "1px solid #EDEFF2",
+        "box-sizing": "border-box",
+        "overflow-x": "hidden",
+        "overflow-y": "auto"
+    },
+    "mainNode": {
+        "flex": "1",
+        "min-width": "0px",
+        "overflow": "hidden",
+        "background-color": "#FFFFFF"
+    },
+    "mainTitleNode": {
+        "height": "50px",
+        "display": "flex",
+        "align-items": "center",
+        "padding": "0px 24px",
+        "border-bottom": "1px solid #EDEFF2",
+        "box-sizing": "border-box"
+    },
+    "mainTitleTextNode": {
+        "font-size": "18px",
+        "color": "#222222",
+        "font-weight": "500",
+        "white-space": "nowrap"
+    },
+    "mainTitleCountNode": {
+        "margin-left": "8px",
+        "font-size": "13px",
+        "font-weight": "bold",
+        "color": "#2768B0",
+        "white-space": "nowrap"
+    },
+    "startProcessAction_pc": {
+        "height": "34px",
+        "line-height": "34px",
+        "margin": "12px 12px 8px 12px",
+        "background-color": "#2768B0",
+        "color": "#FFFFFF",
+        "font-size": "13px",
+        "text-align": "center",
+        "border-radius": "2px",
+        "cursor": "pointer"
+    },
+    "startProcessAction_pc_over": {
+        "background-color": "#1F5A9C"
+    },
+    "lnbMenuNode": {
+        "padding": "4px 0px 16px 0px"
+    },
+    "lnbGroupNode": {
+        "height": "36px",
+        "display": "flex",
+        "align-items": "center",
+        "padding": "0px 16px",
+        "margin-top": "6px"
+    },
+    "lnbGroupIconNode": {
+        "width": "16px",
+        "height": "16px",
+        "flex": "none",
+        "margin-right": "8px",
+        "background-position": "center center",
+        "background-repeat": "no-repeat"
+    },
+    "lnbGroupTextNode": {
+        "font-size": "13px",
+        "font-weight": "bold",
+        "color": "#222222"
+    },
+    "lnbItemNode": {
+        "height": "32px",
+        "display": "flex",
+        "align-items": "center",
+        "padding": "0px 16px 0px 40px",
+        "font-size": "13px",
+        "color": "#444444",
+        "font-weight": "normal",
+        "background-color": "transparent",
+        "cursor": "pointer"
+    },
+    "lnbItemNode_over": {
+        "color": "#222222",
+        "font-weight": "normal",
+        "background-color": "#F5F7FA"
+    },
+    "lnbItemNode_current": {
+        "color": "#2768B0",
+        "font-weight": "bold",
+        "background-color": "#EAF2FB"
+    },
+    "lnbItemTextNode": {
+        "flex": "1",
+        "min-width": "0px",
+        "overflow": "hidden",
+        "white-space": "nowrap",
+        "text-overflow": "ellipsis"
+    },
+    "lnbItemCountNode": {
+        "flex": "none",
+        "margin-left": "6px",
+        "font-size": "12px",
+        "font-weight": "normal",
+        "color": "#2768B0"
+    },
+    "searchBarAreaNode_pc": {
+        "margin-left": "auto",
+        "height": "28px"
+    },
+    "searchBarNode_pc": {
+        "width": "240px",
+        "height": "28px",
+        "background-color": "#FFFFFF",
+        "border": "1px solid #D9D9D9",
+        "border-radius": "2px",
+        "box-sizing": "border-box"
+    },
+    "searchBarActionNode_pc": {
+        "width": "28px",
+        "height": "26px",
+        "background-image": "url("+"../x_component_process_TaskCenter/$Main/default/icon/search.png)",
+        "background-position": "center center",
+        "background-repeat": "no-repeat",
+        "background-size": "18px 18px",
+        "float": "right",
+        "cursor": "pointer"
+    },
+    "searchBarInputBoxNode_pc": {
+        "height": "26px",
+        "overflow": "hidden",
+        "margin-left": "8px",
+        "margin-right": "30px"
+    },
+    "searchBarInputNode_pc": {
+        "font-size": "12px",
+        "width": "100%",
+        "height": "26px",
+        "line-height": "26px",
+        "padding": "0px",
+        "border": "0px",
+        "outline": "none",
+        "background-color": "transparent",
+        "color": "#666666"
     },
     "searchBarAreaNode": {
         "margin": "0px 110px 0px 160px",
@@ -102,13 +255,6 @@
         "background-color": "#FFF",
         "cursor": "pointer"
     },
-    "tabItemIconNode": {
-        "height": "40px",
-        "width": "30px",
-        "float": "left",
-        "background-position": "center center",
-        "background-repeat": "no-repeat"
-    },
     "tabItemTextNode": {
         "float": "left",
         "height": "40px",
@@ -149,157 +295,258 @@
         "height": "100%"
     },
     "actionBarNode": {
-        "min-height": "30px"
+        "min-height": "40px",
+        "border-bottom": "1px solid #EDEFF2"
     },
     "filterActionNode": {
         "float": "right",
-        "height": "26px",
+        "height": "28px",
         "line-height": "26px",
-        "margin-right": "10px",
-        "padding": "0px 10px 0px 25px",
-        "position": "relative",
-        "top": "-35px",
-        "font-size": "14px",
+        "margin-top": "6px",
+        "padding": "0px 10px 0px 28px",
+        "box-sizing": "border-box",
+        "border": "1px solid #CCD1D9",
+        "border-radius": "2px",
+        "font-size": "12px",
         "color": "#333333",
         "cursor": "pointer",
-        "background": "url("+"../x_component_process_TaskCenter/$Main/default/icon/filter.png) 5px 6px no-repeat",
+        "background-color": "#FFFFFF",
+        "background-image": "url("+"../x_component_process_TaskCenter/$Main/default/icon/filter.png)",
+        "background-position": "8px center",
+        "background-repeat": "no-repeat"
     },
     "applicationFilterAreaNode": {
         "margin-right": "80px",
-        "height": "30px",
-        "line-height": "30px"
+        "min-height": "40px"
     },
     "appFilterNode_current": {
         "float": "left",
-        "line-height": "30px",
-        "padding": "0px 15px",
-        "font-size": "14px",
+        "height": "38px",
+        "line-height": "38px",
+        "padding": "0px 4px",
+        "margin-right": "16px",
+        "font-size": "13px",
         "font-weight": "bold",
-        "cursor": "pointer",
-        "margin-right": "10px",
-        "color": "#333"
+        "color": "#2768B0",
+        "border-bottom": "2px solid #2768B0",
+        "cursor": "pointer"
+    },
+    "listHeadNode": {
+        "display": "flex",
+        "height": "30px",
+        "line-height": "30px",
+        "margin-top": "12px",
+        "margin-bottom": "8px",
+        "background-color": "#F2F6F8",
+        "border-radius": "4px",
+        "font-size": "12px",
+        "color": "#8C8C8C",
+        "text-align": "center"
+    },
+    "listHeadIconCellNode": {
+        "flex": "0 0 45px"
+    },
+    "listHeadDateCellNode": {
+        "flex": "0 0 120px"
+    },
+    "listHeadTitleCellNode": {
+        "flex": "1",
+        "min-width": "0px"
+    },
+    "listHeadCreatorCellNode": {
+        "flex": "0 0 140px"
+    },
+    "listHeadStatusCellNode": {
+        "flex": "0 0 170px"
+    },
+    "listHeadActionCellNode": {
+        "flex": "0 0 33px"
+    },
+    "listEmptyNode": {
+        "padding": "80px 0px",
+        "text-align": "center"
+    },
+    "listEmptyIconNode": {
+        "width": "64px",
+        "height": "64px",
+        "margin": "0px auto 12px auto",
+        "background": "url("+"../x_component_process_TaskCenter/$Main/default/lnb/empty.svg) center center no-repeat"
+    },
+    "listEmptyTextNode": {
+        "font-size": "12px",
+        "color": "#8C8C8C"
     },
     "listScrollAreaNode": {
         "overflow": "hidden",
         "margin": "0px"
     },
     "listAreaNode": {
-        "overflow": "hidden"
+        "overflow": "hidden",
+        "padding-bottom": "12px"
     },
 
-    //Item
+    //Item: card row (54px high, 6px gap)
     "itemNode": {
-        "height": "164px",
-        "width": "320px",
-        "float": "left",
+        "height": "54px",
         "position": "static",
-        "margin": "10px 15px"
+        "margin": "0px 0px 6px 0px"
     },
     "itemNode_mobile": {
         "width": "auto",
         "float": "none"
     },
     "itemMainContentAreaNode": {
-        //"border-top": "4px solid #44a217",
         "position": "static",
-        //"border-top": "4px solid #4e82bd",
-        "border-top": "4px solid #ffffff",
-        "height": "132px",
-        "background-color": "#FFF",
-        "border-radius": "6px",
+        "height": "52px",
+        "border": "1px solid #E6E6E6",
+        "background-color": "#FFFFFF",
+        "border-radius": "4px",
         "overflow": "hidden",
-        //"width": "auto",
-        "box-shadow": "2px 2px 10px #cccccc"
+        "box-shadow": "none"
+    },
+    "itemMainContentAreaNode_over": {
+        "background-color": "#EAF2FB"
+    },
+    "itemMainContentAreaNode_out": {
+        "background-color": "#FFFFFF"
     },
     "itemMainContentAreaNode_selected": {
-        //"border-top": "4px solid #44a217",
         "position": "static",
-        "border-top": "4px solid #4e82bd",
-        "height": "132px",
-        "background-color": "#f7f8fe",
-        "border-radius": "6px",
+        "height": "52px",
+        "border": "1px solid #2768B0",
+        "background-color": "#EAF2FB",
+        "border-radius": "4px",
         "overflow": "hidden",
-        //"width": "auto",
-        "box-shadow": "0px 0px 0px #cccccc"
+        "box-shadow": "none"
     },
     "itemTimeContentAreaNode": {
-        "height": "28px",
-        "line-height": "28px",
-        "font-size": "12px",
-        "color": "#666666"
+        "display": "none"
     },
     "itemMainLeftContentAreaNode": {
-        "height": "90px",
-        "width": "100px",
-        "border-right": "1px solid #cccccc",
-        "margin-top": "21px",
+        "height": "52px",
+        "width": "44px",
         "float": "left"
     },
     "itemMainActionContentAreaNode": {
-        "margin": "10px 0px",
-        "height": "112px",
-        "width": "24px",
+        "height": "52px",
+        "width": "32px",
         "float": "right"
-
     },
     "itemMainRightContentAreaNode": {
-        "margin": "10px 24px 10px 110px",
-        "height": "112px",
+        "margin": "0px 32px 0px 44px",
+        "height": "52px",
+        "display": "flex",
+        "align-items": "center",
         "cursor": "pointer"
     },
 
     "itemApplicationIconAreaNode": {
-        "height": "70px",
-        "background-position": "center center",
-        "background-repeat": "no-repeat"
-    },
-    "itemTimeIconNode": {
-        "height": "20px",
-        "background-position": "center center",
-        "background-repeat": "no-repeat"
-    },
-    "itemApplicationIconNode": {
-        "height": "70px",
-        "background-position": "center center",
-        "background-repeat": "no-repeat"
-    },
-    "itemApplicationTitleNode": {
-        "height": "30px",
-        "line-height": "30px",
-        "font-size": "14px",
-        "font-weight": "bold",
-        "overflow": "hidden",
-        "color": "#333333"
-    },
-    "itemTitleNode": {
-        "font-size": "14px",
-        "color": "#333333",
-        "height": "44px",
-        "padding": "3px 0px",
-        "line-height": "22px",
-        "word-break": "break-all",
+        "height": "52px",
         "overflow": "hidden"
     },
-    "itemActivityNode": {
-        "font-size": "12px",
-        "color": "#666666",
-        "height": "22px",
-        "line-height": "22px"
+    "itemTimeIconNode": {
+        "display": "none"
     },
-    "itemNewIconNode": {
-        "width": "42px",
-        "height": "36px",
+    "itemApplicationIconNode": {
+        "width": "24px",
+        "height": "24px",
+        "margin": "14px 0px 0px 14px",
         "background-position": "center center",
         "background-repeat": "no-repeat",
-        "top": "-164px",
-        "left": "0px",
-        "clear": "both",
-        "position": "relative"
+        "background-size": "contain",
+        "cursor": "pointer"
+    },
+    "itemDateNode": {
+        "flex": "0 0 120px",
+        "font-size": "13px",
+        "color": "#444444",
+        "text-align": "center",
+        "white-space": "nowrap"
+    },
+    "itemTitleAreaNode": {
+        "flex": "1",
+        "min-width": "0px",
+        "padding": "0px 16px"
+    },
+    "itemTitleNode": {
+        "font-size": "13px",
+        "color": "#222222",
+        "height": "20px",
+        "line-height": "20px",
+        "overflow": "hidden",
+        "white-space": "nowrap",
+        "text-overflow": "ellipsis"
+    },
+    "itemMetaNode": {
+        "font-size": "12px",
+        "color": "#8C8C8C",
+        "height": "18px",
+        "line-height": "18px",
+        "overflow": "hidden",
+        "white-space": "nowrap",
+        "text-overflow": "ellipsis"
+    },
+    "itemMetaSplitNode": {
+        "color": "#D9D9D9",
+        "margin": "0px 6px"
+    },
+    "itemCreatorNode": {
+        "flex": "0 0 140px",
+        "text-align": "center",
+        "overflow": "hidden"
+    },
+    "itemCreatorNameNode": {
+        "font-size": "13px",
+        "color": "#222222",
+        "line-height": "20px",
+        "white-space": "nowrap",
+        "overflow": "hidden",
+        "text-overflow": "ellipsis"
+    },
+    "itemCreatorUnitNode": {
+        "font-size": "12px",
+        "color": "#8C8C8C",
+        "line-height": "18px",
+        "white-space": "nowrap",
+        "overflow": "hidden",
+        "text-overflow": "ellipsis"
+    },
+    "itemActivityNode": {
+        "flex": "0 0 170px",
+        "display": "flex",
+        "align-items": "center",
+        "justify-content": "center",
+        "padding": "0px 8px",
+        "box-sizing": "border-box",
+        "overflow": "hidden"
+    },
+    "itemStatusDotNode": {
+        "flex": "none",
+        "width": "8px",
+        "height": "8px",
+        "border-radius": "50%",
+        "margin-right": "6px"
+    },
+    "itemStatusTextNode": {
+        "font-size": "12px",
+        "white-space": "nowrap",
+        "overflow": "hidden",
+        "text-overflow": "ellipsis"
+    },
+    "itemStatusColors": {
+        "ok": "#20C997",
+        "progress": "#2768B0",
+        "wait": "#F0C325",
+        "danger": "#F0504F"
+    },
+    "itemNewIconNode": {
+        "display": "none"
     },
 
     "titleActionEditNode":{
         "width": "20px",
         "height": "20px",
+        "margin": "16px auto 0px auto",
         "background": "url("+"../x_component_process_TaskCenter/$Main/default/icon/edit.png) center center no-repeat",
         "cursor": "pointer",
         "opacity": 1
@@ -307,6 +554,7 @@
     "titleActionReadedNode": {
         "width": "20px",
         "height": "20px",
+        "margin": "16px auto 0px auto",
         "background": "url("+"../x_component_process_TaskCenter/$Main/default/icon/readed.png) center center no-repeat",
         "cursor": "pointer",
         "opacity": 1
@@ -314,6 +562,7 @@
     "titleActionShowNode":{
         "width": "20px",
         "height": "20px",
+        "margin": "16px auto 0px auto",
         "background": "url("+"../x_component_process_TaskCenter/$Main/default/icon/open.png) center center no-repeat",
         "cursor": "pointer",
         "opacity": 1
@@ -321,6 +570,7 @@
     "titleActionCloseNode":{
         "width": "20px",
         "height": "20px",
+        "margin": "16px auto 0px auto",
         "background": "url("+"../x_component_process_TaskCenter/$Main/default/icon/closeEdit.png) center center no-repeat",
         "cursor": "pointer",
         "opacity": 1,
@@ -328,8 +578,8 @@
     },
     "itemNode_edit_from": {
         "position": "absolute",
-        "height": "132px",
-        "width": "320px",
+        "height": "52px",
+        "width": "640px",
         "z-index": "500",
     },
     "itemNode_edit_from_mobile": {
@@ -343,9 +593,9 @@
     },
     "itemNode_edit": {
         "position": "absolute",
-        "border-radius": "6px",
-        "box-shadow": "0px 0px 15px #666",
-        "width": "520px",
+        "border-radius": "8px",
+        "box-shadow": "0px 4px 16px rgba(0,0,0,0.18)",
+        "width": "640px",
         "height": "416px"
     },
     "itemNode_edit_mobile": {
@@ -357,7 +607,7 @@
         "clear": "both",
         "height": "68px",
         "padding": "0px 10px",
-        "background-color": "#eeeeee"
+        "background-color": "#F4F5F7"
     },
     "processNode": {
         "margin-top": "4px",
@@ -430,8 +680,8 @@
         "color": "#666666",
         "position": "absolute",
         "z-index": "30000",
-        "box-shadow": "3px 3px 15px #666666",
-        "border-radius": "6px",
+        "box-shadow": "0px 4px 16px rgba(0,0,0,0.18)",
+        "border-radius": "8px",
         "width": "80%",
         "height": "80%",
         "min-width": "400px",
@@ -462,23 +712,25 @@
         "width": "60px",
         "float": "right",
         "cursor": "pointer",
-        "background": "url("+"../x_component_process_TaskCenter/$Main/default/icon/searchProcess.png) center center no-repeat",
+        "background": "url("+"../x_component_process_TaskCenter/$Main/default/icon/search.png) center center / 18px 18px no-repeat",
     },
     "startProcessSearchAreaNode": {
         "margin": "0px 60px 0px 30px",
         "height": "30px"
     },
     "startProcessSearchInputNode": {
-        "height": "24px",
+        "height": "28px",
         "width": "99%",
+        "padding": "0px 8px",
+        "box-sizing": "border-box",
         "color": "#666666",
-        "border": "1px solid #999999",
-        "border-radius": "4px"
+        "border": "1px solid #D9D9D9",
+        "border-radius": "2px"
     },
 
     "startProcessTopNode_mobile": {
         "height": "50px",
-        "background-color":"#4e82bd"
+        "background-color":"#2768B0"
     },
     "startProcessCloseNode": {
         "height": "20px",
@@ -553,14 +805,14 @@
         "line-height": "60px",
         "overflow": "hidden",
         "color": "#333333",
-        "background-color": "#f7f7f7"
+        "background-color": "#F4F5F7"
     },
     "applicationNode_selected": {
         "cursor": "pointer",
         "height": "60px",
         "line-height": "60px",
         "overflow": "hidden",
-        "color": "#3c76b7",
+        "color": "#2768B0",
         "background-color": "#ffffff"
     },
     "applicationIconAreaNode": {
@@ -574,7 +826,7 @@
         "width": "40px"
     },
     "applicationTextNode": {
-        "font-family": "Microsoft YaHei",
+        "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
         "height": "60px",
         "margin-left": "78px",
         "line-height": "60px",
@@ -612,24 +864,25 @@
     },
     "processActionNode": {
         "margin": "0 10px",
-        "height": "24px",
+        "height": "28px",
         "width": "80px",
-        "border": "1px solid #cccccc",
-        "border-radius": "4px",
+        "box-sizing": "border-box",
+        "border": "1px solid #CCD1D9",
+        "border-radius": "2px",
         "color": "#333333",
         "background-color": "#ffffff",
-        "line-height": "24px",
+        "line-height": "26px",
         "text-align": "center",
         "font-size": "12px",
         "display": "block"
     },
     "processActionNode_over": {
-        "border": "1px solid #e67722",
-        "background-color": "#e67722",
+        "border": "1px solid #2768B0",
+        "background-color": "#2768B0",
         "color": "#ffffff"
     },
     "startProcessNode_over": {
-        "background": "#f3f9ff"
+        "background": "#EAF2FB"
     },
     "startProcessNode_out": {
         "background": "transparent"
@@ -639,7 +892,7 @@
         "line-height": "50px",
         "font-size": "14px",
         "padding": "0px 10px",
-        "background": "#eeeeee",
+        "background": "#F2F6F8",
         "font-weight": "bold",
         "padding": "0px 20px",
         "cursor": "pointer"
@@ -650,17 +903,18 @@
 
     //filter
     "filterActionNode_check": {
-        "background-color": "#ff7010",
-        //"border": "1px solid #ff7010",
+        "background-color": "#2768B0",
+        "border": "1px solid #2768B0",
         "color": "#FFF"
     },
     "filterAreaNode": {
-        "border": "1px solid #999",
-        "border-radius": "0px",
-        "box-shadow": "0px 6px 10px #999",
+        "border": "1px solid #E6E6E6",
+        "border-radius": "4px",
+        "box-shadow": "0px 4px 12px rgba(0,0,0,0.12)",
         "background-color": "#FFF",
         "display": "block",
-        "position": "absolute"
+        "position": "absolute",
+        "z-index": "100"
     },
     "filterAreaTipNode":{
         "width": "24px",
@@ -668,18 +922,19 @@
         "background": "url("+"../x_component_process_TaskCenter/$Main/default/icon/sj.png) center top no-repeat",
     },
     "filterListNode": {
-        "margin-left": "30px",
+        "margin-left": "12px",
         "overflow": "hidden"
     },
     "filterListItemNode": {
         "height": "24px",
         "line-height": "24px",
         "font-size": "12px",
-        "border": "1px solid #CCC",
+        "border": "1px solid #CCD1D9",
+        "border-radius": "2px",
         "float": "left",
-        "margin-right": "10px",
+        "margin-right": "8px",
         "padding-left": "8px",
-        "margin-top": "3px",
+        "margin-top": "7px",
         "background-color": "#FFF",
         "cursor": "default"
     },
@@ -696,43 +951,45 @@
     "filterAreaTitleNode": {
         "height": "50px",
         "overflow": "hidden",
-        "border-bottom": "1px solid #999"
+        "border-bottom": "1px solid #EDEFF2"
     },
     "filterAreaTitleActionOkNode": {
-        "margin-top": "13px",
-        "height": "22px",
-        "line-height": "22px",
-        "width": "40px",
+        "margin-top": "11px",
+        "height": "28px",
+        "line-height": "26px",
+        "width": "52px",
+        "box-sizing": "border-box",
         "cursor": "pointer",
-        "border-radius": "3px",
-        "color": "#ff7010",
-        "background-color": "#FFF",
-        "border": "1px solid #ff7010",
+        "border-radius": "2px",
+        "color": "#FFF",
+        "background-color": "#2768B0",
+        "border": "1px solid #2768B0",
         "float": "right",
         "text-align": "center",
         "font-size": "12px",
-        "margin-right": "10px"
+        "margin-right": "12px"
     },
     "filterAreaTitleActionClearNode": {
-        "margin-top": "13px",
-        "height": "22px",
-        "line-height": "22px",
-        "width": "40px",
+        "margin-top": "11px",
+        "height": "28px",
+        "line-height": "26px",
+        "width": "52px",
+        "box-sizing": "border-box",
         "cursor": "pointer",
-        "border-radius": "3px",
-        "color": "#666",
+        "border-radius": "2px",
+        "color": "#333",
         "background-color": "#FFF",
-        "border": "1px solid #666",
+        "border": "1px solid #CCD1D9",
         "float": "right",
         "text-align": "center",
         "font-size": "12px",
-        "margin-right": "10px"
+        "margin-right": "8px"
     },
     "filterAreaTitleSearchNode": {
-        "margin": "10px 120px 0px 15px",
+        "margin": "11px 140px 0px 15px",
         "height": "26px",
-        "border": "1px solid #CCC",
-        "border-radius": "4px"
+        "border": "1px solid #D9D9D9",
+        "border-radius": "2px"
     },
     "filterAreaTitleSearchIconNode": {
         "height": "26px",
@@ -891,9 +1148,9 @@
         "font-size": "12px",
         "line-height": "28px",
         "height": "28px",
-        "background-color": "#EEE",
-        "padding": "0px 5px",
-        "color": "#333",
+        "background-color": "#F2F6F8",
+        "padding": "0px 8px",
+        "color": "#444",
         "border-top": "0px solid #CCC",
         "margin-bottom": "3px"
     },
@@ -903,20 +1160,21 @@
         "margin-bottom": "8px"
     },
     "applicationFilterItemNode": {
-        "padding": "3px",
+        "padding": "3px 8px",
         "margin-top": "3px",
         "margin-bottom": "2px",
         "margin-left": "5px",
         "float": "left",
-        "color": "#4a5bc4",
+        "color": "#333",
         "background-color": "#FFF",
+        "border-radius": "2px",
         "cursor": "pointer",
-        "border": "1px solid #CCC"
+        "border": "1px solid #CCD1D9"
     },
     "applicationFilterItemNode_over": {
-        "color": "#FFF",
-        "background-color": "#4c6b87",
-        "border": "1px solid #4c6b87"
+        "color": "#2768B0",
+        "background-color": "#EAF2FB",
+        "border": "1px solid #2768B0"
     },
 
 
@@ -928,11 +1186,11 @@
         "color": "#666"
     },
     "filterListItemNode_over": {
-        "border": "1px solid #ff7010"
+        "border": "1px solid #2768B0"
     },
 
     "filterListItemTextNode_over": {
-        "color": "#ff7010"
+        "color": "#2768B0"
     },
 
 
@@ -1015,15 +1273,14 @@
 
     "setReadedAction": {
         "margin": "2px auto",
-        "background-color": "#5d7282",
-        "height": "22px",
-        "line-height": "22px",
-        "border": "1px solid #EEE",
-        "border-radius": "4px",
+        "background-color": "#2768B0",
+        "height": "28px",
+        "line-height": "28px",
+        "border-radius": "2px",
         "margin-top": "10px",
         "font-size": "12px",
         "color": "#FFF",
-        "width": "90px",
+        "width": "120px",
         "text-align": "center",
         "cursor": "pointer"
     },
@@ -1099,11 +1356,15 @@
     },
     "appFilterNode": {
         "float": "left",
-        "padding": "0px 5px",
-        "font-size": "14px",
-        "cursor": "pointer",
-        "margin-right": "10px",
-        "color": "#777"
+        "height": "38px",
+        "line-height": "38px",
+        "padding": "0px 4px",
+        "margin-right": "16px",
+        "font-size": "13px",
+        "font-weight": "normal",
+        "color": "#666666",
+        "border-bottom": "2px solid transparent",
+        "cursor": "pointer"
     },
 
 
@@ -1120,15 +1381,18 @@
     },
 
     "datchActionNode": {
-        "border": "4px solid #ffffff",
-        "height": "30px",
-        "width": "100px",
-        "line-height": "30px",
-        "background-color": "#4e82bd",
+        "height": "32px",
+        "width": "120px",
+        "line-height": "32px",
+        "background-color": "#2768B0",
         "color": "#ffffff",
+        "font-size": "13px",
+        "border-radius": "2px",
+        "box-shadow": "0px 2px 8px rgba(0,0,0,0.2)",
         "text-align": "center",
         "cursor": "pointer",
-        "position": "absolute"
+        "position": "absolute",
+        "z-index": "100"
     }
 }
 

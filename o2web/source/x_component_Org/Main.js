@@ -23,9 +23,19 @@ MWF.xApplication.Org.Main = new Class({
 	},
 	createNode: function(){
 		this.content.setStyle("overflow", "hidden");
+		// 다른 앱(ThreeMember 등)에 끼워 넣을 때는 바깥 앱이 제목을 그리므로 모듈 제목 띠를 생략한다.
+		var embedded = !!this.options.embededParent;
+		if (!embedded){
+			this.titleBarNode = new Element("div.ik-org-titlebar").inject(this.content);
+			this.titleBarMenuNode = new Element("div.ik-org-titlebar-menu", {"title": this.lp.toggleMenu}).inject(this.titleBarNode);
+			new Element("div.ik-org-titlebar-text", {"text": this.lp.title}).inject(this.titleBarNode);
+		}
 		this.node = new Element("div", {
-			"styles": {"width": "100%", "height": "100%", "overflow": "hidden"}
+			"styles": {"width": "100%", "height": (embedded) ? "100%" : "calc(100% - 44px)", "overflow": "hidden"}
 		}).inject(this.content);
+		if (this.titleBarMenuNode) this.titleBarMenuNode.addEvent("click", function(){
+			this.node.toggleClass("ik-org-collapsed");
+		}.bind(this));
 	},
 	loadApplicationContent: function(){
 		this.loadStartMenu();
@@ -282,18 +292,18 @@ MWF.xApplication.Org.Menu = new Class({
 		MWF.getJSON(menuUrl, function(json){
 			json.each(function(navi){
 				if (navi.display){
-					var naviNode = new Element("div", {
+					var naviNode = new Element("div.ik-org-navi.ik-org-navi-"+navi.icon, {
 						"styles": this.app.css.startMenuNaviNode,
 						"title": navi.title
 					});
 					naviNode.store("naviData", navi);
 
-					var iconNode =  new Element("div", {
+					var iconNode =  new Element("div.ik-org-navi-icon", {
 						"styles": this.app.css.startMenuIconNode
 					}).inject(naviNode);
 					iconNode.setStyle("background-image", "url("+this.app.path+this.app.options.style+"/icon/"+navi.icon+"60.png)");
 
-					var textNode =  new Element("div", {
+					var textNode =  new Element("div.ik-org-navi-text", {
 						"styles": this.app.css.startMenuTextNode,
 						"text": navi.title
 					});
@@ -371,8 +381,12 @@ MWF.xApplication.Org.Menu = new Class({
 	},
 	toNormal: function(){
 		var css = this.app.css.normalStartMenuNode;
-        this.app.pingyinArea = new Element("div", {"styles": this.app.css.startMenuNaviLeftPingyinNode}).inject(this.node, "top");
+        this.app.pingyinArea = new Element("div.ik-org-lnb-index", {
+            "styles": this.app.css.startMenuNaviLeftPingyinNode,
+            "data-label": this.app.lp.pingyinIndex
+        }).inject(this.node, "top");
 		this.node.setStyles(css);
+		this.node.addClass("ik-org-lnb");
 	},
 
 	// toNormal_bak: function(){

@@ -1,0 +1,71 @@
+<div class="layout_desktop" data-o2-element="desktopNode">
+    <div class="layout_menu" data-o2-element="menuNode">
+        <div class="layout_menu_inner">
+            <div class="layout_menu_start">
+                <div class="layout_menu_start_button logo_o2_40" data-o2-element="startMenuNode" data-o2-events="click:showStartMenu" title="{{o2.LP.desktop.menuAction}}"></div>
+            </div>
+            <div class="layout_menu_lnk" data-o2-element="lnkContentNode">
+                <div class="layout_menu_lnk_area" data-o2-element="lnkAreaNode"></div>
+            </div>
+            <div class="layout_menu_setting">
+                <div class="layout_menu_setting_button" data-o2-element="settingNode">
+                    <div class="layout_menu_scale_zoomValue" data-o2-element="zoomValueNode" data-o2-events="click:zoomMenuShow"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layout_content">
+        <div class="layout_content_table">
+            <div class="layout_content_row"><div class="layout_content_taskbar" data-o2-element="taskbarNode">
+                <div class="layout_content_taskbar_area">
+                    <div class="layout_content_taskbar_area_logo"></div>
+
+                    <div class="layout_content_taskbar_area_tabs" data-o2-element="taskAreaNode">
+                        <div class="layout_content_taskbar_area_tabs_action" data-o2-element="taskActionNode">
+                            <div class="layout_content_taskbar_area_tabs_action_up icon_up_gray" data-o2-element="taskActionUp" data-o2-events="click:toolbarUp"></div>
+                            <div class="layout_content_taskbar_area_tabs_action_down icon_down" data-o2-element="taskActionDown" data-o2-events="click:toolbarDown"></div>
+                        </div>
+
+                        <div class="layout_content_taskbar_area_tabs_contentArea" data-o2-element="taskContentAreaNode">
+                            <div class="layout_content_taskbar_area_tabs_content" data-o2-element="taskContentNode" data-o2-events="mouseover:showRefresh"></div>
+                        </div>
+                    </div>
+
+                    <div class="layout_content_taskbar_area_search">
+                        <div class="layout_content_taskbar_area_search_box" data-o2-element="searchBoxNode">
+                            <div class="layout_content_taskbar_area_search_icon icon_search" data-o2-element="searchIconNode" data-o2-events="click:doSearch"></div>
+                            <div class="layout_content_taskbar_area_search_clear" data-o2-element="searchClearNode" data-o2-events="click:clearSearch"></div>
+                            <div class="layout_content_taskbar_area_search_inputArea">
+                                <input class="layout_content_taskbar_area_search_input" data-o2-element="searchInputNode" data-o2-events="focus:focusSearch;blur:blurSearch;keydown:searchInputKeyDown" type="text" placeholder="{{o2.LP.searchKey}}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layout_content_taskbar_area_action">
+                        <div class="layout_content_taskbar_area_action_item layout_content_taskbar_area_action_msg icon_msg" data-o2-element="msgActionNode" data-o2-events="click:showDesktopMessage" title="{{o2.LP.desktop.showMessage}}"></div>
+                        <div class="layout_content_taskbar_area_action_item layout_content_taskbar_area_action_skin icon_skin" data-o2-element="skinActionNode" title="{{o2.LP.desktop.styleAction}}"></div>
+                    </div>
+
+                    <div class="layout_content_taskbar_area_user" data-o2-element="userInforNode" title="{{o2.LP.desktop.userMenu}}">
+                        <div class="layout_content_taskbar_area_user_icon"></div>
+                        <div class="layout_content_taskbar_area_user_text">
+                            <div class="layout_content_taskbar_area_user_name">{{ $.user.name }}</div>
+                            <div class="layout_content_taskbar_area_user_unit" data-o2-element="userUnitNode"></div>
+                        </div>
+                    </div>
+                </div>
+            </div></div>
+            <div class="layout_content_row"><div class="layout_content_apps" data-o2-element="contentAreaNode">
+                <div class="layout_content_apps_content" data-o2-element="contentNode"></div>
+            </div></div>
+        </div>
+        <div class="layout_content_message" data-o2-element="messageAreaNode"></div>
+    </div>
+</div>
+<div class="layout_menu_scale_slider deepColor_bg" data-o2-element="sliderNode">
+    <div class="layout_menu_scale_zoomSlider" data-o2-element="zoomSliderNode">
+        <div class="layout_menu_scale_zoomSliderKnob mainColor_bg" data-o2-element="zoomSliderKnobNode"></div>
+    </div>
+    <div class="layout_menu_scale_zoomReturn" data-o2-events="click:returnZoom"></div>
+</div>
+<div data-o2-element="startMenuArea"></div>

@@ -155,11 +155,11 @@ MWF.xApplication.process.TaskCenter.TaskCompletedList.Item = new Class({
         return idx;
     },
 
-    showAction: function(){
-        //if (this.showTaskCompletedNode) this.showTaskCompletedNode.fade("in");
-    },
-    hideAction: function(){
-        //if (this.showTaskCompletedNode) this.showTaskCompletedNode.fade("out");
+    //The work's current activity is not part of this data, so only the work state is shown.
+    _getRowStatus: function(){
+        var lp = this.list.app.lp;
+        if (this.data.completed) return {"type": "ok", "text": lp.statusCompleted || lp.completed};
+        return {"type": "progress", "text": lp.statusProgress || lp.processing};
     },
     _getJobByTaskComplete: function(){
         this.list.app.action.getSimpleJobByTaskCompleted(function(json){

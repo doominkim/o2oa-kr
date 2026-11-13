@@ -7,8 +7,8 @@
 
     </div>
     <div class="{{ $.location.locating ? 'location-panel location-panel-pending' : ($.location.inRange ? 'location-panel location-panel-success' : 'location-panel location-panel-error') }}">
-      <div class="location-title" oo-if="$.location.inRange">你已在打卡范围内</div>
-      <div class="location-title" oo-else>{{ $.location.locating ? $.lp.mobile.locationIng : '你不在打卡范围内' }}</div>
+      <div class="location-title" oo-if="$.location.inRange">출퇴근 체크 범위 안에 있습니다</div>
+      <div class="location-title" oo-else>{{ $.location.locating ? $.lp.mobile.locationIng : '출퇴근 체크 범위 밖에 있습니다' }}</div>
       <div class="location-address">{{$.location.title}}</div>
       <button class="location-refresh" oo-if="$.qywxSdkLoaded" @click="qywxLocation">{{$.lp.mobile.refreshLocation}}</button>
     </div>
@@ -30,7 +30,7 @@
       </div>
       <span class="shift-more">›</span>
     </div>
-    <button class="update-off-duty" oo-if="$.updateOffDutyRecord" @click="actionUpdateOffDuty">更新下班卡</button>
+    <button class="update-off-duty" oo-if="$.updateOffDutyRecord" @click="actionUpdateOffDuty">퇴근 체크 업데이트</button>
   </div>
   <div class="check-in-bmap"></div>
 </div>

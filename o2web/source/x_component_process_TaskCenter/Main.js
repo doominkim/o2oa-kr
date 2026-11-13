@@ -107,71 +107,101 @@ MWF.xApplication.process.TaskCenter.Main = new Class({
 
     },
     loadTitle: function () {
+        if (!layout.mobile){
+            this.loadTitle_pc();
+            return;
+        }
         this.loadTitleBar();
-        if (!layout.mobile) this.loadTitleUserNode();
         this.loadStartProcessActionNode();
-        if (!layout.mobile) this.loadTitleTextNode();
         this.loadSearchNode();
+    },
+    loadTitle_pc: function () {
+        this.loadModuleBar();
+
+        this.bodyNode = new Element("div", {"styles": this.css.bodyNode}).inject(this.content);
+        this.lnbNode = new Element("div", {"styles": this.css.lnbNode}).inject(this.bodyNode);
+        this.mainNode = new Element("div", {"styles": this.css.mainNode}).inject(this.bodyNode);
+
+        this.loadStartProcessActionNode();
+
+        this.mainTitleNode = new Element("div", {"styles": this.css.mainTitleNode}).inject(this.mainNode);
+        this.mainTitleTextNode = new Element("div", {"styles": this.css.mainTitleTextNode}).inject(this.mainTitleNode);
+        this.mainTitleCountNode = new Element("div", {"styles": this.css.mainTitleCountNode}).inject(this.mainTitleNode);
+        this.loadSearchNode();
+    },
+    loadModuleBar: function () {
+        this.taskTitleBar = new Element("div", {
+            "styles": this.css.moduleBarNode
+        }).inject(this.content);
+        this.moduleMenuNode = new Element("div", {
+            "styles": this.css.moduleMenuNode
+        }).inject(this.taskTitleBar);
+        this.moduleMenuNode.addEvent("click", this.toggleLnb.bind(this));
+        this.taskTitleTextNode = new Element("div", {
+            "styles": this.css.moduleTitleNode,
+            "text": this.lp.moduleTitle || this.lp.title
+        }).inject(this.taskTitleBar);
+        var node = new Element("div", {
+            "styles": this.css.moduleActionNode,
+            "text": this.lp.gotoWorkcenter
+        }).inject(this.taskTitleBar);
+        node.addEvent("click", this.gotoWorkcenter.bind(this));
+    },
+    toggleLnb: function () {
+        if (!this.lnbNode) return;
+        var hidden = this.lnbNode.getStyle("display") === "none";
+        this.lnbNode.setStyle("display", hidden ? "block" : "none");
+        this.fireEvent("resize");
     },
     loadTitleBar: function () {
         this.taskTitleBar = new Element("div.mainColor_bg", {
             "styles": this.css.taskTitleBar
         }).inject(this.content);
     },
-    loadTitleUserNode: function () {
-        this.taskTitleUserNode = new Element("div", {
-            "styles": this.css.taskTitleUserNode
-        }).inject(this.taskTitleBar);
-        this.taskTitleUserIconNode = new Element("div", {
-            "styles": this.css.taskTitleUserIconNode
-        }).inject(this.taskTitleUserNode);
-        this.taskTitleUserTextNode = new Element("div", {
-            "styles": this.css.taskTitleUserTextNode,
-            "text": this.desktop.session.user.name
-        }).inject(this.taskTitleUserNode);
-    },
     loadStartProcessActionNode: function () {
-        this.startProcessAction = new Element("div", {
-            "styles": this.css.startProcessAction
-        }).inject(this.taskTitleBar);
+        if (!layout.mobile){
+            this.startProcessAction = new Element("div", {
+                "styles": this.css.startProcessAction_pc,
+                "text": this.lp.startDraft || this.lp.start
+            }).inject(this.lnbNode);
+            var css = this.css;
+            this.startProcessAction.addEvents({
+                "mouseover": function () { this.setStyles(css.startProcessAction_pc_over); },
+                "mouseout": function () { this.setStyles(css.startProcessAction_pc); }
+            });
+        }else{
+            this.startProcessAction = new Element("div", {
+                "styles": this.css.startProcessAction
+            }).inject(this.taskTitleBar);
+        }
         this.startProcessAction.addEvents({
             "click": function (e) {
                 this.showStartProcessArea(e);
             }.bind(this)
         });
     },
-    loadTitleTextNode: function () {
-        this.taskTitleTextNode = new Element("div", {
-            "styles": this.css.taskTitleTextNode,
-            "text": this.lp.title
-        }).inject(this.taskTitleBar);
-        var node = new Element("div.mainColor_color", {
-            "styles": this.css.taskTitleInforTextNode,
-            "text": this.lp.gotoWorkcenter
-        }).inject(this.taskTitleBar);
-        node.addEvent("click", this.gotoWorkcenter.bind(this));
-    },
     loadSearchNode: function () {
+        var pc = !layout.mobile;
         this.searchBarAreaNode = new Element("div", {
-            "styles": this.css.searchBarAreaNode
-        }).inject(this.taskTitleBar);
+            "styles": this.css[pc ? "searchBarAreaNode_pc" : "searchBarAreaNode"]
+        }).inject(pc ? this.mainTitleNode : this.taskTitleBar);
         if (layout.mobile) this.searchBarAreaNode.setStyle("margin-left", "10px");
         if (layout.mobile) this.searchBarAreaNode.setStyle("margin-right", "20px");
 
         this.searchBarNode = new Element("div", {
-            "styles": this.css.searchBarNode
+            "styles": this.css[pc ? "searchBarNode_pc" : "searchBarNode"]
         }).inject(this.searchBarAreaNode);
 
         this.searchBarActionNode = new Element("div", {
-            "styles": this.css.searchBarActionNode
+            "styles": this.css[pc ? "searchBarActionNode_pc" : "searchBarActionNode"]
         }).inject(this.searchBarNode);
         this.searchBarInputBoxNode = new Element("div", {
-            "styles": this.css.searchBarInputBoxNode
+            "styles": this.css[pc ? "searchBarInputBoxNode_pc" : "searchBarInputBoxNode"]
         }).inject(this.searchBarNode);
         this.searchBarInputNode = new Element("input", {
             "type": "text",
             "value": this.lp.searchKey,
-            "styles": this.css.searchBarInputNode
+            "styles": this.css[pc ? "searchBarInputNode_pc" : "searchBarInputNode"]
         }).inject(this.searchBarInputBoxNode);
 
         var _self = this;
@@ -197,43 +227,91 @@ MWF.xApplication.process.TaskCenter.Main = new Class({
         });
     },
     loadTab: function () {
+        if (!layout.mobile){
+            this.loadTab_pc();
+        }else{
+            this.loadTab_mobile();
+        }
+        this.getWorkCounts();
+    },
+    loadTab_mobile: function () {
         this.tabAreaNode = new Element("div", {
             "styles": this.css.tabAreaNode
         }).inject(this.content);
 
-        // var size = this.content.getSize();
-        // if (size && size.x < 400) { //移动端屏幕宽度小的时候 5个tab会重叠
-        //     this.tabAreaNode.setStyle("height", "80px");
-        // }
-
-        this.createTabItem(this.lp.task, "task.png", "task", function () {
+        this.createTabItem(this.lp.task, "task", function () {
             this.showTask();
         }.bind(this));
-        this.createTabItem(this.lp.done, "done.png", "taskCompleted", function () {
+        this.createTabItem(this.lp.done, "taskCompleted", function () {
             this.showDone();
         }.bind(this));
-        this.createTabItem(this.lp.read, "read.png", "read", function () {
+        this.createTabItem(this.lp.read, "read", function () {
             this.showRead();
         }.bind(this));
-        this.createTabItem(this.lp.readed, "readed.png", "readCompleted", function () {
+        this.createTabItem(this.lp.readed, "readCompleted", function () {
+            this.showReaded();
+        }.bind(this));
+        this.createTabItem(this.lp.review, "review", function () {
+            this.showReview();
+        }.bind(this));
+        this.createTabItem(this.lp.draftTab, "draft", function () {
+            this.showDraft();
+        }.bind(this));
+        this.createTabItem(this.lp.myCreated, "myCreated", function () {
+            this.showMyCreated();
+        }.bind(this));
+    },
+    //The order of the menu items must match the indexes used by showTab.
+    loadTab_pc: function () {
+        this.tabAreaNode = new Element("div", {
+            "styles": this.css.lnbMenuNode
+        }).inject(this.lnbNode);
+
+        this.createLnbGroup(this.lp.lnbGroupApproval || this.lp.list_process, "approval.svg");
+        this.createLnbItem(this.lp.task, "task", function () {
+            this.showTask();
+        }.bind(this));
+        this.createLnbItem(this.lp.done, "taskCompleted", function () {
+            this.showDone();
+        }.bind(this));
+
+        this.createLnbGroup(this.lp.lnbGroupRead || this.lp.read, "read.svg");
+        this.createLnbItem(this.lp.read, "read", function () {
+            this.showRead();
+        }.bind(this));
+        this.createLnbItem(this.lp.readed, "readCompleted", function () {
             this.showReaded();
         }.bind(this));
 
-        this.createTabItem(this.lp.review, "review.png", "review", function () {
+        this.createLnbGroup(this.lp.lnbGroupDocument || this.lp.myfile, "document.svg");
+        this.createLnbItem(this.lp.review, "review", function () {
             this.showReview();
         }.bind(this));
-
-        this.createTabItem(this.lp.draftTab, "draft.png", "draft", function () {
+        this.createLnbItem(this.lp.draftTab, "draft", function () {
             this.showDraft();
         }.bind(this));
-
-        this.createTabItem(this.lp.myCreated, "mycreated.png", "myCreated", function () {
+        this.createLnbItem(this.lp.myCreated, "myCreated", function () {
             this.showMyCreated();
         }.bind(this));
-
-        //this.createTabItem(this.lp.review, "review.png", "review", function(){this.showReview();}.bind(this));
-
-        this.getWorkCounts();
+    },
+    createLnbGroup: function (text, icon) {
+        var group = new Element("div", {"styles": this.css.lnbGroupNode}).inject(this.tabAreaNode);
+        var iconNode = new Element("div", {"styles": this.css.lnbGroupIconNode}).inject(group);
+        iconNode.setStyle("background-image", "url(../x_component_process_TaskCenter/$Main/default/lnb/"+icon+")");
+        new Element("div", {"styles": this.css.lnbGroupTextNode, "text": text}).inject(group);
+    },
+    createLnbItem: function (text, countKey, action) {
+        var css = this.css;
+        var tab = new Element("div", {"styles": css.lnbItemNode, "title": text}).inject(this.tabAreaNode);
+        new Element("div", {"styles": css.lnbItemTextNode, "text": text}).inject(tab);
+        this[countKey+"CountNode"] = new Element("div", {"styles": css.lnbItemCountNode}).inject(tab);
+        tab.store("text", text);
+        tab.addEvents({
+            "mouseover": function () { if (!this.retrieve("current")) this.setStyles(css.lnbItemNode_over); },
+            "mouseout": function () { if (!this.retrieve("current")) this.setStyles(css.lnbItemNode); },
+            "click": function () { action(); }
+        });
+        this.tabs.push(tab);
     },
 
     // createTabItem: function (text, icon, countKey, action) {
@@ -270,17 +348,11 @@ MWF.xApplication.process.TaskCenter.Main = new Class({
     //     this.tabs.push(tab);
     // },
 
-    createTabItem: function(text, icon, countKey, action){
+    createTabItem: function(text, countKey, action){
         var tab = new Element("div", {
             "styles": this.css.tabItemNode
         }).inject(this.tabAreaNode);
 
-        if (!layout.mobile){
-            var tabIcon = new Element("div", {
-                "styles": this.css.tabItemIconNode
-            }).inject(tab);
-            tabIcon.setStyle("background-image", "url("+"../x_component_process_TaskCenter/$Main/default/tab/"+icon+")");
-        }
         var tabText = new Element("div", {
             "styles": this.css.tabItemTextNode,
             "text": text
@@ -320,22 +392,38 @@ MWF.xApplication.process.TaskCenter.Main = new Class({
         this.getAction(function () {
             this.action.getCount(function (json) {
                 this.counts = json.data;
-                this["taskCountNode"].set("text", "( " + ((this.counts.task > 100) ? "99+" : this.counts.task) + " )");
-                this["taskCompletedCountNode"].set("text", "( " + ((this.counts.taskCompleted > 100) ? "99+" : this.counts.taskCompleted) + " )");
-                this["readCountNode"].set("text", "( " + ((this.counts.read > 100) ? "99+" : this.counts.read) + " )");
-                this["readCompletedCountNode"].set("text", "( " + ((this.counts.readCompleted > 100) ? "99+" : this.counts.readCompleted) + " )");
-                this["reviewCountNode"].set("text", "[ "+((this.counts.review>100) ? "99+" : this.counts.review)+" ]");
+                this.setTabCount("task", this.counts.task);
+                this.setTabCount("taskCompleted", this.counts.taskCompleted);
+                this.setTabCount("read", this.counts.read);
+                this.setTabCount("readCompleted", this.counts.readCompleted);
+                this.setTabCount("review", this.counts.review, ["[ ", " ]"]);
             }.bind(this), null, this.desktop.session.user.distinguishedName);
             this.action.listDraftNext("(0)", 1, function (json) {
-                this["draftCountNode"].set("text", "( " + ((json.count > 100) ? "99+" : json.count) + " )");
+                this.setTabCount("draft", json.count);
             }.bind(this));
             o2.Actions.load("x_processplatform_assemble_surface").ReviewAction.countWithPerson(layout.session.user.id, {
                 creatorPersonList: [layout.session.user.id]
             }).then(function(json){
                 var myCreated = json.data.count;
-                this["myCreatedCountNode"].set("text", "( " + ((myCreated > 100) ? "99+" : myCreated) + " )");
+                this.setTabCount("myCreated", myCreated);
             }.bind(this));
         }.bind(this));
+    },
+    setTabCount: function (countKey, count, brackets) {
+        var node = this[countKey+"CountNode"];
+        if (!node) return;
+        var text = (count > 100) ? "99+" : count;
+        if (layout.mobile){
+            brackets = brackets || ["( ", " )"];
+            node.set("text", brackets[0] + text + brackets[1]);
+        }else{
+            node.set("text", (count) ? text : "");
+        }
+    },
+    setListCount: function (list) {
+        if (!this.mainTitleCountNode || list !== this.currentList) return;
+        var text = (this.lp.countText || "({count})").replace("{count}", list.count || 0);
+        this.mainTitleCountNode.set("text", text);
     },
     loadContent: function(){
         if( layout.mobile ){
@@ -344,7 +432,7 @@ MWF.xApplication.process.TaskCenter.Main = new Class({
                 "height": "100%"
             });
         }
-        this.contentNode = new Element("div", {"styles": this.css.contentNode}).inject(this.content);
+        this.contentNode = new Element("div", {"styles": this.css.contentNode}).inject(this.mainNode || this.content);
         this.contentListAreaNode = new Element("div", {"styles": this.css.contentListAreaNode}).inject(this.contentNode);
 
         this.setContentNodeHeight();
@@ -353,8 +441,16 @@ MWF.xApplication.process.TaskCenter.Main = new Class({
     setContentNodeHeight: function(){
         var size = this.content.getSize();
         var titleSize = this.taskTitleBar.getSize();
-        var tabSize = this.tabAreaNode.getSize();
-        var y = size.y-titleSize.y-tabSize.y-1;
+        var y;
+        if (this.mainNode){
+            var bodyY = size.y-titleSize.y;
+            this.bodyNode.setStyle("height", ""+bodyY+"px");
+            y = bodyY-this.mainTitleNode.getSize().y;
+            size = {"x": this.mainNode.getSize().x, "y": size.y};
+        }else{
+            var tabSize = this.tabAreaNode.getSize();
+            y = size.y-titleSize.y-tabSize.y-1;
+        }
         this.contentNode.setStyle("height", ""+y+"px");
 
         var x = 0;
@@ -414,25 +510,28 @@ MWF.xApplication.process.TaskCenter.Main = new Class({
         this.searchBarInputNode.set("value", this.lp.searchKey);
     },
     showTab: function (idx) {
+        if (!layout.mobile){
+            this.showLnbTab(idx);
+            return;
+        }
         this.tabs.each(function (node, i) {
             if (i === idx) {
                 node.getLast().setStyles(this.css.tabItemTextNode_current);
-                if (!layout.mobile){
-                    node.getFirst().getNext().setStyles(this.css.tabItemTextNode_current);
-                    var icon = node.getFirst().getStyle("background-image");
-                    node.getFirst().setStyle("background-image", icon.replace(".png", "_cur.png"));
-                }else{
-                    node.getFirst().setStyles(this.css.tabItemTextNode_current);
-                }
+                node.getFirst().setStyles(this.css.tabItemTextNode_current);
             } else {
                 node.getLast().setStyles(this.css.tabItemCountNode);
-                if (!layout.mobile){
-                    node.getFirst().getNext().setStyles(this.css.tabItemTextNode);
-                    var icon = node.getFirst().getStyle("background-image");
-                    node.getFirst().setStyle("background-image", icon.replace("_cur.png", ".png"));
-                }else{
-                    node.getFirst().setStyles(this.css.tabItemTextNode);
-                }
+                node.getFirst().setStyles(this.css.tabItemTextNode);
+            }
+        }.bind(this));
+    },
+    showLnbTab: function (idx) {
+        this.tabs.each(function (node, i) {
+            var current = (i === idx);
+            node.store("current", current);
+            node.setStyles(current ? this.css.lnbItemNode_current : this.css.lnbItemNode);
+            if (current){
+                this.mainTitleTextNode.set("text", node.retrieve("text"));
+                this.mainTitleCountNode.set("text", "");
             }
         }.bind(this));
     },

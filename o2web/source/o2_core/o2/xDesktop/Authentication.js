@@ -86,6 +86,7 @@ MWF.xDesktop.Authentication = new Class({
         this.popupPara = {
             container: node
         };
+        if (this.css.loginLayoutNode) this._createLoginLayout(node);
         this.postLogin = function (json) {
             layout.desktop.session.user = json.data;
             layout.session.user = json.data;
@@ -119,6 +120,44 @@ MWF.xDesktop.Authentication = new Class({
         }.bind(this);
         this.openLoginForm(this.popupOptions);
         this.fireEvent("openLogin");
+    },
+    //로그인 화면 좌우 분할 배치(스타일에 loginLayoutNode 가 있을 때만)
+    _createLoginLayout: function (node) {
+        var cssHref = this.path + this.options.style + "/login.css";
+        if (!document.head.getElement("link[data-login-style='" + this.options.style + "']")) {
+            new Element("link", {
+                "rel": "stylesheet",
+                "type": "text/css",
+                "href": cssHref,
+                "data-login-style": this.options.style
+            }).inject(document.head);
+        }
+        //로그인 화면만 휴대폰 폭에 맞춘다(로그인 후에는 새로고침되어 사라진다)
+        if (!document.head.getElement("meta[name='viewport']")) {
+            new Element("meta", {
+                "name": "viewport",
+                "content": "width=device-width, initial-scale=1"
+            }).inject(document.head);
+        }
+        node.getChildren(".ik-login").destroy();
+
+        var lp = this.lp;
+        var title = (layout.config && (layout.config.title || layout.config.systemTitle)) || "";
+        this.loginLayoutNode = new Element("div.ik-login", {"styles": this.css.loginLayoutNode}).inject(node);
+
+        var brandNode = new Element("div.ik-login-brand").inject(this.loginLayoutNode);
+        new Element("img.ik-login-brand-logo", {
+            "src": this.path + this.options.style + "/img/logo-white.svg",
+            "alt": title
+        }).inject(brandNode);
+        new Element("h1.ik-login-brand-title", {"text": lp.loginBrandTitle || title}).inject(brandNode);
+        if (lp.loginBrandDesc) new Element("p.ik-login-brand-desc", {"text": lp.loginBrandDesc}).inject(brandNode);
+
+        var panelNode = new Element("div.ik-login-panel").inject(this.loginLayoutNode);
+        var panelBodyNode = new Element("div.ik-login-panel-body").inject(panelNode);
+        new Element("h2.ik-login-panel-title", {"text": lp.loginPanelTitle || lp.LoginFormTitle}).inject(panelBodyNode);
+        this.loginFormContainer = new Element("div.ik-login-form").inject(panelBodyNode);
+        new Element("div.ik-login-copyright", {"text": lp.loginCopyright || (layout.config && layout.config.footer) || ""}).inject(panelNode);
     },
     safeLogout: function(){
         o2.Actions.get("x_organization_assemble_authentication").safeLogout(function () {
@@ -156,7 +195,8 @@ MWF.xDesktop.Authentication = new Class({
         });
         opt.width = this.options.width;
         opt.height = this.options.height;
-        var form = new MWF.xDesktop.Authentication.LoginForm(this, {}, opt, this.popupPara);
+        var para = this.loginFormContainer ? {container: this.loginFormContainer} : this.popupPara;
+        var form = new MWF.xDesktop.Authentication.LoginForm(this, {}, opt, para);
         form.create();
     },
     openSignUpForm: function (options, callback) {
@@ -219,6 +259,7 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
         "draggable": true,
         "closeAction": true
     },
+    rememberIdKey: "o2.authentication.rememberId",
     load: function () {
         this.setOptions({
             "title": (layout.config && (layout.config.systemTitle || layout.config.title)) ? (layout.config.title || layout.config.systemTitle) : MWF.LP.authentication.LoginFormTitle
@@ -845,6 +886,7 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
                 }
             }, this.app, this.css);
             this.form.load();
+            this._loadRememberId();
 
             // if( !this.userPwdLogin && this.codeLogin ){
             //     this.showCodeLogin();
@@ -1020,9 +1062,9 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
                 this.oauthListNode = new Element("div", { styles: this.css.oauthListNode }).inject(this.oauthArea);
             }
             this.oauthList.each(function (d) {
-                if (d.displayName === "@O2企业微信") {
+                if (d.displayName === "@O2 WeCom") {
                     d.qywx = true;
-                } else if (d.displayName === "@O2钉钉") {
+                } else if (d.displayName === "@O2 DingTalk") {
                     d.dingding = true;
                 }
                 this.loadOauthItem(d);
@@ -1315,8 +1357,41 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
         if (this.bindStatusInterval) clearInterval(this.bindStatusInterval);
         if (this.timer) clearInterval(this.timer);
     },
+    //아이디 저장(스타일에 rememberIdNode 가 있을 때만)
+    _loadRememberId: function () {
+        if (!this.css.rememberIdNode) return;
+        var td = this.formTableArea.getElement("[item='forgetPasswordTr'] td");
+        if (!td) return;
+        var label = new Element("label.rememberIdNode", {"styles": this.css.rememberIdNode}).inject(td, "top");
+        this.rememberIdCheckbox = new Element("input", {
+            "type": "checkbox",
+            "styles": this.css.rememberIdCheckbox
+        }).inject(label);
+        new Element("span", {"text": this.lp.rememberId}).inject(label);
+
+        var saved = null;
+        try { saved = window.localStorage.getItem(this.rememberIdKey); } catch (e) {}
+        if (!saved) return;
+        this.rememberIdCheckbox.checked = true;
+        var credentialItem = this.form.getItem("credential");
+        var userName = new URI(window.location.toString()).getData("username");
+        if (credentialItem && !userName) credentialItem.setValue(saved);
+    },
+    _saveRememberId: function () {
+        if (!this.rememberIdCheckbox) return;
+        var credentialItem = this.form.getItem("credential");
+        var credential = credentialItem ? credentialItem.getValue() : "";
+        try {
+            if (this.rememberIdCheckbox.checked && credential && credential !== this.lp.userName) {
+                window.localStorage.setItem(this.rememberIdKey, credential);
+            } else {
+                window.localStorage.removeItem(this.rememberIdKey);
+            }
+        } catch (e) {}
+    },
     ok: function () {
         this.fireEvent("queryOk");
+        this._saveRememberId();
         this.errorArea.empty();
         var captchaItem = null;
         var codeItem = null;

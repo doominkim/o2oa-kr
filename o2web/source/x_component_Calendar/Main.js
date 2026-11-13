@@ -5,7 +5,7 @@ MWF.require("MWF.xAction.org.express.RestActions", null,false);
 MWF.xDesktop.requireApp("Calendar", "Common", null, false);
 MWF.xDesktop.requireApp("Template", "MDomItem", null, false);
 MWF.xApplication.Calendar.options.multitask = false;
-MWFCalendar.LeftNaviWidth = 250;
+MWFCalendar.LeftNaviWidth = 192;
 MWF.xApplication.Calendar.MainPc = new Class({
     Extends: MWF.xApplication.Common.Main,
     Implements: [Options, Events],
@@ -119,7 +119,7 @@ MWF.xApplication.Calendar.MainPc = new Class({
                   if(callback)callback();
               }else if( !notCreate ){
                   this.actions.saveCalendar({
-                      name : "我的日历",
+                      name : "내 캘린더",
                       type : "PERSON",
                       color : "",
                       description : "",
@@ -134,8 +134,14 @@ MWF.xApplication.Calendar.MainPc = new Class({
     },
     createNode: function(){
         this.content.setStyle("overflow", "hidden");
+        this.moduleBarNode = new Element("div.moduleBarNode", {
+            "styles": this.css.moduleBarNode
+        }).inject(this.content);
+        new Element("i.ooicon-menu", {"styles": this.css.moduleBarIconNode}).inject(this.moduleBarNode);
+        new Element("div", {"styles": this.css.moduleBarTextNode, "text": this.lp.title}).inject(this.moduleBarNode);
+
         this.node = new Element("div", {
-            "styles": {"width": "100%", "height": "100%", "overflow": "hidden"}
+            "styles": {"width": "100%", "height": "calc(100% - 44px)", "overflow": "hidden"}
         }).inject(this.content);
 
         this.naviContainerNode = new Element("div.naviContainerNode", {
@@ -284,10 +290,10 @@ MWF.xApplication.Calendar.MainPc = new Class({
     loadTopMenus: function(){
         this.topMenuNodeMap = {};
         //this.createTopMenu(this.lp.myCalendar, "icon_huiyi", "toMyCalendar");
-        this.createTopMenu(this.lp.month, "ooicon-calendar", "toMonth");
-        this.createTopMenu(this.lp.week, "ooicon-weekly", "toWeek");
-        this.createTopMenu(this.lp.day, "ooicon-clock", "toDay");
-        this.createTopMenu(this.lp.list, "ooicon-list-alt", "toList");
+        this.createTopMenu(this.lp.monthView || this.lp.month, "ooicon-calendar", "toMonth");
+        this.createTopMenu(this.lp.weekView || this.lp.week, "ooicon-weekly", "toWeek");
+        this.createTopMenu(this.lp.dayView || this.lp.day, "ooicon-clock", "toDay");
+        this.createTopMenu(this.lp.listView || this.lp.list, "ooicon-list-alt", "toList");
 
         this.loadTopMenus_middle();
         this.loadTopMenus_right();

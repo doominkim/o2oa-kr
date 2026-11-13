@@ -201,7 +201,7 @@ export default content({
   // 读取选择的文件并上传到服务器
   async _uploadExcel(file) {
     const fileExt = file.name.substring(file.name.lastIndexOf("."));
-    console.debug("文件名", file.name, fileExt);
+    console.debug("파일 이름", file.name, fileExt);
     if (fileExt.toLowerCase() !== ".xls" && fileExt.toLowerCase() !== ".xlsx") {
       o2.api.page.notice(lp.leave.importExcelFileError, 'error');
       return;

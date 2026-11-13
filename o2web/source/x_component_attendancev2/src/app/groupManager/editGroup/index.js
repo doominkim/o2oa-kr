@@ -587,7 +587,7 @@ export default content({
       }).filter(str => !!str);
       
       if (this.bind.requiredCheckInDateForTableList.length > 0 && rCheckInDateList.length < 1) {
-        o2.api.page.notice("必须打卡的日期得配置班次！", 'error');
+        o2.api.page.notice("필수 체크 날짜에는 근무조를 설정해야 합니다!", 'error');
         return;
       }
       myForm.requiredCheckInDateList = rCheckInDateList;

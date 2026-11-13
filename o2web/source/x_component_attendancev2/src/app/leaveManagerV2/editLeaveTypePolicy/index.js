@@ -169,10 +169,10 @@ export default content({
             if (!host) host = window.location.protocol + "//" + window.location.host;
             const defaultText = "/********************\n" +
                 "API Document: " + host + "/api\n" +
-                "this.org; //组织快速访问方法\n" +
-                "grantPerson; //需要计算的用户对象，如：{\"distinguishedName\":\"张三@zhangsan@P\",\"unique\":\"zhangsan\",\"name\":\"张三\"}\n" +
-                "根据这个 grantPerson 用户计算出这个用户本次需要发放的额度，然后 return 返回\n" +
-                "return 10; //返回额度10天\n" +
+                "this.org; //조직 빠른 접근 메서드\n" +
+                "grantPerson; //계산할 사용자 객체, 예: {\"distinguishedName\":\"홍길동@zhangsan@P\",\"unique\":\"zhangsan\",\"name\":\"홍길동\"}\n" +
+                "grantPerson 사용자를 기준으로 이번에 지급할 한도를 계산해 return 으로 반환합니다\n" +
+                "return 10; //한도 10일 반환\n" +
                 "********************/\n\n\n" +
                 "return 0;";
             const v = this.bind.form.grantScript || defaultText;
@@ -212,7 +212,7 @@ export default content({
     },
     async submit() {
         const form = this.bind.form;
-        form.policyName = this.bind.leaveType.name + "_发放规则";
+        form.policyName = this.bind.leaveType.name + "_지급 규칙";
         if (form.grantScopeType !== "ALL" && form.grantScopeList.length === 0) {
             o2.api.page.notice(lp.leaveManagerV2.policy.grantScopeListPickerPlaceholder, 'error');
             return;

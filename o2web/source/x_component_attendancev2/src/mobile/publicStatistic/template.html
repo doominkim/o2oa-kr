@@ -2,7 +2,7 @@
     <div class="public-statistic-shell">
         <div class="public-statistic-header">{{$.title}}</div>
         <div class="public-statistic-content">
-            <div class="public-statistic-loading" oo-if="$.loading">加载中...</div>
+            <div class="public-statistic-loading" oo-if="$.loading">불러오는 중...</div>
 
             <div class="public-statistic-grid">
                 <div class="public-statistic-item">
@@ -82,7 +82,7 @@
                     <div class="record-card">
                         <div class="record-card-header">
                             <div class="record-card-title">{{$.selectedRecordTitle}}</div>
-                            <button class="record-close" @click="closeRecordPanel">关闭</button>
+                            <button class="record-close" @click="closeRecordPanel">닫기</button>
                         </div>
                         <div class="record-list">
                             <div oo-each="$.selectedRecordList" oo-item="record" class="{{record.value.lineClass}}">
