@@ -53,4 +53,10 @@ BEGIN
   END IF;
 END $$;
 
+-- 작업 로그(cms_log): 지난 기록의 작업 유형과 문서 생성 문구도 지금 코드가 쓰는 한국어로
+UPDATE cms_log SET xoperationtype = v.ko FROM (VALUES ('新增', '추가'), ('发布', '게시'), ('删除', '삭제'), ('修改', '수정')) AS v(zh, ko)
+ WHERE cms_log.xoperationtype = v.zh;
+UPDATE cms_log SET xdescription = regexp_replace(xdescription, '^用户\[(.*)\]成功创建一个文档信息$', '사용자[\1]님이 문서를 생성했습니다')
+ WHERE xdescription ~ '^用户\[.*\]成功创建一个文档信息$';
+
 COMMIT;
