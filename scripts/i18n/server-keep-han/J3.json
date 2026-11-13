@@ -209,48 +209,6 @@
       "reason": "System.out 로그"
     }
   ],
-  "o2server/x_attendance_assemble_control/src/main/java/com/x/attendance/assemble/control/service/v2/AttendanceV2LeaveManagerService.java": [
-    {
-      "text": "丧假",
-      "reason": "기본 휴가 유형 값, DB 저장·웹 비교 데이터"
-    },
-    {
-      "text": "产假",
-      "reason": "기본 휴가 유형 값, DB 저장·웹 비교 데이터"
-    },
-    {
-      "text": "其他",
-      "reason": "기본 휴가 유형 값, DB 저장·웹 비교 데이터"
-    },
-    {
-      "text": "哺乳假",
-      "reason": "기본 휴가 유형 값, DB 저장·웹 비교 데이터"
-    },
-    {
-      "text": "婚假",
-      "reason": "기본 휴가 유형 값, DB 저장·웹 비교 데이터"
-    },
-    {
-      "text": "带薪事假",
-      "reason": "기본 휴가 유형 값, DB 저장·웹 비교 데이터"
-    },
-    {
-      "text": "年假",
-      "reason": "기본 휴가 유형 값, DB 저장·웹 비교 데이터"
-    },
-    {
-      "text": "病假",
-      "reason": "기본 휴가 유형 값, DB 저장·웹 비교 데이터"
-    },
-    {
-      "text": "育儿假",
-      "reason": "기본 휴가 유형 값, DB 저장·웹 비교 데이터"
-    },
-    {
-      "text": "调休假",
-      "reason": "기본 휴가 유형 값, DB 저장·웹 비교 데이터"
-    }
-  ],
   "o2server/x_cms_core_express/src/main/java/com/x/cms/core/express/permission/CmsPermissionService.java": [
     {
       "text": "全部",

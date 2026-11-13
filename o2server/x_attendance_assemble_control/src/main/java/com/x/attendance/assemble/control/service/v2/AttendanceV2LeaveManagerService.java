@@ -19,25 +19,25 @@ public class AttendanceV2LeaveManagerService {
     private static Logger logger = LoggerFactory.getLogger(AttendanceV2LeaveManagerService.class);
 
     public void initDefaultLeaveTypeData() {
-        // 初始化考勤假勤类型的默认数据
+        // 근태 휴가 유형 기본 데이터 초기화
         if (logger.isDebugEnabled()) {
-            logger.debug("初始化考勤假勤类型的默认数据的任务开始...");
+            logger.debug("근태 휴가 유형 기본 데이터 초기화 작업 시작...");
         }
         try {
-            // 初始化默认假勤类型数据
+            // 기본 휴가 유형 데이터 초기화
             defaultLeaveTypeData();
             updateConfig();
-            logger.info("考勤假勤类型的默认数据初始化完成.");
+            logger.info("근태 휴가 유형 기본 데이터 초기화 완료.");
         } catch (Exception e) {
             logger.error(e);
         }
         if (logger.isDebugEnabled()) {
-            logger.debug("初始化考勤假勤类型的默认数据的任务结束...");
+            logger.debug("근태 휴가 유형 기본 데이터 초기화 작업 종료...");
         }
     }
 
-    private final List<String> defaultLeaveTypes = Arrays.asList("年假", "带薪事假", "调休假",
-            "产假", "育儿假", "哺乳假", "病假", "婚假", "丧假", "其他");
+    private final List<String> defaultLeaveTypes = Arrays.asList("연차", "유급 휴가", "대체 휴가",
+            "출산 휴가", "육아 휴직", "가족 돌봄 휴가", "병가", "결혼 휴가", "조의 휴가", "기타");
     private final List<String> defaultLeaveTypeIds = Arrays.asList(
             "49448f7d-086e-4f05-8f2c-f64121588661",
             "e9a3b632-1b12-4d9b-bc75-6e54c86d8a35",
@@ -77,7 +77,7 @@ public class AttendanceV2LeaveManagerService {
             emc.persist(leaveType, CheckPersistType.all);
             emc.commit();
             if (logger.isDebugEnabled()) {
-                logger.debug("默认假勤类型 {} 初始化完成，ID: {}", leaveType, leaveType.getId());
+                logger.debug("기본 휴가 유형 {} 초기화 완료, ID: {}", leaveType, leaveType.getId());
             }
         }
 
