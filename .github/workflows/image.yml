@@ -24,7 +24,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: npm
 
       - uses: actions/setup-java@v4
         with:
@@ -45,9 +44,11 @@ jobs:
         if: steps.release-cache.outputs.cache-hit != 'true'
         run: curl -fsSL --retry 3 -o release.zip "$RELEASE_URL"
 
+      # Upstream ignores package-lock.json (root and Vue sub-apps), so dependencies resolve fresh;
+      # gulp build_web runs npm install inside each sub-app itself.
       - name: Build web
         run: |
-          npm ci
+          npm install --no-audit --no-fund
           npx gulp build_web
 
       - name: Assemble distribution
